@@ -6,7 +6,7 @@ Mapping is hardcoded from the KG query at 2026-04-26. Re-run safe — already-se
 import sys
 from pathlib import Path
 
-SKILLS_ROOT = Path("/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS")
+SKILLS_ROOT = Path(__file__).resolve().parent.parent
 
 MAPPING = {
     "88-taliban": "ATOM_Skill_88taliban",

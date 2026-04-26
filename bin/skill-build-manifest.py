@@ -14,7 +14,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-SKILLS_DIR = Path("/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS")
+SKILLS_DIR = Path(__file__).resolve().parent.parent
 MANIFEST_PATH = SKILLS_DIR / "MANIFEST.json"
 WELL_KNOWN_DIR = SKILLS_DIR / ".well-known" / "skills"
 WELL_KNOWN_INDEX = WELL_KNOWN_DIR / "index.json"

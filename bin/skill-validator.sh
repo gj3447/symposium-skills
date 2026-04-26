@@ -7,12 +7,12 @@
 # 종료코드: 0 OK, 1 schema violation / drift, 2 file/path error
 set -euo pipefail
 
+_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+CANONICAL_SKILLS_ROOT="$(dirname "$_SCRIPT_DIR")"
 SCAN_ROOTS=(
-  "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS"
-  "/Users/lagyeongjun/CD/SYMPOSIUM/ICE_ORCA_DRAGON/.claude/skills"
+  "$CANONICAL_SKILLS_ROOT"
+  "$CANONICAL_SKILLS_ROOT/../ICE_ORCA_DRAGON/.claude/skills"
 )
-
-CANONICAL_SKILLS_ROOT="/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS"
 MANIFEST_PATH="$CANONICAL_SKILLS_ROOT/MANIFEST.json"
 EXPECTED_SKILL_COUNT=27
 

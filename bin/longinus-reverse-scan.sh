@@ -14,10 +14,11 @@ set -euo pipefail
 QUIET=0
 [[ "${1:-}" == "--quiet" ]] && QUIET=1
 
-SKILLS_ROOT="/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+SKILLS_ROOT="$(cd "$SCRIPT_DIR/.." && pwd -P)"
 
 # Build expected mapping from skill-add-kgref.py source
-PY="/Users/lagyeongjun/CD/SYMPOSIUM/bin/skill-add-kgref.py"
+PY="$SCRIPT_DIR/skill-add-kgref.py"
 
 # 1) FILE → expected ATOM
 PAIRS_FILE="$(mktemp)"

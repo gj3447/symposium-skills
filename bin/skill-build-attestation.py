@@ -9,7 +9,7 @@ import json
 import sys
 from pathlib import Path
 
-SKILLS_DIR = Path("/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS")
+SKILLS_DIR = Path(__file__).resolve().parent.parent
 MANIFEST = SKILLS_DIR / "MANIFEST.json"
 ATTESTATION_PATH = SKILLS_DIR / ".well-known" / "skills" / "attestation.json"
 

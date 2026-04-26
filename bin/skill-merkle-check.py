@@ -27,7 +27,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-SKILLS_DIR = Path("/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS")
+SKILLS_DIR = Path(__file__).resolve().parent.parent
 MANIFEST_PATH = SKILLS_DIR / "MANIFEST.json"
 
 
@@ -146,7 +146,7 @@ def main() -> int:
             print(f"DRIFT stored={stored_root[:12]} live={live_root[:12]} entries={len(drift)}")
             for k, p, s, l in drift:
                 print(f"  {k:20s} {p:20s} stored={s} live={l}")
-            print("  → fix: python3 /Users/lagyeongjun/CD/SYMPOSIUM/bin/skill-build-manifest.py")
+            print(f"  → fix: python3 {Path(__file__).parent / 'skill-build-manifest.py'}")
 
     return 0 if result["verdict"] == "OK" else 1
 

@@ -9,7 +9,7 @@ Usage:
 import sys
 from pathlib import Path
 
-SKILLS_ROOT = Path("/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS")
+SKILLS_ROOT = Path(__file__).resolve().parent.parent
 VALID_CHANNELS = {"experimental", "beta", "stable"}
 
 

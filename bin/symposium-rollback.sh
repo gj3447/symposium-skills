@@ -7,7 +7,8 @@
 #   symposium-rollback.sh snapshot              # 최신 tmutil localsnapshot 즉시 생성
 set -euo pipefail
 
-SKILLS_GIT="/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS"
+_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+SKILLS_GIT="$(dirname "$_SCRIPT_DIR")"
 
 cmd="${1:-help}"
 

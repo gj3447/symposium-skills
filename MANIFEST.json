@@ -1,9 +1,9 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-04-26T17:33:59+09:00",
-  "git_head_commit": "2ca6d68ada33c478756f6d8d553f654f8a2dfbb8",
-  "git_head_short": "2ca6d68",
-  "git_latest_tag": "v26.0.0",
+  "generatedAt": "2026-04-26T17:42:19+09:00",
+  "git_head_commit": "d0533089dacac31041ba13b1e6caab00f8d9f16c",
+  "git_head_short": "d053308",
+  "git_latest_tag": "v26.0.1",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 27,
   "merkle_root": "d8c62efd4d88ee58b70d2335d93907d7c6a606db0ba62b4a9ed7f9e69b28b7dd",

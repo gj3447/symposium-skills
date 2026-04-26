@@ -11,7 +11,8 @@
 #     skill-build-oci.sh --push
 set -euo pipefail
 
-SKILLS_DIR="/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS"
+_SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd -P)"
+SKILLS_DIR="$(dirname "$_SCRIPT_DIR")"
 REGISTRY="${SKILLVER_OCI_REGISTRY:-ghcr.io/TBD-org/symposium-skills}"
 TAG="${SKILLVER_OCI_TAG:-$(git -C "$SKILLS_DIR" describe --tags --abbrev=0 2>/dev/null || echo 'untagged')}"
 ARTIFACT_TYPE="application/vnd.symposium.claude-skills.v1+json"

@@ -10,7 +10,7 @@ import sys
 import uuid
 from pathlib import Path
 
-SKILLS_DIR = Path("/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS")
+SKILLS_DIR = Path(__file__).resolve().parent.parent
 MANIFEST = SKILLS_DIR / "MANIFEST.json"
 SBOM_PATH = SKILLS_DIR / "SBOM.json"
 
