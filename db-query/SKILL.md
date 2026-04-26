@@ -2,6 +2,7 @@
 name: db-query
 kg_ref: ATOM_Skill_db_query
 version: 1
+channel: stable
 description: >
   비행기맨 서버의 DB에 쿼리를 실행합니다. Neo4j Cypher, PostgreSQL SQL, MongoDB 쿼리, Redis 명령어를 실행할 때 사용합니다.
 ---

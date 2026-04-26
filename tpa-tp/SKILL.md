@@ -2,6 +2,7 @@
 name: tpa-tp
 kg_ref: ATOM_Skill_tpa_tp
 version: 1.0
+channel: stable
 description: >
   TPA TargetPyramid (TP) — Phase 3/4. APT SP 거울 (역순).
   Pattern Library (51 DesignPattern 노드) 매칭. confidence ≥0.7 INSTANCE_OF / <0.7 RESEMBLES.

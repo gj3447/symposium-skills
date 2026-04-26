@@ -2,6 +2,7 @@
 name: longinus
 kg_ref: ATOM_Skill_longinus
 version: 3.1
+channel: stable
 description: >
   롱기누스 방법론 v3.1 — 참조의 미학. KG 의미 계층을 소스코드까지 관통(貫通)시키는 참조 바인딩.
   v3: 7-Layer Reference Model + BX Lens Laws + Refinement Types + GED Drift 정량화.

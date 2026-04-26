@@ -2,6 +2,7 @@
 name: taliban
 kg_ref: ATOM_Skill_taliban
 version: 3
+channel: stable
 description: >
   탈레반 방법론 — APT의 면역 시스템. 적대적 검증 프레임워크.
   렌즈셋 플러거블: --lens constitutional(기본 9), mathematical(113), solid(5), 또는 KG에 등록된 임의 LensSet.

@@ -2,6 +2,7 @@
 name: apt-st
 kg_ref: ATOM_Skill_apt_st
 version: 26
+channel: stable
 description: >
   APT SemanticTwin (ST) — crystallization of AtomicSpans into Contract + Task.
   Enters ONLY after Crystallization Frontier (all leaves = AtomicSpan).

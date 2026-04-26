@@ -2,6 +2,7 @@
 name: apt-sp
 kg_ref: ATOM_Skill_apt_sp
 version: 26
+channel: stable
 description: >
   APT SemanticPyramid (SP) — recursive Span decomposition.
   SP is ONE world. Spans are DAG nodes (N:N, not tree).

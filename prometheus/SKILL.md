@@ -2,6 +2,7 @@
 name: prometheus
 kg_ref: ATOM_Skill_prometheus
 version: 5
+channel: stable
 description: >
   프로메테우스 방법론 v5 — 지식이 행동에 선행한다. "바로 고치지 마, 먼저 불(지식) 훔쳐와."
   사용법: `/prometheus <N> <problem>` (N=subagent 수, 생략 시 auto_estimate).

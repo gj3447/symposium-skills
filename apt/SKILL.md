@@ -2,6 +2,7 @@
 name: apt
 kg_ref: ATOM_Skill_apt_orchestrator
 version: 26
+channel: stable
 description: >
   APT v26 orchestrator — KG 정본 기반. Gate Check Hook 강제. SA→SP→ST→SCW 순환.
   v5~v21 역사 반영. 하네스 4축 + 5대 무기(하네스/탈레반/프로메테우스/롱기누스/재배맨) + D(S)/C(S) + Crystallization Frontier.

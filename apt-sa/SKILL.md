@@ -2,6 +2,7 @@
 name: apt-sa
 kg_ref: ATOM_Skill_apt_sa
 version: 26
+channel: stable
 description: >
   APT SemanticAnchor (SA) phase — project identity and context bootstrap.
   # KG: ATOM_Skill_apt_sa, APT_v26_RFC_draft_2026-04-21 (A1 MIC slot expansion, A4 MethodologyConfig slot), APT_v25_RFC_draft_2026-04-17

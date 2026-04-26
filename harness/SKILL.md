@@ -2,6 +2,7 @@
 name: harness
 kg_ref: ATOM_Skill_harness
 version: 2
+channel: stable
 description: >
   하네스 방법론 — APT의 설계 철학. "구조가 에이전트를 제약한다."
   Invoke when: APT 구조 설계/검토, Phase 전환 규칙 점검, 에이전트 실패 원인 분석,

@@ -2,6 +2,7 @@
 name: tpa
 kg_ref: ATOM_Skill_tpa_orchestrator_v10
 version: 1.0
+channel: stable
 description: >
   TPA v1.0 orchestrator — APT v24 역분석 기반 역순 사이클.
   코드→설계 복원 (TCW→TT→TP→TA). 5대 본질 MIC 참조.

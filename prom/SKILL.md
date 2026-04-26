@@ -2,6 +2,7 @@
 name: prom
 kg_ref: ATOM_Skill_prom_alias
 version: 3
+channel: stable
 description: >
   `/prometheus`의 짧은 별칭(alias). `/prom <N> <problem>` == `/prometheus <N> <problem>`.
   사용법: `/prom 16 "문제"`, `/prom 100 "TOE"`, `/prom "간단한 문제"`.

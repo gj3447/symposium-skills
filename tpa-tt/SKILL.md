@@ -2,6 +2,7 @@
 name: tpa-tt
 kg_ref: ATOM_Skill_tpa_tt
 version: 1.0
+channel: stable
 description: >
   TPA TargetTwin (TT) — Phase 2/4. APT ST 거울 (역순).
   각 pub 심볼의 암묵적/명시적 Contract 추출. AptContract(명시 interface/trait)
