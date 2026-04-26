@@ -2,7 +2,7 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.0",
-  "git_head_short": "4b9a3f7",
+  "git_head_short": "2ca6d68",
   "merkle_root": "d8c62efd4d88ee58b70d2335d93907d7c6a606db0ba62b4a9ed7f9e69b28b7dd",
   "skills_count": 27,
   "skills": [

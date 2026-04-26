@@ -4,19 +4,19 @@
     {
       "name": "MANIFEST.json",
       "digest": {
-        "sha256": "304f0e0f0d5420e7faaf334924ca53ba54b9d00c3fb297bdeb2a78147570ed91"
+        "sha256": "3c87c318ba9d882e5fd54132f041ef7afe732e1a890c75ff028ae43502d254ac"
       }
     },
     {
       "name": "SBOM.json",
       "digest": {
-        "sha256": "08f35f925fa2413f7642208fb05a7061a54d56a9faadc9785485f74fed00db5a"
+        "sha256": "61d7257b28beba23ad4d164cc588277fe12e1a07a780676778cc8a71484a73b2"
       }
     },
     {
       "name": ".well-known/skills/index.json",
       "digest": {
-        "sha256": "526a35812591d887d5b71572b9deedc70812b3152bc3b595660ceff639e454bc"
+        "sha256": "30a85bd5327f33c52e9ab82caf966c2f148475b76a31363f27367fdeafad3a9e"
       }
     }
   ],
@@ -25,7 +25,7 @@
     "buildDefinition": {
       "buildType": "https://symposium.local/skill-build/v1",
       "externalParameters": {
-        "git_head_commit": "224d3790c393900c7e57af15e1bf4db3f429c619",
+        "git_head_commit": "2ca6d68ada33c478756f6d8d553f654f8a2dfbb8",
         "git_latest_tag": "v26.0.0",
         "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS"
       },
@@ -204,8 +204,8 @@
       },
       "metadata": {
         "invocationId": "d8c62efd4d88ee58b70d2335d93907d7c6a606db0ba62b4a9ed7f9e69b28b7dd",
-        "startedOn": "2026-04-26T17:27:21+09:00",
-        "finishedOn": "2026-04-26T17:27:21+09:00"
+        "startedOn": "2026-04-26T17:33:59+09:00",
+        "finishedOn": "2026-04-26T17:33:59+09:00"
       },
       "byproducts": [
         {

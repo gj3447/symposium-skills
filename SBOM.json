@@ -4,7 +4,7 @@
   "serialNumber": "urn:uuid:507e3856-36e7-5191-bb73-8055a1ae035d",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-04-26T17:27:21+09:00",
+    "timestamp": "2026-04-26T17:33:59+09:00",
     "tools": [
       {
         "vendor": "SYMPOSIUM",
@@ -19,7 +19,7 @@
       "properties": [
         {
           "name": "git:head",
-          "value": "224d3790c393900c7e57af15e1bf4db3f429c619"
+          "value": "2ca6d68ada33c478756f6d8d553f654f8a2dfbb8"
         },
         {
           "name": "manifest:merkle_root",
