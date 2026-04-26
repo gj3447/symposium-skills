@@ -1,0 +1,200 @@
+{
+  "schema": "v1",
+  "generatedAt": "2026-04-26T06:45:44+00:00",
+  "git_head_commit": "6da81afddeb759ab7fd8bc4f554bd5f6bc0ab08d",
+  "git_head_short": "6da81af",
+  "git_latest_tag": "v26.0.0",
+  "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
+  "skills_count": 27,
+  "skills": [
+    {
+      "name": "88-taliban",
+      "path": "88-taliban",
+      "version": 3,
+      "kg_ref": "ATOM_Skill_88taliban",
+      "git_tree_sha": "38d5771d041c0b114f517b27d86247edb4119b68"
+    },
+    {
+      "name": "apt",
+      "path": "apt",
+      "version": 26,
+      "kg_ref": "ATOM_Skill_apt_orchestrator",
+      "git_tree_sha": "97f9142bafc6dfed39e009f9b9e19425b9eb35f4"
+    },
+    {
+      "name": "apt-meta-review",
+      "path": "apt-meta-review",
+      "version": 2,
+      "kg_ref": "ATOM_Skill_apt_meta_review",
+      "git_tree_sha": "51e691d24b011d1cefa9cf0fc5fcfc0d2fa02f4c"
+    },
+    {
+      "name": "apt-sa",
+      "path": "apt-sa",
+      "version": 26,
+      "kg_ref": "ATOM_Skill_apt_sa",
+      "git_tree_sha": "7ee8e1c2025ee805cf3f6676ab7a843b765f6319"
+    },
+    {
+      "name": "apt-scw",
+      "path": "apt-scw",
+      "version": 26,
+      "kg_ref": "ATOM_Skill_apt_scw",
+      "git_tree_sha": "a3afb321a6890bcc28a33ba58a0d927e42b1361f"
+    },
+    {
+      "name": "apt-sp",
+      "path": "apt-sp",
+      "version": 26,
+      "kg_ref": "ATOM_Skill_apt_sp",
+      "git_tree_sha": "52309d9b2a06d147f52c9368dd3e2b52d8931971"
+    },
+    {
+      "name": "apt-st",
+      "path": "apt-st",
+      "version": 26,
+      "kg_ref": "ATOM_Skill_apt_st",
+      "git_tree_sha": "66e15eb268c8baf741594562555efa80aa9c56ea"
+    },
+    {
+      "name": "backup",
+      "path": "backup",
+      "version": 1,
+      "kg_ref": "ATOM_Skill_backup",
+      "git_tree_sha": "1911052a20aeb9ccf65b055657b69eaa761a2891"
+    },
+    {
+      "name": "db-query",
+      "path": "db-query",
+      "version": 1,
+      "kg_ref": "ATOM_Skill_db_query",
+      "git_tree_sha": "c80d3cd1cb54f0886fe12288349e2713c96250fb"
+    },
+    {
+      "name": "deploy",
+      "path": "deploy",
+      "version": 1,
+      "kg_ref": "ATOM_Skill_deploy",
+      "git_tree_sha": "58510cf0ffc9be465937bad5c64482230bc485a5"
+    },
+    {
+      "name": "docker-logs",
+      "path": "docker-logs",
+      "version": 1,
+      "kg_ref": "ATOM_Skill_docker_logs",
+      "git_tree_sha": "3e1e7cd01c28441ef1edd9c854c797e8e5831085"
+    },
+    {
+      "name": "harness",
+      "path": "harness",
+      "version": 2,
+      "kg_ref": "ATOM_Skill_harness",
+      "git_tree_sha": "7314d78ec4da281f07a1e2266e4dbe1ac408723f"
+    },
+    {
+      "name": "jaebaeman",
+      "path": "jaebaeman",
+      "version": 2,
+      "kg_ref": "ATOM_Skill_jaebaeman",
+      "git_tree_sha": "2bacf378e59a2839d5bf776d37a118422ac4ba94"
+    },
+    {
+      "name": "kafka-manage",
+      "path": "kafka-manage",
+      "version": 1,
+      "kg_ref": "ATOM_Skill_kafka_manage",
+      "git_tree_sha": "9a6f7342162be8d8a08e8415b47715e5f9fbf31e"
+    },
+    {
+      "name": "longinus",
+      "path": "longinus",
+      "version": "3.1",
+      "kg_ref": "ATOM_Skill_longinus",
+      "git_tree_sha": "95be9529ea38a28a46cfa6ca0973379a17f7e79c"
+    },
+    {
+      "name": "prom",
+      "path": "prom",
+      "version": 3,
+      "kg_ref": "ATOM_Skill_prom_alias",
+      "git_tree_sha": "451d032b115df40d963be94ec088476c73b83ee0"
+    },
+    {
+      "name": "prometheus",
+      "path": "prometheus",
+      "version": 5,
+      "kg_ref": "ATOM_Skill_prometheus",
+      "git_tree_sha": "509dfc64e093a41d4d793306f63b854a67213ffa"
+    },
+    {
+      "name": "server-status",
+      "path": "server-status",
+      "version": 1,
+      "kg_ref": "ATOM_Skill_server_status",
+      "git_tree_sha": "be7c7b61fed7f07cc555c0cb705fc49a55154803"
+    },
+    {
+      "name": "skill-creator",
+      "path": "skill-creator",
+      "version": 1,
+      "kg_ref": "ATOM_Skill_skill_creator",
+      "git_tree_sha": "5049efd64385a1bd2d40377b65bef566a722cf56"
+    },
+    {
+      "name": "solve",
+      "path": "solve",
+      "version": 2,
+      "kg_ref": "ATOM_Skill_solve",
+      "git_tree_sha": "7f1a60e1d16ff608cd7ca45d2daae2fdb4a6b36a"
+    },
+    {
+      "name": "taliban",
+      "path": "taliban",
+      "version": 3,
+      "kg_ref": "ATOM_Skill_taliban",
+      "git_tree_sha": "f48d3a779970cac3b144f73e1fe0ac1910b9caf1"
+    },
+    {
+      "name": "tlb",
+      "path": "tlb",
+      "version": 2,
+      "kg_ref": "ATOM_Skill_tlb_alias",
+      "git_tree_sha": "887047de96407a34fe496b288a7ba98d6b139d03"
+    },
+    {
+      "name": "tpa",
+      "path": "tpa",
+      "version": "1.0",
+      "kg_ref": "ATOM_Skill_tpa_orchestrator_v10",
+      "git_tree_sha": "623cc096eb22357160fb01a712c6468ed551336e"
+    },
+    {
+      "name": "tpa-ta",
+      "path": "tpa-ta",
+      "version": "1.0",
+      "kg_ref": "ATOM_Skill_tpa_ta",
+      "git_tree_sha": "68e4e10e612a576f4b183e1acb4914ae03ea4d60"
+    },
+    {
+      "name": "tpa-tcw",
+      "path": "tpa-tcw",
+      "version": "1.0",
+      "kg_ref": "ATOM_Skill_tpa_tcw",
+      "git_tree_sha": "170c7f2ade2141223464caab2d8dc12d3a97155b"
+    },
+    {
+      "name": "tpa-tp",
+      "path": "tpa-tp",
+      "version": "1.0",
+      "kg_ref": "ATOM_Skill_tpa_tp",
+      "git_tree_sha": "d89f4fb613eeb4cc45fe6a90c9081789c438bb54"
+    },
+    {
+      "name": "tpa-tt",
+      "path": "tpa-tt",
+      "version": "1.0",
+      "kg_ref": "ATOM_Skill_tpa_tt",
+      "git_tree_sha": "6d8cd4ce15134305ba308bbab5f07ebe6998215c"
+    }
+  ]
+}
