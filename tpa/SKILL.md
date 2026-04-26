@@ -1,5 +1,6 @@
 ---
 name: tpa
+kg_ref: ATOM_Skill_tpa_orchestrator_v10
 version: 1.0
 description: >
   TPA v1.0 orchestrator — APT v24 역분석 기반 역순 사이클.

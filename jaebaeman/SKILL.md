@@ -1,5 +1,6 @@
 ---
 name: jaebaeman
+kg_ref: ATOM_Skill_jaebaeman
 version: 2
 description: >
   재배맨(JaebaeMan) v2 — Subagent Runtime Protocol. 모든 AI subagent 동작의 바닥(foundation).

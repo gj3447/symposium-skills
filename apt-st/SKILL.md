@@ -1,5 +1,6 @@
 ---
 name: apt-st
+kg_ref: ATOM_Skill_apt_st
 version: 26
 description: >
   APT SemanticTwin (ST) — crystallization of AtomicSpans into Contract + Task.

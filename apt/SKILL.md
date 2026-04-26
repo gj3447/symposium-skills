@@ -1,5 +1,6 @@
 ---
 name: apt
+kg_ref: ATOM_Skill_apt_orchestrator
 version: 26
 description: >
   APT v26 orchestrator — KG 정본 기반. Gate Check Hook 강제. SA→SP→ST→SCW 순환.

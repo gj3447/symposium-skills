@@ -1,5 +1,6 @@
 ---
 name: docker-logs
+kg_ref: ATOM_Skill_docker_logs
 version: 1
 description: >
   Docker 컨테이너의 로그를 확인합니다. 서비스 장애 원인 파악이나 디버깅 시 사용합니다.

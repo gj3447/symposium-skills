@@ -1,5 +1,6 @@
 ---
 name: 88-taliban
+kg_ref: ATOM_Skill_88taliban
 version: 3
 description: >
   `/taliban --lens mathematical`의 짧은 별칭(alias).

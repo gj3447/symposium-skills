@@ -1,5 +1,6 @@
 ---
 name: tlb
+kg_ref: ATOM_Skill_tlb_alias
 version: 2
 description: >
   `/taliban`의 짧은 별칭(alias). `/tlb <target>` == `/taliban <target>`.

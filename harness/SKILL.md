@@ -1,5 +1,6 @@
 ---
 name: harness
+kg_ref: ATOM_Skill_harness
 version: 2
 description: >
   하네스 방법론 — APT의 설계 철학. "구조가 에이전트를 제약한다."

@@ -1,5 +1,6 @@
 ---
 name: server-status
+kg_ref: ATOM_Skill_server_status
 version: 1
 description: >
   비행기맨 서버 전체 상태를 점검합니다. Docker 컨테이너, DB 접속, 스토리지, 외부 접근, 네트워크 상태를 한눈에 확인할 때 사용합니다.

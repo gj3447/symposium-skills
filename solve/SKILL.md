@@ -1,5 +1,6 @@
 ---
 name: solve
+kg_ref: ATOM_Skill_solve
 version: 2
 description: >
   오답노트 체계적 해결 사이클 — 문제 발견 → KG 기록 → 병렬 리서치 → KG 구축 → 계획 수립 → 실행 → 검증의 7단계.

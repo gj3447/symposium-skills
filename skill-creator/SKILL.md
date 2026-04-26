@@ -1,5 +1,6 @@
 ---
 name: skill-creator
+kg_ref: ATOM_Skill_skill_creator
 version: 1
 description: >
   Anthropic's official Skill Creator — develop, test, and refine Claude skills through iterative workflow.

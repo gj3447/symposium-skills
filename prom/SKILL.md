@@ -1,5 +1,6 @@
 ---
 name: prom
+kg_ref: ATOM_Skill_prom_alias
 version: 3
 description: >
   `/prometheus`의 짧은 별칭(alias). `/prom <N> <problem>` == `/prometheus <N> <problem>`.

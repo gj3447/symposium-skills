@@ -1,5 +1,6 @@
 ---
 name: apt-meta-review
+kg_ref: ATOM_Skill_apt_meta_review
 version: 2
 description: >
   APT MetaReview Phase (5/5) — 의심/피드백을 자동으로 스킬 강화로 이어지는 피드백 루프.

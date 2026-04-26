@@ -1,5 +1,6 @@
 ---
 name: tpa-tp
+kg_ref: ATOM_Skill_tpa_tp
 version: 1.0
 description: >
   TPA TargetPyramid (TP) — Phase 3/4. APT SP 거울 (역순).

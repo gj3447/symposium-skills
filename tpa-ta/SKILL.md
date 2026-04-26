@@ -1,5 +1,6 @@
 ---
 name: tpa-ta
+kg_ref: ATOM_Skill_tpa_ta
 version: 1.0
 description: >
   TPA TargetAnchor (TA) — Phase 4/4. APT SA 거울 (최종 앵커링).

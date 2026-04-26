@@ -1,5 +1,6 @@
 ---
 name: tpa-tcw
+kg_ref: ATOM_Skill_tpa_tcw
 version: 1.0
 description: >
   TPA TargetCodeWorld (TCW) — Phase 1/4. APT SCW 거울 (역순).

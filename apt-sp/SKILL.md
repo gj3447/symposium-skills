@@ -1,5 +1,6 @@
 ---
 name: apt-sp
+kg_ref: ATOM_Skill_apt_sp
 version: 26
 description: >
   APT SemanticPyramid (SP) — recursive Span decomposition.

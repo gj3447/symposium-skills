@@ -1,5 +1,6 @@
 ---
 name: apt-sa
+kg_ref: ATOM_Skill_apt_sa
 version: 26
 description: >
   APT SemanticAnchor (SA) phase — project identity and context bootstrap.
