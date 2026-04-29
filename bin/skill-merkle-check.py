@@ -48,7 +48,11 @@ def parse_frontmatter(skill_md):
         k, raw = m2.group(1), m2.group(2).strip()
         if not raw or raw.startswith(">"):
             continue
-        fm[k] = int(raw) if raw.isdigit() else raw
+        # YAML quoted string handling (PROM 16 F3 — SemVer migration consistency)
+        if (raw.startswith('"') and raw.endswith('"')) or (raw.startswith("'") and raw.endswith("'")):
+            fm[k] = raw[1:-1]
+        else:
+            fm[k] = int(raw) if raw.isdigit() else raw
     return fm
 
 

@@ -11,6 +11,11 @@
 ### Added
 
 - *(versioning)* Adopt Keep a Changelog 1.1.0 + git-cliff auto-regen (PROM 16 F1) ([`014bc98`](#014bc98b6c33a578918f7511fe90aad8a7267593))
+- *(versioning)* SKILL.md ## History + SemVer migration + KG :SkillVersion (PROM 16 F2-F4) ([`aba6319`](#aba63196aee83c16e02627692b65f9543622d980))
+
+### Miscellaneous
+
+- *(cleanup)* Archive legacy SKILL.md .bak files (PROM 16 F6 prep) ([`f0fd863`](#f0fd8634862be7bc5a9d7b0c24f0913ebc4c6a7e))
 
 ## [26.0.2] - 2026-04-26
 
