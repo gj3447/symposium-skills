@@ -12,6 +12,7 @@
 
 - *(versioning)* Adopt Keep a Changelog 1.1.0 + git-cliff auto-regen (PROM 16 F1) ([`014bc98`](#014bc98b6c33a578918f7511fe90aad8a7267593))
 - *(versioning)* SKILL.md ## History + SemVer migration + KG :SkillVersion (PROM 16 F2-F4) ([`aba6319`](#aba63196aee83c16e02627692b65f9543622d980))
+- *(versioning)* Apt phase skills ## History (PROM 16 F7) + Architecture Principles KG scaffolding ([`ffbb331`](#ffbb3313c430a88b9e342d019f7678a84edff486))
 
 ### Changed
 

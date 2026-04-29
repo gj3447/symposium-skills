@@ -238,7 +238,19 @@ User Request
     +-- Branch has code ---------------> /apt-scw (PH6 feedback)
     |       |
     |       +-- Discovery? ------------> back to /apt-sp or /apt-st
+    |       |
+    |       v
+    +-- SCW fulfilled -----------------> /apt-cleanup (PHASE 6 Cleanup Gate)  ← NEW (PROM 16 F8)
+    |       |
+    |       +-- [GATE: 4-tool ratchet] tach=0, fat_ratchet, vulture_delta, complexipy_ratchet
+    |       +-- [GATE: refactor:feature commit ratio ≥ 0.2]
+    |       +-- [GATE: pass_count ≥ 5/7] PASS | NEEDS_REFACTOR | BLOCK
+    |       |
+    |       v
+    +-- Cleanup PASS ------------------> /apt-meta-review (Phase 5 — methodology meta-improve)
 ```
+
+> **Phase 6 (Cleanup Gate) NEW (2026-04-29)** — TDD REFACTOR phase 의 cycle-level 거울. SOLID class-level 만으로는 못 잡는 *folder-level* CCP/ADP 위반을 4-tool ratchet (tach/complexipy/lizard/vulture/deptry) + commit ratio 로 enforce. atomic-span shipping 평면 누적 정정 메커니즘. Spec: [`/apt-cleanup`](../apt-cleanup/SKILL.md). KG: `lesson-apt-phase6-cleanup-missing-2026-04-28`, `lesson-solid-class-level-vs-package-level-mismatch-2026-04-29`.
 
 ## Your role
 You are the CRITIC, not the designer. Your job is to FIND FLAWS, not to approve.

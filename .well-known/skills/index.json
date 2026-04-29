@@ -2,9 +2,9 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.2",
-  "git_head_short": "f0fd863",
-  "merkle_root": "e0ab28ac2da4dd2cd79230856226f5009534ef00e344348574fb5285159aba51",
-  "skills_count": 27,
+  "git_head_short": "ffbb331",
+  "merkle_root": "4a6e8b0c556a2ffb1a3976987659a6a9fd374c12bbfb3cc98a6a71521cc4f4e3",
+  "skills_count": 28,
   "skills": [
     {
       "name": "88-taliban",
@@ -18,42 +18,49 @@
       "version": "26.0.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "f098ac78fefe4de9d35190917d1ad591b2b44455"
+      "git_tree_sha": "479bd78863001b860e2e7ec832f828d4bf00e069"
+    },
+    {
+      "name": "apt-cleanup",
+      "version": "1.0.0",
+      "kg_ref": "ATOM_Skill_apt_cleanup",
+      "channel": "experimental",
+      "git_tree_sha": null
     },
     {
       "name": "apt-meta-review",
       "version": "2.0.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
-      "git_tree_sha": "5325c678d620d34acf414b1fd4023dd47d8804fa"
+      "git_tree_sha": "ed77f6f79e3cd0d428d1c86bd81d1e3d8f501822"
     },
     {
       "name": "apt-sa",
       "version": "26.0.0",
       "kg_ref": "ATOM_Skill_apt_sa",
       "channel": "stable",
-      "git_tree_sha": "fcf232f0a0f24ddb1c91d45ad77d773a0d1b41cb"
+      "git_tree_sha": "d3edcbd3af0b7ac8ba7d8df1597aebb5bd16ccd7"
     },
     {
       "name": "apt-scw",
       "version": "26.0.0",
       "kg_ref": "ATOM_Skill_apt_scw",
       "channel": "stable",
-      "git_tree_sha": "da0da3c6222ef75f2517dd5dab01bdb062f75e85"
+      "git_tree_sha": "aa8beb545b0b6b6ebd002e7dd80e6cfad471804b"
     },
     {
       "name": "apt-sp",
       "version": "26.0.0",
       "kg_ref": "ATOM_Skill_apt_sp",
       "channel": "stable",
-      "git_tree_sha": "e3e4e0c28cebca71447f7a7b62d9b31b30fe8b8d"
+      "git_tree_sha": "3288d5c7680188a5d0b5d2c81cf477687b22b2c3"
     },
     {
       "name": "apt-st",
       "version": "26.0.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "9d5a9c6c16f03014f71130bc553f331a20be8163"
+      "git_tree_sha": "27674182cc1ff3b5b404cfce3cbd51da5ddb5984"
     },
     {
       "name": "backup",
