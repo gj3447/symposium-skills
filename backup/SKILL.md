@@ -1,7 +1,7 @@
 ---
 name: backup
 kg_ref: ATOM_Skill_backup
-version: 1
+version: "1.0.0"
 channel: stable
 description: >
   비행기맨 서버의 DB 데이터를 백업합니다. Neo4j, PostgreSQL, MongoDB, Redis 데이터를 MinIO 또는 로컬에 백업할 때 사용합니다.

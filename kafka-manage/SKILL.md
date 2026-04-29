@@ -1,7 +1,7 @@
 ---
 name: kafka-manage
 kg_ref: ATOM_Skill_kafka_manage
-version: 1
+version: "1.0.0"
 channel: stable
 description: >
   Kafka 토픽 관리, 메시지 생산/소비, 클러스터 상태 확인에 사용합니다.

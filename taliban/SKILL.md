@@ -1,7 +1,7 @@
 ---
 name: taliban
 kg_ref: ATOM_Skill_taliban
-version: 3
+version: "3.0.0"
 channel: stable
 description: >
   탈레반 방법론 — APT의 면역 시스템. 적대적 검증 프레임워크.
@@ -449,3 +449,20 @@ visits = 0 → 1e18 (explore-first sentinel)
 ```
 
 **루프 폐쇄의 심장**: 이 훅이 돌아야 재배맨이 학습한다 (visits 누적 → UCB1 signal → 다음 선택).
+
+---
+
+## History
+
+> Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- taliban/SKILL.md`.
+> 학문 grounding: [`/PROM_16_SKILL_VERSIONING_REPORT.md`](../PROM_16_SKILL_VERSIONING_REPORT.md).
+
+| Version | Date | Summary | KG Ref |
+|---|---|---|---|
+| **v3** | 2026-04-21~24 | LensSet 플러거블 (constitutional 9 / mathematical 113 / solid 5 / longinus 임의 등록 가능). 재배맨 SubagentTaskSpec 씨앗 기반 자동 출격. UCB1 lazy query (visits→reward signal) | `ATOM_Skill_taliban`, `lesson-feedback-is-emergent-not-weapon-2026-04-16` |
+| **v2** | (~2026-04 mid) | --lens mathematical 5-round meta-verification (260✓→102✓ honest convergence). RTI/FVR (Rubber-Stamp 방지). HR11 evidence-backed verdicts. AptDecisionLog with override_reason | — |
+| **v1** | (older) | 9 lens constitutional (GAN 의 D 역할, 만장일치 PASS) | — |
+
+→ APT v22 Gate Check enforcement 의 면역계 mechanism. 88-taliban (v3) = `--lens mathematical` 별칭, tlb (v3) = thin alias.
+
+# KG history: ATOM_Skill_taliban / lesson-prom16-skill-versioning-academic-2026-04-29

@@ -1,7 +1,7 @@
 ---
 name: tpa-tt
 kg_ref: ATOM_Skill_tpa_tt
-version: 1.0
+version: "1.0.0"
 channel: stable
 description: >
   TPA TargetTwin (TT) — Phase 2/4. APT ST 거울 (역순).

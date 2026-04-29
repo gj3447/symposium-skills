@@ -1,7 +1,7 @@
 ---
 name: apt
 kg_ref: ATOM_Skill_apt_orchestrator
-version: 26
+version: "26.0.0"
 channel: stable
 description: >
   APT v26 orchestrator — KG 정본 기반. Gate Check Hook 강제. SA→SP→ST→SCW 순환.
@@ -1782,3 +1782,23 @@ If ANY checkbox fails: BLOCK. Do not proceed. Fix the issue first.
 > 정본 해석: `MATCH (mic:MethodologyIntegrationContract {name:'MIC_v1'})-[:HAS_SLOT]->(s) RETURN s.name, s.currentConcrete`
 > 유틸리티: `03_SCRIPTS/db/resolve_mic_slot.cypher`
 > # KG: lesson-skill-mic-slot-ref-weak-2026-04-15
+
+---
+
+## History
+
+> Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- apt/SKILL.md`.
+> 학문 grounding: [`/PROM_16_SKILL_VERSIONING_REPORT.md`](../PROM_16_SKILL_VERSIONING_REPORT.md) (Lehman SCM 8 laws / Hyrum's Law).
+
+| Version | Date | Summary | KG Ref |
+|---|---|---|---|
+| **v26** | 2026-04-21~25 | A6 resolve-only directive, MIC slot 7→10 (ContractSchema/LensSet/MethodologyConfig 추가), Gate Hook LensSet completeness Cypher enforcement (3-lens shortcut 차단) | `APT_v26_RFC_draft_2026-04-21`, `ATOM_APT_v26_Gate_Hook_Lens_Enforcement_2026-04-21`, `lesson-apt-v26-a6-skill-resolve-only-2026-04-25` |
+| **v25** | 2026-04-17 | Contract 7-field + error_variants extension, SharedType→Contract.shared=true, meta-validation protocol, apt-progress.md 템플릿 | `APT_v25_RFC_draft_2026-04-17`, `lesson-apt-v25-skill-version-drift-2026-04-21` |
+| **v24** | 2026-04-15 전후 | Contract v2 7-field, Lean 4 `lake build` integration (sorry=0 ground truth) | — |
+| **v22** | 2026-04 초 | Gate Check enforcement via Claude Code Hook, Taliban --lens mathematical 5-round meta-verification (260✓→102✓ honest convergence), HR11 evidence-backed verdicts | `lesson-feedback-is-emergent-not-weapon-2026-04-16` |
+| **v17** | (older) | Marker "End of APT v17 Orchestrator SKILL.md" 본문 fossil | — |
+| **v5~v20** | timestream | Historical evolution. MinIO archive: `bhgman/apt-docs/v{N}/` | `APT_v5..APT_v20` (16 AptVersion nodes) |
+
+→ KG SkillVersion query: `MATCH (sv:SkillVersion {skill_name:'apt'}) RETURN sv ORDER BY sv.version DESC` (F4 도입 후)
+
+# KG history: ATOM_Skill_apt_orchestrator (binding root) / lesson-prom16-skill-versioning-academic-2026-04-29

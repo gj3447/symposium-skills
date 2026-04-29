@@ -1,7 +1,7 @@
 ---
 name: prom
 kg_ref: ATOM_Skill_prom_alias
-version: 3
+version: "3.0.0"
 channel: stable
 description: >
   `/prometheus`의 짧은 별칭(alias). `/prom <N> <problem>` == `/prometheus <N> <problem>`.

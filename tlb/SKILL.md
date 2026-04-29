@@ -1,7 +1,7 @@
 ---
 name: tlb
 kg_ref: ATOM_Skill_tlb_alias
-version: 2
+version: "2.0.0"
 channel: stable
 description: >
   `/taliban`의 짧은 별칭(alias). `/tlb <target>` == `/taliban <target>`.

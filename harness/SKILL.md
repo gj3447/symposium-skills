@@ -1,7 +1,7 @@
 ---
 name: harness
 kg_ref: ATOM_Skill_harness
-version: 2
+version: "2.0.0"
 channel: stable
 description: >
   하네스 방법론 — APT의 설계 철학. "구조가 에이전트를 제약한다."
@@ -216,3 +216,22 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 ```
 
 # KG: ATOM_재배맨_v2_harness, SA_methodology_v4_triple_upgrade
+
+---
+
+## History
+
+> Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- harness/SKILL.md`.
+> 학문 grounding: [`/PROM_16_SKILL_VERSIONING_REPORT.md`](../PROM_16_SKILL_VERSIONING_REPORT.md).
+>
+> ⚠️ **Drift 인지 (2026-04-28)** — 사용자 원래 의도는 *industry agent harness / scaffolding* (Cursor/Claude Code/Aider/SWE-agent/MCP). 4축 abstract methodology 로 drift. 정정 진행 중 — `SYMPOSIUM/FEEDBACK/bhgman_harness_drift_resolution_v1_2026-04-28.md` (6-Phase plan).
+
+| Version | Date | Summary | KG Ref |
+|---|---|---|---|
+| **v2** | 2026-04 | 4-Axis Model (Inform / Constrain / Verify / Correct), Architecture-as-Harness, Quality Shift (code → spec), MIC 철학 레이어 | `ATOM_Skill_harness`, `lesson-harness-drift-corrected-2026-04-28`, `lesson-5dae-wonso-metaphor-drift-20260428` |
+| **v1** | (older) | "구조가 에이전트를 제약한다" (Bockeler "Architecture as Harness", Fowler "harness engineering" 인용) | `harness-engineering-fowler.md` 참조 |
+
+→ Drift resolution: `bhgman_harness_drift_resolution_v1_2026-04-28.md` (industry scaffolding 의미 복원). MetaphorValidationGate v1 5-step 검증 통과 필요.
+→ 짝패: 12사도 #4 비행기맨 ⇔ harness (industry sense). `isAirplaneMan(j) := ∀x:CHU j.covers x` ↔ harness covers all model interaction.
+
+# KG history: ATOM_Skill_harness / lesson-prom16-skill-versioning-academic-2026-04-29

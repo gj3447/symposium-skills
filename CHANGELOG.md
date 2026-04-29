@@ -6,6 +6,12 @@
 > 학문 grounding: PROM 16 (`PROM_16_SKILL_VERSIONING_REPORT.md`) — Lehman SCM 8 laws / SemVer 2.0.0 / Adams-McIntosh SANER 2016 / SLSA v1.0.
 > KG: `lesson-prom16-skill-versioning-academic-2026-04-29` (16/16 ResearchFinding, 10 seeds).
 
+## [Unreleased]
+
+### Added
+
+- *(versioning)* Adopt Keep a Changelog 1.1.0 + git-cliff auto-regen (PROM 16 F1) ([`014bc98`](#014bc98b6c33a578918f7511fe90aad8a7267593))
+
 ## [26.0.2] - 2026-04-26
 
 ### Changed

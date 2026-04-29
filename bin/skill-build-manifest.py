@@ -38,7 +38,10 @@ def parse_frontmatter(skill_md):
         key, raw = m2.group(1), m2.group(2).strip()
         if not raw or raw.startswith(">"):
             continue
-        if raw.isdigit():
+        # YAML-style quoted string 처리 (PROM 16 F3: SemVer migration)
+        if (raw.startswith('"') and raw.endswith('"')) or (raw.startswith("'") and raw.endswith("'")):
+            fm[key] = raw[1:-1]
+        elif raw.isdigit():
             fm[key] = int(raw)
         else:
             fm[key] = raw

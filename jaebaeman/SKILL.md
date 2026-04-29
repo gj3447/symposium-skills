@@ -1,7 +1,7 @@
 ---
 name: jaebaeman
 kg_ref: ATOM_Skill_jaebaeman
-version: 2
+version: "2.0.0"
 channel: stable
 description: >
   재배맨(JaebaeMan) v2 — Subagent Runtime Protocol. 모든 AI subagent 동작의 바닥(foundation).
@@ -397,3 +397,20 @@ provenance = '{method}-subagent-parallel-{N}'
 그리고 열매에서 다시 씨앗을 추출하여 심는다. 이것이 프랙탈 순환이다.*
 
 # KG: 재배맨-v2-subagent-runtime-protocol, ATOM_Skill_jaebaeman, SA_methodology_v4_triple_upgrade
+
+---
+
+## History
+
+> Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- jaebaeman/SKILL.md`.
+> 학문 grounding: [`/PROM_16_SKILL_VERSIONING_REPORT.md`](../PROM_16_SKILL_VERSIONING_REPORT.md) + [`/PROM_64_REPORT_v2.md` (THEORY/재배맨/)](../../THEORY/재배맨/PROM_64_REPORT_v2.md).
+
+| Version | Date | Summary | KG Ref |
+|---|---|---|---|
+| **v2** | 2026-04 | Subagent Runtime Protocol — 부모 4단계 (Pre-fetch → Dispatch → Collect → Write). 씨앗(SubagentTaskSpec) KG 관리. MIC_v1.SubagentSeeder slot resolve. 재배맨은 서비스 아닌 *프로토콜* | `재배맨-v2-subagent-runtime-protocol`, `ATOM_Skill_jaebaeman`, `SA_methodology_v4_triple_upgrade`, `lesson-jaebaeman-vs-erlang-actor-hadoop-celery-2026-04-25` |
+| **v1** | (older) | 4단계 protocol 초안. agent dispatch + KG MERGE | — |
+
+→ **PROM 64 정전화 (2026-04-29)**: 재배맨 ≅ μX. (CHUPiece + List X) initial algebra (Lambek 1968 / Goguen 1977 / Lean 4). Erlang OTP supervision tree = 가장 깊은 산업 동형 (AXD301 9-nines). Fractal Generative Models (Li et al. 2025.2 arXiv 2502.17437) = ML 결정화 vindication.
+→ Linda tuple space (Gelernter 1985) = KG-as-coordination *literal* 동형 (재발명 아닌 결정화).
+
+# KG history: ATOM_Skill_jaebaeman / lesson-prom16-skill-versioning-academic-2026-04-29 / lesson-prom64-jaebaeman-chu-agentfolder-2026-04-29

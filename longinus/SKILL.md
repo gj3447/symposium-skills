@@ -1,7 +1,7 @@
 ---
 name: longinus
 kg_ref: ATOM_Skill_longinus
-version: 3.1
+version: "3.1.0"
 channel: stable
 description: >
   롱기누스 방법론 v3.1 — 참조의 미학. KG 의미 계층을 소스코드까지 관통(貫通)시키는 참조 바인딩.
@@ -520,3 +520,21 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 ```
 
 # KG: ATOM_재배맨_v2_longinus, SA_methodology_v4_triple_upgrade
+
+---
+
+## History
+
+> Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- longinus/SKILL.md`.
+> 학문 grounding: [`/PROM_16_SKILL_VERSIONING_REPORT.md`](../PROM_16_SKILL_VERSIONING_REPORT.md).
+
+| Version | Date | Summary | KG Ref |
+|---|---|---|---|
+| **v3.1** | 2026-04 후반 | Reverse Orphan Scan (Code→KG blind-spot fix) + Crate/Script-level binding + Taliban `--lens longinus` | `ATOM_Skill_longinus`, `lesson-longinus-rigor-theories-2026-04-16` |
+| **v3** | 2026-04 mid | 7-Layer Reference Model + BX Lens Laws (GetPut/PutGet) + Refinement Types + GED Drift 정량화 | `SA_methodology_v4_triple_upgrade` |
+| **v2** | (~2026-04 early) | KG → 코드 binding (Layer L1 Document ~ L7 CodeBinding) ReferenceSite 패턴 | — |
+| **v1** | (older) | 7층 Reference Model 초안 (의미 계층 → 소스코드 관통) | — |
+
+→ ReferenceSite 패턴 (sourcePath/sourceId/layer/binding_state/anchor_strategy) — 7-Layer KG 결정화. PROM 16 / PROM 64 모두 Longinus binding 활용 (L1-L3 active).
+
+# KG history: ATOM_Skill_longinus / lesson-prom16-skill-versioning-academic-2026-04-29

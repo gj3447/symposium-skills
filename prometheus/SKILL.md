@@ -1,7 +1,7 @@
 ---
 name: prometheus
 kg_ref: ATOM_Skill_prometheus
-version: 5
+version: "5.0.0"
 channel: stable
 description: >
   프로메테우스 방법론 v5 — 지식이 행동에 선행한다. "바로 고치지 마, 먼저 불(지식) 훔쳐와."
@@ -846,3 +846,22 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 ```
 
 # KG: ATOM_재배맨_v2_prometheus, SA_methodology_v4_triple_upgrade
+
+---
+
+## History
+
+> Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- prometheus/SKILL.md`.
+> 학문 grounding: [`/PROM_16_SKILL_VERSIONING_REPORT.md`](../PROM_16_SKILL_VERSIONING_REPORT.md).
+
+| Version | Date | Summary | KG Ref |
+|---|---|---|---|
+| **v5** | 2026-04-18 | Step 3 prompt 본문을 KG 씨앗 (axis/sub-axis/matrix-template) 으로 lift. SKILL.md = 프로토콜만, 내용물 = KG 정본 (재배맨 원칙 준수). PrometheusStep v5 (Step 0/1/2/2.5/3/3.3/3.5/4/4.7/5/6/7) | `lesson-prometheus-v5-kg-reference-lift-2026-04-18`, `lesson-prometheus-v26-a6-step-drift-2026-04-25` |
+| **v4** | 2026-04-17 | 부모 하계 Pre-fetch (MCP 우회, GH #13605 대응) + Finding 중복 탐지 + 재배맨 MIC 참조 + Gate Hook 강제 | `lesson-prometheus-v4-structural-gaps-2026-04-17`, `SPAN_prometheus_v4_prefetch_protocol`, `SA_methodology_v4_triple_upgrade` |
+| **v3** | (~2026-04 mid) | TOE-스케일 N=100 대응. axis × sub-axis 교차표. UNWIND 단일 트랜잭션 D1 concurrency 해결. KARMA-style consensus/conflict 자동 탐지 | — |
+| **v2** | (~2026-04 early) | ignite/recall/lower/upper/crystallize/design/execute/verify 9-step | (archived) `PrometheusStep` v2 nodes |
+| **v1** | (older) | 7-step (discovery/recon/research/kg-build/plan/execute/verify) | (archived) `PrometheusStep` v1 nodes |
+
+→ Stale KG cleanup (2026-04-25): v1+v2 PrometheusStep 노드 :ARCHIVED.
+
+# KG history: ATOM_Skill_prometheus / lesson-prom16-skill-versioning-academic-2026-04-29

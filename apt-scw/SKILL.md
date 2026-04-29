@@ -1,7 +1,7 @@
 ---
 name: apt-scw
 kg_ref: ATOM_Skill_apt_scw
-version: 26
+version: "26.0.0"
 channel: stable
 description: >
   APT SourceCodeWorld (SCW) — TDD implementation of crystallized Contracts.
