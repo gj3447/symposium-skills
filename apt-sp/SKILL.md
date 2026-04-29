@@ -306,3 +306,18 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 > 정본 해석: `MATCH (mic:MethodologyIntegrationContract {name:'MIC_v1'})-[:HAS_SLOT]->(s) RETURN s.name, s.currentConcrete`
 > 유틸리티: `03_SCRIPTS/db/resolve_mic_slot.cypher`
 > # KG: lesson-skill-mic-slot-ref-weak-2026-04-15
+
+---
+
+## History
+
+> Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- apt-sp/SKILL.md`.
+> Architecture: Progressive Disclosure (`references/sp_world.md` lazy load).
+
+| Version | Date | Summary | KG Ref |
+|---|---|---|---|
+| **v26** | 2026-04 | C(S) 5-predicate fields (objective/definition/keyAssertion/verification/c_s_predicate) MUST non-null on every Span. A3/A5 SP→ST gate Cypher LensSet completeness. δ_infra exception. Magic number 500/200-500 → MethodologyConfig slot (A4) | `APT_v26_RFC_draft_2026-04-21`, `lesson-taliban-shortcut-antipattern-2026-04-21`, `ATOM_APT_delta_infra_exception_2026-04-21` |
+| **v24** | 2026-04 mid | KG 정본 기반 재설계. Crystallization Frontier. v5~v21 AptClarificationNote 22개 반영 | — |
+| **v5~v23** | timestream | SP = ONE world. Spans = DAG nodes (N:N, not tree). D(S) recurrence until ALL leaves satisfy C(S) = AtomicSpan | — |
+
+# KG history: ATOM_Skill_apt_sp / lesson-prom16-skill-versioning-academic-2026-04-29 / lesson-prom16-skillver-progressive-disclosure-drift-2026-04-29

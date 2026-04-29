@@ -209,3 +209,18 @@ RETURN l.name, l.resolved
 *MetaReview는 APT가 스스로를 개선하는 메커니즘이다.*
 *이 루프가 없으면 방법론은 정적이고 결함은 누적된다.*
 *# KG: APT_SkillHardening_v1, lesson-apt-scw-tdd-skipped-context-compression-2026-04-16*
+
+---
+
+## History
+
+> Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- apt-meta-review/SKILL.md`.
+
+| Version | Date | Summary | KG Ref |
+|---|---|---|---|
+| **v2** | 2026-04-21 | APT v26 A6 alignment. SKILL.md 패치는 resolve_slot(ContractSchema/LensSet/MethodologyConfig) 패턴 유지. Prose magic number 주입 금지. KG = 정본. self_application_forbidden, max_depth=1, delta=0 종료조건 | `APT_v26_RFC_draft_2026-04-21`, `CONTRACT_Hardening_MetaReview`, `SPAN_Hardening_MetaReview` |
+| **v1** | 2026-04 | Lesson → SKILL.md 패치 → MATERIALIZES 갱신 → Taliban Gate. SCW 완료 후 자동 제안 | `APT_SkillHardening_v1`, `lesson-apt-scw-tdd-skipped-context-compression-2026-04-16` |
+
+⚠️ **TDD REFACTOR phase 거울 부재** (cycle-level): apt-meta-review 만으로 *평면 누적 / fat file* 못 막음. atomic-span shipping 정규화 자체가 평면 누적 메커니즘. **Phase 6 (Cleanup Gate) 신설 필요** (`lesson-apt-phase6-cleanup-missing-2026-04-28`, HIGH, unresolved). meta-review 는 *방법론 메타-개선*, Phase 6 는 *cycle 차원 cleanup* — 보완 관계.
+
+# KG history: ATOM_Skill_apt_meta_review / lesson-prom16-skill-versioning-academic-2026-04-29 / lesson-apt-phase6-cleanup-missing-2026-04-28 / lesson-solid-class-level-vs-package-level-mismatch-2026-04-29

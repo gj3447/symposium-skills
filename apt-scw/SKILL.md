@@ -305,3 +305,20 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 > 정본 해석: `MATCH (mic:MethodologyIntegrationContract {name:'MIC_v1'})-[:HAS_SLOT]->(s) RETURN s.name, s.currentConcrete`
 > 유틸리티: `03_SCRIPTS/db/resolve_mic_slot.cypher`
 > # KG: lesson-skill-mic-slot-ref-weak-2026-04-15
+
+---
+
+## History
+
+> Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- apt-scw/SKILL.md`.
+> Architecture: Progressive Disclosure (`references/scw_world.md` lazy load — 494 lines).
+
+| Version | Date | Summary | KG Ref |
+|---|---|---|---|
+| **v26** | 2026-04-21~25 | A2 Contract v2 alignment + A4 vibe_coding_sweet/min/hard_max via MethodologyConfig slot (no more hardcoded 500). A5 FulfillmentGate 7 checks via apt-gate-check.sh Cypher (executor≠critic + LensSet completeness + prior VR APPROVED). TDAD (impact_tests mandatory) | `APT_v26_RFC_draft_2026-04-21`, `ATOM_APT_v26_Gate_Hook_Lens_Enforcement_2026-04-21`, `lesson-apt-vr-self-fulfilled-executor-reviewer-2026-04-16` |
+| **v24** | 2026-04 mid | KG 정본 기반 재설계 (`CONTRACT_apt_scw`). Same-layer Tasks parallel | — |
+| **v5~v23** | timestream | TDD implementation (Contract → Test RED → Code GREEN → Refactor). Code MUST have KG refs in comments (Longinus ReferenceSite 7-tuple) | — |
+
+⚠️ **TDD REFACTOR phase 거울 부재** (cycle-level): `lesson-apt-phase6-cleanup-missing-2026-04-28` (HIGH, unresolved). atomic-span shipping 정규화가 *평면 누적* 메커니즘 그 자체. SOLID class-level 통과해도 folder-level CCP 위반 (Robert Martin Package Principles). KG: `lesson-solid-class-level-vs-package-level-mismatch-2026-04-29`.
+
+# KG history: ATOM_Skill_apt_scw / lesson-prom16-skill-versioning-academic-2026-04-29 / lesson-apt-phase6-cleanup-missing-2026-04-28 / lesson-solid-class-level-vs-package-level-mismatch-2026-04-29

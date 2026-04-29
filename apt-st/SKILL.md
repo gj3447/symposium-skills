@@ -317,3 +317,19 @@ v2 schema가 자기자신을 기술할 때 발생하는 self-reference cycle 해
 - `03_SCRIPTS/cypher/{parallel_derive, sp_hyperedge_migration, contract_semver}.cypher`
 
 # KG: ATOM_ST2_contract_boundary_rule, CONTRACT_ST2_SharedType_ContractSchemaV2, MetaContract_CONTRACT_ST2_self_describing_meta
+
+---
+
+## History
+
+> Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- apt-st/SKILL.md`.
+> Architecture: Progressive Disclosure (`references/st_world.md` lazy load — 626 lines).
+
+| Version | Date | Summary | KG Ref |
+|---|---|---|---|
+| **v26** | 2026-04-21 | A2 — Contract v2 (9 canonical axes + access_rights_closure + ArchitectureContract subtype + 6 CrossAxisInvariant + ReferenceSite/DriftMorphism) via ContractSchema slot. SA_Contract_v2_DbC_Interface_2026-04-21_v2 reference instance | `APT_v26_RFC_draft_2026-04-21`, `SA_Contract_v2_DbC_Interface_2026-04-21_v2`, `ATOM_ST2_contract_boundary_rule` |
+| **v25** | 2026-04-17 | error_variants extension. SharedType → Contract.shared=true flag. SemanticTask = MethodologyConfig.vibe_coding_sweet (200-500 line, was hardcoded 500) | `APT_v25_RFC_draft_2026-04-17` |
+| **v24** | 2026-04 mid | KG 정본 기반 재설계. AptClarificationNote 반영 | — |
+| **v5~v23** | timestream | Crystallization (AtomicSpan → Contract + Task). Contract = typed DTO/Schema, NOT prose | — |
+
+# KG history: ATOM_Skill_apt_st / lesson-prom16-skill-versioning-academic-2026-04-29 / lesson-prom16-skillver-progressive-disclosure-drift-2026-04-29

@@ -636,3 +636,18 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 > 정본 해석: `MATCH (mic:MethodologyIntegrationContract {name:'MIC_v1'})-[:HAS_SLOT]->(s) RETURN s.name, s.currentConcrete`
 > 유틸리티: `03_SCRIPTS/db/resolve_mic_slot.cypher`
 > # KG: lesson-skill-mic-slot-ref-weak-2026-04-15
+
+---
+
+## History
+
+> Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- apt-sa/SKILL.md`.
+> Architecture: Progressive Disclosure already applied (`references/sa_world.md` lazy load).
+
+| Version | Date | Summary | KG Ref |
+|---|---|---|---|
+| **v26** | 2026-04 | A1 MIC slot expansion (7→10) + A4 MethodologyConfig slot. Context Budget + SA core fields (objective/definition/keyAssertion/C_S/contextBudget) | `APT_v26_RFC_draft_2026-04-21`, `lesson-sa-contract-v2-rejected-redesign-2026-04-20` |
+| **v22** | 2026-04 초 | Gate Check enforcement via Claude Code Hook | `lesson-feedback-is-emergent-not-weapon-2026-04-16` |
+| **v5~v21** | timestream | SA = 프로메테우스(지식 선행) + 롱기누스(KG 접지) 의 시작점 | — |
+
+# KG history: ATOM_Skill_apt_sa / lesson-prom16-skill-versioning-academic-2026-04-29 / lesson-prom16-skillver-progressive-disclosure-drift-2026-04-29
