@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-04-29T15:27:44+09:00",
-  "git_head_commit": "ffbb3313c430a88b9e342d019f7678a84edff486",
-  "git_head_short": "ffbb331",
+  "generatedAt": "2026-04-29T15:37:06+09:00",
+  "git_head_commit": "5d124c25b600eac87e7a56a7b3b2e64d684d7cb2",
+  "git_head_short": "5d124c2",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 28,
-  "merkle_root": "4a6e8b0c556a2ffb1a3976987659a6a9fd374c12bbfb3cc98a6a71521cc4f4e3",
+  "merkle_root": "958494b2cb9580cb5c0fa83e884f2526cfb9a1222a8b9e0975f9d0dcf989454b",
   "skills": [
     {
       "name": "88-taliban",
@@ -19,10 +19,10 @@
     {
       "name": "apt",
       "path": "apt",
-      "version": "26.0.0",
+      "version": "26.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "479bd78863001b860e2e7ec832f828d4bf00e069"
+      "git_tree_sha": "e4ea78d879718ffbb291fd85a76a74931362422e"
     },
     {
       "name": "apt-cleanup",
@@ -30,7 +30,7 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_apt_cleanup",
       "channel": "experimental",
-      "git_tree_sha": null
+      "git_tree_sha": "f7aed1826c1afc29a2cfa9bc281d437d3941b533"
     },
     {
       "name": "apt-meta-review",
@@ -67,7 +67,7 @@
     {
       "name": "apt-st",
       "path": "apt-st",
-      "version": "26.0.0",
+      "version": "27.0.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
       "git_tree_sha": "27674182cc1ff3b5b404cfce3cbd51da5ddb5984"
@@ -147,7 +147,7 @@
     {
       "name": "prometheus",
       "path": "prometheus",
-      "version": "5.0.0",
+      "version": "6.0.0",
       "kg_ref": "ATOM_Skill_prometheus",
       "channel": "stable",
       "git_tree_sha": "1f1569d077c7c8b6b9a14f72e407ae9666a4ff12"

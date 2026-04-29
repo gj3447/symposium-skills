@@ -1,16 +1,17 @@
 ---
 name: apt-st
 kg_ref: ATOM_Skill_apt_st
-version: "26.0.0"
+version: "27.0.0"
 channel: stable
 description: >
-  APT SemanticTwin (ST) — crystallization of AtomicSpans into Contract + Task.
+  APT SemanticTwin (ST) — crystallization of AtomicSpans into Contract + Task + 8 ST Decision Areas.
   Enters ONLY after Crystallization Frontier (all leaves = AtomicSpan).
+  v27 (2026-04-29): Exhaustive Cover Scope — 8 ST decision areas (AST/Workflow/DesignPattern/ProjectStructure/DataFlow/Algorithm/Store/ClassDesign) mandatory before SCW entry. 96 ResearchFinding 학문 grounding. Tier 1 5 areas (AST/Workflow/DP/DataFlow/Store) HIGH ★, Tier 3 3 areas (PS/Algo/Class) MEDIUM. SCW entry gate hook enforced.
   Contract = typed DTO/Schema (default 7 fields + v25 optional error_variants; v26 A2 schema pluggable via ContractSchema slot). NOT prose.
-  v26 A2 — Contract v2 (9 canonical axes + access_rights_closure + ArchitectureContract subtype + 6 CrossAxisInvariant + ReferenceSite/DriftMorphism) via ContractSchema slot. SA_Contract_v2_DbC_Interface_2026-04-21_v2 is the reference instance.
-  v25: SharedType → Contract.shared=true flag. SemanticTask = MethodologyConfig.vibe_coding_sweet default 200-500 line unit (was hardcoded 500).
+  v26 A2 — Contract v2 (9 canonical axes + access_rights_closure + ArchitectureContract subtype + 6 CrossAxisInvariant + ReferenceSite/DriftMorphism) via ContractSchema slot.
+  v25: SharedType → Contract.shared=true flag. SemanticTask = MethodologyConfig.vibe_coding_sweet 200-500 line.
   v24: KG 정본 기반 재설계. AptClarificationNote 반영.
-  # KG: ATOM_Skill_apt_st, CONTRACT_apt_st, APT_v26_RFC_draft_2026-04-21, APT_v25_RFC_draft_2026-04-17, SA_Contract_v2_DbC_Interface_2026-04-21_v2
+  # KG: ATOM_Skill_apt_st_v27, lesson-st-cover-scope-exhaustive-2026-04-29, lesson-st-cover-tier1-complete-2026-04-29, APT_v26_RFC_draft_2026-04-21, SA_Contract_v2_DbC_Interface_2026-04-21_v2
 ---
 
 ## 🎛 v26 A6 Resolve-Only
@@ -320,6 +321,99 @@ v2 schema가 자기자신을 기술할 때 발생하는 self-reference cycle 해
 
 ---
 
+## 🌐 ST Exhaustive Cover Scope (v27 — 2026-04-29)
+
+> **사용자 verdict (verbatim)**: "쌍그리 깡그리 st 에 kg 에 구축이 다되있어야하거든 ㅇㅇ; ... 그리고 나서 scw 개발 드가는거야"
+>
+> **Drift 정정**: 이전 v25/v26 ST = Contract+Task 2 영역만 cover (6.5x scope drift). v27 = exhaustive 8 영역 결정화 후만 SCW 진입.
+>
+> **Source**: `lesson-st-cover-scope-exhaustive-2026-04-29` (HIGH) + `lesson-prom-holes-audit-2026-04-29` (HIGH) + 8 PROM cycles (96 ResearchFinding) 학문 grounding.
+
+### 8 ST Decision Areas (mandatory, SCW 진입 차단 게이트)
+
+| # | Area | KG Decision Subtype | PROM cycle | Tier |
+|---|---|---|---|---|
+| 1 | **AST 구조** | `:ASTDecision` | `prom16-ast-foundation-2026-04-29` (16) | T1 ★ |
+| 2 | **Workflow** | `:WorkflowDecision` | `prom16-workflow-design-2026-04-29` (16) | T1 ★ |
+| 3 | **Design Patterns** | `:DesignPatternDecision` | `prom32-design-patterns-2026-04-29` (32) | T1 ★ |
+| 4 | **Project Structure** | `:ProjectStructureDecision` | `prom16-project-structure-2026-04-29` (16) | T3 |
+| 5 | **Data Flow** | `:DataFlowDecision` | `prom16-dataflow-design-2026-04-29` (16) | T1 ★ |
+| 6 | **Algorithm** | `:AlgorithmDecision` | `prom32-algorithm-selection-2026-04-29` (32) | T3 |
+| 7 | **Store** | `:StoreDecision` | `prom16-store-design-2026-04-29` (16) | T1 ★ |
+| 8 | **Class Design** | `:ClassDesignDecision` | `prom16-class-design-2026-04-29` (16) | T3 |
+
+→ Contract + Task = **결정의 결과물** (decision artifact). 8 Decision = **결정의 상위 결정** (decision-of-decisions).
+
+### KG schema (8 sub-decision types)
+
+```cypher
+// 모든 Decision 의 공통 supertype
+(:Decision {
+  cycle_id: String,
+  area: String,  // 'ast' | 'workflow' | 'design-pattern' | 'project-structure' | 'data-flow' | 'algorithm' | 'store' | 'class-design'
+  rationale: String,
+  alternatives_considered: [String],
+  parent_lesson: String,
+  created_at: String
+})
+
+// 8 area 별 specialized subtype (각 PROM REPORT 에 schema 정의됨)
+(:Decision:ASTDecision {cst_or_ast, parser_choice, span_tracking, trivia_preserved, ...})
+(:Decision:WorkflowDecision {workflow_form, runtime, soundness_verified, recursion_bound, ...})
+(:Decision:DesignPatternDecision {primary_pattern_family, selected_patterns, archetype_mapping, ...})
+(:Decision:ProjectStructureDecision {topology, build_system, package_manager, ai_navigation, ...})
+(:Decision:DataFlowDecision {flow_form, delivery_semantics, watermark_strategy, idempotency_key, ...})
+(:Decision:AlgorithmDecision {domain, selected, complexity_class, ai_discovered, formal_proof, post_quantum_safe, ...})
+(:Decision:StoreDecision {store_tier, store_choice, pacelc, isolation, embedding_model, ...})
+(:Decision:ClassDesignDecision {paradigm, language, hierarchy_depth_max, solid_compliance, archetype_mapping, di_container, ...})
+```
+
+### SCW Entry Gate Hook (mandatory)
+
+```cypher
+// SCW 진입 전 8 area 결정 모두 채워졌는지 검증.
+// 1개라도 missing → block, return reason.
+
+MATCH (cycle:AptCycle {name: $cycle_id})
+OPTIONAL MATCH (cycle)-[:HAS_DECISION]->(d:Decision)
+WITH cycle,
+     collect(DISTINCT d.area) AS decided_areas,
+     ['ast','workflow','design-pattern','project-structure','data-flow','algorithm','store','class-design'] AS required
+WITH cycle, decided_areas, required,
+     [a IN required WHERE NOT a IN decided_areas] AS missing
+RETURN cycle.name AS cycle,
+       size(missing) = 0 AS gate_passed,
+       missing AS missing_areas,
+       size(decided_areas) AS decided_count,
+       8 AS required_count,
+       CASE WHEN size(missing) = 0
+            THEN 'OK — SCW entry permitted'
+            ELSE 'BLOCKED — ST.exhaustive_cover incomplete: ' + toString(missing)
+       END AS reason
+```
+
+### Tier 우선순위 (resource-bounded 진입 정책)
+
+- **Tier 1 ★ HIGH 5 areas (1/2/3/5/7)**: 일반 cycle 진입 시 **반드시** 결정. (AST / Workflow / Design Patterns / DataFlow / Store)
+- **Tier 3 MEDIUM 3 areas (4/6/8)**: 도메인이 명시적으로 요구할 때만 결정. 일상 cycle 은 default 채택 가능 (Project Structure = monorepo SYMPOSIUM, Algorithm = CLRS canonical, Class = composition 4-archetype trait).
+
+→ 일상 cycle 의 minimal gate: **5/8 (Tier 1) 채워지면 SCW 진입 허용** (Tier 3 default-fallback 포함 시 full 8/8).
+
+### 참조 (Longinus L1 binding)
+
+- `s3://bhgman/apt-papers/STAxis/AST/PROM_16_REPORT.md` (Hole-1)
+- `s3://bhgman/apt-papers/STAxis/Workflow/PROM_16_REPORT.md` (Hole-2)
+- `s3://bhgman/apt-papers/STAxis/DesignPatterns/PROM_32_REPORT.md` (Hole-3)
+- `s3://bhgman/apt-papers/STAxis/ProjectStructure/PROM_16_REPORT.md` (Hole-4)
+- `s3://bhgman/apt-papers/STAxis/DataFlow/PROM_16_REPORT.md` (Hole-5)
+- `s3://bhgman/apt-papers/STAxis/Algorithm/PROM_32_REPORT.md` (Hole-6)
+- `s3://bhgman/apt-papers/STAxis/Store/PROM_16_REPORT.md` (Hole-7)
+- `s3://bhgman/apt-papers/STAxis/Class/PROM_16_REPORT.md` (Hole-8)
+
+# KG: lesson-st-cover-scope-exhaustive-2026-04-29, lesson-st-cover-tier1-complete-2026-04-29, ATOM_Skill_apt_st_v27_exhaustive_cover
+
+---
+
 ## History
 
 > Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- apt-st/SKILL.md`.
@@ -327,6 +421,7 @@ v2 schema가 자기자신을 기술할 때 발생하는 self-reference cycle 해
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|
+| **v27** | 2026-04-29 | **Exhaustive Cover Scope** — 8 ST decision areas (AST/Workflow/DesignPattern/ProjectStructure/DataFlow/Algorithm/Store/ClassDesign) materialized via 8 PROM cycles (96 ResearchFinding). SCW entry gate hook enforced. 사용자 verdict 정정 (Contract+Task 2-area drift → 8-area exhaustive). | `lesson-st-cover-scope-exhaustive-2026-04-29`, `lesson-st-cover-tier1-complete-2026-04-29`, 8 PROM cycles |
 | **v26** | 2026-04-21 | A2 — Contract v2 (9 canonical axes + access_rights_closure + ArchitectureContract subtype + 6 CrossAxisInvariant + ReferenceSite/DriftMorphism) via ContractSchema slot. SA_Contract_v2_DbC_Interface_2026-04-21_v2 reference instance | `APT_v26_RFC_draft_2026-04-21`, `SA_Contract_v2_DbC_Interface_2026-04-21_v2`, `ATOM_ST2_contract_boundary_rule` |
 | **v25** | 2026-04-17 | error_variants extension. SharedType → Contract.shared=true flag. SemanticTask = MethodologyConfig.vibe_coding_sweet (200-500 line, was hardcoded 500) | `APT_v25_RFC_draft_2026-04-17` |
 | **v24** | 2026-04 mid | KG 정본 기반 재설계. AptClarificationNote 반영 | — |
