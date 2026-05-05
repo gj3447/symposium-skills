@@ -55,7 +55,25 @@ def tree_sha_for_path(path_in_repo):
         return None
 
 
+def run_resolve_check():
+    """A6 L2 pre-build invariant: ensure no SKILL.md ships with unresolved ${MIC_v1.SLOT}.
+    Skipped if APT_SKIP_RESOLVE_CHECK=1. KG: skill-resolver-l2-buildstep-2026-05-06.
+    """
+    import os
+    if os.environ.get("APT_SKIP_RESOLVE_CHECK") == "1":
+        return
+    checker = SKILLS_DIR / "bin" / "skill-resolve-check.sh"
+    if not checker.is_file():
+        return  # validator not yet installed (older checkout)
+    try:
+        subprocess.run([str(checker)], check=True, cwd=str(SKILLS_DIR))
+    except subprocess.CalledProcessError as e:
+        print(f"ERROR: skill-resolve-check failed (exit {e.returncode}). Run bin/skill-resolve-check.sh to inspect.", file=sys.stderr)
+        sys.exit(1)
+
+
 def main():
+    run_resolve_check()
     head_commit = run_git("rev-parse", "HEAD")
     head_short = run_git("rev-parse", "--short", "HEAD")
     head_committed_at = run_git("show", "-s", "--format=%cI", "HEAD")

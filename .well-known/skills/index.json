@@ -2,8 +2,8 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.2",
-  "git_head_short": "f17e885",
-  "merkle_root": "d6a696c17ee6ebe1281bdcba42a7cb638f4bd395d98e4ffa979ca0b329c8f02f",
+  "git_head_short": "2620c42",
+  "merkle_root": "33ff4d99d542eed9efa9b39339b36519998c0485f4fc3d4f41e9da250ca9f747",
   "skills_count": 28,
   "skills": [
     {
@@ -18,49 +18,49 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "e4ea78d879718ffbb291fd85a76a74931362422e"
+      "git_tree_sha": "0c7e2aa7b31b9c9937716175b487f93079bcb890"
     },
     {
       "name": "apt-cleanup",
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_cleanup",
       "channel": "experimental",
-      "git_tree_sha": "f7aed1826c1afc29a2cfa9bc281d437d3941b533"
+      "git_tree_sha": "83a87f652c9c40a9574694b44053fbc1dd4aca08"
     },
     {
       "name": "apt-meta-review",
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
-      "git_tree_sha": "ed77f6f79e3cd0d428d1c86bd81d1e3d8f501822"
+      "git_tree_sha": "9dcaa863ce82f0776b6e2ac26de22533e0d5c752"
     },
     {
       "name": "apt-sa",
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sa",
       "channel": "stable",
-      "git_tree_sha": "d3edcbd3af0b7ac8ba7d8df1597aebb5bd16ccd7"
+      "git_tree_sha": "d58129e295e991bca5881ec27a7e538e6124d64b"
     },
     {
       "name": "apt-scw",
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_scw",
       "channel": "stable",
-      "git_tree_sha": "aa8beb545b0b6b6ebd002e7dd80e6cfad471804b"
+      "git_tree_sha": "f9d36779e52c431181cad25ca629e4c6b06fd5d8"
     },
     {
       "name": "apt-sp",
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sp",
       "channel": "stable",
-      "git_tree_sha": "3288d5c7680188a5d0b5d2c81cf477687b22b2c3"
+      "git_tree_sha": "ef062f5f4d1a4e26ea2186f9f5907436062e4fd1"
     },
     {
       "name": "apt-st",
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "72f0c046b29ac0555ade992668e4d32d5f0c6ff5"
+      "git_tree_sha": "dbe03b92088b5c93366e367d309b1f170da4c631"
     },
     {
       "name": "backup",
@@ -95,14 +95,14 @@
       "version": "3.0.0",
       "kg_ref": "ATOM_Skill_harness",
       "channel": "stable",
-      "git_tree_sha": "902da0c6cfa89350e3465949b01477721e5f63ec"
+      "git_tree_sha": "5bc09a9adfead112104ce444a5853698ecb93ff8"
     },
     {
       "name": "jaebaeman",
       "version": "2.1.0",
       "kg_ref": "ATOM_Skill_jaebaeman",
       "channel": "stable",
-      "git_tree_sha": "d1cc8f52497e7132055f74ec7ffe77a30fe14ee4"
+      "git_tree_sha": "38637cdaf46d4b19d1dfea383b2ff3b0504f0c60"
     },
     {
       "name": "kafka-manage",
@@ -116,7 +116,7 @@
       "version": "3.1.0",
       "kg_ref": "ATOM_Skill_longinus",
       "channel": "stable",
-      "git_tree_sha": "d0f889d5baba82d0ecce95980dbd66394f2978cf"
+      "git_tree_sha": "d904d58c97adc17223c6eadd084a6a3f7d3ca52b"
     },
     {
       "name": "prom",
@@ -130,7 +130,7 @@
       "version": "6.1.0",
       "kg_ref": "ATOM_Skill_prometheus",
       "channel": "stable",
-      "git_tree_sha": "1f1569d077c7c8b6b9a14f72e407ae9666a4ff12"
+      "git_tree_sha": "52eced431f43c8d8d2e3e729d9d8376b8251d3c4"
     },
     {
       "name": "server-status",
@@ -151,14 +151,14 @@
       "version": "2.0.0",
       "kg_ref": "ATOM_Skill_solve",
       "channel": "stable",
-      "git_tree_sha": "843e35b228ff4d2f756e77315770a5d6a8633c8d"
+      "git_tree_sha": "e5ffaef2807983d01530de8484231ab57272e246"
     },
     {
       "name": "taliban",
       "version": "3.0.0",
       "kg_ref": "ATOM_Skill_taliban",
       "channel": "stable",
-      "git_tree_sha": "e0988e0559a8067fe59c3ef845c313655c5f7e9f"
+      "git_tree_sha": "24e0e7b5710a55e3771ec33718acb63e99d225d1"
     },
     {
       "name": "tlb",
@@ -172,7 +172,7 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_tpa_orchestrator_v10",
       "channel": "stable",
-      "git_tree_sha": "eed5b580b164def582016b4726580ca5ca2008ca"
+      "git_tree_sha": "87dd8d9d58e529b782564a40af2cf6c72e5a507b"
     },
     {
       "name": "tpa-ta",
