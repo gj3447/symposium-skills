@@ -2,8 +2,8 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.2",
-  "git_head_short": "5d124c2",
-  "merkle_root": "958494b2cb9580cb5c0fa83e884f2526cfb9a1222a8b9e0975f9d0dcf989454b",
+  "git_head_short": "f17e885",
+  "merkle_root": "d6a696c17ee6ebe1281bdcba42a7cb638f4bd395d98e4ffa979ca0b329c8f02f",
   "skills_count": 28,
   "skills": [
     {
@@ -15,52 +15,52 @@
     },
     {
       "name": "apt",
-      "version": "26.1.0",
+      "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
       "git_tree_sha": "e4ea78d879718ffbb291fd85a76a74931362422e"
     },
     {
       "name": "apt-cleanup",
-      "version": "1.0.0",
+      "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_cleanup",
       "channel": "experimental",
       "git_tree_sha": "f7aed1826c1afc29a2cfa9bc281d437d3941b533"
     },
     {
       "name": "apt-meta-review",
-      "version": "2.0.0",
+      "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
       "git_tree_sha": "ed77f6f79e3cd0d428d1c86bd81d1e3d8f501822"
     },
     {
       "name": "apt-sa",
-      "version": "26.0.0",
+      "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sa",
       "channel": "stable",
       "git_tree_sha": "d3edcbd3af0b7ac8ba7d8df1597aebb5bd16ccd7"
     },
     {
       "name": "apt-scw",
-      "version": "26.0.0",
+      "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_scw",
       "channel": "stable",
       "git_tree_sha": "aa8beb545b0b6b6ebd002e7dd80e6cfad471804b"
     },
     {
       "name": "apt-sp",
-      "version": "26.0.0",
+      "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sp",
       "channel": "stable",
       "git_tree_sha": "3288d5c7680188a5d0b5d2c81cf477687b22b2c3"
     },
     {
       "name": "apt-st",
-      "version": "27.0.0",
+      "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "27674182cc1ff3b5b404cfce3cbd51da5ddb5984"
+      "git_tree_sha": "72f0c046b29ac0555ade992668e4d32d5f0c6ff5"
     },
     {
       "name": "backup",
@@ -92,14 +92,14 @@
     },
     {
       "name": "harness",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "kg_ref": "ATOM_Skill_harness",
       "channel": "stable",
       "git_tree_sha": "902da0c6cfa89350e3465949b01477721e5f63ec"
     },
     {
       "name": "jaebaeman",
-      "version": "2.0.0",
+      "version": "2.1.0",
       "kg_ref": "ATOM_Skill_jaebaeman",
       "channel": "stable",
       "git_tree_sha": "d1cc8f52497e7132055f74ec7ffe77a30fe14ee4"
@@ -127,7 +127,7 @@
     },
     {
       "name": "prometheus",
-      "version": "6.0.0",
+      "version": "6.1.0",
       "kg_ref": "ATOM_Skill_prometheus",
       "channel": "stable",
       "git_tree_sha": "1f1569d077c7c8b6b9a14f72e407ae9666a4ff12"
