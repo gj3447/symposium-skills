@@ -33,7 +33,22 @@ import time
 
 NEO4J_URL = os.environ.get("NEO4J_URL", "http://neo4j.metahumotonic.com/db/neo4j/tx/commit")
 NEO4J_AUTH = os.environ.get("NEO4J_AUTH", "neo4j:neo4jpassword")
-FS_BASE = os.environ.get("FS_BASE", "/Users/lagyeongjun/CD/SERVER")
+
+# Fallback chain for path resolution. Priority order: explicit FS_BASE override,
+# then known repo roots in CD/. Home-relative (~) is expanded inline.
+FS_BASE_OVERRIDE = os.environ.get("FS_BASE")
+FS_BASE_CHAIN = [FS_BASE_OVERRIDE] if FS_BASE_OVERRIDE else [
+    "/Users/lagyeongjun/CD/SERVER",
+    "/Users/lagyeongjun/CD/SYMPOSIUM",
+    "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
+    "/Users/lagyeongjun/CD/SYMPOSIUM/METAHUMOTONIC",
+    "/Users/lagyeongjun/CD/SYMPOSIUM/THEORY/CHU",
+    "/Users/lagyeongjun/CD/SYMPOSIUM/THEORY/재배맨",
+    "/Users/lagyeongjun/CD/MIND",
+    "/Users/lagyeongjun/CD",
+    os.path.expanduser("~"),
+]
+FS_BASE_CHAIN = [b for b in FS_BASE_CHAIN if b]
 
 
 def cypher(stmt, params=None):
@@ -72,11 +87,17 @@ def list_reference_sites(needs_sha256=False):
 
 
 def compute_sha256(rel_path):
-    abs_path = os.path.join(FS_BASE, rel_path) if not os.path.isabs(rel_path) else rel_path
-    if not os.path.exists(abs_path) or not os.path.isfile(abs_path):
-        return None
-    with open(abs_path, "rb") as f:
-        return hashlib.sha256(f.read()).hexdigest()
+    # Expand ~ inline before fallback chain
+    expanded = os.path.expanduser(rel_path)
+    if os.path.isabs(expanded):
+        candidates = [expanded]
+    else:
+        candidates = [os.path.join(base, rel_path) for base in FS_BASE_CHAIN]
+    for path in candidates:
+        if os.path.isfile(path):
+            with open(path, "rb") as f:
+                return hashlib.sha256(f.read()).hexdigest()
+    return None
 
 
 def cmd_stats() -> int:
@@ -97,22 +118,52 @@ def cmd_stats() -> int:
     return 0
 
 
-def cmd_init() -> int:
+def resolve_path_status(rel_path):
+    """Return (status, abs_path_if_resolved). status ∈ {FILE, DIRECTORY, MISSING}."""
+    expanded = os.path.expanduser(rel_path)
+    candidates = [expanded] if os.path.isabs(expanded) else [os.path.join(b, rel_path) for b in FS_BASE_CHAIN]
+    for path in candidates:
+        if os.path.isfile(path):
+            return ("FILE", path)
+    for path in candidates:
+        if os.path.isdir(path):
+            return ("DIRECTORY", path)
+    return ("MISSING", None)
+
+
+def cmd_init():
     sites = list_reference_sites(needs_sha256=True)
     populated = 0
+    directory = 0
     missing = 0
+    ts = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
     for s in sites:
-        sha = compute_sha256(s["path"])
-        if sha is None:
+        status, abs_path = resolve_path_status(s["path"])
+        if status == "FILE":
+            with open(abs_path, "rb") as f:
+                sha = hashlib.sha256(f.read()).hexdigest()
+            cypher(
+                "MATCH (rs:ReferenceSite {name:$name}) "
+                "SET rs.sha256 = $sha, rs.sha256_init_at = $ts, rs.sha256_baseline = $sha, "
+                "rs.sha256_status = 'BASELINE', rs.resolved_abs_path = $abs",
+                {"name": s["name"], "sha": sha, "ts": ts, "abs": abs_path},
+            )
+            populated += 1
+        elif status == "DIRECTORY":
+            cypher(
+                "MATCH (rs:ReferenceSite {name:$name}) "
+                "SET rs.sha256_status = 'DIRECTORY_SKIP', rs.resolved_abs_path = $abs, rs.sha256_init_at = $ts",
+                {"name": s["name"], "ts": ts, "abs": abs_path},
+            )
+            directory += 1
+        else:
+            cypher(
+                "MATCH (rs:ReferenceSite {name:$name}) "
+                "SET rs.sha256_status = 'FILE_MISSING', rs.sha256_init_at = $ts",
+                {"name": s["name"], "ts": ts},
+            )
             missing += 1
-            continue
-        cypher(
-            "MATCH (rs:ReferenceSite {name:$name}) "
-            "SET rs.sha256 = $sha, rs.sha256_init_at = $ts, rs.sha256_baseline = $sha",
-            {"name": s["name"], "sha": sha, "ts": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())},
-        )
-        populated += 1
-    print(f"init: populated={populated}, missing_files={missing}, total_seen={len(sites)}")
+    print(f"init: populated={populated}, directory_skip={directory}, missing_files={missing}, total_seen={len(sites)}")
     return 0
 
 
