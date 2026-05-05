@@ -1,7 +1,7 @@
 ---
 name: apt-st
 kg_ref: ATOM_Skill_apt_st
-version: "27.0.0"
+version: "27.1.0"
 channel: stable
 description: >
   APT SemanticTwin (ST) — crystallization of AtomicSpans into Contract + Task + 8 ST Decision Areas.
@@ -29,9 +29,30 @@ RETURN cfg.vibe_coding_sweet_min, cfg.vibe_coding_sweet_max, cfg.vibe_coding_har
 // Contract v2 reference instance
 MATCH (sa:SemanticAnchor {name:'SA_Contract_v2_DbC_Interface_2026-04-21_v2'})-[:USES_CANONICAL]->(axes)
 RETURN axes.name
+
+// ST decision area cfg pointers (2026-05-04 wired, 5 ConfigSchema MIC slot)
+// — magic number hardcoding 금지, Cypher resolve only.
+MATCH (cs:ConfigSchema:MICSlot)
+WHERE cs.name STARTS WITH 'MIC_v1.' AND cs.name ENDS WITH '_decision'
+RETURN cs.name              AS slot,           // MIC_v1.{area}_decision
+       cs.skill_md_pointer  AS pointer,        // cfg.{area}_decision
+       cs.decision_summary  AS summary,
+       cs.materializes_into AS skill_section,  // ## ST.{area}_decision
+       cs.source_cycle      AS prom_cycle      // 2026-05-04 wave
+// 8/8 areas wired (2026-05-04 complete):
+//   T1 ★: AST / Workflow / DesignPattern / DataFlow / Store
+//   T3:   ProjectStructure / Algorithm / ClassDesign
+// Source cycles: hole{1..8} cycles (PROM-16 wave) + hole2-v2 + hole6-v2 fixes
+//
+// v0.8.A1 Gate Hook reference (2026-05-05): apt-gate-check.sh dual-mode
+//   APT_GATE_VERSION=v07 (default, lensCount>=9 floor) | v08-A1 (ensemble UNION concern-coverage>=0.8)
+//   Pirsig holistic synthesis = ensemble union의 Cypher instantiation
+//   RFC: rfc-taliban-v08-concern-coverage-2026-05-04 (DRAFT_v0.8.A1_PHASE3_DEPLOYED)
+MATCH (rfc:MethodologyRFC {name:'rfc-taliban-v08-concern-coverage-2026-05-04'})
+RETURN rfc.status, rfc.amendment_a1_2026_05_04, rfc.phase_3_status
 ```
 
-**SharedType detection**: Contract.shared=true. SharedType_access_rights_closure_v2 = ownership ⊔ capability Fiber Bundle. # KG: APT_v26_A6_2026-04-21, SharedType_access_rights_closure_v2
+**SharedType detection**: Contract.shared=true. SharedType_access_rights_closure_v2 = ownership ⊔ capability Fiber Bundle. # KG: APT_v26_A6_2026-04-21, SharedType_access_rights_closure_v2, MIC_v1.ProjectStructure_decision, MIC_v1.DataFlow_decision, MIC_v1.ClassDesign_decision, MIC_v1.Algorithm_decision, MIC_v1.DesignPattern_decision
 
 ---
 

@@ -1,18 +1,24 @@
 ---
 name: prometheus
 kg_ref: ATOM_Skill_prometheus
-version: "5.0.0"
+version: "6.1.0"
 channel: stable
 description: >
-  프로메테우스 방법론 v5 — 지식이 행동에 선행한다. "바로 고치지 마, 먼저 불(지식) 훔쳐와."
-  사용법: `/prometheus <N> <problem>` (N=subagent 수, 생략 시 auto_estimate).
-  v5: Step 3 prompt 본문을 KG 씨앗(axis/sub-axis/matrix-template)으로 lift.
+  프로메테우스 방법론 v6.1 — **지식-행동 spiral** (Hegel reframe, NOT 단방향 "지식 선행").
+  "바로 고치지 마"는 유지하되, "먼저 불(지식) 훔쳐와"는 thesis-antithesis-synthesis 순환의 첫 thesis로 해석.
+  v6.1 (2026-05-05): OODA/Lean Startup 충돌 해소 — Hegel Phenomenology Begriff 자가운동(thesis 행동 없이 antithesis 못 만남).
+  paralysis-by-analysis 회피: hot-fix latency critical 시 KG-skip + immediate action + post-hoc lesson 허용.
+  사용법: `/prometheus <N> <problem>` (N=subagent 수, 생략 시 auto_estimate, default cfg.prometheus_N_default_small=4 / medium=8 / large=16).
+  v6: Step 6.5 filesystem_dispersion sub-step 추가 + G6.5 gate. KG-first 그대로 두고 KG↔filesystem drift 차단.
+  본문은 slot resolve thin pointer — 정책 자체는 `MIC_v1.FilesystemDispersionPolicy` slot.
+  v5 계승: Step 3 prompt 본문을 KG 씨앗(axis/sub-axis/matrix-template)으로 lift.
   SKILL.md는 프로토콜만, 내용물은 KG 정본(재배맨 원칙 준수).
   v4 계승: 부모 하계 Pre-fetch (MCP 우회) + Finding 중복 탐지 + 재배맨 MIC 참조.
-  Enforces: 9단계 사이클, haiku 병렬 subagent (N, 최대 100),
-  JSON 계약(FullFindingRecord), 부모 UNWIND 배치 write, W3C PROV provenance.
-  subagent 운용 = MIC_v1.SubagentSeeder (재배맨) 참조.
-  # KG: ATOM_Skill_prometheus, SA_methodology_v4_triple_upgrade, lesson-prometheus-v5-kg-reference-lift-2026-04-18
+  Enforces: 9+1 단계 사이클, haiku 병렬 subagent (N, 최대 100, default cfg slot),
+  JSON 계약(FullFindingRecord), 부모 UNWIND 배치 write, W3C PROV provenance, filesystem dispersion gate.
+  subagent 운용 = MIC_v1.SubagentSeeder (재배맨/SOP) 참조.
+  # KG: ATOM_Skill_prometheus, SA_methodology_v4_triple_upgrade, lesson-prometheus-v5-kg-reference-lift-2026-04-18, rfc-prom-filesystem-dispersion-2026-04-29, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory before any framing/diagnostic, lesson-ai-skipped-kg-check-before-framing-2026-04-29)
+  # KG: prometheus-grounding-2026-05-05, finding-prom32-prometheus-P1-F2 (OODA 충돌), finding-prom32-prometheus-P1-F3 (Hegel spiral), amdahl-analysis-prometheus-N-default-2026-05-05, lesson-prometheus-hegel-spiral-reframe-2026-05-05
 ---
 
 ## 🔗 MIC Binding (SOLID-DIP)
@@ -101,6 +107,8 @@ Step 5: 계획 수립 (횃불 경로 설계)
    ↓ [Gate G5: ActionPlan 노드 + child-task 링크 완료]
 Step 6: 실행 (불 밝히기)
    ↓ [Gate G6: 실행 산출물이 Plan과 1:1 대응]
+Step 6.5: filesystem dispersion (KG↔FS 거울)   ← v6 신설, slot resolve only
+   ↓ [Gate G6.5: SOURCES.md + axis-split MD + _findings/raw-jsonl 충족]
 Step 7: 검증 (불이 꺼지지 않는지 확인)
    ↓ (실패 시)
 Step 2로 피드백 루프
@@ -119,6 +127,7 @@ Step 2로 피드백 루프
 | G4 | `MATCH (c:Conflict {cycle_id:$cid, status:'open'}) RETURN count(c)` | > 0 = Taliban 경유 필수 |
 | G4.7 | high-priority finding N중 씨앗 매핑률 | < 100% = BLOCK |
 | G5 | `MATCH (ap:ActionPlan {cycle_id:$cid})-[:HAS_CHILD]->() RETURN count(*)` | 0 = BLOCK |
+| G6.5 | slot resolve `MIC_v1.FilesystemDispersionPolicy` → policy fields 충족 검증 (SOURCES.md exists ∧ axis≥cfg.prometheus_md_axis_threshold면 axis-split MD count=axis_count ∧ N≥cfg.prometheus_findings_jsonl_threshold면 `_findings/` count=N) | 미충족 = BLOCK |
 
 **skip 요청**: 사용자가 명시적으로 `/prom --skip-gate Gx` 플래그 주면 override. 로그: AptDecisionLog with override_reason.
 
@@ -703,6 +712,96 @@ SET p.phase = 'DONE'
 
 ---
 
+### Step 6.5: filesystem dispersion — KG ↔ FS 거울 (v6 신설)
+
+<!-- # KG: rfc-prom-filesystem-dispersion-2026-04-29, FilesystemDispersionPolicy slot, lesson-prom-output-coverage-too-lean-2026-04-29 -->
+
+> **본문은 thin pointer.** 정책 자체는 KG slot에 박혀있음. 본 step은 slot resolve만 한다.
+> v5까지 KG-first 설계 그대로. KG ↔ filesystem drift만 차단.
+
+#### 6.5-1. Slot resolve (필수 선행)
+
+```cypher
+MATCH (mic:MethodologyIntegrationContract {name:'MIC_v1'})
+      -[:HAS_SLOT]->(s:MethodologySlot {name:'FilesystemDispersionPolicy'})
+MATCH (p:FilesystemDispersionPolicy {name: s.currentConcrete})
+RETURN p.layer_l1_documents, p.layer_l2_axis_split,
+       p.layer_l3_cell_dump, p.layer_l4_kg_first,
+       p.layer_l5_minio_mirror_optional, p.layer_l6_source_upper_world_ref,
+       p.layer_l7_skill_crystallization, p.gate_g6_filesystem_coverage
+
+MATCH (cfg:MethodologyConfig {name: 'MethodologyConfig_default_v26'})
+RETURN cfg.prometheus_md_dispersion_required,         // true
+       cfg.prometheus_md_axis_threshold,              // 4
+       cfg.prometheus_findings_jsonl_threshold,       // 32
+       cfg.prometheus_md_dispersion_artifacts         // [SOURCES.md, INDEX.md, axis-split-md, _findings/raw-jsonl, minio-mirror]
+```
+
+#### 6.5-2. 행동 (slot policy 따라)
+
+`cfg.prometheus_md_dispersion_required = true`이면 다음 산출 강제 (slot 필드 1:1 매핑):
+
+| Layer | 산출 | 조건 |
+|---|---|---|
+| L1 | `THEORY/<topic>/{INDEX.md, PROM_<N>_REPORT.md, SOURCES.md}` | 항상 |
+| L2 | `<axis-letter>_<axis-name>.md` per axis | `axis_count ≥ cfg.prometheus_md_axis_threshold` (default 4) |
+| L3 | `_findings/<findingId>.json` per ResearchFinding | `N ≥ cfg.prometheus_findings_jsonl_threshold` (default 32) |
+| L4 | KG nodes/edges (기존 v5 design) | 항상 (정전) |
+| L5 | MinIO mirror `<bucket>/apt-papers/<topic>/` | optional, canon-track 주제일 때 `mc cp -r` |
+| L6 | `:UpperWorldRef` (학술/책/OSS/산업) `binding=upper-world-only` | 인용된 모든 1차 소스 |
+| L7 | 새 `/apt-*` skill 결정화 | 5+ HIGH consensus seed 발생 시 (skill-creator pattern) |
+
+→ **본문은 위 표만 노출. 임계값/policy 변경 = KG `MethodologyConfig_default_v26` SET, 본문 손대지 말 것** (APT v26 A6 resolve-only 원칙).
+
+#### 6.5-3. Gate G6.5 검증
+
+Step 6.5 완료 직후, Step 7 진입 전 강제 검증:
+
+```cypher
+MATCH (l:Lesson {cycle_id: $cycle_id})
+OPTIONAL MATCH (l)-[:HAS_RESEARCH]->(rf:ResearchFinding)
+WITH l, count(rf) AS N, count(DISTINCT split(rf.subAxis,'')[0]) AS axis_count
+
+MATCH (cfg:MethodologyConfig {name: 'MethodologyConfig_default_v26'})
+
+// filesystem 측 카운트는 호출자(부모 Claude)가 ls 결과로 주입
+WITH l, N, axis_count, cfg, $sources_md_exists AS sources_exists,
+     $axis_split_md_count AS axis_md_n, $findings_jsonl_count AS jsonl_n
+
+WITH l,
+     (sources_exists = true) AS l1_pass,
+     (axis_count < cfg.prometheus_md_axis_threshold OR axis_md_n = axis_count) AS l2_pass,
+     (N < cfg.prometheus_findings_jsonl_threshold OR jsonl_n = N) AS l3_pass
+
+MERGE (g65:DispersionGateResult {cycle_id: l.cycle_id})
+SET g65.l1_documents_pass = l1_pass,
+    g65.l2_axis_split_pass = l2_pass,
+    g65.l3_findings_jsonl_pass = l3_pass,
+    g65.gate_passed = (l1_pass AND l2_pass AND l3_pass),
+    g65.checkedAt = datetime()
+RETURN g65.gate_passed AS gate_passed
+```
+
+- `gate_passed=true` → Step 7 진입 허가
+- `gate_passed=false` → 부족 layer 보강 후 재검증 (`/prom --skip-gate G6.5` override 가능, 단 KG `AptDecisionLog`에 사유 기록 필수)
+
+#### 6.5-4. KG Bootstrap (slot 미설치 환경)
+
+slot이 부재하면 본 step은 no-op (v5와 동일 동작). 첫 호출 시 다음 cypher로 slot 설치 (idempotent):
+
+```cypher
+MATCH (mic:MethodologyIntegrationContract {name:'MIC_v1'})
+MERGE (s:MethodologySlot {name:'FilesystemDispersionPolicy'})
+  ON CREATE SET s.currentConcrete = 'PromV5_FilesystemDispersion_v1',
+                s.added_by_rfc = 'rfc-prom-filesystem-dispersion-2026-04-29',
+                s.createdAt = datetime()
+MERGE (mic)-[:HAS_SLOT]->(s)
+```
+
+→ slot/policy 노드 자체 정의는 `rfc-prom-filesystem-dispersion-2026-04-29` MethodologyRFC 노드 참조.
+
+---
+
 ### Step 7: 검증 — 4단계 + Taliban 자동 출격 (v5)
 
 #### 7-A. Taliban 적대적 검증 (v5 자동)
@@ -856,6 +955,7 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|
+| **v6** | 2026-04-29 | Step 6.5 filesystem_dispersion sub-step + G6.5 gate 신설. KG-first 설계 그대로, KG↔FS drift만 차단. 본문은 thin pointer — 정책은 `MIC_v1.FilesystemDispersionPolicy` slot + `MethodologyConfig_default_v26.prometheus_md_*` 4 field. APT v26 A6 resolve-only 준수. cycle `prom64-pkgdisc-2026-04-29`가 evidence — 1 .md만 default 산출되던 문제(KG 152 nodes 풍부 ↔ filesystem 1 .md lean) 해소. | `rfc-prom-filesystem-dispersion-2026-04-29`, `lesson-prom-output-coverage-too-lean-2026-04-29`, `verdict-user-prom-too-lean-2026-04-29`, `rootcause-prom-filesystem-dispersion-missing-2026-04-29`, `FilesystemDispersionPolicy` slot, `PromV5_FilesystemDispersion_v1` policy |
 | **v5** | 2026-04-18 | Step 3 prompt 본문을 KG 씨앗 (axis/sub-axis/matrix-template) 으로 lift. SKILL.md = 프로토콜만, 내용물 = KG 정본 (재배맨 원칙 준수). PrometheusStep v5 (Step 0/1/2/2.5/3/3.3/3.5/4/4.7/5/6/7) | `lesson-prometheus-v5-kg-reference-lift-2026-04-18`, `lesson-prometheus-v26-a6-step-drift-2026-04-25` |
 | **v4** | 2026-04-17 | 부모 하계 Pre-fetch (MCP 우회, GH #13605 대응) + Finding 중복 탐지 + 재배맨 MIC 참조 + Gate Hook 강제 | `lesson-prometheus-v4-structural-gaps-2026-04-17`, `SPAN_prometheus_v4_prefetch_protocol`, `SA_methodology_v4_triple_upgrade` |
 | **v3** | (~2026-04 mid) | TOE-스케일 N=100 대응. axis × sub-axis 교차표. UNWIND 단일 트랜잭션 D1 concurrency 해결. KARMA-style consensus/conflict 자동 탐지 | — |

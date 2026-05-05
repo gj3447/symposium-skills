@@ -1,15 +1,19 @@
 ---
 name: jaebaeman
+aliases: [SOP, subagent-orchestration-protocol]
 kg_ref: ATOM_Skill_jaebaeman
-version: "2.0.0"
+version: "2.1.0"
 channel: stable
 description: >
-  재배맨(JaebaeMan) v2 — Subagent Runtime Protocol. 모든 AI subagent 동작의 바닥(foundation).
+  재배맨(JaebaeMan) v2.1 — Subagent Orchestration Protocol (SOP). 모든 AI subagent 동작의 바닥(foundation).
   씨앗(SubagentTaskSpec)을 KG에서 관리하고, 부모가 Pre-fetch → Dispatch → Collect → Write하는 프로토콜.
   재배맨은 서비스가 아닌 프로토콜이다. 부모 Claude가 따르는 규약.
+  v2.1 (2026-05-05): MAS misnomer 정정 — Wooldridge BDI agent와 다름(internal state 부재, KG seed=외부 명세).
+  학문적 정확 명칭 = SOP(Subagent Orchestration Protocol). 재배맨은 한국어 alias 유지.
   Invoke when: subagent 출격이 필요할 때 (프로메테우스/탈레반/solve 등이 내부적으로 호출).
   직접 호출보다는 MIC_v1.SubagentSeeder slot을 통해 간접 resolve.
   # KG: ATOM_Skill_jaebaeman, 재배맨-v2-subagent-runtime-protocol, SA_methodology_v4_triple_upgrade
+  # KG: jaebaeman-grounding-2026-05-05, finding-prom32-jaebaeman-J1-F2 (MAS misnomer), lesson-jaebaeman-rebrand-SOP-2026-05-05
 ---
 
 ## 🔗 MIC Binding (SOLID-DIP)
@@ -27,7 +31,46 @@ RETURN s.currentConcrete, s.invocation
 
 **프로토콜 불변**: 재배맨은 상주 서비스가 아니다. **부모 Claude가 따르는 4단계 프로토콜**(Seed→Dispatch→Collect→Write).
 
-# KG: MIC_v1, ATOM_Skill_jaebaeman, MethodologySlot:SubagentSeeder, lesson-apt-skill-drift-audit-2026-04-17
+## 🛡 v2.1 Saga Compensation Slot (2026-05-05, RFC J3-F2)
+
+> Garcia-Molina & Salem 1987 Sagas와 비교 시 4단계 protocol에 compensation 부재 → 부분 실패 시 KG inconsistent state. Write 단계에 compensating_action slot 신설.
+
+**SubagentTaskSpec schema 추가 필드:**
+| 필드 | 타입 | 설명 |
+|---|---|---|
+| `compensating_action` | Cypher string \| null | dispatch 후 collect 실패 시 호출되는 inverse action. KG에 미완 ValidationResult/Finding 정리 |
+| `failure_mode` | enum: `best_effort`, `saga_compensate`, `2pc_abort` | 실패 처리 전략. default=`best_effort` (현 동작), 새 cycle은 `saga_compensate` 권장 |
+| `idempotency_key` | string | retry 시 중복 write 방지용 (Write 단계 MERGE 정합성 강화) |
+
+**Collect 실패 처리 prototocol:**
+1. Subagent N개 중 M개만 결과 반환 (timeout/error)
+2. `failure_mode=saga_compensate`이면 부모가 모든 dispatched subagent의 `compensating_action` Cypher 실행
+3. KG에 `partial_failure_log` 노드 생성 + `IS_COMPENSATED_FOR` edge
+4. `failure_mode=best_effort`(legacy)이면 부분 결과만 marshal + warning
+
+## 🔌 v2.1 MCP inputSchema 통합 (2026-05-05, RFC J4-F3)
+
+> SubagentTaskSpec.prompt(free-form Cypher property) → MCP server tool definition(JSON Schema)와 호환. type-safe + prompt injection 방어.
+
+**SubagentTaskSpec schema 추가 (additive, prompt 병존):**
+| 필드 | 타입 | 설명 |
+|---|---|---|
+| `inputSchema` | JSON Schema (object) | MCP tool inputSchema와 동일 spec. parent가 prompt 생성 시 type-validate |
+| `outputSchema` | JSON Schema (object) | subagent 결과 validate. UNWIND batch write 전 필수 schema 통과 |
+| `mcp_tool_compat` | boolean | true면 SubagentTaskSpec이 MCP tool 정의로 export 가능 |
+
+**MCP tool export 패턴:**
+```cypher
+MATCH (ts:SubagentTaskSpec) WHERE ts.mcp_tool_compat = true AND ts.inputSchema IS NOT NULL
+RETURN ts.name AS tool_name, ts.inputSchema, ts.outputSchema, ts.compensating_action
+// → MCP server가 이 결과를 tool definition으로 publish
+```
+
+**기존 prompt-only TaskSpec 호환:**
+- 기본값 `inputSchema=null`, `mcp_tool_compat=false`이므로 기존 동작 unchanged
+- 신규 작성 시 inputSchema 권장. 향후 MCP server 통합 시 자동 export
+
+# KG: MIC_v1, ATOM_Skill_jaebaeman, MethodologySlot:SubagentSeeder, lesson-apt-skill-drift-audit-2026-04-17, lesson-jaebaeman-rebrand-SOP-2026-05-05, lesson-jaebaeman-saga-compensation-2026-05-05, lesson-jaebaeman-mcp-inputschema-2026-05-05
 
 ---
 

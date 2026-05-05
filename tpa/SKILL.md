@@ -7,7 +7,7 @@ description: >
   TPA v1.0 orchestrator — APT v24 역분석 기반 역순 사이클.
   코드→설계 복원 (TCW→TT→TP→TA). 5대 본질 MIC 참조.
   오답노트 피드백 루프 내장. Gate Check Hook 강제.
-  # KG: ATOM_Skill_tpa_orchestrator_v10, TPA_methodology_v10
+  # KG: ATOM_Skill_tpa_orchestrator_v10, TPA_methodology_v10, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory before any framing/diagnostic, lesson-ai-skipped-kg-check-before-framing-2026-04-29)
   Invoke when: "/tpa <path>", "/tpa --audit <anchor>", "/tpa --status",
   "reverse engineer", "analyze codebase", "코드 분석", "리버스 엔지니어링".
   Enforces: phase detection, flow control, adversarial gates, feedback loop, mandatory reflection.

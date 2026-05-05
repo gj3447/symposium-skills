@@ -11,7 +11,7 @@ description: >
   Enforces: 렌즈셋 동적 로딩, GAN 원리 (Design=G, Taliban=D),
   동시 출격, 만장일치 PASS, Anti-Rubber-Stamp (RTI/FVR).
   재배맨 SubagentTaskSpec 기반 자동 출격.
-  # KG: ATOM_Skill_taliban
+  # KG: ATOM_Skill_taliban, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory before any framing/diagnostic, lesson-ai-skipped-kg-check-before-framing-2026-04-29)
 ---
 
 ## 🎛 v26 A6 Resolve-Only
@@ -30,7 +30,32 @@ RETURN cfg.lens_min_critics_constitutional, cfg.lens_min_critics_mathematical,
 // LensSet 구체 정의 (deprecated 차단)
 MATCH (ls:LensSet {name:$lensName}) WHERE ls.deprecated <> true
 RETURN ls.lensCount, ls.minCritics, ls.lenses
+
+// v0.8.A1 ensemble concern-coverage (2026-05-05 wired, RFC + agent dispatch)
+// — 단일 LensSet borderline (constitutional 0.74) → ensemble UNION coverage>=0.8
+// — Pirsig holistic synthesis: 같은 Concern은 max(weight) lens가 cover
+MATCH (rfc:MethodologyRFC {name:'rfc-taliban-v08-concern-coverage-2026-05-04'})
+RETURN rfc.status, rfc.amendment_a1_2026_05_04
+// agent: ~/.claude/agents/taliban-ensemble-critic.md (ensemble dispatch + USED_LENS auto-bind)
+// gate: APT_GATE_VERSION=v08-A1 (apt-gate-check.sh dual-mode)
 ```
+
+## 🌐 v0.8.A1 Ensemble Mode (opt-in)
+
+> 단일 LensSet 발동 시 concern-coverage 0.74-0.41 BORDERLINE/FAIL.
+> ensemble (constitutional + longinus + lens-set-lakatos + lensset-solid 4개)이 default 권장.
+
+**발동 옵션:**
+- **자동 ensemble**: `Agent(subagent_type="taliban-ensemble-critic", prompt=...)` — `~/.claude/agents/taliban-ensemble-critic.md` agent가 4 LensSet 자동 dispatch + USED_LENS edge 자동 박기 + Pirsig synthesis verdict
+- **명시 lens 지정**: `/taliban --lens constitutional --lens longinus --lens lakatos --lens solid <target>` — 4 LensSet ensemble 명시
+- **Legacy 단일**: `/taliban --lens constitutional <target>` — v0.7 모드 (lensCount>=9 단일, BORDERLINE 위험)
+
+**KG VR 자동 기록 (D20 정합):**
+- `vr.gate_version='v08-A1'`, `vr.coverage_score=0.0-1.0`, `vr.holistic_synthesis=...`
+- `vr.executor != vr.reviewer` 강제 (parent-claude vs taliban-ensemble-critic agent)
+- 4 USED_LENS edge 자동 (constitutional/longinus/lakatos/solid)
+
+# KG: rfc-taliban-v08-concern-coverage-2026-05-04, pirsig-holistic-synthesis-layer-v0.8-2026-05-05, lesson-taliban-v08-single-lensset-insufficient-2026-05-04, patch-apt-gate-check-v08-A1-flag-2026-05-05
 
 # KG: APT_v26_A6_2026-04-21, MethodologyConfig_default_v26
 
@@ -69,7 +94,7 @@ RETURN s.currentConcrete, s.invocation
 - `target`: 검증 대상 (KG 노드 이름 또는 자유 텍스트)
 - `--lens`: 렌즈셋 선택 (기본: `constitutional`)
   - `constitutional` — 9-lens, APT 산출물 품질 감사 (기본값)
-  - `mathematical` — 113-lens, 수학적 구조 메타 검증
+  - `mathematical` — 113-lens, 수학적 구조 메타 검증 (정전: `THEORY/TALIBAN/113_LENS_TAXONOMY.md` — 13 domain × {8,9,10} = 113 enumerated, KG `LensSet:mathematical {count:113, closed:'2026-05-02'}`)
   - `solid` — 5-lens, SOLID 원칙 검증
   - 기타 KG에 `LensSet` 노드로 등록된 임의 렌즈셋
 - `--depth`: quick(핵심만) | standard(전체, 기본) | deep(전체 + 교차 분석)

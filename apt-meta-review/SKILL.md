@@ -1,14 +1,14 @@
 ---
 name: apt-meta-review
 kg_ref: ATOM_Skill_apt_meta_review
-version: "2.0.0"
+version: "27.1.0"
 channel: stable
 description: >
   APT MetaReview Phase (5/5) — 의심/피드백을 자동으로 스킬 강화로 이어지는 피드백 루프.
   SCW 완료 후 자동 제안. Lesson 생성 → SKILL.md 패치 → MATERIALIZES 갱신 → Taliban Gate.
   v2 (APT v26 A6 alignment): SKILL.md 패치는 resolve_slot(ContractSchema|LensSet|MethodologyConfig) 패턴 유지. Prose magic number 주입 금지. KG = 정본.
   종료조건: self_application_forbidden, max_depth=1, delta=0.
-  # KG: ATOM_Skill_apt_meta_review, CONTRACT_Hardening_MetaReview, SPAN_Hardening_MetaReview, APT_v26_RFC_draft_2026-04-21
+  # KG: ATOM_Skill_apt_meta_review, CONTRACT_Hardening_MetaReview, SPAN_Hardening_MetaReview, APT_v26_RFC_draft_2026-04-21, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory before any framing/diagnostic, lesson-ai-skipped-kg-check-before-framing-2026-04-29)
 ---
 
 ## 🎛 v26 A6 Resolve-Only

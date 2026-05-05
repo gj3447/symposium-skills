@@ -1,7 +1,7 @@
 ---
 name: apt-sp
 kg_ref: ATOM_Skill_apt_sp
-version: "26.0.0"
+version: "27.1.0"
 channel: stable
 description: >
   APT SemanticPyramid (SP) — recursive Span decomposition.
@@ -28,6 +28,12 @@ MATCH (atom:ATOM {name:'ATOM_APT_delta_infra_exception_2026-04-21'}) RETURN atom
 // SP→ST gate lens completeness
 MATCH (vr:ValidationResult)-[:USED_LENS]->(ls:LensSet {name:'constitutional-9-full'})
 WHERE ls.deprecated <> true RETURN vr, ls.lensCount
+
+// v0.8.A1 ensemble option (2026-05-05, opt-in via APT_GATE_VERSION=v08-A1)
+// — single-LensSet borderline → ensemble UNION concern-coverage>=0.8
+// — Taliban gate: prefer Agent(taliban-ensemble-critic) over single /taliban call
+MATCH (rfc:MethodologyRFC {name:'rfc-taliban-v08-concern-coverage-2026-05-04'})
+RETURN rfc.status
 ```
 
 **C(S) 5-predicate fields** (non-null 필수): `objective` · `definition` · `keyAssertion` · `verification` · `c_s_predicate`. 누락 = Taliban reject. # KG: APT_v26_A6_2026-04-21, lesson-taliban-shortcut-antipattern-2026-04-21

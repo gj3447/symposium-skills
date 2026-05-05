@@ -1,7 +1,7 @@
 ---
 name: apt-cleanup
 kg_ref: ATOM_Skill_apt_cleanup
-version: "1.0.0"
+version: "27.1.0"
 channel: experimental
 description: >
   APT Phase 6 Cleanup Gate — TDD REFACTOR phase의 cycle-level 거울. SA→SP→ST→SCW + meta-review 만으로는

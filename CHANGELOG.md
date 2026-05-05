@@ -14,7 +14,7 @@
 - *(versioning)* SKILL.md ## History + SemVer migration + KG :SkillVersion (PROM 16 F2-F4) ([`aba6319`](#aba63196aee83c16e02627692b65f9543622d980))
 - *(versioning)* Apt phase skills ## History (PROM 16 F7) + Architecture Principles KG scaffolding ([`ffbb331`](#ffbb3313c430a88b9e342d019f7678a84edff486))
 - *(apt-cleanup)* New skill — Phase 6 Cleanup Gate materialization (PROM 16 F8) ([`5d124c2`](#5d124c25b600eac87e7a56a7b3b2e64d684d7cb2))
-- *(apt-st)* V27.0.0 — Exhaustive Cover Scope (8 ST decision areas + SCW gate hook) ([`dd12f58`](#dd12f58d21eaf2f25563c84e79f14d4847a34e35))
+- *(apt-st)* V27.0.0 — Exhaustive Cover Scope (8 ST decision areas + SCW gate hook) ([`f17e885`](#f17e885d2cf4f92f63cf466d097313ad2cfb7d39))
 
 ### Changed
 

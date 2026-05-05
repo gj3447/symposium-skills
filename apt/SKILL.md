@@ -1,13 +1,15 @@
 ---
 name: apt
 kg_ref: ATOM_Skill_apt_orchestrator
-version: "26.0.0"
+version: "27.1.0"
 channel: stable
 description: >
-  APT v26 orchestrator — KG 정본 기반. Gate Check Hook 강제. SA→SP→ST→SCW 순환.
+  APT v26.1 orchestrator — KG 정본 기반. Gate Check Hook 강제. SA→SP→ST→SCW 순환.
   v5~v21 역사 반영. 하네스 4축 + 5대 무기(하네스/탈레반/프로메테우스/롱기누스/재배맨) + D(S)/C(S) + Crystallization Frontier.
+  v26.1: RFC1 (C(S) ↔ A3 axiom layer 분리 명시 + Greek :ARCHIVED) + RFC2 (two-tier cleanup: local RGR in transitions + global Phase 6) + Apt_FourPlusOne motif 인식.
   # KG: ATOM_Skill_apt_orchestrator, APT_v26_RFC_draft_2026-04-21 (A1-A6 pluggable MIC slots 7→10)
   # KG: APT_v25_RFC_draft_2026-04-17 (error_variants extension, SharedType→shared=true, meta-validation)
+  # KG: rfc-apt-cs-axiom-visibility-drift-2026-04-29, rfc-apt-two-tier-cleanup-2026-04-29, Apt_FourPlusOne
   v26 A1: MIC slots 10 (ContractSchema/LensSet/MethodologyConfig 추가). v26 A3/A5: Gate Check Hook LensSet completeness + Cypher enforcement (3-lens shortcut 차단). v26 A6: SKILL.md resolve-only — 본문 리라이트는 별도 스프린트 (ATOM_APT_v26_Gate_Hook_Lens_Enforcement_2026-04-21).
   v22: Gate Check enforcement via Claude Code Hook.
   Incorporates Taliban --lens mathematical 5-round meta-verification feedback (260✓→102✓ honest convergence).
@@ -38,6 +40,51 @@ MATCH (slot:MethodologySlot {name:'ContractSchema'})-[:RESOLVES_TO]->(schema) RE
 **Resolve targets**: `vibe_coding_sweet_min/max` · `vibe_coding_hard_max` · `lens_min_critics_constitutional` · `min_findings_per_lens` · `span_depth_max` · `context_budget_l1_avg`.
 
 # KG: APT_v26_A6_2026-04-21, MethodologyConfig_default_v26, MIC_v1
+
+---
+
+## 🎛 v26.1 Addendum — RFC1 + RFC2 + Apt_FourPlusOne (2026-04-29)
+
+> v26.1은 v26 prose에 손대지 않고 KG slot resolve로만 적용. 본문 한 줄도 직접 magic number 박지 않음 (A6 resolve-only 준수).
+
+### v26.1-A. C(S) predicate ↔ A3 axiom layer 분리 (RFC1)
+
+```cypher
+// C(S) = self-containment (한 Span 내부 atomicity 검사)
+MATCH (cs:DefinedTerm {name:'APT_Layer_CrystallizationFrontier'}) RETURN cs.description
+// 5-predicate: 타입 표현 / 의미 완결 / 구현 / 테스트 / 분해 비경제성
+
+// A3 = sibling-wellformedness (Span 간 관계 검사)
+MATCH (a3:KnowledgeNode {name:'APT20_S2_LayerIndependence'}) RETURN a3.description
+
+// Greek 5-predicate (deprecated)
+MATCH (greek:KnowledgeNode {name:'APT19_A4_CrystallizationFrontier'})
+WHERE 'ARCHIVED' IN labels(greek) RETURN '⚠️ deprecated, use APT_Layer_CrystallizationFrontier'
+```
+
+**중요**: C(S)는 *한 Span 내부* 검사 (5-predicate). 형제 Span 간 wellformedness는 *별도 axiom layer* (A3 SiblingIndependence). 한 노드에 섞지 말 것.
+
+### v26.1-B. Two-tier cleanup (RFC2)
+
+```cypher
+MATCH (rfc:MethodologyRFC {name:'rfc-apt-two-tier-cleanup-2026-04-29'}) RETURN rfc.proposes
+// Local RGR: 각 transition (SA→SP, SP→ST, ST→SCW) 끝에 mini-RGR 3-beat
+// Global Phase 6: 4 phase 종료 후 cross-phase 누적 관측 + 4-tool ratchet
+```
+
+phase tree에서 transition 3곳에 mini-RGR marker 추가됨. Phase 6은 *유지* — 폐기 아님.
+
+### v26.1-C. Apt_FourPlusOne meta-motif
+
+```cypher
+MATCH (m:AptMetaMotif {name:'Apt_FourPlusOne'})<-[:INSTANCE_OF_MOTIF]-(inst)
+RETURN m.formal_signature, collect(inst.name) AS instances
+// Framework self-similar: C(S) + 5-weapons + 4-phase 모두 4 worker + 1 meta 구조
+```
+
+**활용**: 새 컴포넌트 도입 시 4+1 fit 검토. 같은 layer 5번째 = anti-pattern. 5번째는 *다른 layer*여야 함.
+
+# KG: rfc-apt-cs-axiom-visibility-drift-2026-04-29, rfc-apt-two-tier-cleanup-2026-04-29, Apt_FourPlusOne
 
 ---
 
@@ -217,16 +264,27 @@ User Request
     +-- Branch not decomposed ---------> /apt-sp (PH3)
     |       |
     |       +-- [GATE: KG Density Check (D21)] -- BLOCK if fails
-    |       +-- [GATE: C(S) predicate check]
+    |       +-- [GATE: C(S) predicate check] (5-predicate self-containment)
+    |       +-- [GATE: A3 SiblingIndependence] (sibling wellformedness, RFC1 v26.1)
     |       +-- [GATE: Adversarial Round (C_S_sigma)]
     |       +-- [GATE: sigma_oracle (HUMAN)] -- BLOCK until human responds
     |       |
+    |       v
+    +-- [TRANSITION SP→ST: mini-RGR] (RFC2 v26.1 local cleanup)
+    |       +-- RED: prior contract와 conflict 검사
+    |       +-- GREEN: contract 결정화 GO/NO-GO
+    |       +-- REFACTOR: 중복 contract 통합/제거
     |       v
     +-- Branch has AtomicSpan ---------> /apt-st (PH4)
     |       |
     |       +-- [GATE: Adversarial Round (RefinementGate)]
     |       +-- [GATE: sigma_oracle (HUMAN)] -- BLOCK until human responds
     |       |
+    |       v
+    +-- [TRANSITION ST→SCW: mini-RGR] (RFC2 v26.1 local cleanup)
+    |       +-- RED: 작성할 file이 prior code와 conflict 검사
+    |       +-- GREEN: file 작성 GO/NO-GO
+    |       +-- REFACTOR: file move/delete/merge — atomic-span dump 평면 누적 차단
     |       v
     +-- Branch has Contract -----------> /apt-scw (PH5)
     |       |
@@ -251,6 +309,8 @@ User Request
 ```
 
 > **Phase 6 (Cleanup Gate) NEW (2026-04-29)** — TDD REFACTOR phase 의 cycle-level 거울. SOLID class-level 만으로는 못 잡는 *folder-level* CCP/ADP 위반을 4-tool ratchet (tach/complexipy/lizard/vulture/deptry) + commit ratio 로 enforce. atomic-span shipping 평면 누적 정정 메커니즘. Spec: [`/apt-cleanup`](../apt-cleanup/SKILL.md). KG: `lesson-apt-phase6-cleanup-missing-2026-04-28`, `lesson-solid-class-level-vs-package-level-mismatch-2026-04-29`.
+
+> **v26.1 RFC2 — two-tier cleanup**: Phase 6은 **global cross-phase view** (4 phase 누적 관측). Local cleanup은 *transition mini-RGR* 3곳 (SA→SP / SP→ST / ST→SCW)에 분리 배치. 두 tier 책임 분리 — Phase 6 폐기 아님, **추가**. KG: `rfc-apt-two-tier-cleanup-2026-04-29`.
 
 ## Your role
 You are the CRITIC, not the designer. Your job is to FIND FLAWS, not to approve.
@@ -381,6 +441,8 @@ If ANY checkbox fails: BLOCK. Do not proceed. Fix the issue first.
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|
+| **v27** | 2026-04-30 | RFC bundle ACCEPTED: **A6 path A** pre-prompt resolver hook (Python + python-frontmatter + Jinja2 SandboxedEnv + KG Cypher) / **A6.1** magic selective externalization (5 core KG slot + 3 prose 유지, `magic_number_table.md` canonical) / **A7** Gate Hook 4-layer fail-closed (Resilience4j 500ms timeout + Redis state + JFrog audit log + auto fallback + break-glass allowlist + 점진 강제) / **A8** N-ary hypergraph GDSL (Neo4j DispatchHyperedge naming convention 정형화 → TypeDB PERA POC, Contract MLIR-dialect AST + Liquid Haskell refined types + IPLD/VFS folder-abstract). Frontmatter `version: "27.0.0"` bumped. Body migration in dedicated sprints (resolver 3w / N-ary 4+6w / gate 4w / magic 1+2w). | `lesson-prom16-apt-v26-unresolved-4-issues-2026-04-30`, `rfc-apt-v26-A6-resolver-path-A-pre-prompt-hook-2026-04-30`, `rfc-apt-v26-A6.1-magic-selective-externalization-2026-04-30`, `rfc-apt-v27-A7-gate-hook-fail-closed-4-layer-2026-04-30`, `rfc-apt-v27-A8-narray-hypergraph-gdsl-2026-04-30`, `sv-apt-v27.0.0` (+sa/sp/scw 패밀리) |
+| **v26.1** | 2026-04-29 | RFC1 (C(S) ↔ A3 axiom layer 분리, Greek :ARCHIVED) + RFC2 (two-tier cleanup: local RGR + global Phase 6) + Apt_FourPlusOne motif | `rfc-apt-cs-axiom-visibility-drift-2026-04-29`, `rfc-apt-two-tier-cleanup-2026-04-29` |
 | **v26** | 2026-04-21~25 | A6 resolve-only directive, MIC slot 7→10 (ContractSchema/LensSet/MethodologyConfig 추가), Gate Hook LensSet completeness Cypher enforcement (3-lens shortcut 차단) | `APT_v26_RFC_draft_2026-04-21`, `ATOM_APT_v26_Gate_Hook_Lens_Enforcement_2026-04-21`, `lesson-apt-v26-a6-skill-resolve-only-2026-04-25` |
 | **v25** | 2026-04-17 | Contract 7-field + error_variants extension, SharedType→Contract.shared=true, meta-validation protocol, apt-progress.md 템플릿 | `APT_v25_RFC_draft_2026-04-17`, `lesson-apt-v25-skill-version-drift-2026-04-21` |
 | **v24** | 2026-04-15 전후 | Contract v2 7-field, Lean 4 `lake build` integration (sorry=0 ground truth) | — |

@@ -1,7 +1,7 @@
 ---
 name: apt-scw
 kg_ref: ATOM_Skill_apt_scw
-version: "26.0.0"
+version: "27.1.0"
 channel: stable
 description: >
   APT SourceCodeWorld (SCW) — TDD implementation of crystallized Contracts.
@@ -20,6 +20,12 @@ description: >
 ```cypher
 // FulfillmentGate enforcement (executor != critic + LensSet completeness)
 MATCH (vr:ValidationResult)-[:USED_LENS]->(ls:LensSet) WHERE ls.deprecated <> true AND ls.lensCount >= 9 RETURN vr
+
+// v0.8.A1 ensemble option (2026-05-05, opt-in via APT_GATE_VERSION=v08-A1)
+// — FulfillmentGate에 ensemble UNION concern-coverage>=0.8 적용 가능
+// — Agent(taliban-ensemble-critic) 권장: 4 LensSet ensemble + USED_LENS edge auto-bind
+MATCH (rfc:MethodologyRFC {name:'rfc-taliban-v08-concern-coverage-2026-05-04'})
+RETURN rfc.status
 
 // Task line limits
 MATCH (cfg:MethodologyConfig {name:'MethodologyConfig_default_v26'})

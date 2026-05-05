@@ -10,7 +10,7 @@ description: >
   Invoke when: ST→SCW 전환 후 코드가 물질화되었을 때, KG 노드와 소스코드 간 추적성 확보가 필요할 때,
   기존 코드베이스를 KG에 역매핑할 때, Contract-Code 정합성 감사(audit) 시.
   Enforces: 7-layer ref model, BX lens laws (GetPut/PutGet), branded types, GED drift metrics.
-  # KG: ATOM_Skill_longinus, SA_methodology_v4_triple_upgrade
+  # KG: ATOM_Skill_longinus, SA_methodology_v4_triple_upgrade, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory before any framing/diagnostic, lesson-ai-skipped-kg-check-before-framing-2026-04-29)
 ---
 
 ## 🔗 MIC Binding (SOLID-DIP)

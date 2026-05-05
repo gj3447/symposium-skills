@@ -6,7 +6,7 @@ channel: stable
 description: >
   오답노트 체계적 해결 사이클 — 문제 발견 → KG 기록 → 병렬 리서치 → KG 구축 → 계획 수립 → 실행 → 검증의 7단계.
   /solve <문제설명> 또는 /solve lesson-XXX로 호출.
-  # KG: ATOM_Skill_solve
+  # KG: ATOM_Skill_solve, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory before any framing/diagnostic, lesson-ai-skipped-kg-check-before-framing-2026-04-29)
 ---
 
 ## 🔗 MIC Binding (SOLID-DIP)
