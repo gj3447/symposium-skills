@@ -79,17 +79,38 @@ def fetch_policy():
     return {"rate": r[0], "count": r[1], "minimum": r[2], "total": r[3]}
 
 
+def fetch_lens_codes_by_domain():
+    """Fetch real :Lens code from KG, group by domain prefix (e.g. 'LL', 'CT')."""
+    res = cypher(
+        "MATCH (l:Lens) WHERE l.code IS NOT NULL "
+        "RETURN l.code AS code, l.name AS name ORDER BY l.code"
+    )
+    rows = res.get("results", [{}])[0].get("data", [])
+    by_domain = {d: [] for d in DOMAINS}
+    for r in rows:
+        code, name = r["row"]
+        domain = code.split(".")[0] if "." in code else code[:2]
+        if domain in by_domain:
+            by_domain[domain].append({"code": code, "name": name})
+    return by_domain
+
+
 def stratified_sample(target_count):
-    """Distribute target_count proportionally across 13 domains."""
+    """Distribute target_count proportionally across 13 domains using real KG :Lens codes."""
     rng = random.Random(42)  # deterministic for PoC
     rate = target_count / TOTAL
     samples = {}
+    by_domain = fetch_lens_codes_by_domain()
     for domain, domain_total in DOMAINS.items():
         domain_target = max(1, round(domain_total * rate))
-        # lens names are domain-prefixed: LL_001, LL_002, ...
-        domain_lens = [f"{domain}_{i:03d}" for i in range(1, domain_total + 1)]
+        kg_lenses = by_domain.get(domain, [])
+        # Fallback to synthetic names if KG missing
+        if not kg_lenses:
+            domain_lens = [{"code": f"{domain}.{i}", "name": f"<unbound-{i}>"} for i in range(1, domain_total + 1)]
+        else:
+            domain_lens = list(kg_lenses)
         rng.shuffle(domain_lens)
-        samples[domain] = domain_lens[:min(domain_target, domain_total)]
+        samples[domain] = domain_lens[:min(domain_target, len(domain_lens))]
     return samples
 
 
@@ -103,11 +124,15 @@ def cmd_policy():
     return 0
 
 
+def _format_lens_list(lenses):
+    return ",".join(l["code"] for l in lenses)
+
+
 def cmd_full():
     samples = stratified_sample(TOTAL)
     total = sum(len(v) for v in samples.values())
     for domain, lenses in samples.items():
-        print(f"  {domain}: {len(lenses)}/{DOMAINS[domain]} — {','.join(lenses)}")
+        print(f"  {domain}: {len(lenses)}/{DOMAINS[domain]} — {_format_lens_list(lenses)}")
     print(f"total: {total}")
     return 0
 
@@ -116,7 +141,7 @@ def cmd_sample(n):
     samples = stratified_sample(n)
     total = sum(len(v) for v in samples.values())
     for domain, lenses in samples.items():
-        print(f"  {domain}: {len(lenses)}/{DOMAINS[domain]} — {','.join(lenses)}")
+        print(f"  {domain}: {len(lenses)}/{DOMAINS[domain]} — {_format_lens_list(lenses)}")
     print(f"total: {total} (target {n})")
     return 0
 
