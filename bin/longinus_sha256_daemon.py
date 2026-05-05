@@ -167,15 +167,35 @@ def cmd_init():
     return 0
 
 
-def cmd_verify() -> int:
-    sites = list_reference_sites(needs_sha256=False)
+def list_reference_sites_with_status():
+    res = cypher(
+        "MATCH (rs:ReferenceSite) WHERE rs.sourcePath IS NOT NULL "
+        "RETURN rs.name AS name, rs.sourcePath AS path, rs.sha256 AS sha256, "
+        "rs.layer AS layer, rs.sha256_status AS status "
+        "ORDER BY rs.name LIMIT 1000"
+    )
+    rows = res.get("results", [{}])[0].get("data", [])
+    return [{"name": r["row"][0], "path": r["row"][1], "sha256": r["row"][2],
+             "layer": r["row"][3], "status": r["row"][4]} for r in rows]
+
+
+def cmd_verify():
+    sites = list_reference_sites_with_status()
     drift = 0
     missing = 0
     ok = 0
-    skipped = 0
+    skipped_baseline = 0
+    skipped_dir = 0
+    skipped_orphan = 0
     for s in sites:
+        if s["status"] == "DIRECTORY_SKIP":
+            skipped_dir += 1
+            continue
+        if s["status"] == "ORPHAN_REFERENCE":
+            skipped_orphan += 1
+            continue
         if not s["sha256"]:
-            skipped += 1
+            skipped_baseline += 1
             continue
         current = compute_sha256(s["path"])
         if current is None:
@@ -187,7 +207,8 @@ def cmd_verify() -> int:
             emit_drift(s["name"], s["path"], s["sha256"], current, "SHA256_MISMATCH")
         else:
             ok += 1
-    print(f"verify: ok={ok}, drift={drift}, file_missing={missing}, skipped_no_baseline={skipped}")
+    print(f"verify: ok={ok}, drift={drift}, file_missing={missing}, "
+          f"skipped_baseline={skipped_baseline}, skipped_dir={skipped_dir}, skipped_orphan={skipped_orphan}")
     return 0 if drift == 0 and missing == 0 else 1
 
 
