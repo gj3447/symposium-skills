@@ -1,7 +1,7 @@
 ---
 name: prometheus
 kg_ref: ATOM_Skill_prometheus
-version: "6.1.0"
+version: "6.2.0"
 channel: stable
 description: >
   프로메테우스 방법론 v6.1 — **지식-행동 spiral** (Hegel reframe, NOT 단방향 "지식 선행").

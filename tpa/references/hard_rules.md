@@ -8,7 +8,7 @@
 |---|---|---|
 | TR1 | HR1 (Adversarial at every gate) | 동일 — 매 phase gate에 Taliban |
 | TR2 | HR11 (Evidence-backed verdict) | 동일 — APPROVED에 증거 필수 |
-| TR3 | HR7 (Gate transition logged) | 역순: TCW→TT→TP→TA 순서 강제 |
+| TR3 | HR7 (Gate transition logged) | 역순: TCW→ST→SP→TA 순서 강제 |
 | TR4 | (신규) | AST 파서 필수 — grep 단독은 false positive |
 | TR5 | (신규) | skipped_files = 0 — 사각지대 방지 |
 | TR6 | HR5 (KG density) | Unknown → ResearchProvider 자동 |

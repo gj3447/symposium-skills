@@ -1,33 +1,34 @@
 #!/usr/bin/env python3
 """
-Taliban --lens mathematical sampler PoC.
+Taliban --lens mathematical sampler v1.0 (production).
 
 Reads MIC_v1.MathematicalSamplingPolicy slot from KG, returns N lens names
 from 13-domain × 113-lens taxonomy (stratified random per domain).
 
-Modes:
-  --full          : all 113 lens
-  --sample 0.30   : sample rate (default per policy slot)
-  --sample N      : explicit N lens count
-  --minimum       : 12 lens floor (CI smoke gate, 1 per domain ceil-floor)
-  --policy        : print active MathematicalSamplingPolicy
-
-Stratification: 13 mathematical-validation domains
-  LL/CT/TT/AL (9 each), OL/TG/AN (8), CD (9), NT (8), CC/FV/GD/IC (9)
+Modes (argparse):
+  --full                 : all 113 lens
+  --sample N             : explicit N lens count (or rate float < 1.0)
+  --minimum              : floor 12 (CI smoke gate, 1 per domain)
+  --policy               : print active MathematicalSamplingPolicy
+  --domain CODE          : restrict to single domain (LL/CT/TT/AL/OL/TG/AN/CD/NT/CC/FV/GD/IC)
+  --auto                 : cost-guard aware mode — auto-select between minimum/sample/full based on
+                           current $40/$50 cost cap proximity (CLAUDE.md L3 stop hook integration)
+  --json                 : machine-readable output
 
 KG: lensset-mathematical (113 lens registry),
     MIC_v1.MathematicalSamplingPolicy slot,
     mathematical-sampling-default-2026-05-06,
-    fw-mathematical-113-coverage-2026-05-06
+    fw-mathematical-113-coverage-2026-05-06,
+    taliban-mathematical-sampler-poc-2026-05-06 (v0 PoC),
+    iter9-sampler-cli-implementation-2026-05-06 (v1.0 production)
 
-Limitations:
-  - PoC: outputs lens names only (does not dispatch)
-  - Lens definitions live in 113_LENS_TAXONOMY.md, KG node count not equal to taxonomy yet
-  - Cost guard auto-degrade not implemented (manual mode flags)
+Stratification: 13 mathematical-validation domains
+  LL/CT/TT/AL (9 each), OL/TG/AN (8), CD (9), NT (8), CC/FV/GD/IC (9)
 """
 
 from __future__ import annotations
 
+import argparse
 import json
 import os
 import random
@@ -114,8 +115,26 @@ def stratified_sample(target_count):
     return samples
 
 
-def cmd_policy():
+def fetch_cost_estimate():
+    """Fetch current Anthropic API cost from CLAUDE.md L3 stop hook tracking.
+
+    Returns float USD or None if unavailable. Used by --auto mode.
+    """
+    cost_file = os.path.expanduser("~/.claude/hooks/.cost_running_total")
+    if not os.path.exists(cost_file):
+        return None
+    try:
+        with open(cost_file) as f:
+            return float(f.read().strip())
+    except (ValueError, OSError):
+        return None
+
+
+def cmd_policy(as_json=False):
     p = fetch_policy()
+    if as_json:
+        print(json.dumps(p, indent=2))
+        return 0
     print(f"MathematicalSamplingPolicy:")
     print(f"  default_sample_rate:  {p['rate']}")
     print(f"  default_sample_count: {p['count']}")
@@ -128,47 +147,123 @@ def _format_lens_list(lenses):
     return ",".join(l["code"] for l in lenses)
 
 
-def cmd_full():
+def _emit_samples(samples, target_n, as_json):
+    total = sum(len(v) for v in samples.values())
+    if as_json:
+        out = {
+            "target_count": target_n,
+            "actual_count": total,
+            "by_domain": {d: [{"code": l["code"], "name": l["name"]} for l in lenses] for d, lenses in samples.items()},
+        }
+        print(json.dumps(out, indent=2))
+        return 0
+    for domain, lenses in samples.items():
+        if not lenses and target_n > 0:
+            continue
+        print(f"  {domain}: {len(lenses)}/{DOMAINS[domain]} — {_format_lens_list(lenses)}")
+    suffix = f" (target {target_n})" if target_n != total else ""
+    print(f"total: {total}{suffix}")
+    return 0
+
+
+def cmd_full(as_json=False, single_domain=None):
     samples = stratified_sample(TOTAL)
-    total = sum(len(v) for v in samples.values())
-    for domain, lenses in samples.items():
-        print(f"  {domain}: {len(lenses)}/{DOMAINS[domain]} — {_format_lens_list(lenses)}")
-    print(f"total: {total}")
-    return 0
+    if single_domain:
+        samples = {single_domain: samples.get(single_domain, [])}
+    return _emit_samples(samples, TOTAL, as_json)
 
 
-def cmd_sample(n):
+def cmd_sample(n, as_json=False, single_domain=None):
     samples = stratified_sample(n)
-    total = sum(len(v) for v in samples.values())
-    for domain, lenses in samples.items():
-        print(f"  {domain}: {len(lenses)}/{DOMAINS[domain]} — {_format_lens_list(lenses)}")
-    print(f"total: {total} (target {n})")
-    return 0
+    if single_domain:
+        samples = {single_domain: samples.get(single_domain, [])}
+    return _emit_samples(samples, n, as_json)
 
 
-def cmd_minimum():
+def cmd_minimum(as_json=False, single_domain=None):
     p = fetch_policy()
-    return cmd_sample(p["minimum"])
+    return cmd_sample(p["minimum"], as_json=as_json, single_domain=single_domain)
 
 
-def main():
-    args = sys.argv[1:]
-    if not args:
-        print(__doc__, file=sys.stderr)
+def cmd_auto(as_json=False, single_domain=None):
+    """Cost-guard aware: select mode based on current $40/$50 proximity."""
+    cost = fetch_cost_estimate()
+    p = fetch_policy()
+    if cost is None:
+        # No tracking — fallback to default sample
+        chosen = "sample-default"
+        target = p["count"]
+    elif cost >= 50.0:
+        # Halt threshold — refuse
+        msg = {"error": "cost cap $50 reached — sampler halted", "current_cost": cost}
+        print(json.dumps(msg) if as_json else f"ERROR: {msg['error']} (current ${cost:.2f})", file=sys.stderr)
+        return 3
+    elif cost >= 40.0:
+        # Warn threshold — minimum mode
+        chosen = "minimum"
+        target = p["minimum"]
+    elif cost >= 20.0:
+        # Mid-range — default sample
+        chosen = "sample-default"
+        target = p["count"]
+    else:
+        # Low cost — full
+        chosen = "full"
+        target = TOTAL
+    if not as_json:
+        print(f"# auto mode: chose '{chosen}' (target={target}, cost=${cost or 0:.2f})", file=sys.stderr)
+    return cmd_sample(target, as_json=as_json, single_domain=single_domain)
+
+
+def build_parser():
+    p = argparse.ArgumentParser(
+        prog="taliban_mathematical_sampler",
+        description="Taliban --lens mathematical sampler v1.0 (production).",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=__doc__,
+    )
+    g = p.add_mutually_exclusive_group(required=True)
+    g.add_argument("--full", action="store_true", help="all 113 lens (stratified)")
+    g.add_argument("--sample", metavar="N_OR_RATE", help="N lens count or float rate < 1.0")
+    g.add_argument("--minimum", action="store_true", help="12 lens floor (CI smoke gate)")
+    g.add_argument("--policy", action="store_true", help="print active MathematicalSamplingPolicy")
+    g.add_argument("--auto", action="store_true", help="cost-guard aware auto-select mode")
+    p.add_argument("--domain", metavar="CODE", help=f"restrict to single domain ({'/'.join(DOMAINS.keys())})")
+    p.add_argument("--json", action="store_true", help="machine-readable JSON output")
+    return p
+
+
+def main(argv=None):
+    parser = build_parser()
+    args = parser.parse_args(argv)
+    domain = args.domain
+    if domain and domain not in DOMAINS:
+        print(f"ERROR: --domain must be one of {list(DOMAINS.keys())}", file=sys.stderr)
         return 2
-    if args[0] == "--policy":
-        return cmd_policy()
-    if args[0] == "--full":
-        return cmd_full()
-    if args[0] == "--minimum":
-        return cmd_minimum()
-    if args[0] == "--sample" and len(args) >= 2:
-        v = args[1]
-        if "." in v:
-            rate = float(v)
-            return cmd_sample(round(rate * TOTAL))
-        return cmd_sample(int(v))
-    print(__doc__, file=sys.stderr)
+    if args.policy:
+        return cmd_policy(as_json=args.json)
+    if args.full:
+        return cmd_full(as_json=args.json, single_domain=domain)
+    if args.minimum:
+        return cmd_minimum(as_json=args.json, single_domain=domain)
+    if args.auto:
+        return cmd_auto(as_json=args.json, single_domain=domain)
+    if args.sample is not None:
+        v = args.sample
+        try:
+            if "." in v:
+                rate = float(v)
+                if rate >= 1.0:
+                    print("ERROR: --sample rate must be < 1.0 (use --full for all)", file=sys.stderr)
+                    return 2
+                target = round(rate * TOTAL)
+            else:
+                target = int(v)
+        except ValueError:
+            print(f"ERROR: --sample value '{v}' must be int or float", file=sys.stderr)
+            return 2
+        return cmd_sample(target, as_json=args.json, single_domain=domain)
+    parser.print_help(sys.stderr)
     return 2
 
 

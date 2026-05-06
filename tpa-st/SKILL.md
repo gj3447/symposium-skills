@@ -1,23 +1,23 @@
 ---
-name: tpa-tt
-kg_ref: ATOM_Skill_tpa_tt
-version: "1.0.0"
+name: tpa-st
+kg_ref: ATOM_Skill_tpa_st
+version: "1.2.0"
 channel: stable
 description: >
-  TPA TargetTwin (TT) — Phase 2/4. APT ST 거울 (역순).
+  TPA TargetTwin (ST) — Phase 2/4. APT ST 거울 (역순).
   각 pub 심볼의 암묵적/명시적 Contract 추출. AptContract(명시 interface/trait)
-  vs ConventionalContract(암묵 시그니처) 분리 라벨. LOC>100 giant method는 TP로 위임.
+  vs ConventionalContract(암묵 시그니처) 분리 라벨. LOC>100 giant method는 SP로 위임.
   pre/postcondition 주석 파싱. Gate Check Hook 강제: TCW Gate 통과 없이 진입 불가.
-  # KG: ATOM_Skill_tpa_tt, CONTRACT_AS_TPA_tt_SKILL, TPA_methodology_v10
+  # KG: ATOM_Skill_tpa_st, CONTRACT_AS_TPA_st_SKILL, TPA_methodology_v10
 ---
 
-<!-- KG: TASK_AS_TPA_tt_SKILL -->
-<!-- KG: CONTRACT_AS_TPA_tt_SKILL -->
+<!-- KG: TASK_AS_TPA_st_SKILL -->
+<!-- KG: CONTRACT_AS_TPA_st_SKILL -->
 <!-- KG: IMPLEMENTS_SHARED CONTRACT_SHARED_TPA_SubSkillTemplate -->
 
 ## 🔗 MIC Binding (SOLID-DIP)
 
-**IS slot**: TPA_Phase (TT, 2/4)
+**IS slot**: TPA_Phase (ST, 2/4)
 **USES slots**: SubagentSeeder, ResearchProvider (giant method 시), KgCodeBinder, AdversarialValidator
 
 ```cypher
@@ -33,7 +33,7 @@ RETURN s.name, s.currentConcrete, s.invocation
 
 ---
 
-# /tpa-tt — TargetTwin: 암묵적 계약 발굴
+# /tpa-st — TargetTwin: 암묵적 계약 발굴
 
 > **질문**: "각 심볼이 지키고 있는 암묵적 계약은 무엇인가?"
 > 공유 시그니처 = 계약. 명시 interface = 계약. 둘을 섞지 말 것.
@@ -42,7 +42,7 @@ RETURN s.name, s.currentConcrete, s.invocation
 
 > `apt-gate-check.sh`가 자동 실행.
 > **TCW Gate 미통과 시 `permissionDecision: deny`.**
-> BLOCKED 시: `/tpa-tcw` → `/taliban` → TCW Gate 통과 → `/tpa-tt` 재호출.
+> BLOCKED 시: `/tpa-tcw` → `/taliban` → TCW Gate 통과 → `/tpa-st` 재호출.
 
 필수 조건:
 ```cypher
@@ -56,7 +56,7 @@ RETURN exec LIMIT 1
 ## 진입 의식
 
 ```cypher
-MATCH (ts:SubagentTaskSpec {name:'taskspec-tpa-TT', skill:'tpa'})
+MATCH (ts:SubagentTaskSpec {name:'taskspec-tpa-ST', skill:'tpa'})
 RETURN ts.checkItems, ts.cypherQueries, ts.expectedOutcome, ts.treasure_coverage_min
 ```
 
@@ -106,9 +106,9 @@ SET cv.type='implicit',
 ## 결과 기록
 
 ```cypher
-MERGE (tt:TPA_TT_Result {name:'TT_<target>_<date>'})
+MERGE (tt:TPA_ST_Result {name:'ST_<target>_<date>'})
 SET tt.sourcePath=$TARGET,
-    tt.sourceId='tpa-tt-'+$target_id,
+    tt.sourceId='tpa-st-'+$target_id,
     tt.totalContracts=$contract_count,
     tt.aptContracts=$apt_count,
     tt.conventionalContracts=$conv_count,
@@ -121,14 +121,14 @@ MERGE (exec)-[:PHASE_OUTPUT {order:2}]->(tt)
 
 ## Giant Method 처리 (gap04)
 
-**LOC > 100 메서드는 AtomicSpan 아님** → TP phase로 deferred.
+**LOC > 100 메서드는 AtomicSpan 아님** → SP phase로 deferred.
 
 ```cypher
 MERGE (gm:GiantMethodDeferred {name:'GM_'+$sym})
 SET gm.loc=$loc, gm.file=$file+':'+toString($line),
-    gm.reason='LOC>100 — TP 패턴 분석 후 재평가',
-    gm.deferred_to='TP'
-MERGE (tt:TPA_TT_Result {name:$tt_name})-[:DEFERS_TO_TP]->(gm)
+    gm.reason='LOC>100 — SP 패턴 분석 후 재평가',
+    gm.deferred_to='SP'
+MERGE (tt:TPA_ST_Result {name:$tt_name})-[:DEFERS_TO_SP]->(gm)
 ```
 
 ---
@@ -142,15 +142,15 @@ docstring/JSDoc/Rust-doc에서:
 
 ---
 
-## FulfillmentGate TT (7 checks)
+## FulfillmentGate ST (7 checks)
 
 1. [ ] 각 Contract 노드 `sourcePath=file:line` 포함
 2. [ ] `:AptContract` vs `:ConventionalContract` 라벨 **명확 분리**
 3. [ ] pre/postcondition 필드 존재 (없으면 explicit NONE)
-4. [ ] giant_methods_deferred 목록 TP로 전달 (0 이상)
+4. [ ] giant_methods_deferred 목록 SP로 전달 (0 이상)
 5. [ ] Longinus SourceBinding 생성 (Contract마다 1개 이상)
 6. [ ] taskspec.checkItems 전부 pass
-7. [ ] TPA_TT_Result + PHASE_OUTPUT order=2 엣지 + sourcePath+sourceId SET 확인
+7. [ ] TPA_ST_Result + PHASE_OUTPUT order=2 엣지 + sourcePath+sourceId SET 확인
 
 ---
 
@@ -159,23 +159,23 @@ docstring/JSDoc/Rust-doc에서:
 ```cypher
 MATCH (s:MethodologySlot {name:'AdversarialValidator'})
 RETURN s.invocation AS gate
--- {gate} TPA_TT_<target>
+-- {gate} TPA_ST_<target>
 ```
 
 ValidationResult 기록:
 ```cypher
-MERGE (vr:ValidationResult {name:'VR_TPA_TT_<target>_<date>', phase:'TT'})
+MERGE (vr:ValidationResult {name:'VR_TPA_ST_<target>_<date>', phase:'ST'})
 SET vr.verdict=$verdict, vr.evidence=[...], vr.validated_at=datetime(),
     vr.validator='Taliban-9lens'
 MATCH (exec:TPA_Execution)
 MERGE (exec)-[:HAS_VALIDATION]->(vr)
-SET exec.status = CASE $verdict WHEN 'APPROVED' THEN 'IN_PROGRESS_TT' ELSE 'BLOCKED_AT_TT' END
+SET exec.status = CASE $verdict WHEN 'APPROVED' THEN 'IN_PROGRESS_ST' ELSE 'BLOCKED_AT_ST' END
 ```
 
-**APPROVED 아니면 `/tpa-tp` Gate Check에서 차단됨.**
+**APPROVED 아니면 `/tpa-sp` Gate Check에서 차단됨.**
 
 **⚠️ 부모 인라인 APPROVED 금지 — Taliban subagent 최소 1개 독립 출격 강제.**
-**⚠️ VR.provenance='subagent-taliban-tt' 필수. 'inline' 이면 향후 Hook에서 차단.**
+**⚠️ VR.provenance='subagent-taliban-st' 필수. 'inline' 이면 향후 Hook에서 차단.**
 **⚠️ 사용자가 "확인해봐"라고 안 해도 자동으로 실행해야 한다.**
 <!-- KG: lesson-taliban-not-auto-triggered-2026-04-16 -->
 
@@ -186,7 +186,7 @@ SET exec.status = CASE $verdict WHEN 'APPROVED' THEN 'IN_PROGRESS_TT' ELSE 'BLOC
 | 금지 | 이유 |
 |---|---|
 | AptContract + Convention 라벨 섞기 | ontology 오염, 쿼리 불가능 |
-| giant method를 TT에서 억지로 contract화 | atomic 아님 |
+| giant method를 ST에서 억지로 contract화 | atomic 아님 |
 | implementors < 3인데 ConventionalContract | 우연 일치 |
 | sourcePath 생략 | Longinus 깨짐 |
 | TCW Gate 없이 진입 | hook이 차단함 (설계) |
@@ -211,8 +211,8 @@ REFLECTION:
 
 QualityGap 또는 AntiPattern 발견 시 즉시:
 ```cypher
-MERGE (l:AbstractNode:Lesson {name:'lesson-tpa-tt-<finding>-<date>'})
-SET l.category='tpa-tt', l.problem=$problem,
+MERGE (l:AbstractNode:Lesson {name:'lesson-tpa-st-<finding>-<date>'})
+SET l.category='tpa-st', l.problem=$problem,
     l.severity=$severity, l.resolved=false, l.createdAt=datetime()
 ```
 
@@ -233,28 +233,28 @@ SET l.category='tpa-tt', l.problem=$problem,
 ### 세션 진입 시
 ```cypher
 MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
-MATCH (e:TPA_Execution) WHERE e.phase_current='TT' RETURN e.name, e.target LIMIT 3
-MATCH (ts:SubagentTaskSpec {skill:'tpa', phase:'TT'}) RETURN ts.checkItems, ts.parallelism_min, ts.treasure_coverage_min
+MATCH (e:TPA_Execution) WHERE e.phase_current='ST' RETURN e.name, e.target LIMIT 3
+MATCH (ts:SubagentTaskSpec {skill:'tpa', phase:'ST'}) RETURN ts.checkItems, ts.parallelism_min, ts.treasure_coverage_min
 ```
 
 ### Subagent 출격 (3줄)
 ```
-역할: TPA TT Contract extractor (agentId=D<idx>)
-TaskSpec: MATCH (ts:SubagentTaskSpec {name:'taskspec-tpa-TT'}) RETURN ts.*
-Target: $SYMBOL_SUBSET. 출력: {AptContract[], ConventionalContract[], GiantMethodDeferred[]} JSON (provenance='재배맨-tpa-tt').
+역할: TPA ST Contract extractor (agentId=D<idx>)
+TaskSpec: MATCH (ts:SubagentTaskSpec {name:'taskspec-tpa-ST'}) RETURN ts.*
+Target: $SYMBOL_SUBSET. 출력: {AptContract[], ConventionalContract[], GiantMethodDeferred[]} JSON (provenance='재배맨-tpa-st').
 ```
 
 ### 새 씨앗 심기
 ```cypher
 MERGE (ts:SubagentTaskSpec {name:$name})
-SET ts.skill='tpa', ts.phase='TT', ts.displayName=$display, ts.checkItems=$checks,
+SET ts.skill='tpa', ts.phase='ST', ts.displayName=$display, ts.checkItems=$checks,
     ts.status='READY', ts.createdAt=datetime()
 ```
 
 ### 세션 종료 시
 ```cypher
 MATCH (w:WorkBuffer {status:'CURRENT'}) SET w.status='ARCHIVED', w.archived_at=datetime()
-MERGE (wb:WorkBuffer {name:$next}) SET wb.status='CURRENT', wb.phase='TPA TT in progress', wb.updated_at=datetime()
+MERGE (wb:WorkBuffer {name:$next}) SET wb.status='CURRENT', wb.phase='TPA ST in progress', wb.updated_at=datetime()
 ```
 
 ---
@@ -268,4 +268,4 @@ MERGE (wb:WorkBuffer {name:$next}) SET wb.status='CURRENT', wb.phase='TPA TT in 
 > 유틸리티: `03_SCRIPTS/db/resolve_mic_slot.cypher`
 > # KG: lesson-skill-mic-slot-ref-weak-2026-04-15
 
-# KG: ATOM_재배맨_autoboot_tpa-tt
+# KG: ATOM_재배맨_autoboot_tpa-st

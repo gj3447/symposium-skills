@@ -4,7 +4,7 @@
   "displayName": "SYMPOSIUM Skills",
   "description": "Engineering canon: 5 weapons (apt/harness/longinus/taliban/jaebaeman/prometheus) + APT/TPA cycles + ops bundle. Constitutionally governed via CODEOWNERS, drift-gated via Merkle MANIFEST, supply-chain hardened via in-toto + Cosign keyless.",
   "publisher": "SYMPOSIUM",
-  "version": "26.0.0",
+  "version": "30.0.0",
   "homepage": "file:///Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "registry": {
     "kind": "local",
@@ -24,7 +24,7 @@
     "interval": "12m"
   },
   "channels": ["stable", "beta", "experimental"],
-  "skillCount": 27,
+  "skillCount": 28,
   "skills": [
     {"name": "apt", "kg_ref": "ATOM_Skill_apt_orchestrator", "tier": "essence"},
     {"name": "harness", "kg_ref": "ATOM_Skill_harness", "tier": "essence"},
@@ -40,10 +40,11 @@
     {"name": "apt-st", "kg_ref": "ATOM_Skill_apt_st", "tier": "phase"},
     {"name": "apt-scw", "kg_ref": "ATOM_Skill_apt_scw", "tier": "phase"},
     {"name": "apt-meta-review", "kg_ref": "ATOM_Skill_apt_meta_review", "tier": "phase"},
+    {"name": "apt-cleanup", "kg_ref": "ATOM_Skill_apt_cleanup", "tier": "phase"},
     {"name": "tpa", "kg_ref": "ATOM_Skill_tpa_orchestrator_v10", "tier": "tpa"},
     {"name": "tpa-tcw", "kg_ref": "ATOM_Skill_tpa_tcw", "tier": "tpa"},
-    {"name": "tpa-tt", "kg_ref": "ATOM_Skill_tpa_tt", "tier": "tpa"},
-    {"name": "tpa-tp", "kg_ref": "ATOM_Skill_tpa_tp", "tier": "tpa"},
+    {"name": "tpa-st", "kg_ref": "ATOM_Skill_tpa_st", "tier": "tpa"},
+    {"name": "tpa-sp", "kg_ref": "ATOM_Skill_tpa_sp", "tier": "tpa"},
     {"name": "tpa-ta", "kg_ref": "ATOM_Skill_tpa_ta", "tier": "tpa"},
     {"name": "solve", "kg_ref": "ATOM_Skill_solve", "tier": "meta"},
     {"name": "skill-creator", "kg_ref": "ATOM_Skill_skill_creator", "tier": "meta"},

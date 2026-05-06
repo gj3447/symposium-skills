@@ -1,7 +1,7 @@
 ---
 name: harness
 kg_ref: ATOM_Skill_harness
-version: "3.0.0"
+version: "3.1.0"
 channel: stable
 description: >
   하네스 — industry agent scaffolding. 12사도 #4 비행기맨의 공학 측 결정화이며 1:N sibling family.

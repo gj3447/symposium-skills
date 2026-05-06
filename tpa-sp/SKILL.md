@@ -1,24 +1,24 @@
 ---
-name: tpa-tp
-kg_ref: ATOM_Skill_tpa_tp
-version: "1.0.0"
+name: tpa-sp
+kg_ref: ATOM_Skill_tpa_sp
+version: "1.2.0"
 channel: stable
 description: >
-  TPA TargetPyramid (TP) — Phase 3/4. APT SP 거울 (역순).
+  TPA TargetPyramid (SP) — Phase 3/4. APT SP 거울 (역순).
   Pattern Library (51 DesignPattern 노드) 매칭. confidence ≥0.7 INSTANCE_OF / <0.7 RESEMBLES.
   카테고리별 검증 전략 매핑: Distributed→MetaVerifier(Taliban --lens mathematical), Structural→AST,
   Behavioral→call graph, Creational→grep, PL→ResearchProvider.
-  Gate Check Hook 강제: TT Gate 통과 없이 진입 불가.
-  # KG: ATOM_Skill_tpa_tp, CONTRACT_AS_TPA_tp_SKILL, TPA_methodology_v10
+  Gate Check Hook 강제: ST Gate 통과 없이 진입 불가.
+  # KG: ATOM_Skill_tpa_sp, CONTRACT_AS_TPA_sp_SKILL, TPA_methodology_v10
 ---
 
-<!-- KG: TASK_AS_TPA_tp_SKILL -->
-<!-- KG: CONTRACT_AS_TPA_tp_SKILL -->
+<!-- KG: TASK_AS_TPA_sp_SKILL -->
+<!-- KG: CONTRACT_AS_TPA_sp_SKILL -->
 <!-- KG: IMPLEMENTS_SHARED CONTRACT_SHARED_TPA_SubSkillTemplate -->
 
 ## 🔗 MIC Binding (SOLID-DIP)
 
-**IS slot**: TPA_Phase (TP, 3/4)
+**IS slot**: TPA_Phase (SP, 3/4)
 **USES slots**: SubagentSeeder, ResearchProvider (모르는 pattern), MetaVerifier (Distributed 수학 속성), AdversarialValidator
 
 ```cypher
@@ -34,21 +34,21 @@ RETURN s.name, s.currentConcrete, s.invocation
 
 ---
 
-# /tpa-tp — TargetPyramid: 패턴 인식 + 수학 검증
+# /tpa-sp — TargetPyramid: 패턴 인식 + 수학 검증
 
 > **질문**: "이 심볼들이 모여 어떤 패턴/구조를 이루는가?"
-> Pattern Library 없이 TP 진입 금지. 중복 노드 방지.
+> Pattern Library 없이 SP 진입 금지. 중복 노드 방지.
 
 ## ⛔ GATE CHECK (Hook 강제)
 
 > `apt-gate-check.sh`가 자동 실행.
-> **TT Gate 미통과 시 `permissionDecision: deny`.**
-> BLOCKED 시: `/tpa-tt` → `/taliban` → TT Gate 통과 → `/tpa-tp` 재호출.
+> **ST Gate 미통과 시 `permissionDecision: deny`.**
+> BLOCKED 시: `/tpa-st` → `/taliban` → ST Gate 통과 → `/tpa-sp` 재호출.
 
 필수 조건:
 ```cypher
-MATCH (exec:TPA_Execution {status:'IN_PROGRESS_TT'})
-      -[:HAS_VALIDATION]->(vr:ValidationResult {phase:'TT', verdict:'APPROVED'})
+MATCH (exec:TPA_Execution {status:'IN_PROGRESS_ST'})
+      -[:HAS_VALIDATION]->(vr:ValidationResult {phase:'ST', verdict:'APPROVED'})
 RETURN exec LIMIT 1
 ```
 
@@ -57,7 +57,7 @@ RETURN exec LIMIT 1
 ## 진입 의식
 
 ```cypher
-MATCH (ts:SubagentTaskSpec {name:'taskspec-tpa-TP', skill:'tpa'})
+MATCH (ts:SubagentTaskSpec {name:'taskspec-tpa-SP', skill:'tpa'})
 RETURN ts.checkItems, ts.cypherQueries, ts.expectedOutcome, ts.treasure_coverage_min
 
 // Pattern Library 존재 확인 (pre-check)
@@ -65,7 +65,7 @@ MATCH (p:DesignPattern) RETURN count(p) AS pattern_count
 // 기대: pattern_count >= 38 (GoF23 + 분산10 + PL5). 51+ 권장.
 ```
 
-**Pattern Library 없이 TP 실행 금지** — 중복 노드 생성 방지 (gap04 해결).
+**Pattern Library 없이 SP 실행 금지** — 중복 노드 생성 방지 (gap04 해결).
 
 ---
 
@@ -81,7 +81,7 @@ MATCH (p:DesignPattern) RETURN count(p) AS pattern_count
 
 ## confidence 규칙
 
-<!-- KG: lesson-tpa-tp-no-pattern-checklist-2026-04-16 -->
+<!-- KG: lesson-tpa-sp-no-pattern-checklist-2026-04-16 -->
 
 ### INSTANCE_OF 판정: 필수요소 체크리스트 기반 (v2)
 
@@ -129,21 +129,21 @@ WHERE $c < 0.7
 TaskSpec: MATCH (ts:SubagentTaskSpec {name:'taskspec-88taliban-*'}) RETURN *
 Target: 방금 매칭한 Distributed DesignPattern (CRDT/BFT/HotStuff/Kademlia/Raft/Paxos/LWW/Vector_Clock/HLC/Merkle_Tree)
 검증할 수학 속성: commute / assoc / idempotent / safety / liveness (패턴별 상이)
-출력: ValidationResult {phase:'TP-MetaVerify', verdict:$v, math_properties:[...], target:<pattern>}
+출력: ValidationResult {phase:'SP-MetaVerify', verdict:$v, math_properties:[...], target:<pattern>}
 ```
 
 ### FulfillmentGate Cypher 강제 (taskspec.fulfillment_gate_cypher_meta 참조)
 
 ```cypher
-MATCH (tp:TPA_TP_Result {name:$tp_name})-[:MATCHED_PATTERN]->(p:DesignPattern {category:'Distributed'})
+MATCH (tp:TPA_SP_Result {name:$tp_name})-[:MATCHED_PATTERN]->(p:DesignPattern {category:'Distributed'})
 WITH count(p) AS dp_count
-OPTIONAL MATCH (exec:TPA_Execution)-[:HAS_VALIDATION]->(vr:ValidationResult {phase:'TP-MetaVerify', verdict:'APPROVED'})
+OPTIONAL MATCH (exec:TPA_Execution)-[:HAS_VALIDATION]->(vr:ValidationResult {phase:'SP-MetaVerify', verdict:'APPROVED'})
   WHERE (exec)-[:PHASE_OUTPUT]->(tp)
 RETURN dp_count, count(vr) AS mv_count,
   CASE WHEN dp_count=0 OR mv_count>0 THEN 'PASS' ELSE 'FAIL — MetaVerifier required' END AS gate
 ```
 
-**`FAIL — MetaVerifier required`** → TP phase 전체 verdict=REJECTED. 
+**`FAIL — MetaVerifier required`** → SP phase 전체 verdict=REJECTED. 
 `tpa-ta` Hook Gate에서 차단됨.
 
 ### 왜 필요한가
@@ -158,9 +158,9 @@ RETURN dp_count, count(vr) AS mv_count,
 ## 결과 기록
 
 ```cypher
-MERGE (tp:TPA_TP_Result {name:'TP_<target>_<date>'})
+MERGE (tp:TPA_SP_Result {name:'SP_<target>_<date>'})
 SET tp.sourcePath=$TARGET,
-    tp.sourceId='tpa-tp-'+$target_id,
+    tp.sourceId='tpa-sp-'+$target_id,
     tp.totalPatterns=$pattern_count,
     tp.instanceOf_count=$io_count,
     tp.resembles_count=$res_count,
@@ -182,7 +182,7 @@ SET np.description=$desc,
     np.category=$cat,  // 'architectural_novel' | 'language_novel' | 'domain_novel'
     np.first_observed_in=$target,
     np.discovered_at=datetime()
-MERGE (tp:TPA_TP_Result)-[:IDENTIFIES_NOVEL]->(np)
+MERGE (tp:TPA_SP_Result)-[:IDENTIFIES_NOVEL]->(np)
 ```
 
 ---
@@ -199,7 +199,7 @@ RETURN s.invocation AS auto_call
 
 ---
 
-## FulfillmentGate TP (7 checks)
+## FulfillmentGate SP (7 checks)
 
 1. [ ] Pattern Library ≥ 38 노드 존재 (pre-check 통과)
 2. [ ] MECE check: leaf span 중복/누락 없음
@@ -207,7 +207,7 @@ RETURN s.invocation AS auto_call
 4. [ ] Distributed 카테고리는 MetaVerifier 수학 검증 완료
 5. [ ] Novel Pattern은 `:NovelPattern` 라벨 + category 지정
 6. [ ] orphan span 없음
-7. [ ] TPA_TP_Result + PHASE_OUTPUT order=3 엣지 + sourcePath+sourceId SET 확인
+7. [ ] TPA_SP_Result + PHASE_OUTPUT order=3 엣지 + sourcePath+sourceId SET 확인
 
 ---
 
@@ -216,12 +216,12 @@ RETURN s.invocation AS auto_call
 ```cypher
 MATCH (s:MethodologySlot {name:'AdversarialValidator'})
 RETURN s.invocation AS gate
--- {gate} TPA_TP_<target>
+-- {gate} TPA_SP_<target>
 ```
 
 ValidationResult 기록:
 ```cypher
-MERGE (vr:ValidationResult {name:'VR_TPA_TP_<target>_<date>', phase:'TP'})
+MERGE (vr:ValidationResult {name:'VR_TPA_SP_<target>_<date>', phase:'SP'})
 SET vr.verdict=$verdict, vr.evidence=[...], vr.validated_at=datetime(),
     vr.validator='Taliban-9lens+MetaVerifier(distributed)'
 MATCH (exec:TPA_Execution)
@@ -241,7 +241,7 @@ MERGE (exec)-[:HAS_VALIDATION]->(vr)
 
 | 금지 | 이유 |
 |---|---|
-| Pattern library 없이 TP 진입 | 중복 노드 생성 |
+| Pattern library 없이 SP 진입 | 중복 노드 생성 |
 | confidence 없이 INSTANCE_OF | HR11 rubber-stamp 위반 |
 | Distributed 패턴 MetaVerifier skip | 수학 속성 미검증 |
 | AST 없이 regex만 | 주석/문자열 오인식 |
@@ -268,8 +268,8 @@ REFLECTION:
 
 QualityGap 또는 AntiPattern 발견 시 즉시:
 ```cypher
-MERGE (l:AbstractNode:Lesson {name:'lesson-tpa-tp-<finding>-<date>'})
-SET l.category='tpa-tp', l.problem=$problem,
+MERGE (l:AbstractNode:Lesson {name:'lesson-tpa-sp-<finding>-<date>'})
+SET l.category='tpa-sp', l.problem=$problem,
     l.severity=$severity, l.resolved=false, l.createdAt=datetime()
 ```
 
@@ -291,37 +291,37 @@ SET l.category='tpa-tp', l.problem=$problem,
 ### 세션 진입 시
 ```cypher
 MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
-MATCH (e:TPA_Execution) WHERE e.phase_current='TP' RETURN e.name, e.target LIMIT 3
-MATCH (ts:SubagentTaskSpec {skill:'tpa', phase:'TP'}) RETURN ts.checkItems, ts.required_validator_conditions, ts.fulfillment_gate_cypher_meta
+MATCH (e:TPA_Execution) WHERE e.phase_current='SP' RETURN e.name, e.target LIMIT 3
+MATCH (ts:SubagentTaskSpec {skill:'tpa', phase:'SP'}) RETURN ts.checkItems, ts.required_validator_conditions, ts.fulfillment_gate_cypher_meta
 // Pattern Library pre-check (필수)
 MATCH (p:DesignPattern) RETURN count(p) AS lib_size
 ```
 
 ### Subagent 출격 (3줄, 카테고리별 병렬)
 ```
-역할: TPA TP pattern matcher — category={Structural|Behavioral|Creational|Distributed|PL} (agentId=D<idx>)
-TaskSpec: MATCH (ts:SubagentTaskSpec {name:'taskspec-tpa-TP'}) RETURN ts.*
-Target: $CONTRACT_SUBSET + Pattern Library. 출력: {INSTANCE_OF[{p,conf,ev,strategy}], RESEMBLES[...], NovelPattern[...]} JSON (provenance='재배맨-tpa-tp').
+역할: TPA SP pattern matcher — category={Structural|Behavioral|Creational|Distributed|PL} (agentId=D<idx>)
+TaskSpec: MATCH (ts:SubagentTaskSpec {name:'taskspec-tpa-SP'}) RETURN ts.*
+Target: $CONTRACT_SUBSET + Pattern Library. 출력: {INSTANCE_OF[{p,conf,ev,strategy}], RESEMBLES[...], NovelPattern[...]} JSON (provenance='재배맨-tpa-sp').
 ```
 
 ### 자동 88-Taliban 트리거 (Distributed 매칭 시, 위 섹션 참조)
 ```
 역할: 88-Taliban MetaVerifier (agentId=M<idx>)
 TaskSpec: MATCH (ts:SubagentTaskSpec {name STARTS WITH 'taskspec-88taliban-'}) RETURN ts.*
-Target: Distributed DesignPattern. 출력: VR{phase:'TP-MetaVerify', math_properties:[...]}.
+Target: Distributed DesignPattern. 출력: VR{phase:'SP-MetaVerify', math_properties:[...]}.
 ```
 
 ### 새 씨앗 심기
 ```cypher
 MERGE (ts:SubagentTaskSpec {name:$name})
-SET ts.skill='tpa', ts.phase='TP', ts.pattern_category=$cat,
+SET ts.skill='tpa', ts.phase='SP', ts.pattern_category=$cat,
     ts.checkItems=$checks, ts.status='READY', ts.createdAt=datetime()
 ```
 
 ### 세션 종료 시
 ```cypher
 MATCH (w:WorkBuffer {status:'CURRENT'}) SET w.status='ARCHIVED', w.archived_at=datetime()
-MERGE (wb:WorkBuffer {name:$next}) SET wb.status='CURRENT', wb.phase='TPA TP in progress', wb.updated_at=datetime()
+MERGE (wb:WorkBuffer {name:$next}) SET wb.status='CURRENT', wb.phase='TPA SP in progress', wb.updated_at=datetime()
 ```
 
 ---
@@ -335,4 +335,4 @@ MERGE (wb:WorkBuffer {name:$next}) SET wb.status='CURRENT', wb.phase='TPA TP in 
 > 유틸리티: `03_SCRIPTS/db/resolve_mic_slot.cypher`
 > # KG: lesson-skill-mic-slot-ref-weak-2026-04-15
 
-# KG: ATOM_재배맨_autoboot_tpa-tp
+# KG: ATOM_재배맨_autoboot_tpa-sp

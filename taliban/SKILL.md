@@ -1,7 +1,7 @@
 ---
 name: taliban
 kg_ref: ATOM_Skill_taliban
-version: "3.0.0"
+version: "3.1.0"
 channel: stable
 description: >
   탈레반 방법론 — APT의 면역 시스템. 적대적 검증 프레임워크.

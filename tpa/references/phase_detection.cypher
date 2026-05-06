@@ -4,17 +4,17 @@
 // 1. 현재 phase 감지 (특정 execution)
 MATCH (exec:TPA_Execution {name: $exec_name})
 OPTIONAL MATCH (exec)-[:PHASE_OUTPUT {order:1}]->(tcw:TPA_TCW_Result)
-OPTIONAL MATCH (exec)-[:PHASE_OUTPUT {order:2}]->(tt:TPA_TT_Result)
-OPTIONAL MATCH (exec)-[:PHASE_OUTPUT {order:3}]->(tp:TPA_TP_Result)
+OPTIONAL MATCH (exec)-[:PHASE_OUTPUT {order:2}]->(tt:TPA_ST_Result)
+OPTIONAL MATCH (exec)-[:PHASE_OUTPUT {order:3}]->(tp:TPA_SP_Result)
 OPTIONAL MATCH (exec)-[:PHASE_OUTPUT {order:4}]->(ta:TPA_TA_Result)
 OPTIONAL MATCH (exec)-[:HAS_VALIDATION]->(vr:ValidationResult)
 WITH exec, tcw, tt, tp, ta, collect(vr.phase) AS validated_phases
 RETURN exec.name,
   CASE
     WHEN ta IS NOT NULL THEN 'COMPLETE'
-    WHEN 'TP' IN validated_phases THEN 'TA'
-    WHEN 'TT' IN validated_phases THEN 'TP'
-    WHEN 'TCW' IN validated_phases THEN 'TT'
+    WHEN 'SP' IN validated_phases THEN 'TA'
+    WHEN 'ST' IN validated_phases THEN 'SP'
+    WHEN 'TCW' IN validated_phases THEN 'ST'
     WHEN tcw IS NOT NULL THEN 'TCW_UNVALIDATED'
     ELSE 'TCW'
   END AS current_phase;

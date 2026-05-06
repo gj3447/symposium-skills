@@ -15,6 +15,18 @@
 - *(versioning)* Apt phase skills ## History (PROM 16 F7) + Architecture Principles KG scaffolding ([`ffbb331`](#ffbb3313c430a88b9e342d019f7678a84edff486))
 - *(apt-cleanup)* New skill — Phase 6 Cleanup Gate materialization (PROM 16 F8) ([`5d124c2`](#5d124c25b600eac87e7a56a7b3b2e64d684d7cb2))
 - *(apt-st)* V27.0.0 — Exhaustive Cover Scope (8 ST decision areas + SCW gate hook) ([`f17e885`](#f17e885d2cf4f92f63cf466d097313ad2cfb7d39))
+- *(a6)* SKILL.md slot resolver PoC — bin/resolve_slot.py (L1 tier) ([`27a85ee`](#27a85eeee7be8d56141eacc99ebad5c48ea80293))
+- *(longinus)* Sha256 verification daemon PoC — bin/longinus_sha256_daemon.py ([`826be29`](#826be29b3339a7da3b2711baa79c35dc537bd7a8))
+- *(longinus)* Status-aware verify (DIRECTORY_SKIP / ORPHAN_REFERENCE) ([`b2fd9fb`](#b2fd9fb2ead49524d6974d8e2401878ec9aaebf7))
+- *(a6)* L2 build step validator — bin/skill-resolve-check.sh ([`e7264ec`](#e7264ecbfc42550b1933e17a999424b3d166bd56))
+- *(taliban)* Mathematical lens stratified sampler — bin/taliban_mathematical_sampler.py ([`2620c42`](#2620c42ffb9fce1fe63dde6d75ad11773d888047))
+- *(a6)* L2 inline pre-build invariant in skill-build-manifest.py ([`5cb569c`](#5cb569c3b6c824e9444306af8cdaaba99072d8bf))
+- *(longinus)* Launchd plist for sha256 daemon (1h verify schedule) ([`533f7e7`](#533f7e731f5f4563b0ac3760c07294dd94a93a5c))
+
+### Fixed
+
+- *(longinus)* Multi-FS_BASE fallback + status classifier (91.2% coverage) ([`c2b0894`](#c2b0894d976373283750c8b9ce46082bd4a29af7))
+- *(taliban)* Bind sampler to real KG :Lens codes ([`f8effb2`](#f8effb21b89414ed8e8b9036bc177a7aaf2ce4dc))
 
 ### Changed
 
@@ -23,6 +35,9 @@
 ### Miscellaneous
 
 - *(cleanup)* Archive legacy SKILL.md .bak files (PROM 16 F6 prep) ([`f0fd863`](#f0fd8634862be7bc5a9d7b0c24f0913ebc4c6a7e))
+- *(skill-versions)* KG iter 1-4 closure snapshot — v27.1.0 + HR1-18 + Lakatos test ([`050e101`](#050e1011826fadb257686380dfc6400c87dad6ab))
+- *(manifest)* Refresh index.json — v27.1.0 versions + new merkle (post-iter1-4) ([`27b08ea`](#27b08ea8e2402d117caa566887c8450de57cd6bb))
+- *(longinus)* Bump query LIMIT 1000 → 5000 (cross-canon scale) ([`d0ecc48`](#d0ecc486079c58a34fede878297748bd755f6e35))
 
 ## [26.0.2] - 2026-04-26
 

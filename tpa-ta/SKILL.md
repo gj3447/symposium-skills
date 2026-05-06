@@ -1,7 +1,7 @@
 ---
 name: tpa-ta
 kg_ref: ATOM_Skill_tpa_ta
-version: "1.0.0"
+version: "1.2.0"
 channel: stable
 description: >
   TPA TargetAnchor (TA) — Phase 4/4. APT SA 거울 (최종 앵커링).
@@ -9,7 +9,7 @@ description: >
   5종 Drift 측정 (Missing/Orphan/SigMismatch/PatternDiv/LabelRot).
   coverage_ratio < 0.8 → status='SUSPENDED' 강제.
   Longinus 전수 바인딩 + 최종 Taliban gate.
-  Gate Check Hook 강제: TP Gate 통과 없이 진입 불가.
+  Gate Check Hook 강제: SP Gate 통과 없이 진입 불가.
   # KG: ATOM_Skill_tpa_ta, CONTRACT_AS_TPA_ta_SKILL, TPA_methodology_v10
 ---
 
@@ -43,13 +43,13 @@ RETURN s.name, s.currentConcrete, s.invocation
 ## ⛔ GATE CHECK (Hook 강제)
 
 > `apt-gate-check.sh`가 자동 실행.
-> **TP Gate 미통과 시 `permissionDecision: deny`.**
-> BLOCKED 시: `/tpa-tp` → `/taliban` → TP Gate 통과 → `/tpa-ta` 재호출.
+> **SP Gate 미통과 시 `permissionDecision: deny`.**
+> BLOCKED 시: `/tpa-sp` → `/taliban` → SP Gate 통과 → `/tpa-ta` 재호출.
 
 필수 조건:
 ```cypher
-MATCH (exec:TPA_Execution {status:'IN_PROGRESS_TP'})
-      -[:HAS_VALIDATION]->(vr:ValidationResult {phase:'TP', verdict:'APPROVED'})
+MATCH (exec:TPA_Execution {status:'IN_PROGRESS_SP'})
+      -[:HAS_VALIDATION]->(vr:ValidationResult {phase:'SP', verdict:'APPROVED'})
 RETURN exec LIMIT 1
 ```
 
@@ -90,7 +90,7 @@ MERGE (b:SourceBinding:Longinus {name:'SB_<target>_'+sym.name})
 SET b.sourceId='SB_<target>_'+sym.name,
     b.sourcePath=sym.file+':'+toString(sym.line),
     b.symbol=sym.name, b.kind=sym.kind, b.kg_ref=sym.kg_node
-MATCH (tp:TPA_TP_Result {name:'TP_<target>_<date>'})
+MATCH (tp:TPA_SP_Result {name:'TP_<target>_<date>'})
 MERGE (tp)-[:LONGINUS_BINDS]->(b)
 ```
 

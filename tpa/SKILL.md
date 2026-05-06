@@ -1,11 +1,11 @@
 ---
 name: tpa
 kg_ref: ATOM_Skill_tpa_orchestrator_v10
-version: "1.0.0"
+version: "1.2.0"
 channel: stable
 description: >
   TPA v1.0 orchestrator — APT v24 역분석 기반 역순 사이클.
-  코드→설계 복원 (TCW→TT→TP→TA). 5대 본질 MIC 참조.
+  코드→설계 복원 (TCW→ST→SP→TA). 5대 본질 MIC 참조.
   오답노트 피드백 루프 내장. Gate Check Hook 강제.
   # KG: ATOM_Skill_tpa_orchestrator_v10, TPA_methodology_v10, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory before any framing/diagnostic, lesson-ai-skipped-kg-check-before-framing-2026-04-29)
   Invoke when: "/tpa <path>", "/tpa --audit <anchor>", "/tpa --status",
@@ -74,7 +74,7 @@ APT HR1-HR15를 역방향에 맞게 재정의. 위반 시 orchestrator HALT.
 |---|------|------|
 | TR1 | **매 phase gate에 AdversarialValidator 필수** | APT HR1 거울 |
 | TR2 | **APPROVED verdict에 증거(evidence) 필수** | APT HR11 anti-rubber-stamp |
-| TR3 | **Phase 순서 강제 (TCW→TT→TP→TA)** | APT HR7 거울, Gate Check Hook |
+| TR3 | **Phase 순서 강제 (TCW→ST→SP→TA)** | APT HR7 거울, Gate Check Hook |
 | TR4 | **AST 파서 필수 (grep 단독 금지)** | TCW 정확성 보장 |
 | TR5 | **skipped_files = 0** | 부분 스캔 = 사각지대 |
 | TR6 | **Unknown 발견 시 ResearchProvider 자동 호출** | 지식 공백 허용 불가 |
@@ -101,7 +101,7 @@ tpa:
   adversarial:
     enabled: true
     min_findings: 3
-    gates: ["TCW_Gate", "TT_Gate", "TP_Gate", "TA_Gate"]
+    gates: ["TCW_Gate", "ST_Gate", "SP_Gate", "TA_Gate"]
 
   approval:
     allow_agent_sigma: false    # 인간 승인 필수 (중요 결정)
@@ -109,8 +109,8 @@ tpa:
 
   ground_truth:
     tcw: "AST parser output"
-    tt: "contract extraction completeness"
-    tp: "pattern library matching confidence"
+    st: "contract extraction completeness"
+    sp: "pattern library matching confidence"
     ta: "drift measurement < threshold"
 
   feedback_loop:
@@ -142,17 +142,17 @@ tpa:
 // TPA Phase Detection — 역순이므로 코드→설계 방향
 MATCH (exec:TPA_Execution {name: $exec_name})
 OPTIONAL MATCH (exec)-[:PHASE_OUTPUT {order:1}]->(tcw:TPA_TCW_Result)
-OPTIONAL MATCH (exec)-[:PHASE_OUTPUT {order:2}]->(tt:TPA_TT_Result)
-OPTIONAL MATCH (exec)-[:PHASE_OUTPUT {order:3}]->(tp:TPA_TP_Result)
+OPTIONAL MATCH (exec)-[:PHASE_OUTPUT {order:2}]->(tt:TPA_ST_Result)
+OPTIONAL MATCH (exec)-[:PHASE_OUTPUT {order:3}]->(tp:TPA_SP_Result)
 OPTIONAL MATCH (exec)-[:PHASE_OUTPUT {order:4}]->(ta:TPA_TA_Result)
 OPTIONAL MATCH (exec)-[:HAS_VALIDATION]->(vr:ValidationResult)
 WITH exec, tcw, tt, tp, ta, collect(vr.phase) AS validated_phases
 RETURN exec.name,
   CASE
     WHEN ta IS NOT NULL THEN 'COMPLETE (TA done, use --audit for drift check)'
-    WHEN 'TP' IN validated_phases THEN 'Phase 4: TA (pattern matched, run /tpa-ta)'
-    WHEN 'TT' IN validated_phases THEN 'Phase 3: TP (contracts extracted, run /tpa-tp)'
-    WHEN 'TCW' IN validated_phases THEN 'Phase 2: TT (code scanned, run /tpa-tt)'
+    WHEN 'SP' IN validated_phases THEN 'Phase 4: TA (pattern matched, run /tpa-ta)'
+    WHEN 'ST' IN validated_phases THEN 'Phase 3: SP (contracts extracted, run /tpa-sp)'
+    WHEN 'TCW' IN validated_phases THEN 'Phase 2: ST (code scanned, run /tpa-st)'
     WHEN tcw IS NOT NULL THEN 'Phase 1: TCW done but unvalidated (run /taliban)'
     ELSE 'Phase 1: TCW (start with /tpa-tcw)'
   END AS current_phase
@@ -186,21 +186,21 @@ RETURN exec.name,
     |                                    [GATE: Post-gate reflection]  ← TR9
     |                                    [LOG: KG + Lessons]           ← TR10
     |                                         |
-    +-- TCW validated ──────────────────→ /tpa-tt
+    +-- TCW validated ──────────────────→ /tpa-st
     |                                         |
     |                            TT_Result    v
     |                                    [GATE: Taliban 9-lens]
     |                                    [GATE: Post-gate reflection]
     |                                    [LOG: KG + Lessons]
     |                                         |
-    +-- TT validated ───────────────────→ /tpa-tp
+    +-- ST validated ───────────────────→ /tpa-sp
     |                                         |
     |                            TP_Result    v
     |                                    [GATE: Taliban 9-lens]
     |                                    [GATE: Post-gate reflection]
     |                                    [LOG: KG + Lessons]
     |                                         |
-    +-- TP validated ───────────────────→ /tpa-ta
+    +-- SP validated ───────────────────→ /tpa-ta
     |                                         |
     |                            TA_Result    v
     |                                    [GATE: Taliban 9-lens]
@@ -221,7 +221,7 @@ RETURN exec.name,
 ┌─────────────────────────────────────────────────────┐
 │                 오답노트 피드백 루프                    │
 │                                                     │
-│  ① TPA 분석 (TCW→TT→TP→TA)                         │
+│  ① TPA 분석 (TCW→ST→SP→TA)                         │
 │       ↓                                             │
 │  ② 발견 (Discovery)                                 │
 │     - 구조적 동형 (Similarity)                       │
@@ -363,8 +363,8 @@ Reflection 미작성 = INCOMPLETE_GATE (TR9 위반).
 ## 9. Sub-Skills (4 phase)
 
 - `/tpa-tcw` — Phase 1/4: TargetCodeWorld (코드 → 심볼 추출)
-- `/tpa-tt` — Phase 2/4: TargetTwin (심볼 → Contract 추출)
-- `/tpa-tp` — Phase 3/4: TargetPyramid (Contract → Pattern 매칭)
+- `/tpa-st` — Phase 2/4: TargetTwin (심볼 → Contract 추출)
+- `/tpa-sp` — Phase 3/4: TargetPyramid (Contract → Pattern 매칭)
 - `/tpa-ta` — Phase 4/4: TargetAnchor (Pattern → SemanticAnchor 앵커링)
 
 각 sub-skill은 독립 폴더에 SKILL.md + references/ 구조.

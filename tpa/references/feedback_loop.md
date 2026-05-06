@@ -10,7 +10,7 @@ TPA는 **남의 코드를 분석해서 우리 프로젝트의 교훈을 얻는**
 ## 루프 7단계
 
 ```
-① TPA 분석 (TCW→TT→TP→TA)
+① TPA 분석 (TCW→ST→SP→TA)
      ↓
 ② 발견 분류
      ↓
@@ -92,7 +92,7 @@ MERGE (analysis)-[:DERIVED_FROM]->(p)
 
 | 루프 단계 | 본질 (MIC Slot) |
 |---|---|
-| ① 분석 | 전체 (TCW/TT/TP/TA) |
+| ① 분석 | 전체 (TCW/ST/SP/TA) |
 | ② 발견 | ResearchProvider (unknown 리서치) |
 | ③ 기록 | KgCodeBinder (Longinus 바인딩) |
 | ④ 계획 | (orchestrator 판단) |
@@ -109,19 +109,19 @@ MERGE (analysis)-[:DERIVED_FROM]->(p)
 
 v1.0 Contract schema `{signature, pre, post, error_mode}`는 generic/SPA 백엔드에 맞춰져 있어 브라우저 확장·이중 번들·DOM 부작용·타입 소거 코드에서 약점이 드러남. v1.1부터 다음 슬롯을 **선택적으로** 추가 (기존 호출은 그대로 유효).
 
-### 1. DOM-Side-Effect slot (TT Contract)
+### 1. DOM-Side-Effect slot (ST Contract)
 - 목적: `!important` 인라인 스타일, className 토글, element 삽입/제거가 실제 inter-component 계약인 경우 명시.
 - 형식: `dom_side_effects: [{target: "html|body|shadowRoot|selector", op: "style-set|class-toggle|append|remove", property?, value?, important?}]`
 - 발동: `document.*.style.setProperty`, `classList.*`, `appendChild`, `createPortal` 호출 감지 시.
 - 근거: lesson-tpa-side-effect-contracts-2026-04-18 (CRITICAL)
 
-### 2. Cross-Bundle-Write slot (TT Contract)
+### 2. Cross-Bundle-Write slot (ST Contract)
 - 목적: IIFE 번들 ↔ React 번들 등 **서로 import 불가능한** 두 번들이 `window.*` / `CustomEvent`로 주고받는 암묵 계약.
 - 형식: `cross_bundle: {writes: ["window.X"], reads: ["window.Y"], via: "window|CustomEvent|postMessage"}`
 - 발동: manifest 파일 리스트를 `format:'iife' | entry:content` 별로 분할 후 각 번들 내 `window.*=` 할당 교차 매칭.
 - 근거: lesson-tpa-side-effect-contracts-2026-04-18, DesignPattern `Dual-Bundle-Window-IPC`
 
-### 3. Temporal-Contract slot (TT Contract)
+### 3. Temporal-Contract slot (ST Contract)
 - 목적: `setTimeout(_, 500)`, `requestAnimationFrame`, `debounce(_, 2000)` 같은 타이밍 의존이 정합성을 좌우할 때.
 - 형식: `temporal: {delay_ms?, delay_unit: "setTimeout|rAF|debounce|throttle", rationale?, race_risk?}`
 - 집계: 클래스 단위 Temporal-Dependency Graph를 그려 순서 가정(A가 B보다 먼저 resolve) 표시.
@@ -133,24 +133,24 @@ v1.0 Contract schema `{signature, pre, post, error_mode}`는 generic/SPA 백엔�
 - 추론: factory 클로저(`{create: () => new X()}`) 안이면 lazy, 모듈 scope `const x = new X()`이면 eager.
 - 근거: lesson-tpa-temporal-and-lifecycle-blindness-2026-04-18
 
-### 5. silent_degradation slot (TT Contract)
+### 5. silent_degradation slot (ST Contract)
 - 목적: 예외를 던지지 않지만 **증명 가능하게 틀린 결과**를 반환하는 경로. `error_mode`와 orthogonal.
 - 형식: `silent_degradation: {condition, wrong_result, documented: bool}`
 - 예: `async isSupported()` 를 sync 자리에서 호출하여 `return true` fallback 하는 경우.
 - 근거: lesson-tpa-temporal-and-lifecycle-blindness-2026-04-18
 
-### 6. execution_context field (TT Contract)
+### 6. execution_context field (ST Contract)
 - 목적: Chrome Extension 생태계에서 동일 TS 코드가 서로 다른 런타임 컨텍스트(SW/content-script/page/extension-page)에서 실행될 때 사용 가능한 API 집합이 다름.
 - 형식: `execution_context: "service-worker"|"content-script"|"page-context"|"extension-page"|"node"|"any"`
 - 발동: chrome.runtime.*, chrome.storage.*, DOM, postMessage 호출 조합으로 추론. 불확실 시 `"any"`.
 - 근거: lesson-tpa-extension-blindspot-2026-04-18 (downgraded → LOW지만 필드는 유지)
 
-### 7. type_params + ContractGap marker (TT)
+### 7. type_params + ContractGap marker (ST)
 - `type_params: [{name, constraint?}]` — `EventEmitter<TEvents>`, `createStorage<D>` 같은 generic의 파라미터 목록.
 - `contract_gap: true` + `gap_reason: "type-is-any" | "closure-returned-shape" | "unresolved-generic"` — 시그니처만으로 Contract 유도 불가. 사용처 스캔을 요구하는 마커.
 - 근거: lesson-tpa-type-erasure-recovery-2026-04-18 (TOP SOLID)
 
-### 8. state_ownership + layering_audit (TP 후처리)
+### 8. state_ownership + layering_audit (SP 후처리)
 - `state_ownership`: 동일 논리 엔티티(예: plugin registration)가 **2개 이상**의 저장소(Map, Zustand, IndexedDB...)에 동시 write되면 `source_of_truth` 와 `mirrors[]` 지정.
 - `layering_audit`: 모듈이 자신보다 상위 레이어(예: store)에서 하위 레이어(예: infrastructure context) 객체를 **생성**하거나 import하면 `violation` 플래그.
 - 근거: lesson-tpa-state-ownership-and-layering-2026-04-18 (TOP SOLID)
@@ -161,7 +161,7 @@ v1.0 Contract schema `{signature, pre, post, error_mode}`는 generic/SPA 백엔�
 - 효과: cross-package Contract 의존 그래프가 올바르게 이어짐.
 - 근거: lesson-tpa-monorepo-workspace-awareness-2026-04-18
 
-### 10. 새 DesignPattern 5종 (TP library)
+### 10. 새 DesignPattern 5종 (SP library)
 KG에 MERGE됨. 매칭 우선순위는 기존 51패턴 다음.
 
 | 이름 | 카테고리 | 판별 신호 |
@@ -173,14 +173,14 @@ KG에 MERGE됨. 매칭 우선순위는 기존 51패턴 다음.
 | `Facade-over-Self-Deprecation-Layer` | Structural | 같은 모듈에서 class API + flat backward-compat API 동시 export + 공유 singleton |
 
 ### 적용 지침
-- **기존 sub-skill (/tpa-tcw, /tpa-tt, /tpa-tp, /tpa-ta)의 본문은 수정하지 않음.** 이 파일을 참조로만 추가.
-- TT가 출력하는 JSON에 위 slot을 발견 시 포함 — 없으면 생략(하위 호환).
+- **기존 sub-skill (/tpa-tcw, /tpa-st, /tpa-sp, /tpa-ta)의 본문은 수정하지 않음.** 이 파일을 참조로만 추가.
+- ST가 출력하는 JSON에 위 slot을 발견 시 포함 — 없으면 생략(하위 호환).
 - Taliban `--lens constitutional` 검증 시 슬롯 타당성도 체크 대상.
 - v1.1 → v1.2는 자체 자기-피드백 사이클이 쌓이면 진행.
 
 ### 열린 큐 (ActionPlan — WorkBuffer에 보관)
-- `ap-tpa-ext-pattern-lib-2026-04-18` — 5 새 패턴 priority bump, TP confidence 기준 재조정
-- `ap-tpa-side-effect-slot-2026-04-18` ← **이 증보로 명세 완료. 구현은 TCW/TT AST 스캐너 업데이트 필요**
+- `ap-tpa-ext-pattern-lib-2026-04-18` — 5 새 패턴 priority bump, SP confidence 기준 재조정
+- `ap-tpa-side-effect-slot-2026-04-18` ← **이 증보로 명세 완료. 구현은 TCW/ST AST 스캐너 업데이트 필요**
 - `ap-tpa-jsx-cfg-pass-2026-04-18` — JSX-Shape + Rules-of-Hooks CFG (미구현)
 - `ap-tpa-temporal-lifecycle-2026-04-18` — ← 명세 완료. 구현 대기
 - `ap-tpa-pattern-library-v2-2026-04-18` — PubSub↔Observer disambiguation heuristic (미구현)

@@ -1,7 +1,7 @@
 ---
 name: tpa-tcw
 kg_ref: ATOM_Skill_tpa_tcw
-version: "1.0.0"
+version: "1.2.0"
 channel: stable
 description: >
   TPA TargetCodeWorld (TCW) — Phase 1/4. APT SCW 거울 (역순).
@@ -42,7 +42,7 @@ RETURN s.name, s.currentConcrete, s.invocation
 ## ⛔ GATE CHECK (Hook 강제)
 
 > `apt-gate-check.sh`가 자동 실행. 본 스킬은 **시작 스킬(Phase 1/4)**이므로 pre-gate 없음.
-> 대신 **종료시 TCW Gate 기록** 필수 → 미기록 시 `/tpa-tt` 진입 차단.
+> 대신 **종료시 TCW Gate 기록** 필수 → 미기록 시 `/tpa-st` 진입 차단.
 
 ---
 
@@ -258,7 +258,7 @@ MATCH (exec:TPA_Execution {name:'TPA_exec_<target>_<date>'})
 MERGE (exec)-[:HAS_VALIDATION]->(vr)
 ```
 
-**APPROVED 아니면 `/tpa-tt` Gate Check에서 차단됨.**
+**APPROVED 아니면 `/tpa-st` Gate Check에서 차단됨.**
 **provenance가 'subagent-*'가 아니면 향후 Hook 업데이트에서 차단 예정.**
 
 ---

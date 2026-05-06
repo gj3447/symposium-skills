@@ -2,7 +2,7 @@
 name: jaebaeman
 aliases: [SOP, subagent-orchestration-protocol]
 kg_ref: ATOM_Skill_jaebaeman
-version: "2.1.0"
+version: "2.2.0"
 channel: stable
 description: >
   재배맨(JaebaeMan) v2.1 — Subagent Orchestration Protocol (SOP). 모든 AI subagent 동작의 바닥(foundation).

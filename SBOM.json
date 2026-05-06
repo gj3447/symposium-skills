@@ -15,7 +15,7 @@
     "component": {
       "type": "application",
       "name": "SYMPOSIUM/SKILLS",
-      "version": "v26.0.0",
+      "version": "v29.0.0",
       "properties": [
         {
           "name": "git:head",
@@ -27,7 +27,7 @@
         },
         {
           "name": "manifest:skills_count",
-          "value": "27"
+          "value": "28"
         }
       ]
     }
@@ -585,15 +585,15 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:claude-skill/tpa-tp@1.0",
-      "name": "tpa-tp",
+      "bom-ref": "pkg:claude-skill/tpa-sp@1.1",
+      "name": "tpa-sp",
       "version": "1.0",
       "scope": "required",
-      "purl": "pkg:claude-skill/tpa-tp@1.0?channel=stable",
+      "purl": "pkg:claude-skill/tpa-sp@1.1?channel=stable",
       "properties": [
         {
           "name": "kg:ref",
-          "value": "ATOM_Skill_tpa_tp"
+          "value": "ATOM_Skill_tpa_sp"
         },
         {
           "name": "git:tree_sha",
@@ -607,15 +607,15 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:claude-skill/tpa-tt@1.0",
-      "name": "tpa-tt",
+      "bom-ref": "pkg:claude-skill/tpa-st@1.1",
+      "name": "tpa-st",
       "version": "1.0",
       "scope": "required",
-      "purl": "pkg:claude-skill/tpa-tt@1.0?channel=stable",
+      "purl": "pkg:claude-skill/tpa-st@1.1?channel=stable",
       "properties": [
         {
           "name": "kg:ref",
-          "value": "ATOM_Skill_tpa_tt"
+          "value": "ATOM_Skill_tpa_st"
         },
         {
           "name": "git:tree_sha",
