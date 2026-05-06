@@ -76,7 +76,7 @@ def list_reference_sites(needs_sha256=False):
     res = cypher(
         f"MATCH (rs:ReferenceSite) {where} "
         "RETURN rs.name AS name, rs.sourcePath AS path, rs.sha256 AS sha256, rs.layer AS layer "
-        "ORDER BY rs.name LIMIT 1000"
+        "ORDER BY rs.name LIMIT 5000"
     )
     rows = res.get("results", [{}])[0].get("data", [])
     out = []
@@ -172,7 +172,7 @@ def list_reference_sites_with_status():
         "MATCH (rs:ReferenceSite) WHERE rs.sourcePath IS NOT NULL "
         "RETURN rs.name AS name, rs.sourcePath AS path, rs.sha256 AS sha256, "
         "rs.layer AS layer, rs.sha256_status AS status "
-        "ORDER BY rs.name LIMIT 1000"
+        "ORDER BY rs.name LIMIT 5000"
     )
     rows = res.get("results", [{}])[0].get("data", [])
     return [{"name": r["row"][0], "path": r["row"][1], "sha256": r["row"][2],
