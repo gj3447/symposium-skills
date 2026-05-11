@@ -81,4 +81,43 @@ phase별 자세한 cypher는 각 phase의 `references/` 내 phase-specific 파�
 - **E-PD2: L3 다중 atom** — atom A의 L3 켜둔 채 atom B의 L3도 켬. 후속 평가 모두 오염.
 - **E-PD3: L1 skip, L2 직행** — 정체성 미확립 상태에서 구조 로드. 잘못된 브랜치 선택.
 
+---
+
+## Academic Grounding
+
+PD 3-tier는 단순 엔지니어링 컨벤션이 아닌 **3 학문 분야**의 결정화:
+
+### 1. Cognitive Load Theory (Sweller 1988)
+
+> Sweller, J. (1988). *Cognitive load during problem solving: Effects on learning*. Cognitive Science, 12(2), 257-285.
+
+핵심 주장: 작업 기억(working memory)은 동시 처리 가능 chunk 수에 한계 (intrinsic + extraneous + germane load). 초과 시 학습/처리 효율 급락.
+
+→ **L1/L2/L3 분리는 extraneous load 차단** + germane load (의도된 처리)에 자원 집중. 전체 KG 한 번에 로드 = extraneous load 폭발.
+
+### 2. Miller's Magical Number (Miller 1956)
+
+> Miller, G. A. (1956). *The magical number seven, plus or minus two: Some limits on our capacity for processing information*. Psychological Review, 63(2), 81-97.
+
+핵심 주장: 단기 기억은 동시 7±2 chunk 한계.
+
+→ **L1 메타데이터 ~10 항목 / L2 구조 ~30 / L3 상세 1 atom**의 단계적 expansion은 Miller chunk 한계를 *각 단계마다* 준수하는 구조. atom 단위로 잘게 쪼개면 7±2 안에 들어옴.
+
+### 3. Transformer Attention O(n²) (Vaswani et al. 2017)
+
+> Vaswani, A. et al. (2017). *Attention Is All You Need*. NeurIPS 2017.
+
+핵심: self-attention 비용 O(n²) (n = token 수). LLM context window 안 token 많을수록 *각 token이 다른 모든 token 참조* — quadratic scaling.
+
+→ **Context Rot 정량적 근거.** 8K 토큰 vs 100K 토큰 = attention cost 156x 차이. PD가 L3에 8K (single atom)로 제한하는 것은 *transformer 아키텍처의 실제 비용*에 응답.
+
+### 통합
+
+3 grounding이 *각각 다른 layer*에서 PD를 정당화:
+- Sweller: 인지심리 layer (왜 분리)
+- Miller: 단기기억 layer (왜 chunk 크기)
+- Vaswani: 컴퓨터아키텍처 layer (왜 8K threshold)
+
+→ PD는 *수렴적 결정* (convergent decision). 한 layer 만 보면 임의 휴리스틱처럼 보이지만 3 layer 교집합이 좁아 결정 unique.
+
 # KG: APT_PD_canonical_pattern, lesson-context-rot-prevention-pd

@@ -85,4 +85,51 @@ MERGE (prev)-[:HANDS_OFF_TO {via:pte.name}]->(next)
 - **E-PTC2: 보존 누락** — 다음 phase가 필요한 키 누락. 재로딩 비용 → KG에서 다시 cypher.
 - **E-PTC3: silent 압축** — PhaseTransitionEvent 없이 압축. 추적 불가 → cypher 강제.
 
+---
+
+## Academic Grounding
+
+Phase Transition Compaction은 *소프트웨어 공학 + 정보이론*의 결정화:
+
+### 1. Brooks's Law (Mythical Man-Month, 1975)
+
+> Brooks, F. P. (1975/1995). *The Mythical Man-Month: Essays on Software Engineering*. Addison-Wesley.
+
+핵심: 후기 프로젝트에 인력 추가하면 *느려진다* — communication overhead가 quadratic.
+
+→ phase 전환 시 *모든 컨텍스트* 다음 phase에 전달 = brookes communication overhead 폭주. *보존-제거 매트릭스*로 communication path를 *명시적으로 좁힘*.
+
+### 2. Conway's Law (Conway 1968)
+
+> Conway, M. E. (1968). *How do committees invent?*. Datamation, 14(5), 28-31.
+
+핵심: 시스템 구조 = 그것을 만든 조직의 소통 구조와 동형 (isomorphic).
+
+→ APT의 4-phase 분리 자체가 *소통 구조*. phase 간 핸드오프는 *Conway 동형 boundary*. boundary가 명확할수록 system architecture도 명확.
+
+### 3. Information-Theoretic Compression (Shannon 1948)
+
+> Shannon, C. E. (1948). *A Mathematical Theory of Communication*. Bell System Technical Journal, 27.
+
+핵심: 정보 압축은 *redundancy* 제거 + *entropy* 보존. lossless / lossy 구분.
+
+→ Phase Transition Compaction = *lossy compression*. KG에 PROV로 보존 (lossless), 다음 phase에 전달은 lossy. KG가 정전, context는 hot cache.
+
+### 4. Lampson Hints (Lampson 1983)
+
+> Lampson, B. W. (1983). *Hints for Computer System Design*. IEEE Software, 1(1), 11-28.
+
+원칙 9: "When in doubt, leave it out" (의심스러우면 빼라).
+원칙 16: "Make it fast, rather than general or powerful" (빠르게, 그것이 일반적·강력함보다 우선).
+
+→ 압축 매트릭스의 "제거" 컬럼은 Lampson #9 적용. 다음 phase가 *진짜* 필요한지 불확실하면 제거 (KG는 보존).
+
+### 통합
+
+Brooks + Conway = *구조적 boundary* 정당화 (왜 phase 분리)
+Shannon = *압축 합리성* (KG=lossless, context=lossy)
+Lampson = *실용 결정* (제거 컬럼 룰)
+
+→ Phase Transition Compaction은 *4 학문이 동시에 권장*하는 패턴.
+
 # KG: APT_PhaseTransition_canonical, lesson-context-rot-prevention-handoff

@@ -91,4 +91,56 @@ RETURN e
 - **E-EPT3: 추상 Context** — "잘못 분해함". 어떻게? 어떤 입력? Guard 설계 불가.
 - **E-EPT4: KG 미결정화** — `:ErrorPattern` 노드 없이 prose만. 다른 phase에서 검색 불가.
 
-# KG: APT_ErrorPattern_template_canonical, CONTRACT_AgentMistakeLog_v1_2026-04-27
+---
+
+## Academic Grounding
+
+Context/Lesson/Guard 3절 양식은 *human factors + safety engineering*의 결정화:
+
+### 1. Reason's Swiss Cheese Model (Reason 1990)
+
+> Reason, J. (1990). *Human Error*. Cambridge University Press.
+>
+> Reason, J. (2000). *Human error: models and management*. BMJ, 320(7237), 768-770.
+
+핵심: 사고는 *latent failures* (계: organization/management) + *active failures* (개인 행동)가 *swiss cheese 구멍 정렬*할 때 발생.
+
+→ E-XX의 **Context** = active failure (어떤 행동), **Lesson** = latent failure (왜 발생 가능했나), **Guard** = barrier (구멍 막기). 3절 = Reason 의 3 layer accident causation 직접 매핑.
+
+### 2. Norman's Slip-Lapse-Mistake (Norman 1988)
+
+> Norman, D. A. (1988). *The Design of Everyday Things*. Basic Books.
+>
+> Reason, J. (1990) 의 GEMS framework도 동일 taxonomy.
+
+3 종 인간 오류:
+- **Slip**: 의도 옳음, 실행 잘못 (typo, 잘못 클릭)
+- **Lapse**: 의도 잊음 (단계 누락)
+- **Mistake**: 의도 자체 잘못 (잘못된 모델/지식)
+
+→ E-XX의 *severity* 매핑:
+- Slip → P3-P4 (즉시 발견 + 쉬운 fix)
+- Lapse → P2-P3 (Guard로 reminder 가능)
+- Mistake → P1-P2 (Lesson으로 mental model 갱신 필요)
+
+### 3. Post-Mortem Methodology (Allspaw 2012)
+
+> Allspaw, J. (2012). *Blameless PostMortems and a Just Culture*. CodeAsCraft blog (Etsy).
+
+핵심: *blame*이 아닌 *systemic learning* 지향. fact 분리 (what happened) + interpretation 분리 (why). 시간 순서 reconstruction.
+
+→ E-XX의 Context는 *blame-free* 사실 기술. Lesson은 systemic 분석. AP4 Silent Patch 같은 사례에서 "agent X가 나빠서"가 아닌 "KG 결정화 의무 미명시"로 작성.
+
+### 4. Pattern Language (Alexander 1977)
+
+> Alexander, C. (1977). *A Pattern Language: Towns, Buildings, Construction*. Oxford University Press.
+
+핵심: 반복되는 문제 → 반복되는 해결책 → *pattern name*. Christopher Alexander 의 250 architectural pattern.
+
+→ E-XX naming convention (`E-SA1`, `AP4`, etc.) 은 Alexander pattern naming. 식별자가 *재사용 가능 어휘*가 되어 cross-skill 참조 가능.
+
+### 5. KG embedding: CONTRACT_AgentMistakeLog_v1
+
+기존 SYMPOSIUM KG의 `CONTRACT_AgentMistakeLog_v1_2026-04-27` 도 동일 양식 (assumed↔actual symmetric pair). E-XX는 그것의 markdown 표현.
+
+# KG: APT_ErrorPattern_template_canonical, CONTRACT_AgentMistakeLog_v1_2026-04-27, lesson-reason-swiss-cheese-grounding-2026-05-11

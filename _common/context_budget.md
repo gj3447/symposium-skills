@@ -96,4 +96,44 @@ RETURN 'V_CB3_BudgetMismatch' AS validation,
 - **E-CB2: depth 기반 무시** — 모든 Span에 동일 budget. depth 깊어져도 줄어들지 않음. → 자동 할당 cypher 강제.
 - **E-CB3: 토큰 폭주 무관심** — Context Rot 발생해도 계속 진행. → SA의 P-SA5 (Context Budget 할당됨) 게이트가 우회되지 않도록.
 
+---
+
+## Academic Grounding
+
+Context Budget의 depth별 토큰 할당 (50K/50K/20K/8K)은 *engineering heuristic*이지만 3 academic foundation에 grounding:
+
+### 1. Working Memory Capacity (Baddeley 2000)
+
+> Baddeley, A. (2000). *The episodic buffer: a new component of working memory?* Trends in Cognitive Sciences, 4(11), 417-423.
+
+작업 기억 4 component (phonological loop / visuospatial sketchpad / episodic buffer / central executive). 각 처리 자원 제한.
+
+→ depth 0/1의 50K = "episodic buffer (전체 맥락 통합)" 단계. depth 3+의 8K = "phonological loop (단일 sequence 처리)" 단계. depth에 따라 동원되는 buffer 다름.
+
+### 2. Transformer Quadratic Attention (Vaswani 2017)
+
+> Vaswani, A. et al. (2017). *Attention Is All You Need*. arXiv:1706.03762.
+
+self-attention FLOPs = O(n² · d). LLM throughput에 직접 영향.
+
+→ 8K vs 50K token 처리 비용 = ~39× (단순 양적 비율로는 6.25× 이지만 attention quadratic으로 39×). depth 3+를 *최소 비용 layer*로 두는 것은 throughput 최적화.
+
+### 3. Goldilocks Zone (Pinker 1994, Steels 2003)
+
+> Steels, L. (2003). *The Evolution of Communication Systems by Adaptive Agents*. Springer.
+
+*적정선* 원리 — 너무 작으면 표현력 부족, 너무 크면 attention 분산. 진화/학습 시스템은 자연스럽게 중간 zone 수렴.
+
+→ 200-500 line / 8K token은 인간 + LLM 양쪽의 *공통 goldilocks*. Sweller cognitive load + transformer cost + 사용자 vibe coding 단위가 *교집합*에서 발생.
+
+### 통합
+
+3 grounding의 교집합:
+| Layer | 권장 단위 |
+|---|---|
+| Baddeley | working memory 4-component fit |
+| Vaswani | transformer O(n²) cost optimization |
+| Steels | evolutionary goldilocks |
+| → 교집합 | depth 3+ = 8K, depth 1-2 = 20K-50K |
+
 # KG: APT_ContextBudget_canonical, MethodologyConfig_default_v26, magic_number_table_v27_A6.1

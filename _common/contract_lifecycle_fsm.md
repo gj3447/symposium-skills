@@ -121,4 +121,59 @@ RETURN 'V_FSM4_SilentTransition' AS validation, ct.name, ct.status, ct.status_up
 - **E-FSM3: terminal 재활용** — Rejected/Archived Contract를 update하여 재진입. 새 Contract 생성으로만 가능.
 - **E-FSM4: self-review** — Active 전이 시 ST creator == reviewer. V15 위반.
 
-# KG: APT_ContractLifecycle_FSM_canonical, lesson-contract-fsm-silent-transition
+---
+
+## Academic Grounding
+
+Contract Lifecycle FSM은 *formal methods + design-by-contract*의 결정화:
+
+### 1. Harel's Statecharts (Harel 1987)
+
+> Harel, D. (1987). *Statecharts: A visual formalism for complex systems*. Science of Computer Programming, 8(3), 231-274.
+
+핵심: 단순 FSM 한계 (state explosion) 극복 — hierarchy / orthogonality / broadcast.
+
+→ Contract FSM의 6 state (Draft/Active/Fulfilled/Amended/Rejected/Archived) + Amended↔Active 양방향 = Harel statechart pattern. Amended는 *sub-state of Active*로 볼 수도 있음 (hierarchy).
+
+### 2. Design by Contract (Meyer 1992)
+
+> Meyer, B. (1992). *Applying "Design by Contract"*. IEEE Computer, 25(10), 40-51.
+>
+> Meyer, B. (1997). *Object-Oriented Software Construction* 2nd ed. Prentice Hall.
+
+핵심: 함수 호출은 *계약* — caller가 precondition 보장하면 callee가 postcondition 보장. Eiffel language로 직접 표현.
+
+→ AptContract 의 7 필드 (input_type / output_type / precondition / postcondition / semantic_meaning / target_file / status) 가 Meyer DbC 직접 적용. tau_check 5/5 = Meyer 의 *contract well-formedness*.
+
+### 3. Hoare CSP (Hoare 1978)
+
+> Hoare, C. A. R. (1978). *Communicating Sequential Processes*. CACM, 21(8), 666-677.
+>
+> Hoare, C. A. R. (1985). *Communicating Sequential Processes*. Prentice Hall.
+
+핵심: 프로세스 간 통신 = *event* (synchronous message passing). 시스템 = parallel processes.
+
+→ Contract FSM의 Kafka event publishing = CSP event 모델. silent transition = CSP에서 *unobservable internal action* — pure functional 측면에선 OK이지만 verification 시 추적 불가.
+
+### 4. Petri Net (Petri 1962)
+
+> Petri, C. A. (1962). *Kommunikation mit Automaten*. PhD thesis, Univ. Bonn.
+
+핵심: place-transition net. concurrent / non-deterministic 시스템의 graphical formalism.
+
+→ Contract FSM이 *single state*만 갖는다는 invariant = Petri net place token = 1 (1-safe net). 동시 2 state = invariant 위반 (V-FSM1 정당화).
+
+### 5. Liveness vs Safety Properties (Lamport 1977)
+
+> Lamport, L. (1977). *Proving the correctness of multiprocess programs*. IEEE TSE, 3(2), 125-143.
+
+- Safety: "something bad never happens" (e.g. Rejected에서 escape 못 함)
+- Liveness: "something good eventually happens" (e.g. Active이면 결국 Fulfilled 또는 Amended)
+
+→ V-FSM3 (terminal escape 차단) = safety. Brooks의 *project completion* = liveness. APT는 safety를 강제, liveness는 사이클 완료에 위임.
+
+### 통합
+
+Harel + Meyer + Hoare + Petri + Lamport = Contract FSM의 *5 학문 grounding*. 단순 status enum이 아닌 *formal verification 가능 model*.
+
+# KG: APT_ContractLifecycle_FSM_canonical, lesson-contract-fsm-silent-transition, lesson-harel-meyer-grounding-2026-05-11

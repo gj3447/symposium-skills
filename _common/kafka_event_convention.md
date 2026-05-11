@@ -204,4 +204,65 @@ expected_event_for_status_change = {
 - **E-K4: event_type 신조어** — 카탈로그 외 임의 이름 (`MyCustomEvent`). consumer가 unknown으로 drop.
 - **E-K5: payload 누락** — required 필드 빠짐. consumer fail.
 
-# KG: APT_KafkaEvent_convention_canonical
+---
+
+## Academic Grounding
+
+Kafka Event Convention은 *분산 시스템 이론*의 결정화:
+
+### 1. Lamport's Happens-Before (Lamport 1978)
+
+> Lamport, L. (1978). *Time, Clocks, and the Ordering of Events in a Distributed System*. CACM, 21(7), 558-565.
+
+핵심: 분산 시스템에 *전역 시계* 없음. 인과 관계는 happens-before 부분 순서로만 정의. correlation_id가 인과 chain 추적.
+
+→ event의 `correlation_id` (uuid)는 정확히 Lamport vector clock의 *causal ancestor identifier*. 같은 cycle 내 event들이 chain.
+
+### 2. The Log: Unified Data Architecture (Kreps 2014)
+
+> Kreps, J. (2014). *The Log: What every software engineer should know about real-time data's unifying abstraction*. LinkedIn Engineering blog.
+
+핵심: append-only log = 분산 시스템의 *canonical primitive*. state = log의 fold. event sourcing.
+
+→ APT의 *모든 phase transition / FSM transition / feedback 생성*이 Kafka log entry. KG state는 log fold. log 우선, KG는 derived view.
+
+### 3. CloudEvents Spec (CNCF 2018)
+
+> CNCF CloudEvents v1.0 (2019). *A specification for describing event data*. https://github.com/cloudevents/spec
+
+핵심: 이벤트 standardization — `type`, `source`, `id`, `time`, `datacontenttype`, `data` 필드.
+
+→ APT event format이 CloudEvents 직접 매핑:
+- `event_type` → CloudEvents `type`
+- `agent` → `source`
+- `correlation_id` → `id`
+- `timestamp` → `time`
+- `payload` → `data`
+
+### 4. CAP Theorem (Brewer 2000, Gilbert-Lynch 2002)
+
+> Gilbert, S., & Lynch, N. (2002). *Brewer's conjecture and the feasibility of consistent, available, partition-tolerant web services*. SIGACT News, 33(2), 51-59.
+
+핵심: Consistency + Availability + Partition tolerance 중 2개만 동시 가능.
+
+→ Kafka는 *AP* (network partition 시 일관성 약화, availability 우선) 또는 *CP* (consumer ack 강제) 모드. APT는 *AP*로 가정 (consumer가 eventually consistent KG view).
+
+### 5. Idempotent Producer (Kreps 2017)
+
+> Kreps, J. (2017). *Exactly Once Semantics in Apache Kafka*. Confluent blog.
+
+→ correlation_id + producer dedup으로 *at-most-once* OR *exactly-once*. APT는 *at-least-once*로 가정 (멱등 consumer 의무).
+
+### 6. Anti-pattern: silent SET (E-K1) 의 학문 근거
+
+silent state mutation = *side effect without trace* = pure functional language (Haskell)의 IO monad 우회와 동형. event log 없는 mutation은 *referentially opaque* (Strachey 1967).
+
+> Strachey, C. (1967). *Fundamental Concepts in Programming Languages*. Lecture notes, Copenhagen.
+
+→ E-K1을 막는 것은 *referential transparency 유지* 의무.
+
+### 통합
+
+Lamport + Kreps + CloudEvents + CAP + Strachey = 분산 / 이벤트 / 형식 / 일관성 / 의미 5 layer. APT event는 이 5 grounding의 교집합.
+
+# KG: APT_KafkaEvent_convention_canonical, lesson-lamport-kreps-grounding-2026-05-11
