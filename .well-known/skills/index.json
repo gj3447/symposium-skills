@@ -2,8 +2,8 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.2",
-  "git_head_short": "22a503d",
-  "merkle_root": "7895d7252326ec1521fd86034cd576471b1aa182334cbb7f1d8ecdb9bdefc99b",
+  "git_head_short": "c6198aa",
+  "merkle_root": "9f43a9397ed90a7a2c5f81b76f09085e33c2e73b0fbce049340617478af5414c",
   "skills_count": 28,
   "skills": [
     {
@@ -18,7 +18,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "0c7e2aa7b31b9c9937716175b487f93079bcb890"
+      "git_tree_sha": "4f3375f031136b2d42445035d8fa153393cd001c"
     },
     {
       "name": "apt-cleanup",
@@ -32,14 +32,14 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
-      "git_tree_sha": "9dcaa863ce82f0776b6e2ac26de22533e0d5c752"
+      "git_tree_sha": "09c0974c53c30d7b5f48dc63d2bd987123b47eb8"
     },
     {
       "name": "apt-sa",
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sa",
       "channel": "stable",
-      "git_tree_sha": "d58129e295e991bca5881ec27a7e538e6124d64b"
+      "git_tree_sha": "538675660e9b3fd609bd89c04ea14767e3f363af"
     },
     {
       "name": "apt-scw",
@@ -95,7 +95,7 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_harness",
       "channel": "stable",
-      "git_tree_sha": "f8d78c225a6de6da7f3987648dd4b88813c69c03"
+      "git_tree_sha": "6b2af368a3b6c4aabed43f80b37fc54e577c183b"
     },
     {
       "name": "jaebaeman",
