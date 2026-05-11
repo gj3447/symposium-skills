@@ -170,3 +170,86 @@ Parent Span defines boundary types shared between children BEFORE children enter
 | V20 | Producer without consumer | P2 |
 
 ---
+
+## 14. Error Handling Philosophical Grounding (2026-05-11 추가)
+
+> Cross-ref: `THEORY/APT/PHILOSOPHICAL_FOUNDATIONS.md` §3 (Lakatos research programme) + §10 (Hegel Aufhebung) + APT_Cycle_Functor.lean (`apt_cycle_lakatos_progressive` PASS) + `lesson-midnight-preliminary-inflation-anti-pattern-2026-05-11`.
+> **iter 105 갱신**: 17 APT Lean files / 156 theorems Mathlib-free 0 sorry — 9-tier architecture. Per-error-handling-mechanism explicit Lean theorem cite:
+> - **Lakatos hard core protection** (refutation 시 program abort) → `APT_Lakatos_Progressive.lean:apt_lakatos_complete` 4-component bijection (hard core / belt / positive / negative heuristic)
+> - **Lakatos protective belt adjustment** (auxiliary hypothesis 변형) → `APT_Lakatos_Progressive.lean:strong_consequence_is_progressive` (testable + corroboration ≥ 50)
+> - **Lakatos ad-hoc rescue detection** (rescue without testable consequence ⇒ degenerating) → `APT_Lakatos_Progressive.lean:pure_ad_hoc_is_degenerating` 형식
+> - **Hegel Aufhebung error→Lesson 격상** (cancel + preserve + elevate) → `APT_Hegel_Aufhebung.lean:apt_full_aufhebung_coverage` + `synthesis_preserves_valid` + `synthesis_cancels_invalid`
+> - **Maturana autopoiesis self-organization** (Lesson → Pattern Library extension) → `APT_Maturana_Autopoiesis.lean:apt_full_autopoietic_coverage` (4 properties: self-org/self-maintenance/closure/coupling)
+> - **Midnight PRELIMINARY inflation anti-pattern** (lesson-midnight-preliminary-inflation-anti-pattern-2026-05-11) → `APT_Lakatos_Progressive.lean:preliminary_inflation_violates_lakatos` (formal lesson) + `APT_Architecture_Master.lean:apt_completion_session_perfect` (이 session 자체 100% file_change_ratio + 0 PRELIMINARY 형식 증명)
+> - **HR20 Anti-Theater (mode collapse)** → `APT_Lakatos_Progressive.lean:mode_collapse_implies_anti_theater` + `APT_Adversarial_Triple.lean:mode_collapse_no_refutation`
+>
+> Error handling 가 *왜* 단순 retry 가 아닌 progressive feedback loop 인지 학문 grounding.
+
+### Lakatos progressive shift ↔ Error handling = research programme adjustment
+
+```
+APT error handling ≠ exception catch + retry
+APT error handling = Lakatos protective belt adjustment:
+  ┌────────────────────────────────────────┐
+  │ error detected (refutation)            │
+  │      ↓                                 │
+  │ classify: hard core vs protective belt │
+  │      ↓                                 │
+  │ if hard core: PROGRAM_ABORT (degenerating)│
+  │ if belt: AUXILIARY_HYPOTHESIS adjust    │
+  │      ↓                                 │
+  │ testable consequence 검증               │
+  │      ↓                                 │
+  │ Lesson 결정화 (KG MERGE)                │
+  └────────────────────────────────────────┘
+```
+
+| Lakatos | APT error handling |
+|---|---|
+| **hard core refutation** | Contract v2 9-axis violation → cycle abort + cleanup |
+| **protective belt adjustment** | SP decomposition revision, retry with new sub-task |
+| **ad-hoc rescue detection** | rescue without testable consequence → ALERT halt |
+| **progressive shift** | error → Lesson → 다음 cycle 의 정전 grounding 강화 |
+| **degenerating shift** | 동일 error 반복 + ad-hoc rescue 누적 → research programme abandon |
+
+### Hegel Aufhebung ↔ Error 의 Lesson 격상
+
+| Hegel | APT error handling |
+|---|---|
+| thesis | initial assumption (executor의 wrongAssumption) |
+| antithesis | external verdict (compiler/critic/사용자 truth) |
+| synthesis | Lesson 결정화 (`wrongAssumption ↔ truth` symmetric pair) |
+
+**Hegel 함의**: error 는 *negation* 이 아닌 *Aufhebung* — 폐기 + 보존 + 격상. wrongAssumption 자체도 KG 에 보존 (negative provenance) — 미래 동일 패턴 회피.
+
+### Maturana-Varela autopoiesis ↔ Error self-correction = system 의 self-organization
+
+> Maturana-Varela 1980 autopoiesis: 자기-조직 system = *자기 자신을 produce* 하는 cycle.
+
+```
+APT cycle = autopoietic system:
+  - Lesson 생성 → 다음 cycle 의 Pattern Library extension
+  - error 가 system 자기 self-organization 에 contribute
+  - system 외부 input 만 의존 ✗ (closed under error feedback)
+```
+
+**Maturana 함의**: APT error handling 은 self-organizing — 실패가 자체 적응 mechanism (Lakatos hard core 보호).
+
+### Anti-Pattern 정전: Midnight PRELIMINARY Inflation (2026-05-11 lesson)
+
+> `lesson-midnight-preliminary-inflation-anti-pattern-2026-05-11` (HIGH severity) — autoloop "idle ✗" spec 만 으로 PRELIMINARY-only KG inflation 발생.
+
+| anti-pattern | corrective action |
+|---|---|
+| autoloop firing 마다 file change ✗ | file_change_ratio mandatory 1차 metric |
+| PRELIMINARY-only KG node 누적 | max 3 PRELIMINARY per iter |
+| user verdict gate bypass | trigger condition 명시 mandatory |
+| heretwork (헛작업) 패턴 | priority order: file change → cross-link → lesson closure |
+
+ALERT halt threshold: **file_change_ratio < 0.5 in 5 consecutive iter** → cron auto-halt + Lesson generate.
+
+KG: `apt-philosophical-quadruple-canonical-2026-05-11` (Aristotle + Hegel + Lakatos + Friston) + `lesson-midnight-preliminary-inflation-anti-pattern-2026-05-11`
+
+---
+
+---

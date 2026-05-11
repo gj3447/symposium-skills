@@ -418,3 +418,42 @@ RETURN dl.id, dl.decided_at
 ```
 
 ---
+
+## 12. Aristotle 4 Causes ↔ APT 7-Phase Mapping (2026-05-11 추가)
+
+> Cross-ref: `THEORY/APT/PHILOSOPHICAL_FOUNDATIONS.md` §1 + `MIND/lean_formalization/APT_Cycle_Functor.lean` (Lean 9 theorems PASS).
+> **iter 101 갱신**: 17 APT Lean files / 156 theorems Mathlib-free 0 sorry — 9-tier architecture (1 FOUND + 4 explicit canonical + 6 sub-axis + 1 CAPSTONE + 2 ENGINEERING + 1 LIMIT + 1 CROSS-CANON + 1 META). Phase 매핑 explicit Lean cite:
+> - PH1 SemanticAnchor (SA) = Aristotle Material cause (`APT_Cycle_Functor.lean:sa_is_material_cause`)
+> - PH2 SemanticPyramid (SP) = Formal cause + DDD Bounded Context + Hegel thesis (`APT_DDD_Conway_BoundedContext.lean:complete_apt_sp_well_formed`)
+> - PH3 SemanticTwin (ST) = Formal cause crystallized + Curry-Howard type (`APT_Curry_Howard.lean:cargo_pass_implies_proof`)
+> - PH4 SourceCodeWorld (SCW) = Efficient cause + Beck TDD RGR + Boyd OODA action (`APT_TDD_Beck_RGR.lean:apt_scw_complete_iff_full_rgr` + `APT_OODA_Boyd.lean:apt_ooda_production_bound`)
+> - PH5 Validation = Final cause + Tarski metalanguage + Adversarial Triple (`APT_Tarski_Metalanguage.lean:apt_tarski_compliant` + `APT_Adversarial_Triple.lean:apt_v17_adversarial_fully_grounded`)
+> - PH6 MetaReview = Russell-Lawvere-Yanofsky-Hofstadter bounded recursion (`APT_MetaReview_Bounded.lean:meta_twice_invalid`)
+> - PH7 Cleanup = Maturana autopoiesis + Lakatos positive heuristic (`APT_Maturana_Autopoiesis.lean:apt_full_autopoietic_coverage` + `APT_Lakatos_Progressive.lean:apt_cycle_progressive`)
+>
+> Aristotle *Physics* II.3 + *Metaphysics* V.2 — 모든 것은 4 원인으로 설명. APT 7 phase 가 정확 매핑.
+
+| Aristotle 원인 | APT phase | 의미 | Lean theorem |
+|---|---|---|---|
+| **Material cause** (causa materialis) | **SA** (SemanticAnchor) | "무엇으로 만드나" — KG anchor + Progressive Disclosure + context budget (apt-sa SKILL grounding) | `sa_is_material_cause` PASS |
+| **Formal cause** (causa formalis) | **SP** (SemanticPyramid) | "어떤 형식으로 분해되나" — D(S) recursive + AtomicSpan 5-predicate + MDL stopping | (apt_aristotle_complete coverage) |
+| **Efficient cause** (causa efficiens) | **ST** (SemanticTwin) | "무엇이 만드나" — Contract v2 9-axis + Task spec + DTO crystallization | (apt_aristotle_complete coverage) |
+| **Final cause** (causa finalis) | **SCW** (SourceCodeWorld) | "무엇 위해" — TDD GREEN + Lesson generation + telos (목적인) | `scw_is_final_cause` PASS |
+| **Meta cause** (Lakatos extension) | **MetaReview + Cleanup** | "원인의 원인" — feedback loop + Phase 6 ratchet (5-tier) | `meta_phases_collapse_to_meta` PASS |
+
+**Lakatos 1970 reading**: 4 원인 + meta-causa = research programme 의 *hard core* (Contract v2 9-axis + C(S) 5-predicate, 불변) + *protective belt* (SP decomposition + AtomicSpan, 가변) 구조.
+
+### Phase boundary 의 철학 함의
+
+```
+SA (Material) → SP (Formal) — Aristotle 의 *질료 → 형식* 운동
+SP (Formal) → ST (Efficient) — *형식 → 운동인* (Contract = 무엇이 만드나)
+ST (Efficient) → SCW (Final) — *운동인 → 목적인* (telos = 코드)
+SCW → MetaReview (Meta) — Lakatos 가 4 원인 외 *progressive shift* 추가
+```
+
+**전체**: APT 사이클 = Aristotle 4 원인 + Lakatos progressive 의 *engineering 결정화*. 2400년 형이상학 chain (Aristotle ~340 BCE → Aquinas 1265 → Hegel 1807 → Lakatos 1970 → Lean 2026).
+
+KG: `apt-philosophical-quadruple-canonical-2026-05-11` (`:Hyperedge:CrossCanonGrounding` STRONG_QUADRUPLE_PHILOSOPHICAL)
+
+---

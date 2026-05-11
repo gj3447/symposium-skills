@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-06T20:03:02+09:00",
-  "git_head_commit": "d0ecc486079c58a34fede878297748bd755f6e35",
-  "git_head_short": "d0ecc48",
+  "generatedAt": "2026-05-06T20:49:18+09:00",
+  "git_head_commit": "22a503d99af5ad7487770ad1403ee3b9622d59f1",
+  "git_head_short": "22a503d",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 28,
-  "merkle_root": "76e230a505104c1c3f5f6885ec06cdacf2c2a3adf9960a9a6bed5897176f5448",
+  "merkle_root": "7895d7252326ec1521fd86034cd576471b1aa182334cbb7f1d8ecdb9bdefc99b",
   "skills": [
     {
       "name": "88-taliban",
@@ -107,10 +107,10 @@
     {
       "name": "harness",
       "path": "harness",
-      "version": "3.1.0",
+      "version": "3.2.0",
       "kg_ref": "ATOM_Skill_harness",
       "channel": "stable",
-      "git_tree_sha": "5bc09a9adfead112104ce444a5853698ecb93ff8"
+      "git_tree_sha": "f8d78c225a6de6da7f3987648dd4b88813c69c03"
     },
     {
       "name": "jaebaeman",
@@ -118,7 +118,7 @@
       "version": "2.2.0",
       "kg_ref": "ATOM_Skill_jaebaeman",
       "channel": "stable",
-      "git_tree_sha": "38637cdaf46d4b19d1dfea383b2ff3b0504f0c60"
+      "git_tree_sha": "39e6aedb33be327d8bef5d2d9cc2ff1fa3c7f9d7"
     },
     {
       "name": "kafka-manage",
@@ -134,7 +134,7 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_longinus",
       "channel": "stable",
-      "git_tree_sha": "d904d58c97adc17223c6eadd084a6a3f7d3ca52b"
+      "git_tree_sha": "db12a34baeb4b78316ea063ebaaeb7c3a065854c"
     },
     {
       "name": "prom",
@@ -150,7 +150,7 @@
       "version": "6.2.0",
       "kg_ref": "ATOM_Skill_prometheus",
       "channel": "stable",
-      "git_tree_sha": "52eced431f43c8d8d2e3e729d9d8376b8251d3c4"
+      "git_tree_sha": "70d785ca3dcd1447195cfad298d09457edf662a3"
     },
     {
       "name": "server-status",
@@ -182,7 +182,7 @@
       "version": "3.1.0",
       "kg_ref": "ATOM_Skill_taliban",
       "channel": "stable",
-      "git_tree_sha": "24e0e7b5710a55e3771ec33718acb63e99d225d1"
+      "git_tree_sha": "05ad0a717f7649fc6be81f620411e41b487a1d81"
     },
     {
       "name": "tlb",
@@ -198,7 +198,7 @@
       "version": "1.2.0",
       "kg_ref": "ATOM_Skill_tpa_orchestrator_v10",
       "channel": "stable",
-      "git_tree_sha": "87dd8d9d58e529b782564a40af2cf6c72e5a507b"
+      "git_tree_sha": "e4c435bf79171bfb42f219eac7748efc00f0e2d8"
     },
     {
       "name": "tpa-sp",
@@ -206,7 +206,7 @@
       "version": "1.2.0",
       "kg_ref": "ATOM_Skill_tpa_sp",
       "channel": "stable",
-      "git_tree_sha": null
+      "git_tree_sha": "b095198bba3dae888ec4914edcc0691f81d9af8e"
     },
     {
       "name": "tpa-st",
@@ -214,7 +214,7 @@
       "version": "1.2.0",
       "kg_ref": "ATOM_Skill_tpa_st",
       "channel": "stable",
-      "git_tree_sha": null
+      "git_tree_sha": "6eb60a2e12514b76ea8d53a3d2c49f2c54140ac5"
     },
     {
       "name": "tpa-ta",
@@ -222,7 +222,7 @@
       "version": "1.2.0",
       "kg_ref": "ATOM_Skill_tpa_ta",
       "channel": "stable",
-      "git_tree_sha": "c5b7d63bc9cbf0b199322123819b030a56a3f606"
+      "git_tree_sha": "216f10ef190c77966fa7eb7da201922145a4019c"
     },
     {
       "name": "tpa-tcw",
@@ -230,7 +230,7 @@
       "version": "1.2.0",
       "kg_ref": "ATOM_Skill_tpa_tcw",
       "channel": "stable",
-      "git_tree_sha": "0d3d546c37ec7e12374f9f90305a67f1b6f22e80"
+      "git_tree_sha": "e26d92e17486a796de614ea51b3f7de3dcd5e746"
     }
   ]
 }

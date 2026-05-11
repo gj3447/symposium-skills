@@ -1,7 +1,7 @@
 ---
 name: harness
 kg_ref: ATOM_Skill_harness
-version: "3.1.0"
+version: "3.2.0"
 channel: stable
 description: >
   하네스 — industry agent scaffolding. 12사도 #4 비행기맨의 공학 측 결정화이며 1:N sibling family.
@@ -138,6 +138,23 @@ SYMPOSIUM은 directly L_RT runtime이 아니지만, LangGraph로 매핑 가능:
 
 (PAPER §2.1 참조.)
 
+### 3.2 L_RT Implementation Pattern Library — 6 Team Pattern × 5 Orchestration Model
+
+5 orchestration model (§3) = *control-flow primitive*. 6 team pattern (revfactory/harness 2026 정전) = 그 위 *agent collaboration recipe*. 다른 위상 → cross-product 사양화 필수.
+
+| Team Pattern | 5 Model 매핑 | SYMPOSIUM 4축 강조 |
+|---|---|---|
+| Pipeline (순차 의존) | LangGraph linear / ADK chain | Constrain |
+| Fan-out/Fan-in (병렬→통합) | LangGraph conditional / Agents SDK handoff | Inform |
+| Expert Pool (상황별 선택) | CrewAI hierarchical | Inform |
+| **Producer-Reviewer** (생성+검증) | AutoGen GroupChat / Agents SDK | **Verify** (Taliban D20 거울 — executor != reviewer) |
+| Supervisor (중앙 분배) | CrewAI manager / ADK root | Constrain + Correct |
+| Hierarchical Delegation (재귀 위임) | ADK A2A / Agents SDK | Constrain |
+
+→ Producer-Reviewer ↔ Taliban D20 1:1 정전 거울 (Anti-Rubber-Stamp industry-confirmed independent).
+→ 상세 매핑 + production recipe 5종 (QA boundary-cross / trigger validation / `_workspace/` / evolution 3-signal / 5 invariant 정합) — `references/production_factory_patterns.md` 참조.
+→ External canonical: `revfactory-harness-2026-05-09` (`:ExternalFrontierHarness`, sha256 `ee84902c`).
+
 ---
 
 ## 4. L_MC 내부 원리 — Control Plane vs Compute Plane
@@ -257,6 +274,7 @@ L1~L3 의심 신호:
 | 외부 인용을 검증 없이 박기 | citation drift 재발 | PseudepigraphaValidationGate (§7.3) |
 | MCP를 한 계층 내부 axis로 환원 | 3계층 가로지르는 protocol을 단일 axis로 축소 | §5 그대로 |
 | 프롬프트만 수정해서 해결 | 구조 문제는 지시문으로 해결 불가 | Böckeler 체크리스트 (§9) |
+| 6 team pattern을 5 orchestration model의 *대체*로 박기 | recipe(pattern) ↔ primitive(model) 위상 다름 — cross-product 정전 | §3.2 + `references/production_factory_patterns.md` |
 
 ---
 
@@ -300,6 +318,7 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|
+| **v3.2** | 2026-05-09 | revfactory/harness 정합 보완 — §3.2 6 team pattern × 5 orchestration model cross-product 정전 + `references/production_factory_patterns.md` 신규 (QA boundary-cross / trigger validation / `_workspace/` / evolution 3-signal / 5 invariant 정합 / SYMPOSIUM 우위 6종). What-NOT-To-Do 1행 추가. 외부 첨단 industry-confirmed independent. | `revfactory-harness-2026-05-09`, `sv-harness-v3.2.0-2026-05-09`, `production-factory-patterns-reference-2026-05-09` |
 | **v3** | 2026-04-30 | **F11 close-out**: Family 정의(3-tier L_IDE/L_RT/L_MC) 우선 + 4축 위치 정정(L_IDE 내부 원리, Böckeler 2축의 fine-grained 분해) + Citation drift 정정(Böckeler 정확 철자 + "Harness engineering for coding agent users" + martinfowler.com URL) + MCP 어댑터 명시 + 메타-함정 가드 + PseudepigraphaValidationGate hook | `lesson-harness-drift-corrected-2026-04-29`, `lesson-harness-citation-drift-bockeler-2026-04-30`, `seed-harness-3tier-canonical-validated-2026-04-30`, `seed-anthropic-managed-agents-meta-harness-2026-04-30`, `ap-F11-Harness-Phase1-2-Sprint-B` (status=completed) |
 | **v2** | 2026-04 | (drift) 4-Axis Model을 family 정의로 박음. ~~"Bockeler, Architecture as Harness"~~ 가짜 인용. industry agent scaffolding 의미 결락. | `lesson-harness-drift-corrected-2026-04-28` (resolved=false, superseded by 2026-04-29) |
 | **v1** | (older) | "구조가 에이전트를 제약한다" — Böckeler 정신은 살아있었으나 attribution 부정확 | — |

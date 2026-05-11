@@ -120,3 +120,89 @@ Next session loads KG findings --> context
 ```
 
 ---
+
+## 16. Adversarial Round Philosophical Grounding (2026-05-11 추가)
+
+> Cross-ref: `THEORY/APT/PHILOSOPHICAL_FOUNDATIONS.md` §6 (Friston FEP) + §7 (Whitehead actual occasion concrescence) + `producer-reviewer-triple-canonical-2026-05-10` + `THEORY/TALIBAN/SOURCES.md` (Goodfellow GAN-D + Pirsig holistic + Bacchelli-Bird empirical).
+> **iter 106 갱신**: 17 APT Lean files / 156 theorems Mathlib-free 0 sorry — 9-tier architecture. **CROSS-CANON Lean grounding**: producer-reviewer-triple-canonical hyperedge 형식 증명 = `APT_Adversarial_Triple.lean` (234L, 9 theorems first-try PASS). Per-canon explicit Lean theorem cite:
+> - **Goodfellow 2014 GAN-D minimax** (mode collapse anti-pattern detect) → `APT_Adversarial_Triple.lean:mode_collapse_no_refutation` + `APT_Lakatos_Progressive.lean:mode_collapse_implies_anti_theater` (HR20 dual proof)
+> - **Pirsig 1991 Lila MoQ holistic synthesis** (LensSet UNION coverage) → `APT_Adversarial_Triple.lean:apt_taliban_lens_134` (constitutional 9 + math 113 + solid 5 + longinus 7 = 134 axes formal cardinality) + `coverage_81_meets_precondition` (PROM 16 PRECONDITION_FULLY_MET 81% threshold formal)
+> - **Whitehead 1929 concrescence** (multiple prehensions → unified satisfaction) → `APT_Whitehead_Concrescence.lean:apt_adversarial_well_formed` (adversarial round = actual occasion instance) + `four_concrescence_components_distinct` + `concrescence_total_preserved`
+> - **Bacchelli-Bird 2013 MSR empirical** (executor != reviewer) → `APT_Adversarial_Triple.lean:apt_v17_review_valid` + `same_agent_invalid` (V15 + allow_agent_sigma=false LOCKED formal)
+> - **Cross-Canon Hyperedge formal** (3 canon convergence) → `APT_Adversarial_Triple.lean:producer_reviewer_hyperedge_complete` (4-property formal) + `three_canon_distinct` (3 canon contributions distinct)
+> - **Multi-parent sub-axis** (Aristotle Final + Friston FEP combined) → `APT_Adversarial_Triple.lean:adversarial_multi_parent_sub_axis` (NOT separate canon — engineering instantiation)
+>
+> Adversarial round 가 *왜* 단일 critic 이 아닌 LensSet UNION ensemble 인지 학문 grounding.
+
+### Goodfellow 2014 GAN-D ↔ APT critic = D in G/D minimax
+
+```
+APT (G producer) vs Critic (D adversarial):
+  - G goal: contract fulfillment
+  - D goal: failure mode discovery
+  - Equilibrium: progressive shift (Lakatos)
+  - Mode collapse 회피 mandatory:
+      - 동일 finding 반복 ✗
+      - exactly 3 NITPICK 반복 ✗ (v17 Anti-Theater detect)
+      - severity distribution audit
+```
+
+| Goodfellow GAN-D | APT critic mechanism |
+|---|---|
+| **D objective**: maximize log D(real) + log(1−D(fake)) | Critic finding 다양성 maximize (LensSet UNION coverage) |
+| **G objective**: minimize log(1−D(G(z))) | Producer contract 위반 회피 |
+| **Mode collapse** | Anti-Theater (§14.3 V18) — exactly 3 NITPICK per round detect |
+| **Nash equilibrium** | progressive shift — testable consequence 누적 |
+
+### Pirsig 1991 Lila ↔ holistic synthesis = LensSet UNION coverage
+
+> Pirsig 1974/1991 Metaphysics of Quality — 단일 lens ≠ truth, multiple lens UNION 만 holistic synthesis.
+
+```
+APT critic = Taliban LensSet UNION (4 sets):
+  - constitutional 9-axis (정전 위반 detect)
+  - mathematical 113-axis (formal property)
+  - solid 5-axis (SRP/OCP/LSP/ISP/DIP)
+  - longinus 7-axis (reference binding integrity)
+
+UNION coverage ≥ 0.81 mandatory (PROM 16 PRECONDITION_FULLY_MET 정전)
+```
+
+**Pirsig 함의**: 단일 lens = static quality 만 capture, dynamic quality 누락. 4 LensSet UNION = static + dynamic 통합.
+
+### Whitehead 1929 Concrescence ↔ Adversarial round = actual occasion 의 prehension
+
+> Whitehead Process and Reality — actual occasion 은 *prehension* (felt grasping) 통해 self-create.
+
+| Whitehead | APT adversarial round |
+|---|---|
+| **prehension** (positive) | critic 가 producer artifact 를 grasp (citation + evidence) |
+| **prehension** (negative) | critic 가 무관 detail 배제 |
+| **concrescence** | finding ensemble → verdict synthesis |
+| **satisfaction** | gate PASS verdict (final synthesis 완성) |
+
+**Whitehead 함의**: adversarial round 의 multiple finding 이 단일 verdict 로 concrescence — actual occasion 의 self-organization mechanism instantiation.
+
+### Bacchelli-Bird 2013 empirical ↔ Code review effectiveness
+
+> Bacchelli-Bird MSR 2013 — code review effectiveness empirical study: critic ≠ author, focus 분산 mandatory, 명확 finding output.
+
+| Bacchelli-Bird | APT v17 |
+|---|---|
+| **executor != reviewer** | V15 mandatory (allow_agent_sigma: false LOCKED) |
+| **multiple reviewer perspectives** | LensSet UNION (4 sets) |
+| **finding diversity required** | Anti-Theater detect (exactly 3 NITPICK ✗) |
+| **explicit verdict output** | AptDecisionLog mandatory (V28) |
+
+### Cross-Canon Hyperedge: Producer-Reviewer Triple-Canonical
+
+> `producer-reviewer-triple-canonical-2026-05-10` (:Hyperedge:CrossCanonGrounding):
+>   1. Goodfellow 2014 GAN-D minimax
+>   2. Bacchelli-Bird 2013 MSR empirical
+>   3. revfactory Phase 2 pattern 4 (industry frontier)
+>
+> ⇒ APT v17 adversarial round = 3 정전 합치점의 산업 instantiation.
+
+KG: `apt-philosophical-quadruple-canonical-2026-05-11` (Aristotle + Hegel + Lakatos + Friston) + `producer-reviewer-triple-canonical-2026-05-10` + `apt-error-pattern-HR20-anti-theater-2026-05-06` (mode collapse counter)
+
+---

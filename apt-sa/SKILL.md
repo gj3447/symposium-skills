@@ -28,6 +28,58 @@ RETURN cfg.context_budget_sa_default, cfg.context_budget_l1_avg, cfg.context_bud
 
 ---
 
+## 🎯 v27 A15 — SA Phase Activation Matrix (Work-Kind Routing)
+
+> SA를 *얼마나* 돌릴지 결정. Step 1-2 진입 *전에* work_kind 분류부터.
+> A15는 SA *내부* 라우팅(2-A/B/C 새 앵커/재사용/브랜치)과 직교 — A15는 SA *진입* 게이트.
+
+### Work-kind 결정 (사용자 발화 또는 KG 조회)
+
+```cypher
+// 사용자가 명시 발화 시: '새 기능' / '기능 확장' / '버그 수정' / '리팩터' / '유지보수'
+// 미발화 시 SA bootstrap이 자동 분류:
+//   NEW         := 관련 SemanticAnchor 0건
+//   EXTEND      := 관련 SemanticAnchor ≥1건 + 새 scope (Step 1-3 결과)
+//   MAINTENANCE := 동일 anchor 동일 scope 재진입 (bug fix / refactor / docs)
+MATCH (cfg:MethodologyConfig {name:'MethodologyConfig_default_v26'})
+RETURN coalesce(cfg.sa_phase_activation_matrix_default, 'auto') AS default_mode
+```
+
+### 라우팅 매트릭스 (A15)
+
+| work_kind | SA Phase | 실행 단계 | 후속 |
+|-----------|----------|-----------|------|
+| **NEW** | **FULL** | Step 1 (KG 탐색) → Step 2-A (새 anchor) → Step 3 (5 core fields + context budget) → SA→SP Gate | SP 진입 |
+| **EXTEND** | **SHORT_CIRCUIT** | Step 1-1/1-2 (관련 anchor 조회) → Step 2-B 또는 2-C (재사용/브랜치) → 기존 anchor 5 core fields 검증만 → SA→SP Gate | SP 진입 |
+| **MAINTENANCE** | **SKIP** | Step 1-1 (anchor 확인) → 즉시 ST drift-detection 으로 라우팅 (Longinus L7 drift check) | ST drift 모드 진입 |
+
+### Phase Activation 결정 게이트 (Cypher)
+
+```cypher
+// 진입 시 work_kind 미정 → 자동 분류 시도
+MATCH (sa_candidate:SemanticAnchor) WHERE sa_candidate.name CONTAINS $user_topic
+WITH count(sa_candidate) AS hit, collect(sa_candidate.status)[..3] AS statuses
+RETURN
+  CASE
+    WHEN hit = 0 THEN 'NEW'
+    WHEN hit >= 1 AND any(s IN statuses WHERE s = 'active') AND $is_drift_scope = false THEN 'EXTEND'
+    WHEN hit >= 1 AND $is_drift_scope = true  THEN 'MAINTENANCE'
+    ELSE 'NEW'
+  END AS work_kind,
+  hit AS related_anchor_count
+```
+
+### 매트릭스 적용 규약
+
+- 사용자 명시 발화(`work_kind`)는 자동 분류 override.
+- **MAINTENANCE 라우팅으로 ST drift 진입 시 SA→SP Gate 우회 가능** — 단, ST에서 `tpa-st` drift check 통과(5종 drift coverage_ratio ≥ 0.8) 필수.
+- EXTEND SHORT_CIRCUIT 모드에서도 5 core fields는 검증 (null 발견 시 NEW로 fallback).
+- 본 매트릭스는 `MethodologyConfig.sa_phase_activation_matrix_default` slot에서 resolve. Prose 하드코딩 금지.
+
+# KG: oq-prom16-apt-v27-A15-sa-branch-matrix-2026-05-10 (PROVISIONALLY_RATIFIED 2026-05-11), decision-log-blanket-proceed-2026-05-11, lesson-prom16-apt-v26-unresolved-4-issues-2026-04-30 (parent context)
+
+---
+
 ## 🔗 MIC Binding (SOLID-DIP)
 
 **IS slot**: APT_Phase (SA, 1/4)

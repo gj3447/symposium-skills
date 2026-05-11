@@ -204,3 +204,80 @@ All code files MUST include:
 ```
 
 ---
+
+## 23. Quick Reference Philosophical Index (2026-05-11 추가)
+
+> Cross-ref: `THEORY/APT/PHILOSOPHICAL_FOUNDATIONS.md` (11 axes 4-layer integration) + `THEORY/APT/COMPARISON_METHODOLOGIES.md` (5 methodology compare) + `apt-philosophical-quadruple-canonical-2026-05-11` (4-canonical hyperedge).
+> **iter 107 갱신**: 17 APT Lean files / 156 theorems Mathlib-free 0 sorry — 9-tier architecture (1 FOUNDATIONAL + 4 explicit canonical + 6 sub-axis + 1 CAPSTONE + 2 ENGINEERING + 1 LIMIT + 1 CROSS-CANON + 1 META). 모든 학문 정전 mapping 이 *formal Lean evidence* 보유 — references files 마다 explicit per-mechanism Lean theorem cite (phases.md §12 / gates.md §24 / validation.md §27 / kg_logging.md §15 / error_handling.md §14 / adversarial.md §16). Quick reference 의 *1줄 mapping* 들이 모두 Lean PASS 정전과 1:1 대응.
+>
+> Phase / Gate / Validation / Error / Adversarial 의 학문 정전 1줄 mapping.
+
+### APT 7-Phase ↔ Aristotle 4 causes (Lean PASS `apt_aristotle_complete` + Hegel Lean PASS `hegel_spiral_returns`)
+
+| APT phase | Aristotle cause | role |
+|---|---|---|
+| **PH1 SemanticAnchor (SA)** | Material (Hyle) | substrate — what is to be made |
+| **PH2 SemanticPyramid (SP)** | Formal (Eidos) | shape decomposition |
+| **PH3 SemanticTwin (ST)** | Formal (Eidos) | crystallized contract form |
+| **PH4 SourceCodeWorld (SCW)** | Efficient (Kinoun) | execution agent (TDD) |
+| **PH5 Validation** | Final (Telos) | telos / fulfillment verification |
+| **PH6 MetaReview** | Meta (Reflexive) | self-application max_depth=1 |
+| **PH7 Cleanup** | Meta (Reflexive) | system reset for next cycle |
+
+### APT Gate ↔ Lakatos research programme (Lean PASS `apt_cycle_lakatos_progressive` + dedicated `apt_cycle_progressive` PROM 16 0.81 PASS in APT_Lakatos_Progressive.lean)
+
+| Gate | Lakatos role | trigger |
+|---|---|---|
+| DensityCheck | positive heuristic | INFORMED_BY ≥ 5 + sources ≥ 3 |
+| C(S)_sigma | hard core protection | Contract v2 9-axis violation = abort |
+| RefinementGate | protective belt | C(S) 5-predicate fail = re-decompose |
+| FulfillmentGate 13/13 | progressive shift | testable consequence + Lean PASS |
+| MetaReview | rescue detection | ad-hoc rescue without testable consequence ✗ |
+| Cleanup ratchet | positive heuristic | LOC / cyclomatic / cycle / dead code / module 향상 방향 |
+
+### APT Validation ↔ Tarski + Gödel + Hofstadter (limit acknowledgement)
+
+| limit | APT response |
+|---|---|
+| Tarski undefinability | 5 external verdict source ensemble (Taliban + Ground Truth + HUMAN + Lakatos external + Lean) |
+| Gödel incompleteness | partial consistency only — **20 APT Lean files / 179 theorems Mathlib-free 0 sorry** (iter 31 4-canonical milestone + iter 47 CAPSTONE meta-integration with Lakatos defense in depth claim resistance = 4 + iter 55 FOUNDATIONAL Curry-Howard meta-theorem + iter 62 ENGINEERING #1 Beck TDD RGR = APT SCW PH4 + iter 70 ENGINEERING #2 Evans DDD + Conway 1968 = APT SP PH3 semantic + iter 77 LIMIT Tarski 1936 metalanguage = honest limitation acknowledgement + iter 85 CROSS-CANON Goodfellow + Pirsig + Bacchelli-Bird = producer-reviewer-triple-canonical hyperedge formal + iter 93 META-ARCHITECTURE Architecture Master meta-meta proof + iter 109 ENGINEERING #3 Wirth 1971 stepwise refinement = APT SP PH3 algorithmic instance + iter 117 METAPHYSICAL Plato Phaedo eidos + Frege Begriffsschrift = APT ST PH3 metaphysical grounding + Aristotle Formal 3-sibling cluster + iter 125 META v2 update Architecture Master v2 = v1 16/149 → v2 19/172 progression formal proof) |
+| Hofstadter strange loop | max_depth=1 invariant (Lean PASS `apt_self_application_bounded`) |
+
+### APT Error Handling ↔ Hegel Aufhebung + Maturana autopoiesis
+
+| concept | APT mechanism |
+|---|---|
+| Aufhebung (지양) | Lesson `wrongAssumption ↔ truth` symmetric pair (폐기 + 보존 + 격상) |
+| autopoiesis | Lesson → Pattern Library extension (self-organization closure) |
+| anti-PRELIMINARY-inflation | file_change_ratio mandatory + ALERT halt < 0.5 in 5 iter |
+
+### APT KG Logging ↔ Friston FEP + W3C PROV-DM
+
+| concept | APT mechanism |
+|---|---|
+| Friston active inference | KG = prior update mechanism (prediction error → Bayesian update) |
+| W3C PROV-DM 6 relations | wasGeneratedBy / used / wasInformedBy / wasAttributedTo / wasAssociatedWith / actedOnBehalfOf |
+| Tarski metalanguage | KG = APT 의 외부 truth predicate (`:ValidationResult` + `:Lesson` 정전화) |
+
+### APT Adversarial ↔ Goodfellow GAN-D + Pirsig + Whitehead + Bacchelli-Bird
+
+| concept | APT mechanism |
+|---|---|
+| Goodfellow minimax | Producer-Critic adversarial = Lakatos progressive equilibrium |
+| Pirsig Lila holistic | LensSet UNION (constitutional 9 + mathematical 113 + solid 5 + longinus 7) |
+| Whitehead concrescence | finding ensemble → verdict synthesis (actual occasion satisfaction) |
+| Bacchelli-Bird MSR | executor != reviewer (V15 + allow_agent_sigma: false LOCKED) |
+
+### APT 4-Canonical Cross-Canon Hyperedge
+
+> `apt-philosophical-quadruple-canonical-2026-05-11` (:Hyperedge:CrossCanonGrounding):
+>   1. **Aristotle 4 causes** (Material/Formal/Efficient/Final) → APT 7-phase mapping
+>   2. **Hegel 1807 Phänomenologie** (Aufhebung 자가운동) → APT cycle progressive
+>   3. **Lakatos 1970 research programme** (hard core + protective belt) → APT gate hierarchy
+>   4. **Friston 2010 FEP** (active inference) → APT KG logging Bayesian update
+>
+> ⇒ APT methodology = 4 정전 합치점의 산업 instantiation. (Lean **20 APT files / 179 theorems Mathlib-free 0 sorry / lean exit 0**: APT_Cycle_Functor (9 Aristotle) + APT_Hegel_Aufhebung (12 Hegel) + APT_Lakatos_Progressive (9 Lakatos) + APT_Friston_FEP (8 Friston) + APT_AtomicSpan_MDL (7 Kolmogorov+Solomonoff) + APT_TPA_Dual (9 Mac Lane) + APT_MetaReview_Bounded (14 Russell+Lawvere+Yanofsky+Hofstadter) + APT_OODA_Boyd (9 Boyd) + APT_Maturana_Autopoiesis (8 Maturana sub-axis) + APT_Whitehead_Concrescence (10 Whitehead sub-axis) + APT_Quadruple_Canonical_Integration (8 CAPSTONE meta-integration with Lakatos defense in depth) + APT_Curry_Howard (7 FOUNDATIONAL meta-theorem — proposition↔type underlies all) + APT_TDD_Beck_RGR (11 ENGINEERING #1 — Beck 2003 RGR = APT SCW PH4 instance) + APT_DDD_Conway_BoundedContext (11 ENGINEERING #2 — Evans DDD + Conway 1968 = APT SP PH3 semantic instance) + APT_Tarski_Metalanguage (8 LIMIT constraint — Tarski 1936 undefinability + KG metalanguage + 5 verdict source ensemble) + APT_Adversarial_Triple (9 CROSS-CANON grounding — Goodfellow GAN + Pirsig Lila + Bacchelli-Bird MSR = producer-reviewer-triple-canonical hyperedge formal) + APT_Architecture_Master (7 META v1 proof — meta-meta level entire 16-Lean structure formally well-formed) + APT_Wirth_StepwiseRefinement (9 ENGINEERING #3 — Wirth 1971 stepwise refinement = APT SP PH3 algorithmic instance, sibling DDD Bounded Context) + APT_Plato_Frege_Eidos (7 METAPHYSICAL sub-axis — Plato Phaedo eidos + Frege Begriffsschrift = APT ST PH3 metaphysical grounding, 3-sibling Aristotle Formal cluster: DDD/Wirth/Plato-Frege) + **APT_Architecture_Master_v2 (7 META v2 update — v1 16/149 frozen iter 93 → v2 19/172 iter 125 progression formal proof)**)
+
+KG: `apt-philosophical-quadruple-canonical-2026-05-11` + `apt-philosophical-foundations-2026-05-11` + `apt-comparison-methodologies-2026-05-11` + `lean-apt-cycle-functor-2026-05-11` + `lean-apt-atomic-span-mdl-2026-05-11`
+
+---

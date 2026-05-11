@@ -22,6 +22,7 @@
 - *(taliban)* Mathematical lens stratified sampler — bin/taliban_mathematical_sampler.py ([`2620c42`](#2620c42ffb9fce1fe63dde6d75ad11773d888047))
 - *(a6)* L2 inline pre-build invariant in skill-build-manifest.py ([`5cb569c`](#5cb569c3b6c824e9444306af8cdaaba99072d8bf))
 - *(longinus)* Launchd plist for sha256 daemon (1h verify schedule) ([`533f7e7`](#533f7e731f5f4563b0ac3760c07294dd94a93a5c))
+- *(skills)* Progressive Disclosure refactor across all weapon + apt + tpa skills ([`72116a3`](#72116a3eebfda0bb052d0db3b2e8316731395009))
 
 ### Fixed
 
@@ -38,6 +39,7 @@
 - *(skill-versions)* KG iter 1-4 closure snapshot — v27.1.0 + HR1-18 + Lakatos test ([`050e101`](#050e1011826fadb257686380dfc6400c87dad6ab))
 - *(manifest)* Refresh index.json — v27.1.0 versions + new merkle (post-iter1-4) ([`27b08ea`](#27b08ea8e2402d117caa566887c8450de57cd6bb))
 - *(longinus)* Bump query LIMIT 1000 → 5000 (cross-canon scale) ([`d0ecc48`](#d0ecc486079c58a34fede878297748bd755f6e35))
+- *(manifest)* Refresh index.json post-PD-refactor (head 72116a3) ([`22a503d`](#22a503d99af5ad7487770ad1403ee3b9622d59f1))
 
 ## [26.0.2] - 2026-04-26
 
