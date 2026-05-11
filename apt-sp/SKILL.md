@@ -15,7 +15,7 @@ description: >
 
 ## 🎛 v26 A6 Resolve-Only
 
-> Sweet spot band (200-500 line) / δ_infra exception / span_depth_max — **하드코딩 금지**. MethodologyConfig slot resolve.
+> Sweet spot band (`{{cfg.vibe_coding_sweet_min}}`-`{{cfg.vibe_coding_sweet_max}}` line, 현재 200-500) / δ_infra exception / span_depth_max — **하드코딩 금지**. MethodologyConfig slot resolve.
 
 ```cypher
 // Sweet spot + hard max
@@ -130,7 +130,7 @@ AtomicSpan = base case. Contract = subproblem 간 합의된 interface.
 
 ### δ (Decomposition Diseconomy) 상세
 
-- **Sweet spot: `cfg.vibe_coding_sweet_min`~`cfg.vibe_coding_sweet_max` (현재 200~500줄)**
+- **Sweet spot: `{{cfg.vibe_coding_sweet_min}}`~`{{cfg.vibe_coding_sweet_max}}` (현재 200~500줄)**
 - 100줄 미만: 상위 Span과 합병 (독립 의미 단위로 존재할 이유 없음)
 - `cfg.vibe_coding_hard_max` 초과: 더 분해 필요 (바이브코딩 최적 단위 초과)
 
@@ -239,7 +239,7 @@ RETURN leaf.name,
 ### Step 5: Taliban RefinementGate
 
 ```
-/taliban 호출 → SP 산출물 9-lens 검증
+/taliban 호출 → SP 산출물 `{{cfg.lens_count_constitutional}}`-lens 검증 (현재 9)
 → APPROVED이면 KG에 ValidationResult(phase='SP') 기록
 → REJECTED이면 Finding 반영 후 재분해
 ```
@@ -318,7 +318,17 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 ## History
 
 > Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- apt-sp/SKILL.md`.
-> Architecture: Progressive Disclosure (`references/sp_world.md` lazy load).
+> Architecture: Progressive Disclosure v3 — references split (2026-05-11):
+> - C(S) 5 predicates (v/t/i/d/s, cheap-first): [`references/cs_predicates.md`](references/cs_predicates.md)
+> - EXPLORES_VIA 3 strategies + Selection Span + Confluence: [`references/explores_via.md`](references/explores_via.md)
+> - RefinementGate 3 checks (Coverage/Consistency/Independence): [`references/refinement_gate.md`](references/refinement_gate.md)
+> - Dense Linking (INFORMED_BY ≥ N): [`references/dense_linking.md`](references/dense_linking.md)
+> - SP 4 Rules (SpanPlanningNature/2-Layer/SpiderWeb/N:N DAG): [`references/sp_rules.md`](references/sp_rules.md)
+> - Span Boundary (allowed_paths / forbidden_patterns): [`references/span_boundary.md`](references/span_boundary.md)
+> - SP → ST handoff cypher: [`references/handoff_to_st.md`](references/handoff_to_st.md)
+> - SP error patterns (E1/E10/E-SP1/2/3): [`references/sp_errors.md`](references/sp_errors.md)
+> - Cross-skill shared: [`../_common/`](../_common/) (Context Budget § migrated to dedup).
+> - Legacy redirect: `references/sp_world.md`.
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|

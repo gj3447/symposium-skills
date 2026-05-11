@@ -694,7 +694,12 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 ## History
 
 > Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- apt-sa/SKILL.md`.
-> Architecture: Progressive Disclosure already applied (`references/sa_world.md` lazy load).
+> Architecture: Progressive Disclosure v3 — references split into focused files (2026-05-11):
+> - SA *internal* routing (Step 1-2 matrix, A15 work_kind): [`references/routing_decisions.md`](references/routing_decisions.md)
+> - `apt-progress.md` initial template (incl. v27 A15 fields): [`references/progress_template.md`](references/progress_template.md)
+> - SA → SP handoff 8-check + A15 추가 3-check: [`references/handoff_to_sp.md`](references/handoff_to_sp.md)
+> - Cross-skill shared concepts: [`../_common/`](../_common/) (progressive_disclosure / context_budget / phase_transition_compaction / validation_query_pattern / error_pattern_template / contract_lifecycle_fsm / kafka_event_convention)
+> - Legacy single-file (kept as redirect): `references/sa_world.md` → see split files above.
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|

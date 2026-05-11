@@ -4,7 +4,7 @@ kg_ref: ATOM_Skill_apt_st
 version: "27.1.0"
 channel: stable
 description: >
-  APT SemanticTwin (ST) — crystallization of AtomicSpans into Contract + Task + 8 ST Decision Areas.
+  APT SemanticTwin (ST) — crystallization of AtomicSpans into Contract + Task + `{{cfg.st_decision_areas}}` ST Decision Areas (현재 8).
   Enters ONLY after Crystallization Frontier (all leaves = AtomicSpan).
   v27 (2026-04-29): Exhaustive Cover Scope — 8 ST decision areas (AST/Workflow/DesignPattern/ProjectStructure/DataFlow/Algorithm/Store/ClassDesign) mandatory before SCW entry. 96 ResearchFinding 학문 grounding. Tier 1 5 areas (AST/Workflow/DP/DataFlow/Store) HIGH ★, Tier 3 3 areas (PS/Algo/Class) MEDIUM. SCW entry gate hook enforced.
   Contract = typed DTO/Schema (default 7 fields + v25 optional error_variants; v26 A2 schema pluggable via ContractSchema slot). NOT prose.
@@ -213,7 +213,7 @@ MERGE (c1)-[:SEQUENCED_WITH {order: 1}]->(c2)
 ### Step 6: Taliban Gate
 
 ```
-/taliban → ST 산출물 검증 (Contract 7대 필드 완전성, SharedType 일관성)
+/taliban → ST 산출물 검증 (Contract `{{cfg.contract_default_fields}}`대 필드 (현재 7) 완전성, SharedType 일관성)
 → APPROVED → ValidationResult(phase='ST') 기록
 → REJECTED → Finding 반영 후 Contract 수정
 ```
@@ -350,7 +350,7 @@ v2 schema가 자기자신을 기술할 때 발생하는 self-reference cycle 해
 >
 > **Source**: `lesson-st-cover-scope-exhaustive-2026-04-29` (HIGH) + `lesson-prom-holes-audit-2026-04-29` (HIGH) + 8 PROM cycles (96 ResearchFinding) 학문 grounding.
 
-### 8 ST Decision Areas (mandatory, SCW 진입 차단 게이트)
+### `{{cfg.st_decision_areas}}` ST Decision Areas (mandatory, SCW 진입 차단 게이트, 현재 8)
 
 | # | Area | KG Decision Subtype | PROM cycle | Tier |
 |---|---|---|---|---|
@@ -438,7 +438,19 @@ RETURN cycle.name AS cycle,
 ## History
 
 > Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- apt-st/SKILL.md`.
-> Architecture: Progressive Disclosure (`references/st_world.md` lazy load — 626 lines).
+> Architecture: Progressive Disclosure v3 — 626L _world.md split (2026-05-11):
+> - Contract Examples 3 patterns (UserProfile/SearchIndex/HelloAPT): [`references/contract_examples.md`](references/contract_examples.md)
+> - NFR Environment Variants (dev/staging/prod): [`references/nfr_env_variants.md`](references/nfr_env_variants.md)
+> - Hardware Context Layer (REQUIRES_HARDWARE patterns): [`references/hardware_context.md`](references/hardware_context.md)
+> - SEQUENCED_WITH Composition (Hoare chaining): [`references/sequenced_with.md`](references/sequenced_with.md)
+> - Contract Sandwich (N:1 sharing): [`references/contract_sandwich.md`](references/contract_sandwich.md)
+> - Failure Pattern Detection (7 signals): [`references/failure_patterns.md`](references/failure_patterns.md)
+> - Amendment Scenarios (Fulfilled → Amended 5 triggers): [`references/amendment_scenarios.md`](references/amendment_scenarios.md)
+> - tau_check 5/5 (Before/After Fix): [`references/tau_check.md`](references/tau_check.md)
+> - CrystallizationEvent Hub (hub-and-spoke 4 roles): [`references/crystallization_hub.md`](references/crystallization_hub.md)
+> - Boundary Mold (apt-st 정체): [`references/boundary_mold.md`](references/boundary_mold.md)
+> - Cross-skill shared: [`../_common/`](../_common/) (Contract Lifecycle FSM § migrated).
+> - Legacy redirect: `references/st_world.md`.
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|

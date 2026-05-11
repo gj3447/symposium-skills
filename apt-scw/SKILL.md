@@ -112,7 +112,7 @@ IF executor(코드 작성자) == reviewer(Fulfilled 선언자):
 1. Contract의 acceptance_criteria에서 테스트 작성 (RED)
 2. 테스트가 통과하는 최소 코드 구현 (GREEN)
 3. 리팩토링 (REFACTOR)
-4. FulfillmentGate 7 checks
+4. FulfillmentGate `{{cfg.fulfillment_gate_checks}}` checks (현재 7)
 5. 통과 → Contract status = Fulfilled
 ```
 
@@ -154,7 +154,7 @@ class ModalGPUProvider(GPUProvider):
 | acceptance_criteria | 실행 가능한 테스트 |
 | impact_tests | **필수** (TDAD) — 빈 값 = BLOCKING violation |
 
-> "Task estimated_lines > 500 → Span을 더 분해해야 함"
+> "Task estimated_lines > `{{cfg.vibe_coding_sweet_max}}` (현재 500) → Span을 더 분해해야 함"
 > "Contract가 잘게 쪼개져야 Task도 잘게 나뉨"
 
 ---
@@ -193,7 +193,7 @@ ORDER BY atom.name
     - 중복 제거, 명확성 개선
 ```
 
-### Step 3: FulfillmentGate — 7 Checks
+### Step 3: FulfillmentGate — `{{cfg.fulfillment_gate_checks}}` Checks (현재 7)
 
 | # | Check | 검증 |
 |:-:|-------|------|
@@ -201,11 +201,11 @@ ORDER BY atom.name
 | 2 | Coverage | 핵심 로직 테스트 커버 |
 | 3 | Contract alignment | input_type/output_type이 코드와 일치 |
 | 4 | KG refs present | # KG: 주석 존재 |
-| 5 | Lines ≤ 500 | target_file 줄 수 확인 |
+| 5 | Lines ≤ `{{cfg.vibe_coding_sweet_max}}` (현재 500) | target_file 줄 수 확인 |
 | 6 | No abstract types | data/any/result 타입 미사용 |
 | 7 | impact_tests filled | 빈 값 아님 |
 
-**7/7 PASS → Contract status = Fulfilled.**
+**`{{cfg.fulfillment_gate_checks}}/{{cfg.fulfillment_gate_checks}}` PASS (현재 7/7) → Contract status = Fulfilled.**
 
 ### Step 4: KG 물질화 기록
 
@@ -269,7 +269,7 @@ SCW → SA 피드백: "프로젝트 범위 변경 필요"
 | KG ref 주석 생략 | 롱기누스 추적 불가 | # KG: TASK_xxx 필수 |
 | impact_tests 비워두기 | TDAD BLOCKING violation | 테스트 경로 명시 |
 | `cfg.vibe_coding_hard_max` 초과 파일 | Task 단위 초과 | SP로 돌아가 추가 분해 |
-| Contract 무시하고 코드 | 물질화가 아닌 임의 구현 | Contract 7대 필드 준수 |
+| Contract 무시하고 코드 | 물질화가 아닌 임의 구현 | Contract `{{cfg.contract_default_fields}}`대 필드 준수 (현재 7) |
 | 코드를 정본으로 취급 | KG가 canonical | Neo4j Canonicality 원칙 |
 | executor = reviewer | 자기 승인 금지 | Taliban D20 protocol |
 
@@ -317,7 +317,20 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 ## History
 
 > Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- apt-scw/SKILL.md`.
-> Architecture: Progressive Disclosure (`references/scw_world.md` lazy load — 494 lines).
+> Architecture: Progressive Disclosure v3 — 494L _world.md split (2026-05-11):
+> - TDD Strange Loop + Hoare Analogy (~ not =): [`references/tdd_strange_loop_hoare.md`](references/tdd_strange_loop_hoare.md)
+> - FulfillmentGate 7 Checks: [`references/fulfillment_gate.md`](references/fulfillment_gate.md)
+> - TDAD impact_tests (Baseline + Regression): [`references/tdad.md`](references/tdad.md)
+> - EDD 5 criteria (Stochastic + CI Divergence): [`references/edd.md`](references/edd.md)
+> - Gap Resolution (Thompson Sampling 70/30): [`references/gap_resolution.md`](references/gap_resolution.md)
+> - Session Startup Protocol 7-step: [`references/session_startup.md`](references/session_startup.md)
+> - PH6 Feedback (6 Discovery × 10 Categories): [`references/ph6_feedback.md`](references/ph6_feedback.md)
+> - Anti-Patterns AP1-AP9: [`references/anti_patterns.md`](references/anti_patterns.md)
+> - KG Reference Comments (Longinus L3 binding): [`references/kg_ref_comments.md`](references/kg_ref_comments.md)
+> - SCW-specific Kafka payloads: [`references/kafka_events.md`](references/kafka_events.md)
+> - SCW → SP/ST feedback handoff (Max returns): [`references/scw_to_sp_st_handoff.md`](references/scw_to_sp_st_handoff.md)
+> - Cross-skill shared: [`../_common/`](../_common/) (Contract Lifecycle FSM § migrated).
+> - Legacy redirect: `references/scw_world.md`.
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|

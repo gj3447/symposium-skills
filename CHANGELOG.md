@@ -40,6 +40,11 @@
 - *(manifest)* Refresh index.json — v27.1.0 versions + new merkle (post-iter1-4) ([`27b08ea`](#27b08ea8e2402d117caa566887c8450de57cd6bb))
 - *(longinus)* Bump query LIMIT 1000 → 5000 (cross-canon scale) ([`d0ecc48`](#d0ecc486079c58a34fede878297748bd755f6e35))
 - *(manifest)* Refresh index.json post-PD-refactor (head 72116a3) ([`22a503d`](#22a503d99af5ad7487770ad1403ee3b9622d59f1))
+- *(manifest)* Merkle-check auto-refresh index.json (git_head 22a503d, harness v3.2.0 ratchet) ([`c6198aa`](#c6198aa633ab2bf61433dead1396bf0a383f0efd))
+
+### Checkpoint
+
+- A15 SA Phase Activation Matrix + pending edits (2026-05-11 pre-monorepo-flatten) ([`97372a3`](#97372a39c8b5895f2dfc46ae1069061da99b75df))
 
 ## [26.0.2] - 2026-04-26
 
