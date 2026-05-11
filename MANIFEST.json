@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-11T13:45:12+09:00",
-  "git_head_commit": "c6198aa633ab2bf61433dead1396bf0a383f0efd",
-  "git_head_short": "c6198aa",
+  "generatedAt": "2026-05-11T14:34:10+09:00",
+  "git_head_commit": "3b1463e61eb25610955b959d647e34a134dd2454",
+  "git_head_short": "3b1463e",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 28,
-  "merkle_root": "9f43a9397ed90a7a2c5f81b76f09085e33c2e73b0fbce049340617478af5414c",
+  "merkle_root": "5fd95a03e3cb42f8c5ae8305c5f09d72fc05a70ca1c87e5fb82d759ee999f9fe",
   "skills": [
     {
       "name": "88-taliban",
@@ -38,7 +38,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
-      "git_tree_sha": "09c0974c53c30d7b5f48dc63d2bd987123b47eb8"
+      "git_tree_sha": "3c812c839fbc3c56000c91c5e258d4213e0a1c03"
     },
     {
       "name": "apt-sa",
@@ -46,7 +46,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sa",
       "channel": "stable",
-      "git_tree_sha": "538675660e9b3fd609bd89c04ea14767e3f363af"
+      "git_tree_sha": "e0b386d8733d6e753a3c6401574382d5685695e7"
     },
     {
       "name": "apt-scw",
@@ -54,7 +54,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_scw",
       "channel": "stable",
-      "git_tree_sha": "f9d36779e52c431181cad25ca629e4c6b06fd5d8"
+      "git_tree_sha": "096149dc23fd316949ad14172c0f23ff76a546ae"
     },
     {
       "name": "apt-sp",
@@ -62,7 +62,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sp",
       "channel": "stable",
-      "git_tree_sha": "ef062f5f4d1a4e26ea2186f9f5907436062e4fd1"
+      "git_tree_sha": "2de190426d0bf349afe49f0e806aa361f558bd43"
     },
     {
       "name": "apt-st",
@@ -70,7 +70,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "dbe03b92088b5c93366e367d309b1f170da4c631"
+      "git_tree_sha": "00b9f1b91a3ead1c41516adae876243fa4562a6c"
     },
     {
       "name": "backup",
