@@ -32,6 +32,7 @@
 - *(apt v28-draft)* Reactivate v18 SubagentArchitecture + v12 diffusion frame + v20 descent validation ([`dd235dc`](#dd235dc7dfb71169811e577da05c45f75a5a5b13))
 - *(apt v28)* 6-agent parallel dispatch — Triple scaffold + Orchestrator §15 + 3 Lean + Taliban A3 REJECT ([`646c0d7`](#646c0d76a9940e6dede0f4af7fb95e7eeb858770))
 - *(fix-agent v0.1.0-draft)* §8 rubber-stamp recurrence mitigation — 3-prong (orthogonal-lens rotation + patch-fuzzing sublens + attempt-cap sigma_oracle injection) ([`f63189b`](#f63189bcb1dc1bacc8cf174850c9b2620c7dd35b))
+- *(apt-d)* S2 skill scaffold + fix-agent K-01 empirical test sprint ([`33bb3da`](#33bb3da092d962f1ad59f3ee85c3f9c0d1d77e45))
 
 ### Fixed
 

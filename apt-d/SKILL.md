@@ -11,7 +11,7 @@ description: >
   M3 shared-object sibling (Taliban M1 equivocation resolved) +
   M4 smooth ODE transitions (instead of discrete SA→SP→ST→SCW) +
   M5 forward-reverse symmetric (APT+TPA unified).
-  29 Lean theorem formal floor (G1 9 + G2 6 + G3 14, MIND/lean_formalization/APT_Diffusion_*.lean).
+  24 Lean theorem formal floor (G1 9 + G2 6 + G3 9, MIND/lean_formalization/APT_Diffusion_*.lean). NOTE: RFC §3 claims 29 — actual grep shows 24 (G3 has 9, not 14). RFC count to be corrected separate sprint.
   Honest load-bearing limitation: shared-object sibling assumes UNIFIED artifact.
   Multi-file boundary forces back to v28-like decomposition.
   Invoke when: single-artifact problem + continuous metric available + smooth transition required.
@@ -26,7 +26,7 @@ description: >
 This skill is **EXPERIMENTAL** — `channel: experimental`, NOT production. Production users should use `/apt` (v27 stable).
 
 **Status fields**:
-- `formal_floor`: 29 Lean theorems PASS (Mathlib-free) ✓
+- `formal_floor`: 24 Lean theorems PASS (Mathlib-free) ✓ — *RFC §3 claims 29; actual grep shows 24, G3 TPA_Dual has 9 not 14. Discrepancy load-bearing — separate sprint to reconcile.*
 - `runtime`: NOT implemented (skill scaffold only)
 - `dogfood`: 0 cycles run on real codebase
 - `migration_plan`: per RFC §6 (NOT yet executed)
@@ -75,7 +75,10 @@ RETURN cfg.single_artifact_required,    // = true
 
 ---
 
-## 🔬 Formal floor — 29 Lean theorem reference
+## 🔬 Formal floor — 24 Lean theorem reference (RFC claims 29 — drift)
+
+> **honest correction 2026-05-14**: RFC §3 claims "29 Lean theorem (G1 9 + G2 6 + G3 14)". Direct `grep -cE "^theorem|^lemma"` on the 3 files gives **24** (G1 9 + G2 6 + G3 **9**). G3 TPA_Dual.lean has 9, not 14. RFC author count drift — separate reconciliation sprint required.
+
 
 ### G1 — Diffusion Foundation (9 theorem, `APT_Diffusion_Foundation.lean`)
 
@@ -98,11 +101,21 @@ RETURN cfg.single_artifact_required,    // = true
 - T14 `score_to_flow_conversion`
 - T15 `flow_to_score_conversion`
 
-### G3 — TPA Dual (14 theorem, `APT_TPA_Dual.lean`)
+### G3 — TPA Dual (9 theorem actual, `APT_TPA_Dual.lean`)
 
-- T16-T29: forward APT ↔ reverse TPA functorial duality (15 axiom + 14 theorem)
+- T16 `direction_dual_involutive`
+- T17 `mirror_apt_tpa`
+- T18 `mirror_tpa_apt`
+- T19 `mirror_bijective`
+- T20 `mirror_reverses_direction`
+- T21 `both_apt_tpa_progressive`
+- T22 `both_bounded_max_depth`
+- T23 `round_trip_identity`
+- T24 `five_canon_distinct_roles`
 
-**Build**: `cd MIND/lean_formalization && lean APT_Diffusion_Foundation.lean APT_Flow_Matching.lean APT_TPA_Dual.lean` → 29/29 PASS exit 0 (2026-05-14 확인).
+**Build**: `cd MIND/lean_formalization && lean APT_TPA_Dual.lean` → PASS exit 0 (2026-05-14 확인). G1/G2 also PASS.
+
+**Total**: 24 theorem (NOT 29 as RFC claims). G3 deficit = 5 missing (T25-T29 RFC asserts; actual file has only T16-T24). RFC reconciliation sprint required.
 
 ---
 
