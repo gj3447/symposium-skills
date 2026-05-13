@@ -2,9 +2,9 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.2",
-  "git_head_short": "3b1463e",
-  "merkle_root": "5fd95a03e3cb42f8c5ae8305c5f09d72fc05a70ca1c87e5fb82d759ee999f9fe",
-  "skills_count": 28,
+  "git_head_short": "dd235dc",
+  "merkle_root": "0e3deb40d6b514f8912d8c7c9081048cb48f9b3a16b7d9866cefc69356870d7c",
+  "skills_count": 31,
   "skills": [
     {
       "name": "88-taliban",
@@ -18,7 +18,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "4f3375f031136b2d42445035d8fa153393cd001c"
+      "git_tree_sha": "75b6a6a5091b3ea17794146f11c8af785e4615bc"
     },
     {
       "name": "apt-cleanup",
@@ -70,6 +70,13 @@
       "git_tree_sha": "1e04e1224351597fe523d375ea7d4b2638e080e4"
     },
     {
+      "name": "build-agent",
+      "version": "0.1.0-draft",
+      "kg_ref": "ATOM_Skill_build_agent_v28",
+      "channel": "draft",
+      "git_tree_sha": null
+    },
+    {
       "name": "db-query",
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_db_query",
@@ -84,11 +91,25 @@
       "git_tree_sha": "26351fdffe82ac8a18af18928a95704daeb578ed"
     },
     {
+      "name": "design-agent",
+      "version": "0.1.0-draft",
+      "kg_ref": "ATOM_Skill_design_agent_v28",
+      "channel": "draft",
+      "git_tree_sha": null
+    },
+    {
       "name": "docker-logs",
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_docker_logs",
       "channel": "stable",
       "git_tree_sha": "d282608d65e285a9bb7f409c3fd4e6bd6311d9c8"
+    },
+    {
+      "name": "fix-agent",
+      "version": "0.1.0-draft",
+      "kg_ref": "ATOM_Skill_fix_agent_v28",
+      "channel": "draft",
+      "git_tree_sha": null
     },
     {
       "name": "harness",
