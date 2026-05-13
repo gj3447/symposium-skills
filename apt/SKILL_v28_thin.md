@@ -7,15 +7,25 @@ status: PRELIMINARY
 draft_of: rfc-apt-parsimony-pass-2026-05-14
 description: >
   APT v28 thin orchestrator (draft) — practitioner-facing methodology only.
-  Research artifact (5-canon convergence / Lean theorems / 27-version history / Hyperedge
-  progression) preserved under THEORY/APT/ but NOT loaded by this skill.
-  6 operational features: SA bootstrap / SP decomposition / ST crystallization (informal-
-  ok in fast_path, typed in full_cycle) / SCW = TDD + KG refs / External adversarial review /
-  Cleanup 4-tool ratchet. 5 enforced HARD RULES (down from 16 in v27), 3 rigor modes
-  (fast_path default), 1 worked example reference.
+  PARSIMONY: research artifact (5-canon convergence / Lean theorems / 27-version history /
+  Hyperedge progression) preserved under THEORY/APT/ but NOT loaded by this skill.
+  REACTIVATION: 6 lost operational features from v12+v18+v20 (diffusion AutoMode + Multi-
+  Taliban + FractalFeedback + DesignAgent/TalibanSquad/BuildAgent/FixAgent split +
+  UserPrinciple_SelfCorrecting + KG-as-IPC + Descent Validation depth∝check density) +
+  4 dormant seeds (sigma-auto-reviewer / sibling-independence-pragmatic / mcp-subagent-proxy
+  / scaling-async-gate, all dormant since 2026-04-17).
+  6 operational features: SA bootstrap / SP decomposition with diffusion-style descent /
+  ST crystallization (informal-ok in fast_path, typed in full_cycle) / SCW = TDD + KG refs /
+  Multi-Taliban descent validation (NOT just endpoint check) / Cleanup 4-tool ratchet.
+  5 enforced HARD RULES (down from 16 in v27), 3 rigor modes (fast_path default).
+  Subagent architecture: Orchestrator (this skill) + 4 specialist roles (DesignAgent /
+  TalibanSquad / BuildAgent / FixAgent), KG-as-IPC, clean context per spawn, jaebaeman
+  하노이탑 recursive descent for context-window-bound problems.
   Invoke when: "apt", "start work on", "implement", "develop", "what phase am I in", "auto mode".
   Enforces: per-branch phase detection, 5 enforced HRs (each with Cypher gate), external
-  reviewer mandate before PROGRESSIVE Lakatos verdict, fast_path Lakatos verdict ceiling.
+  reviewer mandate before PROGRESSIVE Lakatos verdict, fast_path Lakatos verdict ceiling,
+  Multi-Taliban descent validation at SP, FixAgent auto-correction loop (user σ_oracle only
+  at final exit).
 ---
 
 # APT v28 (draft) — Thin Production Methodology
@@ -178,11 +188,27 @@ MERGE (sa)-[:HAS_ROOT]->(root)
 
 **Mandatory**: 5 core fields (objective / definition / keyAssertion / c_s_predicate / context_budget_total) **AND** Root Span (HR1).
 
-### §4.2 SP — Span decomposition
+### §4.2 SP — Span decomposition (**diffusion-style descent**, reactivated from v12+v20)
 
 D(S) recurrence until every leaf satisfies C(S) 5-predicate (= AtomicSpan). Branches are N:N DAG nodes, not a strict tree. depth=0 (Root) → depth=1 (L1) → depth=2 (L2) → ... → AtomicSpan.
 
+**Diffusion frame (v12 AutoMode reactivation)**: think of SP as a denoising sampler. Each depth step refines from coarse (Root) to fine (AtomicSpan). Sibling spans at the same depth run in parallel — they share context via **KG-as-IPC** (no direct subagent communication; KG = Unix pipe). Refinement metric is *continuous score-like* in spirit (does this leaf satisfy C(S)? how much margin?) even though the C(S) gate is binary at decision time.
+
+**Descent Validation (v20 reactivation)**: Taliban critic dispatch is **depth-proportional**, not endpoint-only.
+- depth 0 → 1: single Taliban critic on Root decomposition
+- depth N → N+1: 1 Taliban subagent per ~5 atoms (`seed-apt-fix-sigma-auto-reviewer-2026-04-17` reactivated)
+- AtomicSpan reached: final TalibanSquad UNION (4 lens: constitutional+longinus+solid+lakatos)
+
+This makes APT/diffusion analogy operational: the score function is checked *along the trajectory*, not just at t=T.
+
 **Atomic span = approximately 1 module ≈ 1 file ≈ 200-500 LOC** (`cfg.vibe_coding_sweet_min/max` resolves the exact range).
+
+**Sibling coordination** (departing from strict A3 SiblingIndependence axiom — see `lesson-apt-generative-modeling-canon-missing-2026-05-14`): sibling spans MAY share gradient via:
+- shared KG INFORMED_BY links
+- test coverage overlap detection (`seed-apt-fix-sibling-independence-pragmatic-2026-04-17` reactivated)
+- L2 sibling kernel consolidation (cross-attention analog at the kernel level)
+
+A3 strict independence is preserved as the *default* but relaxed when sibling cross-talk demonstrably improves convergence. Marked as PRELIMINARY axiom revision pending external Taliban math-lens review.
 
 ### §4.3 ST — Crystallization (rigor-aware)
 
@@ -304,4 +330,86 @@ MATCH (mic:MethodologyIntegrationContract {name:'MIC_v1'})-[:HAS_SLOT]->(s)
 RETURN s.name, s.currentConcrete
 ```
 
-# KG roots: ATOM_Skill_apt_orchestrator_v28_draft, rfc-apt-parsimony-pass-2026-05-14, MIC_v1
+---
+
+## §12 Subagent Architecture (reactivated from v18, was dropped in v22-v27)
+
+Per `APT18_SubagentArchitecture` KG node — Main agent (this skill) ≠ doer. Main agent is the Orchestrator only; actual work is delegated to 4 specialist subagent roles.
+
+| Role | Skill | Responsibility | Spawn trigger |
+|---|---|---|---|
+| **Orchestrator** | `/apt` (this skill) | phase detection, delegation, result collection. Does NOT directly write KG nodes or create Spans. | user invocation |
+| **DesignAgent** | (new — to spec out, sibling of /apt-sp + /apt-st) | span decomposition + Contract crystallization | SA→SP transition |
+| **TalibanSquad** | `taliban-ensemble-critic` agent (precursor exists) | parallel multi-lens adversarial review (constitutional + longinus + solid + lakatos) | every Descent Validation step + every gate transition |
+| **BuildAgent** | (new — sibling of /apt-scw) | TDD implementation (RED → GREEN → REFACTOR) | ST→SCW transition |
+| **FixAgent** | (new — implements `UserPrinciple_SelfCorrecting_APT`) | Taliban finding auto-correction loop. Receives BlockerFinding nodes, proposes patches, re-dispatches to TalibanSquad for verification. | any BlockerFinding emitted by TalibanSquad |
+
+User intervention boundary: σ_oracle at final exit + direction setting at start. **NOT at every gate.** If user has to manually catch every defect (as in this session's "너무 빨리" / "kg 잘 연결되었냐"), FixAgent is failing — system is not self-correcting. This is the K-01 BLOCKER pattern at framework level.
+
+### §12.1 KG-as-IPC discipline (reactivated `apt-cw-kg-as-ipc`)
+
+**Subagents do not communicate directly.** All inter-subagent state goes through KG. Pattern:
+
+```
+DesignAgent     →  writes  →  :AptSpan + :AptContract nodes
+                                        │
+TalibanSquad    ←  reads   ←  same nodes; writes :BlockerFinding + :ValidationResult
+                                        │
+FixAgent        ←  reads   ←  :BlockerFinding; writes :ProposedPatch + :CorrectionAttempt
+                                        │
+TalibanSquad    ←  reads   ←  :ProposedPatch; writes new :ValidationResult (verify loop)
+                                        │
+BuildAgent      ←  reads   ←  :AptContract + :ValidationResult (APPROVED); writes :SourceCodeNode
+```
+
+KG = Unix pipe equivalent. Parent Orchestrator does Pre-fetch (KG seed extraction) → Dispatch (subagent fire) → Collect (subagent JSON results) → Write (batch MERGE) — exactly the jaebaeman 4-phase SOP.
+
+### §12.2 Spawn sequence (reactivated `apt-cw-spawn-sequence`)
+
+Every subagent spawn starts from **clean context** (no inheritance from parent). Parent does Pre-fetch:
+
+```cypher
+// Pre-fetch: collect KG seed for this subagent
+MATCH (ts:SubagentTaskSpec {skill: $target_skill, status: 'READY'})
+OPTIONAL MATCH (ts)-[:USES_CONTRACT]->(c:AptContract)
+OPTIONAL MATCH (ts)-[:INFORMED_BY]->(k:KnowledgeNode)
+RETURN ts.name, ts.role, ts.system_prompt_seed,
+       collect(DISTINCT c.name) AS contracts,
+       collect(DISTINCT k.name) AS knowledge_seeds
+```
+
+Spawn command (Agent tool with subagent_type matching the role) — receives only the Pre-fetch payload. No conversation context inheritance.
+
+---
+
+## §13 Jaebaeman 하노이탑 — recursive descent for context-window-bound problems
+
+When Span decomposition depth exceeds parent context capacity, escalate via **jaebaeman 하노이탑** pattern (per KG `재배맨_하노이탑`):
+
+> 컨텍스트 윈도우 한계를 점화식으로 돌파하는 agent 계층 구조. CHU 전체에 접근 가능한 최상위 agent = 비행기맨.
+
+Translated to operational terms:
+- L0 (root): Orchestrator with full sprint view
+- L1: per-branch DesignAgent, sees only assigned branch
+- L2: per-sub-branch DesignAgent recursively spawned for deep decomposition
+- ...
+- L_max: AtomicSpan-level BuildAgent
+
+Each level operates within its own context window. KG-as-IPC carries state across levels. The recursion is the **diffusion sampler depth**: deeper = more refined = more parallel branches.
+
+`seed-apt-fix-scaling-async-gate-2026-04-17` (reactivated) provides the runtime: async Taliban gate queue + executor pool ≥3 + lazy jaebaeman stream for 100+ atom SP.
+
+---
+
+## §14 Honest limitations of reactivation
+
+- **DesignAgent / BuildAgent / FixAgent subagents do not yet exist**. Only `taliban-ensemble-critic` exists as TalibanSquad precursor. v28 promotion requires building these 3.
+- **A3 SiblingIndependence axiom relaxation is PRELIMINARY** — needs external Taliban math-lens (88-taliban or constitutional+mathematical UNION) verdict before CANONICAL.
+- **4 dormant seeds reactivated but not implemented** — sigma-auto-reviewer / sibling-independence-pragmatic / mcp-subagent-proxy / scaling-async-gate are referenced here but their implementation is a separate sprint.
+- **Diffusion frame is analogy-strength, not formal** — the 7 missing generative-modeling canon (Sohl-Dickstein 2015 / Ho 2020 DDPM / Song 2021 / Karras 2022 EDM / Lipman 2023 Flow Matching / Hoogeboom 2023 Cold Diffusion / Albergo 2023 Stochastic Interpolants) are *cited* but not yet *absorbed as Lean theorems* (cf. APT's existing 141 Lean theorems are all in the philosophy-of-correctness canon family).
+- **Same self-application gap as v27** — these reactivations are described by the same agent (Claude) that authored the regression analysis. External KG audit (separate agent, separate sprint) needed before v28 promotion.
+
+# KG roots: ATOM_Skill_apt_orchestrator_v28_draft, rfc-apt-parsimony-pass-2026-05-14,
+#           lesson-apt-degenerated-parallel-jaebaeman-2026-05-14, MIC_v1,
+#           재배맨_하노이탑, APT18_SubagentArchitecture, apt-cw-kg-as-ipc,
+#           apt-cw-spawn-sequence, UserPrinciple_SelfCorrecting_APT
