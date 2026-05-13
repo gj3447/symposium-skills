@@ -11,7 +11,7 @@ description: >
   M3 shared-object sibling (Taliban M1 equivocation resolved) +
   M4 smooth ODE transitions (instead of discrete SA→SP→ST→SCW) +
   M5 forward-reverse symmetric (APT+TPA unified).
-  24 Lean theorem formal floor (G1 9 + G2 6 + G3 9, MIND/lean_formalization/APT_Diffusion_*.lean). NOTE: RFC §3 claims 29 — actual grep shows 24 (G3 has 9, not 14). RFC count to be corrected separate sprint.
+  29 Lean theorem formal floor (G1 9 APT_Diffusion_Foundation + G2 6 APT_Flow_Matching + G3 14 APT_Structural_Refinement, all Mathlib-free PASS exit 0).
   Honest load-bearing limitation: shared-object sibling assumes UNIFIED artifact.
   Multi-file boundary forces back to v28-like decomposition.
   Invoke when: single-artifact problem + continuous metric available + smooth transition required.
@@ -26,7 +26,7 @@ description: >
 This skill is **EXPERIMENTAL** — `channel: experimental`, NOT production. Production users should use `/apt` (v27 stable).
 
 **Status fields**:
-- `formal_floor`: 24 Lean theorems PASS (Mathlib-free) ✓ — *RFC §3 claims 29; actual grep shows 24, G3 TPA_Dual has 9 not 14. Discrepancy load-bearing — separate sprint to reconcile.*
+- `formal_floor`: 29 Lean theorems PASS (Mathlib-free) ✓ — G1 APT_Diffusion_Foundation 9 + G2 APT_Flow_Matching 6 + G3 **APT_Structural_Refinement** 14. (Prior commit 997196b mis-identified G3 as `APT_TPA_Dual.lean` — that's a sibling file, NOT in RFC §3.3. RFC was always correct. Self-correction logged: `lesson-aptd-drift-correction-self-correction-2026-05-14`.)
 - `runtime`: NOT implemented (skill scaffold only)
 - `dogfood`: 0 cycles run on real codebase
 - `migration_plan`: per RFC §6 (NOT yet executed)
@@ -75,9 +75,9 @@ RETURN cfg.single_artifact_required,    // = true
 
 ---
 
-## 🔬 Formal floor — 24 Lean theorem reference (RFC claims 29 — drift)
+## 🔬 Formal floor — 29 Lean theorem reference (RFC §3 verified)
 
-> **honest correction 2026-05-14**: RFC §3 claims "29 Lean theorem (G1 9 + G2 6 + G3 14)". Direct `grep -cE "^theorem|^lemma"` on the 3 files gives **24** (G1 9 + G2 6 + G3 **9**). G3 TPA_Dual.lean has 9, not 14. RFC author count drift — separate reconciliation sprint required.
+> **self-correction 2026-05-14**: prior commit 997196b claimed "RFC drift: 29→24" — that was a *meta-drift*. The correct G3 file is `APT_Structural_Refinement.lean` (14 theorems), NOT `APT_TPA_Dual.lean` (9 theorems, separate sibling file in M5 symmetry context). RFC §3 was always correct: G1 9 + G2 6 + G3 14 = 29. Lesson: `lesson-aptd-drift-correction-self-correction-2026-05-14` (memory feedback_check_state_first violated *twice* — once when claiming "29 unverified", second when "correcting" with wrong file reference).
 
 
 ### G1 — Diffusion Foundation (9 theorem, `APT_Diffusion_Foundation.lean`)
@@ -101,21 +101,26 @@ RETURN cfg.single_artifact_required,    // = true
 - T14 `score_to_flow_conversion`
 - T15 `flow_to_score_conversion`
 
-### G3 — TPA Dual (9 theorem actual, `APT_TPA_Dual.lean`)
+### G3 — Structural Refinement (14 theorem, `APT_Structural_Refinement.lean`, Yao 2023 ToT + Madaan 2023 Self-Refine + Bai 2022 Constitutional)
 
-- T16 `direction_dual_involutive`
-- T17 `mirror_apt_tpa`
-- T18 `mirror_tpa_apt`
-- T19 `mirror_bijective`
-- T20 `mirror_reverses_direction`
-- T21 `both_apt_tpa_progressive`
-- T22 `both_bounded_max_depth`
-- T23 `round_trip_identity`
-- T24 `five_canon_distinct_roles`
+- S1 `tot_branching_terminates` — SP descent termination
+- S2 `tot_leaf_size_one` — AtomicSpan boundary
+- S3 `tot_empty_branch_size` — vacuous boundary
+- S4 `self_refine_monotone_improvement` — FixAgent/RefineAgent monotone
+- S5 `self_refine_invalid_critique_no_guarantee` — honest invalid-critique limit
+- S6 `constitutional_principles_compose` — Constitutional lens composition
+- S7 `apt_sp_is_tot_with_kg_pruning` — SP = ToT + KG pruning
+- S8 `apt_atomic_maps_to_leaf` — AtomicSpan ↔ ToT leaf
+- S9 `apt_fix_agent_is_self_refine` — FixAgent = Self-Refine
+- S10 `apt_fix_agent_improves_when_valid` — RefineAgent guarantee
+- S11 `apt_taliban_squad_constitutional` — TalibanSquad lens UNION
+- S12 `taliban_lens_names_distinct` — lens distinctness
+- S13 `apt_structural_canon_complete` — 3-canon hyperedge complete
+- S14 `apt_three_canon_distinct` — pairwise distinct
 
-**Build**: `cd MIND/lean_formalization && lean APT_TPA_Dual.lean` → PASS exit 0 (2026-05-14 확인). G1/G2 also PASS.
+**Build**: `cd MIND/lean_formalization && lean APT_Structural_Refinement.lean APT_Diffusion_Foundation.lean APT_Flow_Matching.lean` → 29/29 PASS exit 0 (2026-05-14 재확인).
 
-**Total**: 24 theorem (NOT 29 as RFC claims). G3 deficit = 5 missing (T25-T29 RFC asserts; actual file has only T16-T24). RFC reconciliation sprint required.
+**Sibling file (NOT in RFC §3 G1/G2/G3)**: `APT_TPA_Dual.lean` (9 theorem T16-T24) provides M5 forward-reverse mirror in a separate independent file. *Optional* additional formal evidence, not part of the 29-theorem RFC §3 backbone.
 
 ---
 
