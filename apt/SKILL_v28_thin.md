@@ -203,12 +203,18 @@ This makes APT/diffusion analogy operational: the score function is checked *alo
 
 **Atomic span = approximately 1 module ≈ 1 file ≈ 200-500 LOC** (`cfg.vibe_coding_sweet_min/max` resolves the exact range).
 
-**Sibling coordination** (departing from strict A3 SiblingIndependence axiom — see `lesson-apt-generative-modeling-canon-missing-2026-05-14`): sibling spans MAY share gradient via:
-- shared KG INFORMED_BY links
-- test coverage overlap detection (`seed-apt-fix-sibling-independence-pragmatic-2026-04-17` reactivated)
-- L2 sibling kernel consolidation (cross-attention analog at the kernel level)
+**Sibling coordination** — **A3 strict independence is KEPT** (Taliban ensemble REJECT verdict 2026-05-14, `taliban-a3-axiom-relaxation-2026-05-14`, coverage 0.42, 5 BLOCKER).
 
-A3 strict independence is preserved as the *default* but relaxed when sibling cross-talk demonstrably improves convergence. Marked as PRELIMINARY axiom revision pending external Taliban math-lens review.
+The relaxation was proposed (referencing diffusion cross-attention) but rejected with the following Taliban findings:
+- **L1 ad-hoc rescue** — contradiction-to-conclusion flip; Lakatos degenerating problemshift
+- **L2 no novel prediction** — "may improve convergence" is not falsifiable
+- **L3 predecessor poisoned** — `seed-apt-fix-sibling-dep-pragmatic-carveout-2026-04-17` is TAINTED, not resolved
+- **M1 equivocation** — APT-sibling (distinct decomposition units) ≠ Diffusion-sibling (denoising steps on *same* tensor). Category error.
+- **S1 SRP/OCP collapse** — A3 is the structural guarantor for isolated reasoning. Removing it breaks Contract-as-interface (APT19 doctrine).
+
+**Recommended path** (Taliban verdict): if generative-modeling grounding is desired, route to **separate APT-D variant track** per `rfc-seed-apt-diffusion-grounding-2026-05-14`. Do NOT surgically remove A3 while keeping the rest of APT discrete.
+
+Sibling spans remain independent under A3 in v28 unless and until a coherent APT-D package is built and externally validated.
 
 ### §4.3 ST — Crystallization (rigor-aware)
 
@@ -408,6 +414,97 @@ Each level operates within its own context window. KG-as-IPC carries state acros
 - **4 dormant seeds reactivated but not implemented** — sigma-auto-reviewer / sibling-independence-pragmatic / mcp-subagent-proxy / scaling-async-gate are referenced here but their implementation is a separate sprint.
 - **Diffusion frame is analogy-strength, not formal** — the 7 missing generative-modeling canon (Sohl-Dickstein 2015 / Ho 2020 DDPM / Song 2021 / Karras 2022 EDM / Lipman 2023 Flow Matching / Hoogeboom 2023 Cold Diffusion / Albergo 2023 Stochastic Interpolants) are *cited* but not yet *absorbed as Lean theorems* (cf. APT's existing 141 Lean theorems are all in the philosophy-of-correctness canon family).
 - **Same self-application gap as v27** — these reactivations are described by the same agent (Claude) that authored the regression analysis. External KG audit (separate agent, separate sprint) needed before v28 promotion.
+
+---
+
+## §15 Orchestrator Dispatch Protocol
+
+How the Orchestrator (this `/apt` skill) operationalizes the jaebaeman 4-phase SOP to spawn the 4 specialist subagents (DesignAgent / TalibanSquad / BuildAgent / FixAgent).
+
+### §15.1 The 4-phase SOP at orchestrator level
+
+**Pre-fetch** (Cypher seed extraction — parent does KG read for subagent):
+
+```cypher
+MATCH (ts:SubagentTaskSpec {skill: $target_skill, status: 'READY'})
+OPTIONAL MATCH (ts)-[:USES_CONTRACT]->(c:AptContract)
+OPTIONAL MATCH (ts)-[:INFORMED_BY]->(k:KnowledgeNode)
+OPTIONAL MATCH (ts)-[:TARGETS_SPAN]->(span:AptSpan)
+RETURN ts.name AS seed, ts.role, ts.system_prompt_seed, ts.inputSchema,
+       collect(DISTINCT c {.name, .input_type, .output_type, .pre, .post}) AS contracts,
+       collect(DISTINCT k.name) AS knowledge_seeds,
+       collect(DISTINCT span.name) AS target_spans
+```
+
+**Dispatch** (Agent tool — clean context, 5-line template):
+
+```
+Agent(subagent_type=$role,
+      model=ts.model or 'haiku',
+      run_in_background=(N>1),
+      prompt="역할: {ts.role}\n씨앗: {ts.name}\n계약: {contracts_json}\n지식_seed: {knowledge_json}\n출력: {ts.outputSchema} JSON 단일 블록")
+```
+
+**Collect** (single source-of-truth JSON schema each specialist returns):
+
+```json
+{
+  "subagent_role": "DesignAgent|TalibanSquad|BuildAgent|FixAgent",
+  "seed_id": "<SubagentTaskSpec.name>",
+  "kg_writes": [{"label": "AptSpan", "name": "...", "props": {...}}],
+  "kg_edges": [{"from": "...", "to": "...", "rel": "..."}],
+  "findings": [{"kind": "Blocker|Observation|Patch", "summary": "...", "axis": "..."}],
+  "verdict": "APPROVED|NEEDS_REWORK|REJECT|null",
+  "evidence_refs": ["..."]
+}
+```
+
+**Write** (parent batch MERGE — single transaction, idempotent):
+
+```cypher
+UNWIND $results AS r
+UNWIND r.kg_writes AS w
+CALL apoc.merge.node([w.label], {name: w.name}, w.props, w.props) YIELD node
+WITH r
+UNWIND r.kg_edges AS e
+MATCH (a {name: e.from}), (b {name: e.to})
+CALL apoc.merge.relationship(a, e.rel, {}, {}, b) YIELD rel
+WITH r
+MATCH (ts:SubagentTaskSpec {name: r.seed_id})
+SET ts.status = 'COLLECTED', ts.collectedAt = datetime()
+```
+
+### §15.2 Dispatch matrix
+
+```
+SA → SP transition:   DesignAgent dispatch (span decomposition)
+SP → ST transition:   DesignAgent (Contract drafting) → TalibanSquad (gate)
+ST → SCW transition:  BuildAgent dispatch (TDD RED/GREEN/REFACTOR)
+Any BlockerFinding:   FixAgent dispatch (loop until verdict≠REJECT or max_attempts)
+Cleanup gate:         no subagent — direct uvx tool ratchet (§6)
+```
+
+### §15.3 Parallel dispatch — single-message multi-Agent pattern
+
+When K≥3 sibling spans need the same subagent role, the Orchestrator spawns them as **K Agent tool calls in a single response message**. KG-as-IPC means parallel subagents do not coordinate at runtime — they read/write **disjoint KG node sets** (each seed's `TARGETS_SPAN` partition is disjoint by construction).
+
+GH#29181 self-check: count(Agent invocations emitted) == count(SubagentTaskSpec with status='DISPATCHED' in this turn). If intent N ≠ actual N, the Orchestrator failed to fan out — log as `lesson-apt-degenerated-parallel-jaebaeman-2026-05-14` instance.
+
+### §15.4 Cost discipline (per cfg.rigor_level)
+
+- **fast_path**: 1 DesignAgent (Root span only) + 1 TalibanSquad (2-lens minimum). No BuildAgent fan-out — author implements directly under SCW guidance.
+- **full_cycle**: 1 DesignAgent per branch (depth-proportional, see §4.2 Descent Validation) + 1 BuildAgent per AtomicSpan + FixAgent on-demand per BlockerFinding.
+- **methodology_audit**: full_cycle + `88-taliban` TalibanSquad invocation with mathematical lens (113-lens batch, see jaebaeman §소비자별 특화).
+
+### §15.5 Honest limitations
+
+- **DesignAgent / BuildAgent / FixAgent are draft skills** (§12 already noted). The dispatch templates above are *target shape*, not currently runnable as-is. Only `taliban-ensemble-critic` (TalibanSquad precursor) exists.
+- **Hard-coded `subagent_type` strings are anti-pattern**. Prefer `MIC_v1.SubagentSeeder` slot resolve so role names rebind without editing this section. Current literals (`DesignAgent` etc.) are placeholders for slot `currentConcrete`.
+- **No saga compensation wired here** — jaebaeman v2.1 `compensating_action` slot exists in TaskSpec schema but this protocol does not yet invoke it on collect-failure. Default behavior = `best_effort` (partial results + warning).
+
+# KG: dispatch-protocol-apt-v28-2026-05-14, MIC_v1.SubagentSeeder
+
+---
 
 # KG roots: ATOM_Skill_apt_orchestrator_v28_draft, rfc-apt-parsimony-pass-2026-05-14,
 #           lesson-apt-degenerated-parallel-jaebaeman-2026-05-14, MIC_v1,

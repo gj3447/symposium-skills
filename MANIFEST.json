@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-11T14:34:10+09:00",
-  "git_head_commit": "3b1463e61eb25610955b959d647e34a134dd2454",
-  "git_head_short": "3b1463e",
+  "generatedAt": "2026-05-14T01:23:19+09:00",
+  "git_head_commit": "dd235dc7dfb71169811e577da05c45f75a5a5b13",
+  "git_head_short": "dd235dc",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
-  "skills_count": 28,
-  "merkle_root": "5fd95a03e3cb42f8c5ae8305c5f09d72fc05a70ca1c87e5fb82d759ee999f9fe",
+  "skills_count": 31,
+  "merkle_root": "0e3deb40d6b514f8912d8c7c9081048cb48f9b3a16b7d9866cefc69356870d7c",
   "skills": [
     {
       "name": "88-taliban",
@@ -22,7 +22,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "4f3375f031136b2d42445035d8fa153393cd001c"
+      "git_tree_sha": "75b6a6a5091b3ea17794146f11c8af785e4615bc"
     },
     {
       "name": "apt-cleanup",
@@ -81,6 +81,14 @@
       "git_tree_sha": "1e04e1224351597fe523d375ea7d4b2638e080e4"
     },
     {
+      "name": "build-agent",
+      "path": "build-agent",
+      "version": "0.1.0-draft",
+      "kg_ref": "ATOM_Skill_build_agent_v28",
+      "channel": "draft",
+      "git_tree_sha": null
+    },
+    {
       "name": "db-query",
       "path": "db-query",
       "version": "1.0.0",
@@ -97,12 +105,28 @@
       "git_tree_sha": "26351fdffe82ac8a18af18928a95704daeb578ed"
     },
     {
+      "name": "design-agent",
+      "path": "design-agent",
+      "version": "0.1.0-draft",
+      "kg_ref": "ATOM_Skill_design_agent_v28",
+      "channel": "draft",
+      "git_tree_sha": null
+    },
+    {
       "name": "docker-logs",
       "path": "docker-logs",
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_docker_logs",
       "channel": "stable",
       "git_tree_sha": "d282608d65e285a9bb7f409c3fd4e6bd6311d9c8"
+    },
+    {
+      "name": "fix-agent",
+      "path": "fix-agent",
+      "version": "0.1.0-draft",
+      "kg_ref": "ATOM_Skill_fix_agent_v28",
+      "channel": "draft",
+      "git_tree_sha": null
     },
     {
       "name": "harness",

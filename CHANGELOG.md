@@ -23,11 +23,22 @@
 - *(a6)* L2 inline pre-build invariant in skill-build-manifest.py ([`5cb569c`](#5cb569c3b6c824e9444306af8cdaaba99072d8bf))
 - *(longinus)* Launchd plist for sha256 daemon (1h verify schedule) ([`533f7e7`](#533f7e731f5f4563b0ac3760c07294dd94a93a5c))
 - *(skills)* Progressive Disclosure refactor across all weapon + apt + tpa skills ([`72116a3`](#72116a3eebfda0bb052d0db3b2e8316731395009))
+- *(apt v27 PD v3)* Full _world.md → _common/ + phase references split ([`be2dbe4`](#be2dbe45dee231c8bd45d0b0ff0527e8c5f4e631))
+- *(_common)* Academic Grounding sections to all 7 shared concept files ([`3b1463e`](#3b1463e61eb25610955b959d647e34a134dd2454))
+- *(bin)* Cypher_validate.sh — extract markdown cypher + EXPLAIN syntax check (PROM 16 A3, 146/146 PASS) ([`f89c5b5`](#f89c5b563f8ed2a69b04da1b014d5bb199a271e4))
+- *(bin)* Kg-backup-daily.sh — APOC daily export + 7d retention + sha256 metadata (PROM 16 A10) ([`66ffae3`](#66ffae39412caaa5715aec2f9b780123e6d5b8a5))
+- *(bin)* Kg-mirror-monthly.sh — TIER 3 minio offsite (PROM 16 A10, monthly cron) ([`5aeab67`](#5aeab6710de8ab0b7564b135aa8ce19d08f00eee))
+- *(apt v28-draft)* SKILL_v28_thin.md parallel draft — per rfc-apt-parsimony-pass-2026-05-14 ([`be59666`](#be59666c5c1aa7c1fc505543a639ee4c166e7042))
+- *(apt v28-draft)* Reactivate v18 SubagentArchitecture + v12 diffusion frame + v20 descent validation ([`dd235dc`](#dd235dc7dfb71169811e577da05c45f75a5a5b13))
 
 ### Fixed
 
 - *(longinus)* Multi-FS_BASE fallback + status classifier (91.2% coverage) ([`c2b0894`](#c2b0894d976373283750c8b9ce46082bd4a29af7))
 - *(taliban)* Bind sampler to real KG :Lens codes ([`f8effb2`](#f8effb21b89414ed8e8b9036bc177a7aaf2ce4dc))
+
+### Performance
+
+- *(bin)* Cypher_validate.sh v2 — single cypher-shell JVM session (146 blocks, 5.9s — 60x faster than v1) ([`0eeb3da`](#0eeb3da524fbec5fa38df4aaac145c666e836037))
 
 ### Changed
 
@@ -41,6 +52,8 @@
 - *(longinus)* Bump query LIMIT 1000 → 5000 (cross-canon scale) ([`d0ecc48`](#d0ecc486079c58a34fede878297748bd755f6e35))
 - *(manifest)* Refresh index.json post-PD-refactor (head 72116a3) ([`22a503d`](#22a503d99af5ad7487770ad1403ee3b9622d59f1))
 - *(manifest)* Merkle-check auto-refresh index.json (git_head 22a503d, harness v3.2.0 ratchet) ([`c6198aa`](#c6198aa633ab2bf61433dead1396bf0a383f0efd))
+- *(manifest)* Merkle-check auto-refresh post-PD-v3 (git_head be2dbe4) ([`bde5e58`](#bde5e582ce75f7b8db0d44d04a3293d7b5e21639))
+- *(manifest)* Rebuild post PD v3 (merkle 5fd95a03e3cb, head 3b1463e) ([`81e81f3`](#81e81f3c48d23b6ac2c764f1dfef30e5250d618d))
 
 ### Checkpoint
 
