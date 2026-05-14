@@ -304,7 +304,7 @@ Read `review.md` for an honest assessment of what the cycle got right and wrong 
 
 ## §9 History (link to full log)
 
-This SKILL.md tracks **last 5 versions only**. Full log: [`THEORY/APT/SKILL_VERSION_HISTORY.md`](../../THEORY/APT/SKILL_VERSION_HISTORY.md) (to be created on v28 promotion, contains 27 prior version annotations).
+This SKILL.md tracks **last 5 versions only**. Full log: `THEORY/APT/SKILL_VERSION_HISTORY.md` (to be created on v28 promotion, contains 27 prior version annotations).
 
 | Version | Date | Summary |
 |---|---|---|

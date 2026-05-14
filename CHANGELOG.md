@@ -41,6 +41,7 @@
 - *(taliban)* Bind sampler to real KG :Lens codes ([`f8effb2`](#f8effb21b89414ed8e8b9036bc177a7aaf2ce4dc))
 - *(apt-d)* RFC theorem count drift correction (29→24) ([`997196b`](#997196b5be848e8429c0fbc5f49c8af748671ec1))
 - *(apt-d)* Self-correct prior drift-correction — RFC §3 was correct (29 theorems verified) ([`51e2f13`](#51e2f139f68e915c36c5dcc7451390eb0341a75e))
+- *(prometheus)* V6.3 — Step 3-0 MANDATORY + Anti-Pattern Detection + Step 3-5 9-field bundle ([`7889067`](#7889067fe58b59200253e3ff61a494d88f7848a2))
 
 ### Performance
 

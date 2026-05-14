@@ -1,6 +1,6 @@
 # Part I: Foundations (기초)
 
-> **APT Foundations** | [← index.md](index.md)
+> **APT Foundations** | _legacy archive (2026-03-25). Current references: see [`../`](../).
 > 이 파일은 APT의 수학적·인식론적 기초를 다룬다.
 > This file covers APT's mathematical and epistemological foundations.
 
@@ -577,4 +577,4 @@ Automatically searches KG internal and web before decomposition to enrich Span's
 ---
 
 > **다음 파일 (Next):** Operations, Structural Patterns, Infrastructure, Practical Reference — 후속 파일에서 다룸.
-> [← index.md](index.md)
+> _legacy archive — current references: [`../`](../).

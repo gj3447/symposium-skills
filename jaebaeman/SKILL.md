@@ -2,7 +2,7 @@
 name: jaebaeman
 aliases: [SOP, subagent-orchestration-protocol]
 kg_ref: ATOM_Skill_jaebaeman
-version: "2.3.0"
+version: "2.4.0"
 channel: stable
 description: >
   재배맨(JaebaeMan) v2.1 — Subagent Orchestration Protocol (SOP). 모든 AI subagent 동작의 바닥(foundation).
@@ -312,6 +312,147 @@ def validate_agent_kwargs(kwargs: dict) -> None:
 
 ---
 
+## 🪵 v2.4 SubagentTaskSpec.depth NOT NULL Invariant (2026-05-14, p3 trigger)
+
+> Finding: 직전 `/prom` drift fix (commits `4fec91f` / `7889067` / `7fade00`) 측 KG UNWIND 시 apoc trigger `t_depth_not_null` 발동 → `50N00 p3 invariant: SubagentTaskSpec.depth must not be null` → seed 누락. 우회 = `depth=0` 사전 박기. spec 측 미문서 = silent fail 재발 위험.
+> Lesson: `lesson-jaebaeman-depth-invariant-2026-05-14`.
+
+### Invariant 정전
+
+```
+I_DEPTH : ∀ s:SubagentTaskSpec . s.depth IS NOT NULL ∧ s.depth ∈ [0, 3]
+          • root seed                  → depth = 0
+          • fractal child (Step 4.7)   → depth = parent.depth + 1
+          • depth > 3                  → hard fail (무한 증식 차단)
+```
+
+**apoc trigger `t_depth_not_null` (live on neo4j://data/neo4j-0)** 가 DB 측 enforce:
+
+```cypher
+// Trigger source (cypher-shell verified 2026-05-14)
+CYPHER 5 UNWIND keys($assignedNodeProperties) AS k
+ UNWIND $assignedNodeProperties[k] AS entry
+ WITH entry WHERE "SubagentTaskSpec" IN labels(entry.node) AND entry.node.depth IS NULL
+ CALL apoc.util.validate(true, "p3 invariant: SubagentTaskSpec.depth must not be null", [])
+ RETURN 0
+```
+
+→ `:SubagentTaskSpec` 노드의 *어떤* property assignment 든 `depth IS NULL` 이면 transaction rollback.
+→ 따라서 SET 절 어디서든 `depth=coalesce($depth, 0)` 또는 명시적 `depth=0` *필수*.
+
+### 모든 SubagentTaskSpec 관련 apoc trigger (audit 2026-05-14)
+
+| Trigger | Type | Enforce |
+|---|---|---|
+| `t_depth_not_null` | property assignment guard | depth NOT NULL (p3 invariant) — **본 절 정전화** |
+| `t_dep_unlock` | status transition (BLOCKED → READY) | DEPENDS_ON dep 모두 READY/COMPLETED 시 자동 unlock |
+| `t_failure_spawn` | failureCount ≥ 3 | adversarial sibling seed 자동 생성 (`SPAWNED_SIBLING` edge) |
+| `rf-audit-after-v2` | ResearchFinding create | TriggerAuditLogV2 자동 기록 |
+
+추가 constraint:
+- `p3_subagent_name_unique` (UNIQUENESS on `:SubagentTaskSpec(name)`)
+
+→ p1/p2/p4 invariant trigger 는 **현재 DB 측 미설치** (audit 결과). p3 만 active.
+→ 향후 p1 (sourceId FK), p2 (status enum), p4 (germinationMethod enum) 추가 시 동일 패턴으로 SKILL.md 측 amend.
+
+### 9-field Bundle 갱신 — `depth` NOT NULL 필드 추가
+
+v2.2 의 9-field core 는 *논리 spec*. 실제 DB 측 NOT NULL 강제 필드는 **9-field + `depth` + `status` + `createdAt`** 의 12 field. depth 는 9-field 의 *additive option* 으로 분류돼 있었으나 trigger 측 강제 → **schema-mandatory 격상**.
+
+| # | 필드 | 타입 | NULL? | 기본값 | 비고 |
+|---|------|------|-------|--------|------|
+| 1-9 | (9-field core) | (v2.2 표 그대로) | 각 필드별 | — | 정전 core |
+| +10 | **`depth`** | Int | **❌ NOT NULL** | **0** (root seed) | **`t_depth_not_null` trigger 강제 (p3)** |
+| +11 | `status` | enum String | NOT NULL | `READY` | lifecycle anchor |
+| +12 | `createdAt` | DateTime | NOT NULL | `datetime()` | provenance anchor |
+
+### 씨앗 생성 Cypher 정전 — `depth` 명시 mandatory
+
+**잘못된 패턴 (silent fail)**:
+
+```cypher
+// ❌ AP-D1: depth 누락 → t_depth_not_null 발동 → 50N00 rollback
+MERGE (s:SubagentTaskSpec {name: $name})
+SET s.skill = $skill, s.sourceId = $sid, s.status = 'READY', s.createdAt = datetime();
+```
+
+**올바른 패턴**:
+
+```cypher
+// ✓ root seed (대다수 경우)
+MERGE (s:SubagentTaskSpec {name: $name})
+SET s.skill = $skill,
+    s.sourceId = $sid,
+    s.displayName = $display,
+    s.taskType = $taskType,
+    s.targetDomain = $domain,
+    s.expectedOutcome = $outcome,
+    s.contractRef = $contractRef,
+    s.taskRef = $taskRef,
+    s.germinationMethod = $germ,
+    s.depth = coalesce($depth, 0),    // ← MANDATORY. 누락 시 NULL → trigger rollback
+    s.status = 'READY',
+    s.createdAt = datetime();
+
+// ✓ fractal child (Step 4.7 in-cycle germination)
+MATCH (parent:SubagentTaskSpec {name: $parent_seed})
+WITH coalesce(parent.depth, 0) + 1 AS newDepth
+WHERE newDepth <= 3                   // hard limit
+MERGE (s:SubagentTaskSpec {name: $name})
+SET s.depth = newDepth, ...;          // 나머지 동일
+```
+
+### Validation Gate (Phase 1 pre-MERGE)
+
+```python
+def validate_seed_bundle(bundle: dict) -> None:
+    if bundle.get('depth') is None:
+        raise SOPValidationError(
+            'p3 invariant: SubagentTaskSpec.depth must not be null. '
+            'Set depth=0 for root seed or depth=parent.depth+1 (≤3) for fractal child. '
+            'See SKILL.md §v2.4.'
+        )
+    if not (0 <= bundle['depth'] <= 3):
+        raise SOPValidationError(
+            f'depth out of range [0,3]: got {bundle["depth"]}. '
+            'depth>3 is fractal infinite-expansion (Phase 4.7 hard limit).'
+        )
+```
+
+### Error Variants 표 보강 (v2.2 E1/E2/E3 + E4 추가)
+
+| Code | 이름 | 조건 | 복구 |
+|------|------|------|------|
+| E1 | `OrphanSeed` | (v2.2) | (v2.2) |
+| E2 | `MissingHasSeedEdge` | (v2.2) | (v2.2) |
+| E3 | `MultipleSeedPerAtomicSpan` | (v2.2) | (v2.2) |
+| **E4** | **`DepthInvariantViolation` (p3)** | **`s.depth IS NULL` OR `s.depth > 3`** | **MERGE 절에 `depth = coalesce($depth, 0)` 명시 + fractal hard limit. Trigger `t_depth_not_null` 발동 시 50N00 rollback** |
+
+### Backfill (legacy seeds with NULL depth)
+
+```cypher
+// 1. Audit
+MATCH (s:SubagentTaskSpec) WHERE s.depth IS NULL
+RETURN count(s) AS missing_depth, collect(s.name)[..10] AS sample;
+
+// 2. Backfill — root seed assumption (sourceRF/sourceId 가 ResearchFinding 또는 AtomicSpan 1차 anchor)
+MATCH (s:SubagentTaskSpec) WHERE s.depth IS NULL
+SET s.depth = 0,
+    s.depth_backfilled_at = datetime(),
+    s.depth_backfilled_reason = 'p3 invariant v2.4 migration 2026-05-14';
+
+// 3. (옵션) 프랙탈 child 감지 후 정정
+MATCH (parent:SubagentTaskSpec)-[:GERMINATED_FROM]->(:ResearchFinding)<-[:HAS_RESEARCH]-(:Lesson)<-[:SPAWNED_FROM]-(child:SubagentTaskSpec)
+WHERE child.depth = 0
+SET child.depth = coalesce(parent.depth, 0) + 1;
+```
+
+(DB audit 결과 2026-05-14: `missing_depth = 0`. 즉 backfill 불필요 — 현재 모든 active seed 가 이미 depth 박힌 상태. v2.4 spec 정전화는 *미래 silent fail 차단* 목적.)
+
+# KG: lesson-jaebaeman-depth-invariant-2026-05-14, ATOM_Skill_jaebaeman, 재배맨-v2-subagent-runtime-protocol
+
+---
+
 # /jaebaeman — Subagent Runtime Protocol
 
 > **재배맨 = 씨앗에서 에이전트를 재배하는 사람.**
@@ -355,7 +496,7 @@ Phase 4: Write   — UNWIND 배치 KG merge → 씨앗 상태 갱신
   model: String,          // 'haiku' | 'sonnet' | 'opus'
   priority: String,       // 'HIGH' | 'MEDIUM' | 'LOW' | 'EXPLORATION' | 'VERIFY'
   status: String,         // READY → DISPATCHED → COLLECTED → ARCHIVED | FAILED
-  depth: Int,             // 프랙탈 세대 (최대 3)
+  depth: Int,             // 프랙탈 세대 [0,3] — **NOT NULL** (v2.4 §p3 trigger 강제)
   germinationMethod: String, // 'consensus' | 'conflict' | 'singleton' | 'manual'
   sourceRF: String,       // 발아 원천 ResearchFinding name
   createdAt: DateTime,
@@ -389,9 +530,11 @@ SET ts.skill = $skill,
     ts.priority = $priority,
     ts.targetDomain = $domain,
     ts.status = 'READY',
-    ts.depth = coalesce($depth, 0),
+    ts.depth = coalesce($depth, 0),    // ★ NOT NULL — v2.4 §p3 trigger (depth=0 root, parent+1 fractal)
     ts.createdAt = datetime()
 ```
+
+> ⚠ **`t_depth_not_null` apoc trigger** (live)가 `:SubagentTaskSpec` 의 `depth IS NULL` SET 을 차단한다. `coalesce(...,0)` 누락 시 `50N00 p3 invariant` 로 transaction rollback. 상세: §v2.4.
 
 ### 씨앗 중복 검사 (Dedupe)
 
@@ -726,6 +869,7 @@ provenance = '{method}-subagent-parallel-{N}'
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|
+| **v2.4** | 2026-05-14 | `SubagentTaskSpec.depth NOT NULL` invariant 정전화 (p3 trigger). 직전 `/prom` drift fix 측 `50N00 p3 invariant` rollback → spec 미문서 silent fail 위험. apoc trigger 4종 audit (`t_depth_not_null` / `t_dep_unlock` / `t_failure_spawn` / `rf-audit-after-v2`) + constraint `p3_subagent_name_unique`. 9-field bundle → 12-field schema 격상 (depth/status/createdAt NOT NULL 추가). E4 `DepthInvariantViolation` 신설. 씨앗 생성 Cypher `coalesce($depth,0)` mandatory 명시. Validation gate Python. | `lesson-jaebaeman-depth-invariant-2026-05-14` |
 | **v2.3** | 2026-05-14 | Schema Tool Param Binding (PROM_16 E2.1 patch) — Anthropic Agent tool 시그니처 `(model, run_in_background, prompt)` 3 param 정전. `subagent_type` / `isolation` 등 비표준 param 제거 (runtime fail 차단). 9-field bundle → KG metadata only matrix. MODEL_MAP alias resolution + cache_control ephemeral 5-min TTL directive. references/phases.md + gates.md + theory.md + kg_logging.md 동시 patch. | `rf-prom16-cc-eng-E2-S1-agent-tool-params-2026-05-14`, `lesson-jaebaeman-tool-param-binding-2026-05-14` |
 | **v2.2** | 2026-05-14 | SubagentTaskSpec 9-field bundle + sourceId FK→AtomicSpan 1:1 invariant (GAP-3). Orphan/MissingEdge/MultipleSeed detection. | `span-gap3-jaebaeman-seed-fk-2026-05-14` |
 | **v2.1** | 2026-05-05 | MAS misnomer 정정 (Wooldridge BDI ≠ KG-seed agent) — SOP 학문적 명칭 격상. Saga compensation slot + MCP inputSchema 통합. | `lesson-jaebaeman-rebrand-SOP-2026-05-05`, `lesson-jaebaeman-saga-compensation-2026-05-05`, `lesson-jaebaeman-mcp-inputschema-2026-05-05` |

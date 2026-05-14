@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-14T12:32:06+09:00",
-  "git_head_commit": "b84bf9cc4133055cf8f401a8c992f44059f95d9a",
-  "git_head_short": "b84bf9c",
+  "generatedAt": "2026-05-14T14:47:19+09:00",
+  "git_head_commit": "7889067fe58b59200253e3ff61a494d88f7848a2",
+  "git_head_short": "7889067",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 32,
-  "merkle_root": "ebbd9d9864b0b2b47c0f0349330ed31ce4582e2cb48e9f4aa7bf4d83b440eef6",
+  "merkle_root": "bb0cfc76c34219fd0992635591971b52bd2c16a96da23dac0a2a4b3b5a0d2eba",
   "skills": [
     {
       "name": "88-taliban",
@@ -147,7 +147,7 @@
     {
       "name": "jaebaeman",
       "path": "jaebaeman",
-      "version": "2.3.0",
+      "version": "2.4.0",
       "kg_ref": "ATOM_Skill_jaebaeman",
       "channel": "stable",
       "git_tree_sha": "13628301a73f6c0f0433c5ee0853b15ff7d9fe7a"
@@ -182,7 +182,7 @@
       "version": "6.3.0",
       "kg_ref": "ATOM_Skill_prometheus",
       "channel": "stable",
-      "git_tree_sha": "70d785ca3dcd1447195cfad298d09457edf662a3"
+      "git_tree_sha": "d2d3eb8eda85f5444be97409e9df77b9fa541837"
     },
     {
       "name": "server-status",
