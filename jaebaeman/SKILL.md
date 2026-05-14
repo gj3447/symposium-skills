@@ -2,7 +2,7 @@
 name: jaebaeman
 aliases: [SOP, subagent-orchestration-protocol]
 kg_ref: ATOM_Skill_jaebaeman
-version: "2.2.0"
+version: "2.3.0"
 channel: stable
 description: >
   재배맨(JaebaeMan) v2.1 — Subagent Orchestration Protocol (SOP). 모든 AI subagent 동작의 바닥(foundation).
@@ -71,6 +71,244 @@ RETURN ts.name AS tool_name, ts.inputSchema, ts.outputSchema, ts.compensating_ac
 - 신규 작성 시 inputSchema 권장. 향후 MCP server 통합 시 자동 export
 
 # KG: MIC_v1, ATOM_Skill_jaebaeman, MethodologySlot:SubagentSeeder, lesson-apt-skill-drift-audit-2026-04-17, lesson-jaebaeman-rebrand-SOP-2026-05-05, lesson-jaebaeman-saga-compensation-2026-05-05, lesson-jaebaeman-mcp-inputschema-2026-05-05
+
+---
+
+## 🌱 v2.2 SubagentTaskSpec Schema — 9-field bundle + sourceId FK 1:1 (2026-05-14, GAP-3)
+
+> 사용자 정전 2026-05-14: 「기본 동작 단위는 재배맨이야 재배맨 단위가 span 이기도하고 ㅇㅇ; 재배맨 씨앗단위」.
+> 즉 **SubagentTaskSpec (재배맨 씨앗) 1개 = AtomicSpan 1개 1:1**. 씨앗 단위 = 작업의 atomic 단위.
+> 상세: [`references/seed_fk_invariant.md`](./references/seed_fk_invariant.md).
+
+### 9-field Seed Bundle (canonical core)
+
+| # | 필드 | 타입 | 역할 |
+|---|------|------|------|
+| 1 | `skill` | String | 소속 스킬 (`apt-scw`, `prometheus`, `taliban`, ...) |
+| 2 | `sourceId` | String **FK→:AtomicSpan(name)** | 발아 원천 AtomicSpan name. **1:1 invariant** |
+| 3 | `displayName` | String | 사람 읽기용 역할명 |
+| 4 | `taskType` | enum | `research` \| `validation` \| `methodology-skill-edit` \| `code-impl` \| ... |
+| 5 | `targetDomain` | String | 담당 도메인 |
+| 6 | `expectedOutcome` | String | 기대 산출물 형식 (Contract postcondition 거울) |
+| 7 | `contractRef` | String → `:Contract(name)` | 입출력 계약 노드 ref (Phase 4 schema-validate 근거) |
+| 8 | `taskRef` | String → `:SemanticTask(name)` | 작업 단위 ref (Phase 2 prompt 조립 근거) |
+| 9 | `germinationMethod` | enum | `consensus` \| `conflict` \| `singleton` \| `manual` \| `1to1to1to1-dogfood-<date>` |
+
+**Phase별 옵션 필드** (saga `compensating_action`, MCP `inputSchema/outputSchema` 등)는 위 9-field 위에 *additive*. 9-field 가 정전 core.
+
+### sourceId FK 1:1 Invariant
+
+```
+∀ s:SubagentTaskSpec where s.skill = 'apt-scw'.
+   s.sourceId ∈ {AtomicSpan.name}                          -- FK (no orphan)
+∧ ∀ a:AtomicSpan ∃! s:SubagentTaskSpec[s.sourceId = a.name AND s.skill='apt-scw']  -- bijection
+```
+
+**Rationale**: 재배맨 SOP 의 단위 (씨앗) = APT 의 단위 (AtomicSpan). 둘이 다르면 *어떤* 단위가 작업 단위인지 모호 → drift. 사용자 정전이 1:1 강제.
+
+**다른 skill** (`prometheus`, `taliban` 등) 은 `sourceId` 가 `Lesson` / `Span` / `Contract` 등 다른 anchor 일 수 있음. FK target 은 `(skill, sourceLabel)` pair 가 결정 (각 skill 의 references 에 명시). 단, **`skill='apt-scw'` 의 경우 sourceLabel = `AtomicSpan` 으로 정전 고정**.
+
+### HAS_SEED Edge Schema
+
+```cypher
+(a:AtomicSpan)-[:HAS_SEED {
+  wave_index: Int,           // dispatch 파편 순서 (0..N-1). 한 AtomicSpan 이 재배포(wave) 받으면 증가
+  status: String,            // 'READY' | 'DISPATCHED' | 'COLLECTED' | 'FAILED'  (s.status 거울)
+  created_at: DateTime,
+  cycle_id: String           // 어느 APT cycle 의 결정인지 추적
+}]->(s:SubagentTaskSpec)
+```
+
+**불변**: `wave_index` 가 다르면 같은 (a, s.skill) 에 대해 여러 SubagentTaskSpec 이 *시간순* 존재 가능 (재시도). 그러나 **현재 활성** (status ∈ {READY, DISPATCHED, COLLECTED}) 인 seed 는 **AtomicSpan 당 1개** (1:1 invariant).
+
+### Orphan Seed Detection (FK 위반 감지)
+
+```cypher
+// 1. sourceId 가 :AtomicSpan(name) 에 존재하지 않음 → OrphanSeed
+MATCH (s:SubagentTaskSpec {skill: 'apt-scw'})
+WHERE NOT EXISTS { MATCH (a:AtomicSpan {name: s.sourceId}) }
+RETURN count(s) AS orphan_seeds  // > 0 → invariant violation (E1)
+
+// 2. HAS_SEED edge 누락 (sourceId 는 맞으나 edge 없음)
+MATCH (s:SubagentTaskSpec {skill: 'apt-scw'})
+MATCH (a:AtomicSpan {name: s.sourceId})
+WHERE NOT EXISTS { MATCH (a)-[:HAS_SEED]->(s) }
+RETURN count(s) AS missing_edges  // > 0 → invariant violation (E2)
+
+// 3. 같은 AtomicSpan 에 활성 seed 2+ (MultipleSeedPerAtomicSpan)
+MATCH (a:AtomicSpan)-[:HAS_SEED]->(s:SubagentTaskSpec {skill: 'apt-scw'})
+WHERE s.status IN ['READY', 'DISPATCHED', 'COLLECTED']
+WITH a, count(s) AS active_seeds
+WHERE active_seeds > 1
+RETURN a.name, active_seeds  // > 0 → invariant violation (E3)
+```
+
+### Error Variants
+
+| Code | 이름 | 조건 | 복구 |
+|------|------|------|------|
+| E1 | `OrphanSeed` | `s.sourceId` ∉ `:AtomicSpan(name)` | seed 폐기 (FAILED) 또는 AtomicSpan 먼저 생성 |
+| E2 | `MissingHasSeedEdge` | sourceId 매칭 AtomicSpan 존재하나 `:HAS_SEED` edge 부재 | backfill edge MERGE (아래 마이그레이션 Cypher) |
+| E3 | `MultipleSeedPerAtomicSpan` | 동일 AtomicSpan 에 활성 seed > 1 | 가장 오래된 seed → ARCHIVED, 최신만 활성 유지 |
+
+상세 worked example (3 case) + Wooldridge BDI grounding + backfill 마이그레이션 Cypher: [`references/seed_fk_invariant.md`](./references/seed_fk_invariant.md).
+
+# KG: ATOM_Skill_jaebaeman, span-gap3-jaebaeman-seed-fk-2026-05-14, lesson-jaebaeman-rebrand-SOP-2026-05-05
+
+---
+
+## 🧷 v2.3 Schema Tool Param Binding (2026-05-14, PROM_16 E2.1 finding)
+
+> Finding: `rf-prom16-cc-eng-E2-S1-agent-tool-params-2026-05-14` (PARTIAL_DRIFT, runtime fail 잠재).
+> SOP references 가 `Agent(subagent_type=..., isolation=...)` 같은 비표준 param 을 prescribe 하고 있었음 → 실제 Anthropic Agent tool 시그니처 mismatch → InputValidationError.
+
+### Anthropic Agent Tool 시그니처 정전
+
+```
+Agent(
+  model: str,                    # full ID OR alias ('haiku' | 'sonnet' | 'opus')
+  run_in_background: bool,       # True = 병렬 백그라운드, False = blocking
+  prompt: str                    # 본문 — archetype / role / context 모두 여기 녹임
+)
+```
+
+**단 3 param**. 그 외는 모두 **runtime InputValidationError**.
+
+### 9-field Bundle → Tool Param 분리 매트릭스
+
+| # | 9-field name | Tool param? | 위치 |
+|---|--------------|-------------|------|
+| 1 | `skill` | ❌ KG metadata | `:SubagentTaskSpec.skill` + DispatchHyperedge.skill |
+| 2 | `sourceId` | ❌ KG metadata | `:SubagentTaskSpec.sourceId` (FK→AtomicSpan) |
+| 3 | `displayName` | ❌ KG metadata | `:SubagentTaskSpec.displayName` (prompt 본문에 녹임) |
+| 4 | `taskType` | ❌ KG metadata | `:SubagentTaskSpec.taskType` (prompt 본문에 녹임) |
+| 5 | `targetDomain` | ❌ KG metadata | `:SubagentTaskSpec.targetDomain` (prompt 본문에 녹임) |
+| 6 | `expectedOutcome` | ❌ KG metadata | `:SubagentTaskSpec.expectedOutcome` (prompt 본문 closing 에 schema 명시) |
+| 7 | `contractRef` | ❌ KG metadata | `:SubagentTaskSpec.contractRef` (prompt pre-fetch 에서 Contract 노드 조회 결과 주입) |
+| 8 | `taskRef` | ❌ KG metadata | `:SubagentTaskSpec.taskRef` (prompt pre-fetch 에서 SemanticTask 조회 결과 주입) |
+| 9 | `germinationMethod` | ❌ KG metadata | HAS_SEED edge property + `:SubagentTaskSpec.germinationMethod` |
+
+**Tool param 으로 직접 전달되는 것은 9-field 중 0개**. 9-field 는 전부 KG metadata, parent 가 KG 조회 후 *prompt 본문에 녹여* tool 에 전달.
+
+별도 ts.model field 가 alias resolution 거쳐 `Agent(model=...)` 에 들어감 (이건 9-field 외 부가 field).
+
+### 잘못된 패턴 (Anti-Pattern, 사전 차단 mandatory)
+
+```python
+# ❌ AP-1: subagent_type 직접 전달
+Agent(subagent_type='taliban-ensemble-critic', prompt=sb)
+# → InputValidationError. 대신: archetype label 을 prompt 첫 줄에 명시.
+
+# ❌ AP-2: isolation 직접 전달
+Agent(isolation='sandbox', prompt=sb)
+# → InputValidationError. 대신: KG metadata 로 박고 parent 가 격리 정책 enforce.
+
+# ❌ AP-3: 9-field bundle 전체 spread
+Agent(**sb)  # sb = {skill, sourceId, displayName, ..., model, prompt}
+# → InputValidationError on 첫 unknown key.
+
+# ❌ AP-4: cache_control 을 tool 시그니처에 직접
+Agent(cache_control={'type': 'ephemeral'}, prompt=sb)
+# → InputValidationError. cache_control 은 prompt content block 내부에 박힘 (Anthropic SDK 정전).
+```
+
+### 올바른 패턴 (정전)
+
+```python
+# 1. KG 에서 ts 조회 (9-field + model alias)
+ts = kg_fetch_taskspec(name=seed_name)
+
+# 2. KG pre-fetch — taskRef/contractRef 디레퍼런스
+context_block = kg_prefetch(ts.taskRef, ts.contractRef, ts.targetDomain)
+
+# 3. prompt 조립 — archetype/role/contract 모두 본문에 녹임
+prompt = f"""\
+역할: {ts.displayName} (archetype={archetype_from_skill(ts.skill)})
+씨앗: {ts.name} — {ts.taskType} / {ts.targetDomain}
+계약: {context_block.contract_summary}
+사전지식: {context_block.kg_snapshot}
+{ts.expectedOutcome 형식의 JSON 단일 블록 출력.}
+"""
+
+# 4. Agent tool 호출 — 3 param only
+Agent(
+  model = MODEL_MAP[ts.model or 'haiku'],
+  run_in_background = (N > 1),
+  prompt = prompt
+)
+
+# 5. dispatch 후 KG update — 9-field 전체는 이미 :SubagentTaskSpec 에 있음
+# HAS_SEED edge status='DISPATCHED', cycle_id, wave_index 만 갱신
+```
+
+### MODEL_MAP — alias → full ID resolution
+
+```python
+# Anthropic Claude API model ID 정전 (2026-05-14 기준)
+MODEL_MAP = {
+    'haiku':  'claude-haiku-4-5-20251001',    # 4.5 Haiku, fast/cheap subagent (1M context)
+    'sonnet': 'claude-sonnet-4-7-20260301',   # 4.7 Sonnet, balanced
+    'opus':   'claude-opus-4-7-20260301',     # 4.7 Opus, parent orchestrator (1M context)
+}
+
+def resolve_model(alias_or_id: str) -> str:
+    """alias 면 full ID 로, 이미 full ID 면 passthrough."""
+    if alias_or_id in MODEL_MAP:
+        return MODEL_MAP[alias_or_id]
+    if alias_or_id.startswith('claude-'):
+        return alias_or_id   # 이미 full ID
+    raise ValueError(f'Unknown model: {alias_or_id}')
+```
+
+**Rationale**: SKILL.md 본문 / Subagent seed 는 alias ('haiku') 로 쓰는 편이 SKILL drift 시 model version bump 가 한 곳 (MODEL_MAP) 에서만 일어남. full ID 를 본문 흩뿌리면 retire-model 마이그레이션 시 수십 곳 grep.
+
+### Prompt Caching Directive (5-min TTL ephemeral)
+
+N개 dispatch 가 동일한 stable prefix (KG snapshot / Lesson list / prior RF) 공유하면 Anthropic prompt caching 적용:
+
+```python
+# Anthropic SDK 직접 호출 시 (Agent tool wrapper 내부에서):
+messages = [{
+    "role": "user",
+    "content": [
+        {
+            "type": "text",
+            "text": stable_prefix,                          # KG snapshot, > 1024 tokens
+            "cache_control": {"type": "ephemeral"}          # 5-min TTL cache write
+        },
+        {
+            "type": "text",
+            "text": per_agent_suffix                        # role/axis/sub_axis — 다양
+        }
+    ]
+}]
+```
+
+**조건**:
+- prefix ≥ 1024 tokens (haiku) / 2048 tokens (sonnet/opus)
+- bytes-exact match (1 char diff → cache miss)
+- 5-min TTL (만료 후 cache write 다시)
+
+**효과**: 첫 dispatch = cache write (full price), 이후 N-1 dispatch = cache read (≈ 10% price). N=32 dispatch 시 input token cost ≈ 1 + 31×0.1 = 4.1× (32× 대비 87% 절감).
+
+추적: `DispatchHyperedge.cache_hit_ratio` = (cache_read_count) / N.
+
+### Validation Gate (Phase 2.3 pre-dispatch hook)
+
+```python
+ALLOWED_AGENT_KWARGS = {'model', 'run_in_background', 'prompt'}
+
+def validate_agent_kwargs(kwargs: dict) -> None:
+    extra = set(kwargs.keys()) - ALLOWED_AGENT_KWARGS
+    if extra:
+        raise SOPValidationError(
+            f'PROM_16 E2.1: Agent tool only accepts {ALLOWED_AGENT_KWARGS}. '
+            f'Unknown params: {extra}. '
+            f'KG metadata (subagent_type/isolation/archetype 등) 는 prompt 본문에 녹이거나 KG 에만 박을 것.'
+        )
+```
+
+# KG: rf-prom16-cc-eng-E2-S1-agent-tool-params-2026-05-14, lesson-jaebaeman-tool-param-binding-2026-05-14, ATOM_Skill_jaebaeman
 
 ---
 
@@ -212,13 +450,51 @@ LIMIT 10
 
 ### 2-3. Agent 호출
 
+**Anthropic Agent tool 시그니처 정전**: `(model, run_in_background, prompt)` — 단 3 param. 9-field bundle 중 이 3 field 만 tool param 으로, 나머지 6 field (skill / sourceId / displayName / taskType / targetDomain / germinationMethod) 는 **KG metadata only** (HAS_SEED edge + DispatchHyperedge 에 박힘). `subagent_type` / `isolation` / `archetype` 같은 *비표준 param* 전달 시 **InputValidationError → runtime fail** (PROM_16 E2.1 finding `rf-prom16-cc-eng-E2-S1-agent-tool-params-2026-05-14`).
+
 ```python
+# MODEL_MAP — alias → full ID (Anthropic Claude API 정전)
+MODEL_MAP = {
+    'haiku':  'claude-haiku-4-5-20251001',   # 4.5 Haiku, 1M context, fast/cheap subagent
+    'sonnet': 'claude-sonnet-4-7-20260301',  # 4.7 Sonnet, balanced
+    'opus':   'claude-opus-4-7-20260301',    # 4.7 Opus 1M context, parent orchestrator
+}
+
+# 정전 호출 패턴 (3 param only):
 Agent(
-    model = ts.model or 'haiku',
-    run_in_background = True,  # N>1이면 병렬
-    prompt = assembled_prompt
+    model = MODEL_MAP[ts.model or 'haiku'],   # alias 해석. ts.model 이 이미 full ID 면 passthrough
+    run_in_background = True,                  # N>1 이면 병렬, single 이면 False 가능
+    prompt = assembled_prompt                  # 3줄 + pre-fetch context. archetype/subagent_type 정보는 본문에 녹임
 )
+
+# ❌ 잘못된 패턴 (runtime fail):
+# Agent(subagent_type='taliban-ensemble-critic', prompt=...)   # InputValidationError
+# Agent(isolation='sandbox', prompt=...)                        # InputValidationError
 ```
+
+**Prompt caching directive** (5-min TTL ephemeral cache, Anthropic prompt caching 정전):
+
+N개 병렬 dispatch 시 pre-fetch context (KG snapshot / Lesson list / 기존 ResearchFinding) 가 동일하면 **cache_control: `{type: "ephemeral"}`** 을 prompt 의 stable prefix 에 박아 cache hit 활용. 첫 호출 = cache write (full price), 이후 N-1 호출 = cache read (≈ 10% price). 5분 TTL 동안 동일 cycle 내 재dispatch 시 효과적.
+
+```python
+# parent 가 prompt 조립 시 stable prefix 와 per-agent suffix 분리:
+stable_prefix = build_pre_fetch_context(skill, problem_keyword)   # KG snapshot, Lesson, prior RF
+per_agent_suffix = build_role_block(ts.displayName, ts.role, sb.axis, sb.sub_axis)
+
+# Anthropic SDK 호출 시 cache_control:
+[
+  {"type": "text", "text": stable_prefix, "cache_control": {"type": "ephemeral"}},
+  {"type": "text", "text": per_agent_suffix}
+]
+# → 첫 dispatch 가 prefix cache write, 이후 N-1 dispatch 가 cache hit
+```
+
+**Cache 적용 조건**:
+- prefix 길이 ≥ 1024 tokens (haiku) / 2048 tokens (sonnet/opus) — 미만이면 cache 비활성
+- 동일 prefix bytes-exact match — 1 char 다르면 cache miss
+- 5분 TTL 내 재사용 — 만료 후 cache write 다시 필요
+
+Cache hit ratio 추적은 `DispatchHyperedge.cache_hit_ratio` 필드에 기록 (Phase 4 Write 단계).
 
 ### 2-4. 씨앗 상태 전이
 
@@ -450,6 +726,9 @@ provenance = '{method}-subagent-parallel-{N}'
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|
+| **v2.3** | 2026-05-14 | Schema Tool Param Binding (PROM_16 E2.1 patch) — Anthropic Agent tool 시그니처 `(model, run_in_background, prompt)` 3 param 정전. `subagent_type` / `isolation` 등 비표준 param 제거 (runtime fail 차단). 9-field bundle → KG metadata only matrix. MODEL_MAP alias resolution + cache_control ephemeral 5-min TTL directive. references/phases.md + gates.md + theory.md + kg_logging.md 동시 patch. | `rf-prom16-cc-eng-E2-S1-agent-tool-params-2026-05-14`, `lesson-jaebaeman-tool-param-binding-2026-05-14` |
+| **v2.2** | 2026-05-14 | SubagentTaskSpec 9-field bundle + sourceId FK→AtomicSpan 1:1 invariant (GAP-3). Orphan/MissingEdge/MultipleSeed detection. | `span-gap3-jaebaeman-seed-fk-2026-05-14` |
+| **v2.1** | 2026-05-05 | MAS misnomer 정정 (Wooldridge BDI ≠ KG-seed agent) — SOP 학문적 명칭 격상. Saga compensation slot + MCP inputSchema 통합. | `lesson-jaebaeman-rebrand-SOP-2026-05-05`, `lesson-jaebaeman-saga-compensation-2026-05-05`, `lesson-jaebaeman-mcp-inputschema-2026-05-05` |
 | **v2** | 2026-04 | Subagent Runtime Protocol — 부모 4단계 (Pre-fetch → Dispatch → Collect → Write). 씨앗(SubagentTaskSpec) KG 관리. MIC_v1.SubagentSeeder slot resolve. 재배맨은 서비스 아닌 *프로토콜* | `재배맨-v2-subagent-runtime-protocol`, `ATOM_Skill_jaebaeman`, `SA_methodology_v4_triple_upgrade`, `lesson-jaebaeman-vs-erlang-actor-hadoop-celery-2026-04-25` |
 | **v1** | (older) | 4단계 protocol 초안. agent dispatch + KG MERGE | — |
 

@@ -2,9 +2,9 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.2",
-  "git_head_short": "dd235dc",
-  "merkle_root": "0e3deb40d6b514f8912d8c7c9081048cb48f9b3a16b7d9866cefc69356870d7c",
-  "skills_count": 31,
+  "git_head_short": "997196b",
+  "merkle_root": "a09ee1c92eecbd435cdbada4a45c71c3f55ca2c0d89482e7c7e476470db6c27b",
+  "skills_count": 32,
   "skills": [
     {
       "name": "88-taliban",
@@ -18,7 +18,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "75b6a6a5091b3ea17794146f11c8af785e4615bc"
+      "git_tree_sha": "630eb12f037bac557d5481f6e662e0b219fed0b4"
     },
     {
       "name": "apt-cleanup",
@@ -26,6 +26,13 @@
       "kg_ref": "ATOM_Skill_apt_cleanup",
       "channel": "experimental",
       "git_tree_sha": "83a87f652c9c40a9574694b44053fbc1dd4aca08"
+    },
+    {
+      "name": "apt-d",
+      "version": "0.1.0-draft",
+      "kg_ref": "ATOM_Skill_apt_d",
+      "channel": "experimental",
+      "git_tree_sha": "cb1ec24bdf43903a48f92aba8ad405f0ca6148af"
     },
     {
       "name": "apt-meta-review",
@@ -74,7 +81,7 @@
       "version": "0.1.0-draft",
       "kg_ref": "ATOM_Skill_build_agent_v28",
       "channel": "draft",
-      "git_tree_sha": null
+      "git_tree_sha": "a000ac98a6f40dbd275a82c6cdfa6609d6a15796"
     },
     {
       "name": "db-query",
@@ -95,7 +102,7 @@
       "version": "0.1.0-draft",
       "kg_ref": "ATOM_Skill_design_agent_v28",
       "channel": "draft",
-      "git_tree_sha": null
+      "git_tree_sha": "8a6e6810e571b258243200be79e9efa593867334"
     },
     {
       "name": "docker-logs",
@@ -109,7 +116,7 @@
       "version": "0.1.0-draft",
       "kg_ref": "ATOM_Skill_fix_agent_v28",
       "channel": "draft",
-      "git_tree_sha": null
+      "git_tree_sha": "bc1a38a268d39f371b202c9ffb7e7dfa982349d6"
     },
     {
       "name": "harness",

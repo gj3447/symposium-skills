@@ -10,7 +10,9 @@ description: >
   v26 A5: FulfillmentGate 7 checks enforced via apt-gate-check.sh Cypher query (executor!=critic + LensSet completeness + prior VR APPROVED). TDAD (impact_tests mandatory).
   v26 A4: vibe_coding_sweet/min/hard_max via MethodologyConfig slot (no more hardcoded 500).
   v24: KG 정본 기반 재설계. AptClarificationNote 반영.
-  # KG: ATOM_Skill_apt_scw, CONTRACT_apt_scw, APT_v26_RFC_draft_2026-04-21, ATOM_APT_v26_Gate_Hook_Lens_Enforcement_2026-04-21
+  Invoke when: parent /apt orchestrator dispatch only; direct user call 금지 (PATTERN_D guard, E1.4). SCW 는 SP→ST→SCW gate chain 의 4/4 phase — 단독 호출 시 ST gate APPROVED + AtomicSpan.wave_index + SubagentTaskSpec FK precondition 자동 만족 불가, dispatch_only=true.
+  Active Weapons (2026-05-14): 재배맨 single-message N parallel Task dispatch (wave_index batch, Step 10) + Longinus L5-L7 forward binding (Code → `# KG:` ref comment, Step 12) + Taliban `/tlb <SourceCodeNode> --lens constitutional` FulfillmentGate 7-check (Step 13). hub-jaebaeman-sop + hub-longinus-reference + hub-taliban-immunity resolve.
+  # KG: ATOM_Skill_apt_scw, CONTRACT_apt_scw, APT_v26_RFC_draft_2026-04-21, ATOM_APT_v26_Gate_Hook_Lens_Enforcement_2026-04-21, rf-prom16-cc-eng-E1-S4
 ---
 
 ## 🎛 v26 A6 Resolve-Only
@@ -51,6 +53,28 @@ RETURN s.name, s.currentConcrete, s.invocation
 ```
 
 # KG: MIC_v1, lesson-apt-not-truly-jaebaeman-2026-04-14
+
+---
+
+## ⚔ Active Weapons — Phase SCW (4/5)
+
+> SCW 측 활성 5무기 (parent /apt orchestrator §"5무기 Phase Integration Matrix" mirror).
+
+| Step | Weapon | Invocation | Trigger | Output |
+|------|--------|-----------|---------|--------|
+| Step 10 (wave dispatch) | **재배맨** (SubagentSeeder) | single-message N parallel `Task()` calls (max=`cfg.parallel_max_agents`, wave_index 같은 SubagentTaskSpec batch) | ST APPROVED + AtomicSpan.wave_index 결정 + SubagentTaskSpec FK 준비 | N 개 parallel implementation results (single assistant turn) |
+| Step 11 (TDD RED→GREEN→REFACTOR) | **재배맨** + **Taliban** | per-Task: RED test write → GREEN code → impact_tests verify → mini-RGR | wave dispatch 후 각 Task 내부 | Code + test (per AtomicSpan, ≤ `cfg.vibe_coding_hard_max` LOC) |
+| Step 12 (Code → KG ref comment) | **Longinus** (KgCodeBinder) | L5-L7 forward binding: 모든 함수/클래스/모듈에 `# KG: <node_name>` 주석 강제 | GREEN 통과 직후 (PostToolUse Write/Edit hook) | `SourceCodeNode` + `MATERIALIZES` edge + Longinus 7-tuple binding |
+| Step 13 (FulfillmentGate 7-check) | **Taliban** (AdversarialValidator) | `/tlb <SourceCodeNode> --lens constitutional`: (1) executor!=critic (2) LensSet completeness (3) prior VR APPROVED (4) Contract 4-측면 충족 (5) `# KG:` ref 존재 (6) impact_tests PASS (7) fat-file ratchet 통과 | 모든 wave task GREEN + Longinus binding 완료 | `VerdictRecord` APPROVED + Cleanup 진입 trigger |
+
+**SCW 진입 hub**: `hub-jaebaeman-sop` (wave dispatch parallel) + `hub-longinus-reference` (Code↔KG binding) + `hub-taliban-immunity` (FulfillmentGate).
+
+**Anti-pattern 금지**:
+- Sequential Task dispatch (= 재배맨 위반) — 반드시 *single assistant turn* 측 N parallel.
+- Code orphan (= Longinus 위반) — `# KG:` 주석 없는 함수/클래스는 PostToolUse hook 측 차단.
+- Same-model critic (= Taliban HR3 위반) — design model ≠ critic model 강제.
+
+# KG: hub-jaebaeman-sop, hub-longinus-reference, hub-taliban-immunity, MIC_v1.SubagentSeeder, MIC_v1.KgCodeBinder, MIC_v1.AdversarialValidator
 
 ---
 
@@ -175,23 +199,105 @@ RETURN atom.name, c.name, c.input_type, c.output_type, c.acceptance_criteria,
 ORDER BY atom.name
 ```
 
-### Step 2: Task별 TDD 루프
+### Step 2: Task별 TDD 루프 (wave-aware dispatch)
 
-각 Task에 대해:
+> v27.2 (2026-05-14, GAP-4): SP 가 부여한 `AtomicSpan.wave_index` (GAP-1) + 재배맨 `SubagentTaskSpec.sourceId` FK 1:1 (GAP-3) 를 합쳐 **wave 단위 single-message N-parallel dispatch**.
+> 사용자 정전: 「최대한 병렬 처리가 되도록」 + 「종속성 아닌 부분은 최대 병렬」.
+> 상세: [`references/wave_dispatch.md`](references/wave_dispatch.md).
 
+#### 2-0. Wave Loop (외곽 — 부모 책임)
+
+```
+W_max ← MAX(AtomicSpan.wave_index)            -- e.g. 3 for 3-wave 7-span 예제
+for w in 1..W_max:
+    batch ← collect_ready_seeds(wave = w)     -- §2-1 Cypher
+    intent_N ← |batch|
+    Agent_calls ← single_message_parallel(batch)   -- §2-2
+    actual_N ← |Agent_calls|
+    assert intent_N == actual_N               -- GH#29181 self-check, §2-3
+    results ← collect_all(Agent_calls)
+    if all(v == 'PASS' for v in results):
+        UNWIND_write_kg(results)              -- 재배맨 Phase 4
+        advance to wave w+1
+    else:
+        raise WavePartialFail(wave=w, failed=[...])    -- §2-4 차단
+```
+
+**Invariant**:
+- **Same wave**: fully parallel (1 message, N Agent tool calls).
+- **Cross wave**: strictly sequential (wave k+1 은 wave k 전체 PASS 후).
+- Kahn ordering: `(a)-[:DEPENDS_ON]->(b) ⟹ a.wave_index < b.wave_index`.
+
+#### 2-1. Wave-aware batch collect Cypher
+
+```cypher
+// SCW dispatch step (wave-aware, GAP-1 + GAP-3 통합)
+// $CURRENT_WAVE: driver loop 변수
+MATCH (a:AtomicSpan)-[:HAS_SEED]->(ts:SubagentTaskSpec {skill:'apt-scw'})
+WHERE a.wave_index = $CURRENT_WAVE AND ts.status = 'READY'
+WITH ts, a ORDER BY a.name
+RETURN collect({
+  seed_name: ts.name, source_atom: a.name,
+  task_type: ts.taskType, contract_ref: ts.contractRef,
+  task_ref: ts.taskRef, wave: a.wave_index
+}) AS dispatch_batch
+// → 재배맨 lead_link: single-message N parallel Agent calls
+```
+
+#### 2-2. Single-message dispatch (재배맨 Phase 2)
+
+```
+[부모 message]:
+  Agent(model='haiku', prompt=<seed_1 3줄+pre-fetch>)
+  Agent(model='haiku', prompt=<seed_2 3줄+pre-fetch>)
+  ... (N seeds 동시)
+```
+
+각 seed 내부에서 **TDD 3-step**:
 ```
 2a. acceptance_criteria → 테스트 파일 작성 (RED)
     - 테스트가 먼저. 코드 전에 테스트.
     - impact_tests 경로에 작성
-
 2b. 테스트 통과하는 최소 코드 구현 (GREEN)
     - target_file에 작성
     - # KG: TASK_xxx, CONTRACT_xxx 주석 포함
-
 2c. 리팩토링 (REFACTOR)
     - 테스트 여전히 통과 확인
     - 중복 제거, 명확성 개선
 ```
+
+#### 2-3. GH#29181 self-check (intent vs actual)
+
+```
+pre_dispatch:  intent_N = |dispatch_batch|
+post_dispatch: actual_N = count(tool_use blocks in parent message)
+assert actual_N == intent_N, DispatchIntentMismatch(wave, intent, actual, delta)
+```
+
+| delta | 복구 |
+|---|---|
+| `> 0` (under-dispatch) | 누락 seed status 'READY' 복원 + 재dispatch |
+| `< 0` (over-dispatch) | 초과 Agent 결과 ARCHIVED + rejected_reason='OverDispatch' |
+
+#### 2-4. WavePartialFail handling
+
+wave w 의 N seed 중 M≥1 FAIL → wave w+1 진입 **차단**.
+
+```cypher
+MERGE (wpf:WavePartialFail {
+  project: $PROJECT, wave: $CURRENT_WAVE, cycle_id: $CYCLE_ID
+})
+SET wpf.failed_count = $M, wpf.total_count = $N,
+    wpf.failed_seeds = $failed_seed_names,
+    wpf.user_verdict_required = true,
+    wpf.advance_blocked = true;
+```
+
+복구 옵션 (사용자 verdict 게이트):
+- (a) Retry-Seed (timeout 등 일시 실패)
+- (b) Span 재분해 → SP 로 되돌려 D(S) 추가 분해 → wave_index 재계산
+- (c) Contract 보강 → ST 로 되돌려 acceptance_criteria 강화
+- (d) Force-advance — **금지** (DEPENDS_ON 순서 위반 → downstream 코드 폭발)
 
 ### Step 3: FulfillmentGate — `{{cfg.fulfillment_gate_checks}}` Checks (현재 7)
 
@@ -286,13 +392,26 @@ MATCH (mic:MethodologyIntegrationContract {name:'MIC_v1'})-[:HAS_SLOT]->(s:Metho
 RETURN s.currentConcrete, s.invocation, s.protocol
 ```
 
-### 부모 Pre-fetch (v2 — MCP 우회)
+### 부모 Pre-fetch (v2 — MCP 우회) + Wave-aware ready batch (v27.2)
 ```cypher
+// (a) Lesson/RF context pre-fetch
 MATCH (l:Lesson)-[:HAS_RESEARCH]->(rf:ResearchFinding)
 WHERE l.name CONTAINS $keyword RETURN rf.name, rf.domain, rf.oneLineSummary LIMIT 20
+
+// (b) Wave-aware READY seed batch (GAP-1 wave_index + GAP-3 sourceId FK 통합)
+// $CURRENT_WAVE: driver loop 변수 (1..W_max)
+MATCH (a:AtomicSpan)-[:HAS_SEED]->(ts:SubagentTaskSpec {skill:'apt-scw'})
+WHERE a.wave_index = $CURRENT_WAVE AND ts.status = 'READY'
+RETURN collect(ts) AS dispatch_batch
+// → 재배맨 lead_link: single-message N parallel Agent calls (same wave fully parallel)
+// → cross-wave sequential (wave k+1 은 wave k 전체 PASS 후만)
+
+// (c) Legacy fallback (wave_index 미부여 — 차단 대상이지만 진단용)
 MATCH (ts:SubagentTaskSpec {skill:'apt-scw'}) WHERE ts.status='READY'
 RETURN ts.name, ts.role LIMIT 10
 ```
+
+상세 wave loop pseudocode + WavePartialFail + GH#29181 self-check: §Step 2 (TDD 루프) 및 [`references/wave_dispatch.md`](references/wave_dispatch.md).
 
 ### WorkBuffer 연속성
 ```cypher
@@ -329,11 +448,13 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 > - KG Reference Comments (Longinus L3 binding): [`references/kg_ref_comments.md`](references/kg_ref_comments.md)
 > - SCW-specific Kafka payloads: [`references/kafka_events.md`](references/kafka_events.md)
 > - SCW → SP/ST feedback handoff (Max returns): [`references/scw_to_sp_st_handoff.md`](references/scw_to_sp_st_handoff.md)
+> - **Wave-aware dispatch (Kahn batch + single-message N-parallel + WavePartialFail)**: [`references/wave_dispatch.md`](references/wave_dispatch.md) (v27.2 GAP-4 2026-05-14)
 > - Cross-skill shared: [`../_common/`](../_common/) (Contract Lifecycle FSM § migrated).
 > - Legacy redirect: `references/scw_world.md`.
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|
+| **v27.2** | 2026-05-14 | **Wave-aware dispatch (GAP-4)** — Step 2 TDD 루프 본문에 wave loop pseudocode + wave-aware batch Cypher (`a.wave_index = $CURRENT_WAVE`) + single-message N-parallel + GH#29181 intent-vs-actual self-check + WavePartialFail handling (wave k+1 진입 차단 + 사용자 verdict 게이트). GAP-1 (`apt-sp/references/wave_extraction.md`) + GAP-3 (`jaebaeman/references/seed_fk_invariant.md`) 통합. 3-wave 7-span worked example GAP-1 와 동일. | `span-gap4-scw-wave-dispatch-2026-05-14`, `APT_SP_WaveExtraction_canonical`, `lesson-jaebaeman-rebrand-SOP-2026-05-05` |
 | **v26** | 2026-04-21~25 | A2 Contract v2 alignment + A4 vibe_coding_sweet/min/hard_max via MethodologyConfig slot (no more hardcoded 500). A5 FulfillmentGate 7 checks via apt-gate-check.sh Cypher (executor≠critic + LensSet completeness + prior VR APPROVED). TDAD (impact_tests mandatory) | `APT_v26_RFC_draft_2026-04-21`, `ATOM_APT_v26_Gate_Hook_Lens_Enforcement_2026-04-21`, `lesson-apt-vr-self-fulfilled-executor-reviewer-2026-04-16` |
 | **v24** | 2026-04 mid | KG 정본 기반 재설계 (`CONTRACT_apt_scw`). Same-layer Tasks parallel | — |
 | **v5~v23** | timestream | TDD implementation (Contract → Test RED → Code GREEN → Refactor). Code MUST have KG refs in comments (Longinus ReferenceSite 7-tuple) | — |

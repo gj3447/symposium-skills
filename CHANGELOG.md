@@ -39,6 +39,7 @@
 - *(longinus)* Multi-FS_BASE fallback + status classifier (91.2% coverage) ([`c2b0894`](#c2b0894d976373283750c8b9ce46082bd4a29af7))
 - *(taliban)* Bind sampler to real KG :Lens codes ([`f8effb2`](#f8effb21b89414ed8e8b9036bc177a7aaf2ce4dc))
 - *(apt-d)* RFC theorem count drift correction (29→24) ([`997196b`](#997196b5be848e8429c0fbc5f49c8af748671ec1))
+- *(apt-d)* Self-correct prior drift-correction — RFC §3 was correct (29 theorems verified) ([`51e2f13`](#51e2f139f68e915c36c5dcc7451390eb0341a75e))
 
 ### Performance
 

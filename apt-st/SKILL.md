@@ -11,7 +11,9 @@ description: >
   v26 A2 — Contract v2 (9 canonical axes + access_rights_closure + ArchitectureContract subtype + 6 CrossAxisInvariant + ReferenceSite/DriftMorphism) via ContractSchema slot.
   v25: SharedType → Contract.shared=true flag. SemanticTask = MethodologyConfig.vibe_coding_sweet 200-500 line.
   v24: KG 정본 기반 재설계. AptClarificationNote 반영.
-  # KG: ATOM_Skill_apt_st_v27, lesson-st-cover-scope-exhaustive-2026-04-29, lesson-st-cover-tier1-complete-2026-04-29, APT_v26_RFC_draft_2026-04-21, SA_Contract_v2_DbC_Interface_2026-04-21_v2
+  Invoke when: parent /apt orchestrator dispatch only — direct user call rejected by APT_GATE_VERSION=v27_phase_st_dispatch_guard. Korean: APT 결정화 페이즈 — 상위 /apt 가 phase routing, 단독 호출 금지. ST 는 SA→SP→ST→SCW gate chain 의 3/4 phase — 단독 호출 시 SP gate APPROVED + Crystallization Frontier (all leaves = AtomicSpan) + 8 ST Decision Areas exhaustive cover precondition 자동 만족 불가, dispatch_only=true (E1.4 PATTERN_D → PATTERN_A 격상, rf-prom16-cc-eng-E1-S4-skill-activation-2026-05-14).
+  Active Weapons (2026-05-14): Longinus L3-L4 binding (Contract → AtomicSpan ReferenceSite 7-tuple, Step 8) + 재배맨 per-AtomicSpan SubagentTaskSpec seed (1:1:1:1 Contract:Task:Seed:AtomicSpan, Step 9) + Taliban `/tlb <Contract> --lens constitutional` RefinementGate (Step 9.5). hub-longinus-reference + hub-jaebaeman-sop + hub-taliban-immunity resolve.
+  # KG: ATOM_Skill_apt_st_v27, lesson-st-cover-scope-exhaustive-2026-04-29, lesson-st-cover-tier1-complete-2026-04-29, APT_v26_RFC_draft_2026-04-21, SA_Contract_v2_DbC_Interface_2026-04-21_v2, rf-prom16-cc-eng-E1-S4-skill-activation-2026-05-14
 ---
 
 ## 🎛 v26 A6 Resolve-Only
@@ -71,6 +73,28 @@ RETURN s.name, s.currentConcrete, s.invocation
 
 ---
 
+## ⚔ Active Weapons — Phase ST (3/5)
+
+> ST 측 활성 5무기 (parent /apt orchestrator §"5무기 Phase Integration Matrix" mirror).
+
+| Step | Weapon | Invocation | Trigger | Output |
+|------|--------|-----------|---------|--------|
+| Step 7 (Contract DTO 결정화) | **재배맨** (SubagentSeeder) | per-AtomicSpan parallel research → Contract DbC 4-측면 합의 | Crystallization Frontier 통과 직후 (all leaves = AtomicSpan) | `Contract` (input_type/output_type/pre/post/invariant) |
+| Step 8 (ReferenceSite 7-tuple binding) | **Longinus** (KgCodeBinder) | L3-L4 forward binding: `(:Contract)-[:HAS_REFERENCE_SITE]->(:ReferenceSite {name, kind, source, target, cardinality, label, provenance})` | Contract 결정화 직후 | `ReferenceSite` per Contract (7-tuple complete) + Longinus L3-L4 trace |
+| Step 9 (1:1:1:1 seed) | **재배맨** (SubagentSeeder) | per-AtomicSpan SubagentTaskSpec seed (TDD RED test 4-tuple: file/contract_ref/test_id/expected) | Contract APPROVED 직후 | `SubagentTaskSpec` per AtomicSpan (SCW wave dispatch 준비) |
+| Step 9.5 (RefinementGate) | **Taliban** (AdversarialValidator) | `/tlb <Contract_id> --lens constitutional` (LensSet completeness mandatory) | Contract + SubagentTaskSpec 작성 직후 | `VerdictRecord` APPROVED + SCW 진입 trigger |
+
+**ST→SCW mini-RGR** (RFC2 transition):
+- RED: Taliban prior code conflict 검사 (작성할 file path 측 sibling 충돌)
+- GREEN: 재배맨 wave dispatch GO/NO-GO (wave_index 같은 SubagentTaskSpec batch 측 readiness)
+- REFACTOR: Harness 3-tier file placement audit (atomic-span dump 평면 누적 차단 — IDE-host / runtime / managed 측 정확 layer 배치)
+
+**ST 진입 hub**: `hub-longinus-reference` (Contract ReferenceSite 7-tuple) + `hub-jaebaeman-sop` (1:1:1:1 seed) + `hub-taliban-immunity` (RefinementGate).
+
+# KG: hub-longinus-reference, hub-jaebaeman-sop, hub-taliban-immunity, MIC_v1.KgCodeBinder, MIC_v1.SubagentSeeder, MIC_v1.AdversarialValidator
+
+---
+
 # /apt-st — SemanticTwin: Contract Crystallization
 
 > **ST = Verify & Correct 축.**
@@ -102,6 +126,8 @@ SP는 Contract를 직접 소유하지 않는다.
 
 ### 3. Contract = Typed DTO/Schema (NOT prose)
 
+> **Metaphysical grounding**: Contract = Aristotelian *μορφή (form)*. SCW 측 source code = *ὕλη (matter)*. ST 는 form 을 결정화 — 곧 matter 가 받을 준비를 마친 organizing principle 을 명시. (apt §🏛 Metaphysical Grounding 참조; PROM_16 P1.4 finding 2026-05-14: Plato methexis 대신 Aristotelian hylomorphism). 4 DbC fields = form 의 4 측면 (§C 아래 참조).
+
 | Field | Type | 설명 |
 |-------|------|------|
 | `input_type` | typed | gRPC protobuf, function signature, dataclass |
@@ -111,6 +137,22 @@ SP는 Contract를 직접 소유하지 않는다.
 | `acceptance_criteria` | test spec | 통과/실패 판정 기준 |
 | `semantic_meaning` | string | 이 Contract가 왜 존재하는지 |
 | `target_file` | path | 물질화될 파일 경로 |
+
+#### §C. Contract = Form (Aristotle's μορφή, 4 측면)
+
+Contract 의 DbC fields 가 Aristotle 의 form (μορφή) 4 측면을 직접 implement:
+
+| DbC field | Aristotle 측면 | 의미 |
+|-----------|---------------|------|
+| `input_type` / `output_type` | **εἶδος (eidos)** — formal cause | what-it-is (τὸ τί ἦν εἶναι), the *intelligible structure* matter will receive |
+| `precondition` | **ὕλη-readiness** — material cause prerequisite | matter 가 form 을 받기 위해 만족해야 할 조건. 빈약 = matter prerequisite 불명 |
+| `postcondition` | **τελός (telos)** — final cause | form 이 matter 에 완전히 impressed 되었을 때의 상태 (ἐνέργεια realized) |
+| `semantic_meaning` (→ `invariant` 결정화) | **οὐσία (ousia)** — substance, persistent identity | form-matter unity 가 시간 가로질러 유지하는 본질. semantic_meaning 의 명시 = ousia 의 articulation |
+
+**규칙**: 4 fields 모두 채워져야 Contract = complete form. 한 측면 누락 = form incomplete → SCW 진입 시 matter 가 어떤 form 을 받아야 하는지 불완전 → 결과 σύνολον (synolon) 불안정.
+
+**Cite**: Aristotle, *Metaphysics* Z.7 1032a12-15 (form-matter unity), Z.17 1041a6-b33 (substance as form-of-matter), H.6 1045a23-b23 (no third entity); Aquinas, *Summa Theologiae* I q.75 a.4 (*forma dat esse*).
+# KG: aristotle-hylomorphism-grounding-2026-05-14, prom16-p14-methexis-suggestive-finding-2026-05-14
 
 **예시:**
 ```
@@ -230,6 +272,92 @@ Draft → [ContractSchema fields + review] → Active → [FulfillmentGate] → 
 - **Active**: 7대 필드 완성, 리뷰 통과
 - **Fulfilled**: SCW에서 Task PASS
 - **Archived**: 프로젝트 완료 또는 폐기
+
+---
+
+## 🔒 1:1:1:1 Cardinality Invariant Gate (ST→SCW 진입 차단)
+
+> **사용자 정전 (2026-05-14)**: AtomicSpan ≡ Contract ≡ SemanticTask ≡ SubagentTaskSpec ≡ 1 file — **1:1:1:1**.
+>
+> **Drift 차단**: AtomicSpan 이 ST 통과 후 Contract/Task/Seed 중 하나라도 missing 인 채 SCW 로 흘러가면, SCW executor 가 KG 정본 없이 코드를 작성 → 롱기누스 추적 불가 + Contract-Code 정합성 붕괴.
+>
+> **DbC grounding**: Meyer (1992) — "Design by Contract" requires every routine to carry an explicit contract. AtomicSpan 단위 routine 의 contract = `:AptContract` 노드. 누락 = pre/postcondition 부재 = 검증 가능성 상실.
+
+### Invariant (정전)
+
+```
+∀ atomic ∈ AtomicSpan:
+  ∃! c ∈ Contract:        (atomic)-[:HAS_CONTRACT]->(c)
+  ∃! t ∈ SemanticTask:    (atomic)-[:HAS_TASK]->(t)
+  ∃! s ∈ SubagentTaskSpec: (atomic)-[:HAS_SEED]->(s)
+```
+
+**예외 (SharedType only)**: `c.shared = true` 인 Contract 는 1 Contract : N AtomicSpan 허용 (Contract Sandwich 패턴). 그 외 Contract 는 1:1 강제.
+SharedType detection: `MIC_v1.ContractSchema` slot — Contract.shared=true flag (v25), access_rights_closure v2 (v26 A2).
+
+### Gate Hook Cypher (apt-gate-check.sh 자동 실행)
+
+```cypher
+// ST→SCW 진입 차단 게이트 — 1:1:1:1 cardinality 검증.
+// missing > 0 → permissionDecision: deny + reason 반환.
+
+MATCH (sa:SemanticAnchor {name: $PROJECT})-[:HAS_ROOT]->(root)
+MATCH (root)-[:DECOMPOSES_TO*1..10]->(atomic:AtomicSpan)
+WHERE atomic.is_atomic = true
+
+// 각 AtomicSpan 의 3 mandatory binding 확인.
+OPTIONAL MATCH (atomic)-[:HAS_CONTRACT]->(c:AptContract)
+OPTIONAL MATCH (atomic)-[:HAS_TASK]->(t:SemanticTask)
+OPTIONAL MATCH (atomic)-[:HAS_SEED]->(s:SubagentTaskSpec)
+
+WITH atomic, c, t, s,
+     // SharedType 예외 — Contract.shared=true 면 N:1 허용, 그 외는 1:1.
+     CASE WHEN c IS NULL THEN 'MissingContract'
+          WHEN t IS NULL THEN 'MissingTask'
+          WHEN s IS NULL THEN 'MissingSeed'
+          ELSE 'OK' END AS missing_kind
+
+WITH atomic, missing_kind
+WHERE missing_kind <> 'OK'
+
+WITH collect({atomic: atomic.name, missing: missing_kind}) AS violations,
+     count(*) AS missing_count
+
+RETURN missing_count = 0 AS gate_passed,
+       missing_count AS violations_total,
+       violations AS missing_atomicspans,
+       CASE WHEN missing_count = 0
+            THEN 'OK — ST→SCW handoff permitted (1:1:1:1 invariant satisfied)'
+            ELSE 'BLOCKED — 1:1:1:1 cardinality violated. Run /apt-st to crystallize missing bindings.'
+       END AS reason
+```
+
+### SharedType N:1 예외 검증 (별도 query)
+
+```cypher
+// shared=false Contract 가 2+ AtomicSpan 에 걸리면 위반 (Contract Sandwich 오용).
+MATCH (a1:AtomicSpan)-[:HAS_CONTRACT]->(c:AptContract)<-[:HAS_CONTRACT]-(a2:AtomicSpan)
+WHERE a1.name < a2.name
+  AND (c.shared IS NULL OR c.shared = false)
+RETURN 'V_ST_Cardinality_NonSharedMultiplex' AS violation,
+       c.name AS contract,
+       collect(DISTINCT a1.name) + collect(DISTINCT a2.name) AS atomic_spans,
+       'Set c.shared=true OR split Contract per AtomicSpan' AS remediation
+```
+
+### 위반 시 행동
+
+1. **MissingContract / MissingTask / MissingSeed**: `/apt-st` 재실행 → 누락 AtomicSpan 에 대해 Step 3 (Contract 생성) + Seed (SubagentTaskSpec) 발행.
+2. **NonSharedMultiplex**: Contract Sandwich 의도면 `c.shared = true` 설정 + access_rights_closure 명시. 아니면 Contract 를 AtomicSpan 별로 분리 (`contract_sandwich.md` 의 derived Contract cypher 참조).
+3. **Re-run gate**: `apt-gate-check.sh` 통과 후에만 `/apt-scw` 진입 허용.
+
+### 참조
+
+- 상세 grounding + worked example 3종 + `apt-gate-check.sh` 패치 예시: [`references/cardinality_invariant.md`](references/cardinality_invariant.md)
+- SharedType 정의: [`references/contract_sandwich.md`](references/contract_sandwich.md)
+- ContractSchema slot resolve: `MIC_v1.ContractSchema` (SKILL.md 상단 v26 A6 섹션)
+
+# KG: span-gap2-st-1to1-cardinality-gate-2026-05-14, lesson-st-1to1-cardinality-canon-2026-05-14, ATOM_ST_CardinalityInvariantGate
 
 ---
 

@@ -10,7 +10,9 @@ description: >
   Then Crystallization Frontier → ST.
   v26: C(S) 5-predicate fields (objective/definition/keyAssertion/verification/c_s_predicate) MUST be non-null on every Span. v26 A3/A5: SP→ST gate enforces LensSet completeness via Cypher (lesson-taliban-shortcut-antipattern-2026-04-21). δ_infra exception via ATOM_APT_delta_infra_exception_2026-04-21. Magic number 500/200-500 → MethodologyConfig slot (A4).
   v24: KG 정본 기반 재설계. v5~v21 AptClarificationNote 22개 반영.
-  # KG: ATOM_Skill_apt_sp, CONTRACT_apt_sp, APT_v26_RFC_draft_2026-04-21, lesson-taliban-shortcut-antipattern-2026-04-21
+  Invoke when: parent /apt orchestrator dispatch only — direct user call rejected by APT_GATE_VERSION=v27_phase_sp_dispatch_guard. Korean: APT 디컴포즈 페이즈 — 상위 orchestrator dispatch only. SP 는 SA→SP→ST→SCW gate chain 의 2/4 phase — 단독 호출 시 SA gate APPROVED + Root Span HAS_ROOT precondition 자동 만족 불가, dispatch_only=true (E1.4 PATTERN_D guard, rf-prom16-cc-eng-E1-S4-skill-activation-2026-05-14).
+  Active Weapons (2026-05-14): 재배맨 SubagentTaskSpec seed per Span (D(S) parallel decomposition, Step 4) + Taliban `/tlb <SPAN> --lens constitutional` per Crystallization Frontier 진입 후보 (C(S) 5-predicate gate, Step 6). hub-jaebaeman-sop + hub-taliban-immunity resolve.
+  # KG: ATOM_Skill_apt_sp, CONTRACT_apt_sp, APT_v26_RFC_draft_2026-04-21, lesson-taliban-shortcut-antipattern-2026-04-21, rf-prom16-cc-eng-E1-S4-skill-activation-2026-05-14
 ---
 
 ## 🎛 v26 A6 Resolve-Only
@@ -53,6 +55,28 @@ RETURN s.name, s.currentConcrete, s.invocation
 ```
 
 # KG: MIC_v1, lesson-apt-not-truly-jaebaeman-2026-04-14
+
+---
+
+## ⚔ Active Weapons — Phase SP (2/5)
+
+> SP 측 활성 5무기 (parent /apt orchestrator §"5무기 Phase Integration Matrix" mirror).
+
+| Step | Weapon | Invocation | Trigger | Output |
+|------|--------|-----------|---------|--------|
+| Step 4 (D(S) recursive decomposition) | **재배맨** (SubagentSeeder) | per-Span `SubagentTaskSpec` seed (parent Pre-fetch → Dispatch → Collect → Write) | parent Span 측 자식 후보 N 개 결정 필요 (LOC > `cfg.vibe_coding_sweet_max` OR multi-concern) | 자식 Span N 개 (each carrying objective/definition/keyAssertion) |
+| Step 5 (wave_index 할당) | **재배맨** | `MATCH (s:Span) SET s.wave_index = $level` | 자식 Span 생성 직후 (parallel dispatch wave 결정) | `Span.wave_index` (same wave = single-message parallel) |
+| Step 6 (C(S) 5-predicate gate) | **Taliban** (AdversarialValidator) | `/tlb <SPAN_id> --lens constitutional` (LensSet completeness 강제) | leaf Span → AtomicSpan 격상 후보 | `VerdictRecord` APPROVED + `:AtomicSpan` 라벨 |
+| Step 7 (Crystallization Frontier 통과) | **Taliban** (mathematical lens optional) | `/88-taliban <Frontier>` (sibling-wellformedness A3 axiom) | 모든 leaf=AtomicSpan 도달 시 | Frontier APPROVED → ST 진입 trigger |
+
+**SP→ST mini-RGR** (RFC2 transition):
+- RED: Taliban prior contract conflict 검사
+- GREEN: Taliban Crystallization Frontier gate (모든 leaf=AtomicSpan)
+- REFACTOR: Longinus 중복 ReferenceSite 통합
+
+**SP 진입 hub**: `hub-jaebaeman-sop` (Span DAG decomposition seed) + `hub-taliban-immunity` (C(S) gate).
+
+# KG: hub-jaebaeman-sop, hub-taliban-immunity, MIC_v1.SubagentSeeder, MIC_v1.AdversarialValidator
 
 ---
 
@@ -236,7 +260,45 @@ RETURN leaf.name,
 
 **모든 leaf가 is_atomic=true AND :AtomicSpan 라벨 보유 → Crystallization Frontier 도달 → ST 진입 가능.**
 
-### Step 5: Taliban RefinementGate
+### Step 5: Parallel Wave Extraction (Kahn topological order)
+
+> Crystallization Frontier 도달 후 *모든* AtomicSpan 에 **wave_index** (Kahn 1962 topo sort) 부여.
+> 같은 wave = antichain (DEPENDS_ON edge 없음) = SCW dispatch 완전 병렬 batch.
+> 외부 정전: Kahn 1962 *CACM* 5(11):558-562 / CLRS §22.4 Topological Sort.
+
+**Invariant**: `(a)-[:DEPENDS_ON]->(b)` ⟹ `a.wave_index < b.wave_index` (strict less).
+
+```cypher
+// Wave 1 — DEPENDS_ON in-degree 0 (root AtomicSpan)
+MATCH (atom:AtomicSpan) WHERE NOT ()-[:DEPENDS_ON]->(atom) AND atom.wave_index IS NULL
+SET atom.wave_index = 1
+RETURN count(atom) AS wave1_size
+
+// Wave k (k=2,3,...) — driver script 가 wave_size > 0 까지 반복
+WITH $k AS k
+MATCH (atom:AtomicSpan)
+WHERE atom.wave_index IS NULL
+  AND NOT EXISTS {
+    MATCH (pred:AtomicSpan)-[:DEPENDS_ON]->(atom)
+    WHERE pred.wave_index IS NULL OR pred.wave_index >= k
+  }
+SET atom.wave_index = k
+RETURN k, count(atom) AS wave_size
+
+// 종료 검증 — NULL 잔존 시 CyclicDAG
+MATCH (atom:AtomicSpan) WHERE atom.wave_index IS NULL
+RETURN atom.name AS cyclic_atom
+```
+
+**Complexity**: O(V+E). V=|AtomicSpan|, E=|DEPENDS_ON|.
+
+**Error variants**:
+- `CyclicDAG`: NULL 잔존. DEPENDS_ON cycle → 상위 Span 으로 의존 끌어올려 재분해.
+- `OrphanLeaf`: :AtomicSpan 라벨 없는 leaf. Step 4 Crystallization Frontier 검증에서 사전 차단.
+
+Worked example (3-wave 7-span) + edge case (single node / linear chain / all-parallel / cyclic) + SP→ST gate cypher → [`references/wave_extraction.md`](references/wave_extraction.md).
+
+### Step 6: Taliban RefinementGate
 
 ```
 /taliban 호출 → SP 산출물 `{{cfg.lens_count_constitutional}}`-lens 검증 (현재 9)
@@ -252,8 +314,19 @@ RETURN leaf.name,
 
 - 전체 AtomicSpan 목록 + description
 - Span 간 DEPENDS_ON 관계
+- **AtomicSpan.wave_index** (Kahn topo sort, SCW dispatch batch 결정용)
 - INFORMED_BY 링크
 - apt-progress.md 현재 상태
+
+### SP→ST gate (wave_index 완전성 강제)
+
+```cypher
+MATCH (sa:SemanticAnchor {name: $PROJECT})-[:HAS_ROOT]->(root)
+MATCH (root)-[:DECOMPOSES_TO*1..10]->(atom:AtomicSpan)
+WHERE atom.wave_index IS NULL
+RETURN 'V_SP_WaveIndex_Missing' AS validation, atom.name
+// 1행 이상 = SP→ST 차단. references/wave_extraction.md 참조.
+```
 
 ### 제거
 
@@ -315,6 +388,75 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 
 ---
 
+## Plan Mode Workflow (Optional) — Claude Code Plan Mode ↔ APT SP D(S)→C(S) 매핑
+
+> Claude Code Plan Mode (Shift+Tab cycle) 와 APT SP D(S) 재귀 → C(S) 검증 은 자연스러운 1:1 대응을 이룬다.
+> 외부 정전: Claude Code Plan Mode 공식 spec (https://code.claude.com/docs).
+> PROM_16 finding: `rf-prom16-cc-eng-E4-S2-plan-worktree-2026-05-14` (verdict: INTEGRATED_PARTIAL_MISSING_OPPORTUNITY).
+> Korean: Plan Mode = 실행 *전* read-only 계획 시각화. APT SP 는 본질적으로 plan layer (코드 없음 / Contract 없음 / 분해와 탐색만) — Plan Mode 와 동형(homomorphic).
+
+### 1:1 매핑 표
+
+| Claude Code Plan Mode 단계 | APT SP 단계 | 외부 결과물 |
+|----------|------|----------|
+| Plan Mode 진입 (Shift+Tab → "plan") | Step 1 Root Span 확인 + Step 2 L1 분해 | plan tree (markdown) — user inspect |
+| Plan tree iterate (read-only D(S) 시뮬레이션) | Step 3 재귀 D(S) → 하위 Span 생성 | DAG 시각화 (mermaid / cypher graph) |
+| Plan tree leaf 확정 | Step 3 C(S) 5-predicate 검증 → AtomicSpan 마킹 | leaf set + C(S) verdict |
+| Plan tree 승인 (user accept) | Step 4 Crystallization Frontier 도달 확인 + Step 5 wave_index | wave_index 할당된 atomic span list |
+| Plan Mode exit → Edit mode | Step 6 Taliban RefinementGate → ST handoff | KG commit (atomic Cypher transaction) |
+
+### Plan Mode + Wave Extraction 시너지
+
+> 어제 박힌 Step 5 Parallel Wave Extraction (Kahn 1962 topo sort) 은 Plan Mode 와 결합 시 **wave 단계 시각화** 단계가 된다.
+> Plan Mode 의 read-only 특성 = wave_index 확정 *전* in-degree 0 set 검증 = user 가 plan tree 에서 "어떤 atomic span 이 wave 1 인가" 직접 확인 가능.
+
+```
+Plan Mode tree view (예시):
+  Root Span
+  ├── L1: Concern A
+  │   ├── L2: AtomicSpan A1 [wave=1, in-degree=0]
+  │   └── L2: AtomicSpan A2 [wave=2, DEPENDS_ON A1]
+  └── L1: Concern B
+      └── L2: AtomicSpan B1 [wave=1, in-degree=0]  ← antichain with A1
+
+User APPROVED → exit Plan Mode → atomic Cypher commit:
+  SET A1, B1 :AtomicSpan, wave_index=1
+  SET A2 :AtomicSpan, wave_index=2
+  → SP→ST gate V_SP_WaveIndex_Missing 자동 통과
+```
+
+### 활용 권장 시나리오
+
+- **복잡 SP 사이클** (depth ≥ 3): Plan Mode 로 전체 DAG 한 번에 시각화 후 user 가 분해 sanity-check.
+- **wave_index 결정 borderline**: in-degree 계산이 미묘할 때 Plan Mode 의 read-only iterate 로 DEPENDS_ON edge 직접 검토.
+- **C(S) 5-predicate human σ predicate** (Rule 5 σ — Semantic completeness): Plan Mode 에서 user verdict 받기 자연스러움.
+
+### 비-활용 시나리오
+
+- **단순 SP** (atomic span ≤ 3): Plan Mode overhead 가 직접 분해보다 큼.
+- **인프라 파일 SP** (K8s/Helm/Terraform): τ_infra/ι_infra 판정은 dry-run 결과 필요 — Plan Mode read-only 와 직교.
+- **Hot-fix / 단기 사이클**: prometheus v6.1 paralysis-by-analysis 회피 패턴 우선.
+
+### Atomic KG Commit 패턴 (Plan Mode exit 후)
+
+```cypher
+// Plan Mode 에서 user 확정된 wave 1 + wave 2 batch 를 단일 transaction 으로 commit
+BEGIN
+UNWIND $atomic_spans AS span
+MATCH (s:AptSpan {name: span.name})
+SET s:AtomicSpan,
+    s.is_atomic = true,
+    s.estimated_lines = span.lines,
+    s.wave_index = span.wave,
+    s.plan_mode_approved = true,
+    s.plan_mode_approved_at = datetime()
+COMMIT
+```
+
+# KG: rf-prom16-cc-eng-E4-S2-plan-worktree-2026-05-14, claude-code-plan-mode-canonical, ATOM_APT_SP_Plan_Mode_Integration_2026-05-14
+
+---
+
 ## History
 
 > Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- apt-sp/SKILL.md`.
@@ -326,12 +468,15 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 > - SP 4 Rules (SpanPlanningNature/2-Layer/SpiderWeb/N:N DAG): [`references/sp_rules.md`](references/sp_rules.md)
 > - Span Boundary (allowed_paths / forbidden_patterns): [`references/span_boundary.md`](references/span_boundary.md)
 > - SP → ST handoff cypher: [`references/handoff_to_st.md`](references/handoff_to_st.md)
+> - Parallel Wave Extraction (Kahn topo sort, wave_index): [`references/wave_extraction.md`](references/wave_extraction.md)
 > - SP error patterns (E1/E10/E-SP1/2/3): [`references/sp_errors.md`](references/sp_errors.md)
 > - Cross-skill shared: [`../_common/`](../_common/) (Context Budget § migrated to dedup).
 > - Legacy redirect: `references/sp_world.md`.
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|
+| **v27.2** | 2026-05-14 | GAP E4.2 (HIGH) Plan Mode Workflow appendix — Claude Code Plan Mode (Shift+Tab) ↔ APT SP D(S)→C(S) 1:1 매핑 + Step 5 wave_index 시각화 시너지 + atomic KG commit 패턴. GAP E1.4 (LOW) frontmatter 측 `Invoke when: parent /apt orchestrator dispatch only` 명시 (APT_GATE_VERSION=v27_phase_sp_dispatch_guard, PATTERN_D guard). Korean dual-language. | `rf-prom16-cc-eng-E4-S2-plan-worktree-2026-05-14`, `rf-prom16-cc-eng-E1-S4-skill-activation-2026-05-14`, `ATOM_APT_SP_Plan_Mode_Integration_2026-05-14` |
+| **v27.1** | 2026-05-14 | GAP-1 Parallel Wave Extraction step (Kahn topo sort, AtomicSpan.wave_index). Crystallization Frontier 후 SP→ST gate 에 `V_SP_WaveIndex_Missing` 강제. 1to1to1to1 invariant 의 병렬 dispatch batch 명시화 | `lesson-apt-sp-wave-index-explicit-2026-05-14`, `APT_SP_WaveExtraction_canonical` |
 | **v26** | 2026-04 | C(S) 5-predicate fields (objective/definition/keyAssertion/verification/c_s_predicate) MUST non-null on every Span. A3/A5 SP→ST gate Cypher LensSet completeness. δ_infra exception. Magic number 500/200-500 → MethodologyConfig slot (A4) | `APT_v26_RFC_draft_2026-04-21`, `lesson-taliban-shortcut-antipattern-2026-04-21`, `ATOM_APT_delta_infra_exception_2026-04-21` |
 | **v24** | 2026-04 mid | KG 정본 기반 재설계. Crystallization Frontier. v5~v21 AptClarificationNote 22개 반영 | — |
 | **v5~v23** | timestream | SP = ONE world. Spans = DAG nodes (N:N, not tree). D(S) recurrence until ALL leaves satisfy C(S) = AtomicSpan | — |
