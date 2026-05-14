@@ -1,7 +1,7 @@
 ---
 name: prometheus
 kg_ref: ATOM_Skill_prometheus
-version: "6.2.0"
+version: "6.3.0"
 channel: stable
 description: >
   프로메테우스 방법론 v6.1 — **지식-행동 spiral** (Hegel reframe, NOT 단방향 "지식 선행").
@@ -320,37 +320,73 @@ RETURN rf.name, rf.oneLineSummary LIMIT 5
 > **v5 변경**: Prompt 본문은 SKILL.md에 없다. KG `SubagentTaskSpec` 씨앗이 정본.
 > SKILL.md 수정 없이 KG 씨앗만 업데이트하면 전체 시스템에 즉시 반영된다.
 
-#### 3-0. KG 씨앗 Pre-fetch (부모 책무)
+#### 3-0. KG 씨앗 Pre-fetch (부모 책무) — **MANDATORY (drift block)**
 
-**부모는 Agent 출격 전에 반드시 KG에서 씨앗을 조회**한다. `mcp__neo4j__read_neo4j_cypher`:
+> **v6.3 (2026-05-14) 강제 격상**: Step 3-0 = **MANDATORY**. SKIP = SKILL.md DRIFT (`lesson-prometheus-v5-kg-reference-lift-2026-04-18` 위반 — "SKILL.md = 프로토콜만, 내용물 = KG 정본"). main Claude prompt 측 axis hardcode = ANTI-PATTERN.
+> **부모는 Agent 출격 전에 반드시 KG에서 씨앗을 조회한다.** 조회 SKIP / NULL 결과 무시 후 진행 = HARD VIOLATION. 아래 cypher 3 query 모두 실행 후 결과를 prompt 조립에 주입해야 한다. `mcp__neo4j__read_neo4j_cypher`:
 
 ```cypher
-// Matrix Template (JSON 계약 + 수행 절차)
+// Matrix Template (JSON 계약 + 수행 절차) — MANDATORY query #1
 MATCH (mt:SubagentTaskSpec {name: 'taskspec-prometheus-matrix-research-v1'})
 RETURN mt.description AS template_desc
 
-// Axis 씨앗 (도메인 지침) — N≥12일 때 axis_label로 매칭
+// Axis 씨앗 (도메인 지침) — N≥12일 때 axis_label로 매칭 — MANDATORY query #2
 MATCH (ax:SubagentTaskSpec {skill:'prometheus'})
 WHERE ax.axis_label IN ['history','principle','implementation','storage',
                          'query-schedule','limitations','connections','applications']
 RETURN ax.name, ax.axis_label, ax.description
 
-// Sub-axis 씨앗 (렌즈 지침)
+// Sub-axis 씨앗 (렌즈 지침) — MANDATORY query #3
 MATCH (sa:SubagentTaskSpec {skill:'prometheus'})
 WHERE sa.sub_axis_label IN ['official-docs','community-cases','benchmarks','alternatives',
                              'pitfalls','trends-2026','theory','critique']
 RETURN sa.name, sa.sub_axis_label, sa.description
 ```
 
-**부족한 씨앗 발견 시**: `MERGE` 로 KG에 심은 후 진행. SKILL.md 수정 금지.
+**부족/부재한 씨앗 발견 시 처리**:
+- query #1 (`taskspec-prometheus-matrix-research-v1`) 결과 NULL → **즉시 MERGE** 후 진행:
+  ```cypher
+  MERGE (mt:SubagentTaskSpec {name: 'taskspec-prometheus-matrix-research-v1'})
+  ON CREATE SET mt.skill='prometheus', mt.role='matrix-template',
+                mt.status='READY', mt.description=$template_body, mt.createdAt=datetime()
+  ```
+- query #2/#3 (axis / sub-axis) 결과 부족 → `taskspec-prometheus-axis-<label>` / `taskspec-prometheus-subaxis-<label>` 직접 MERGE. SKILL.md 본문 수정 금지.
 
-#### 3-1. 도메인 분배
+#### 3-0-A. Anti-Pattern Detection (drift block, v6.3 신설)
 
-| N 범위 | 분배 전략 | 씨앗 선택 |
+> Step 3-0 spec 위반 측 자주 발생 drift pattern. main Claude 측 Step 3-0 SKIP 후 axis 측 prompt hardcode → KG 씨앗 정전 우회 → 다음 cycle에서 stale axis 측 propagation. **자체 진단 checklist**:
+
+| 패턴 (anti-pattern) | drift type | 정정 (mandatory action) |
 |---|---|---|
-| N ≤ 5 | 수동 도메인 템플릿 | 부모가 axis 1-5개 자율 선택 |
-| 6 ≤ N ≤ 11 | 프리셋 도메인 | axis 6-11개 (sub-axis=default: official+critique 혼합) |
-| N ≥ 12 | **axis × sub-axis 교차표** | KG 씨앗 `axis_label × sub_axis_label` 조합 |
+| main prompt 측 axis label 직접 hardcode (`axis_label = ['history','principle',...]` Python list 등) | Step 3-0 SKIP | KG seed pre-fetch (query #2) mandatory, hardcode 제거 |
+| sub-axis 측 manual 작성 (prompt 내 description 직접 서술) | Step 3-1 violation | `taskspec-prometheus-subaxis-<label>` KG 조회, 결과 NULL 시 MERGE |
+| `model="haiku"` only, `seed_bundle` 부재 (axis_seed / sub_axis_seed / template_seed 미주입) | Step 3-5 violation | 9-field seed_bundle (재배맨 v2.2) mandatory |
+| matrix-template description SKILL.md에 inline 복제 | v5 reference-lift 위반 | KG 씨앗만 정본, 복제 즉시 삭제 |
+| query 결과 NULL 무시 후 default 측 진행 | drift hide | NULL 시 MERGE + provenance edge (`MERGED_FOR_CYCLE`) 필수 |
+| Step 3-0 cypher SKIP, axis 측 prompt 직접 작성 | foundation violation | 본 cycle 즉시 ABORT + retroactive KG seed MERGE + cycle 재실행 |
+
+**자가검증 cypher** (cycle 종료 시 sanity-check):
+```cypher
+// 본 cycle 측 출격 측 axis seed 측 :GERMINATED_FROM_AXIS edge 존재 여부
+MATCH (rf:ResearchFinding {cycle_id:$cycle_id})
+WHERE NOT (rf)-[:GERMINATED_FROM_AXIS]->()
+RETURN count(rf) AS drift_count
+// drift_count > 0 → Step 3-0 SKIP 의심 → lesson-prom-manual-axis-drift 측 기록
+```
+
+# KG: rf-prom-manual-axis-drift-2026-05-14, lesson-prometheus-v5-kg-reference-lift-2026-04-18 (강제 격상)
+
+#### 3-1. 도메인 분배 — **KG seed mandatory (v6.3)**
+
+> **모든 N 범위에서 axis 선택은 Step 3-0 query #2/#3 결과로부터 derive 되어야 한다.** main Claude 측 axis label 직접 hardcode (Python list / prompt inline 등) = Step 3-0 SKIP drift. KG에 없는 axis 사용 시 `taskspec-prometheus-axis-<label>` 측 즉시 MERGE 필수.
+
+| N 범위 | 분배 전략 | 씨앗 선택 (모두 KG seed 필수) |
+|---|---|---|
+| N ≤ 5 | 수동 도메인 템플릿 | 부모가 KG axis 1-5개 자율 선택 — 부재 시 MERGE 후 진행 |
+| 6 ≤ N ≤ 11 | 프리셋 도메인 | KG axis 6-11개 (sub-axis=default: official+critique 혼합) — hardcode 금지 |
+| N ≥ 12 | **axis × sub-axis 교차표** | KG 씨앗 `axis_label × sub_axis_label` 조합 (Step 3-0 query #2 × #3 cartesian) — 교차표 자체도 KG seed 측 derive 필수 |
+
+**위반 시**: Step 3-0-A anti-pattern table 측 row 1 (axis hardcode) 발동 → cycle ABORT + retroactive MERGE.
 
 #### 3-2. findingId 결정적 해시 (멱등 MERGE 보장)
 
@@ -383,24 +419,43 @@ Terse 모드 근거: N=100일 때 full schema면 ~500KB context, terse는 ~150KB
   2. N개 동시 KG write 시 Lesson 노드 lock 경합 (Neo4j 5.x deadlock)
 - 부모가 Step 3.5에서 **UNWIND 단일 트랜잭션**으로 배치 MERGE.
 
-#### 3-5. 부모 Dispatch 패턴 (Jaebaeman 정석)
+#### 3-5. 부모 Dispatch 패턴 (Jaebaeman 정석) — **9-field seed_bundle MANDATORY (v6.3)**
 
 **기본 절차**: → **재배맨 SKILL.md Phase 2 Dispatch** 참조 (정본).
 공통: Pre-fetch(2-1) → Prompt 조립(2-2) → Agent 호출(2-3) → 씨앗 상태 전이(2-4) → HARD CONSTRAINTS.
 
-**Prometheus 특화**: `seed_bundle` 조립 (axis + sub_axis + template 3-tuple) + N≥50 terse schema 선택.
+**Prometheus 특화**: `seed_bundle` 조립 (재배맨 v2.2 측 9-field) + N≥50 terse schema 선택.
 
-```
+> **MANDATORY**: 아래 9 field 모두 채운 seed_bundle 만이 valid dispatch. `model="haiku"` only 측 axis hardcode prompt = Step 3-0/3-5 동시 위반 (Step 3-0-A row 3 발동).
+
+```python
 for idx in 0..N-1:
     bundle = {
-      axis_seed    : axes[idx_axis],
-      sub_axis_seed: subaxes[idx_sub],
-      template_seed: 'taskspec-prometheus-matrix-research-v1',
-      schema_variant: 'terse' if N >= 50 else 'full'
+      # 1. axis seed (KG MANDATORY)
+      axis_seed       : axes[idx_axis],            # Step 3-0 query #2 결과
+      # 2. sub-axis seed (KG MANDATORY)
+      sub_axis_seed   : subaxes[idx_sub],          # Step 3-0 query #3 결과
+      # 3. template seed (KG MANDATORY)
+      template_seed   : 'taskspec-prometheus-matrix-research-v1',
+      # 4. schema variant (N-aware)
+      schema_variant  : 'terse' if N >= 50 else 'full',
+      # 5. cycle provenance
+      cycle_id        : $cycle_id,
+      # 6. findingId (deterministic hash, Step 3-2)
+      finding_id      : "finding_" + sha256(problem + "::" + domain + "::" + str(idx))[:16],
+      # 7. parent lesson (Step 1 측 결정화 lesson)
+      parent_lesson   : $parent_lesson_name,
+      # 8. agent dispatch metadata (재배맨 v2.2)
+      agent_id        : f"prom-{cycle_id}-{idx}",
+      # 9. model / token budget
+      model_spec      : { name:'haiku', max_tokens: 4096 if schema_variant=='terse' else 8192 }
     }
-    # 재배맨 Phase 2-2 prompt 조립에 bundle.description들 주입
+    # 재배맨 Phase 2-2 prompt 조립에 bundle.description들 주입 (전체 복제 X, id 참조 O)
     # 재배맨 Phase 2-3 Agent 호출
 ```
+
+**dispatch 후 provenance edges (Step 3.5 UNWIND 시 추가)**:
+`GERMINATED_FROM_AXIS` (rf → axis_seed) + `GERMINATED_FROM_SUBAXIS` (rf → sub_axis_seed) + `USED_TEMPLATE` (rf → template_seed) — Step 3-0-A 측 self-verify cypher 가 이 3 edge 존재 여부로 drift 판정.
 
 부모는 N개 subagent의 JSON 수집 후 **Step 3.5**로 일괄 KG write.
 ResearchFinding에 `GERMINATED_FROM_AXIS` + `GERMINATED_FROM_SUBAXIS` + `USED_TEMPLATE` 엣지 추가 (Prometheus 고유 provenance).
@@ -955,6 +1010,7 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|
+| **v6.3** | 2026-05-14 | Step 3-0 KG seed Pre-fetch **MANDATORY 격상** + Step 3-0-A Anti-Pattern Detection section 신설 (6-row drift table + self-verify cypher). Step 3-1 도메인 분배 측 KG seed mandatory 명시 (axis hardcode 금지). Step 3-5 9-field seed_bundle (재배맨 v2.2) 명시. 본 세션 (2026-05-14) 측 5 prom cycle 모두 Step 3-0 SKIP drift 측 instance — `lesson-prometheus-v5-kg-reference-lift-2026-04-18` ("SKILL.md = 프로토콜만, 내용물 = KG 정본") 위반 인정. SKILL.md 본문 정정 X (drift는 SKIP 측 발생), Step 3-0/3-0-A enforcement 강화로 mandatory 격상. | `rf-prom-manual-axis-drift-2026-05-14`, `lesson-prometheus-v5-kg-reference-lift-2026-04-18` (강제 격상), `taskspec-prometheus-matrix-research-v1` (정본 cement) |
 | **v6** | 2026-04-29 | Step 6.5 filesystem_dispersion sub-step + G6.5 gate 신설. KG-first 설계 그대로, KG↔FS drift만 차단. 본문은 thin pointer — 정책은 `MIC_v1.FilesystemDispersionPolicy` slot + `MethodologyConfig_default_v26.prometheus_md_*` 4 field. APT v26 A6 resolve-only 준수. cycle `prom64-pkgdisc-2026-04-29`가 evidence — 1 .md만 default 산출되던 문제(KG 152 nodes 풍부 ↔ filesystem 1 .md lean) 해소. | `rfc-prom-filesystem-dispersion-2026-04-29`, `lesson-prom-output-coverage-too-lean-2026-04-29`, `verdict-user-prom-too-lean-2026-04-29`, `rootcause-prom-filesystem-dispersion-missing-2026-04-29`, `FilesystemDispersionPolicy` slot, `PromV5_FilesystemDispersion_v1` policy |
 | **v5** | 2026-04-18 | Step 3 prompt 본문을 KG 씨앗 (axis/sub-axis/matrix-template) 으로 lift. SKILL.md = 프로토콜만, 내용물 = KG 정본 (재배맨 원칙 준수). PrometheusStep v5 (Step 0/1/2/2.5/3/3.3/3.5/4/4.7/5/6/7) | `lesson-prometheus-v5-kg-reference-lift-2026-04-18`, `lesson-prometheus-v26-a6-step-drift-2026-04-25` |
 | **v4** | 2026-04-17 | 부모 하계 Pre-fetch (MCP 우회, GH #13605 대응) + Finding 중복 탐지 + 재배맨 MIC 참조 + Gate Hook 강제 | `lesson-prometheus-v4-structural-gaps-2026-04-17`, `SPAN_prometheus_v4_prefetch_protocol`, `SA_methodology_v4_triple_upgrade` |

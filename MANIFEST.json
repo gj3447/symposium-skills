@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-14T03:13:00+09:00",
-  "git_head_commit": "51e2f139f68e915c36c5dcc7451390eb0341a75e",
-  "git_head_short": "51e2f13",
+  "generatedAt": "2026-05-14T12:32:06+09:00",
+  "git_head_commit": "b84bf9cc4133055cf8f401a8c992f44059f95d9a",
+  "git_head_short": "b84bf9c",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 32,
-  "merkle_root": "560e0d55777f72980051d5e092fe9bf1c09def9d4694e44b2c903e2302409949",
+  "merkle_root": "ebbd9d9864b0b2b47c0f0349330ed31ce4582e2cb48e9f4aa7bf4d83b440eef6",
   "skills": [
     {
       "name": "88-taliban",
@@ -22,7 +22,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "630eb12f037bac557d5481f6e662e0b219fed0b4"
+      "git_tree_sha": "78c001365c0d955d18bd669caa39d0cabea0134e"
     },
     {
       "name": "apt-cleanup",
@@ -30,7 +30,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_cleanup",
       "channel": "experimental",
-      "git_tree_sha": "83a87f652c9c40a9574694b44053fbc1dd4aca08"
+      "git_tree_sha": "f9e7358230be787063b089bbeb8ac83302bda200"
     },
     {
       "name": "apt-d",
@@ -46,7 +46,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
-      "git_tree_sha": "3c812c839fbc3c56000c91c5e258d4213e0a1c03"
+      "git_tree_sha": "17868a26a9fbe7d1b048b9637d35b15785809962"
     },
     {
       "name": "apt-sa",
@@ -54,7 +54,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sa",
       "channel": "stable",
-      "git_tree_sha": "e0b386d8733d6e753a3c6401574382d5685695e7"
+      "git_tree_sha": "b15eb684f583560d274883fe417ce317fd0286a9"
     },
     {
       "name": "apt-scw",
@@ -62,7 +62,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_scw",
       "channel": "stable",
-      "git_tree_sha": "096149dc23fd316949ad14172c0f23ff76a546ae"
+      "git_tree_sha": "a00ecd72d120be5c894f73c333e1cd8db9662091"
     },
     {
       "name": "apt-sp",
@@ -70,7 +70,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sp",
       "channel": "stable",
-      "git_tree_sha": "2de190426d0bf349afe49f0e806aa361f558bd43"
+      "git_tree_sha": "b562b047a097eec59b6517e4aa0eebf856bfb08d"
     },
     {
       "name": "apt-st",
@@ -78,7 +78,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "00b9f1b91a3ead1c41516adae876243fa4562a6c"
+      "git_tree_sha": "e43b71c861754d298f9d7736a3e7f10620942898"
     },
     {
       "name": "backup",
@@ -102,7 +102,7 @@
       "version": "1.1.0",
       "kg_ref": "ATOM_Skill_db_query",
       "channel": "stable",
-      "git_tree_sha": "ef300723f8d49e68635a5d84a32e615c310f4346"
+      "git_tree_sha": "453ee87e46b6045110319faa092a83cf6599df61"
     },
     {
       "name": "deploy",
@@ -150,7 +150,7 @@
       "version": "2.3.0",
       "kg_ref": "ATOM_Skill_jaebaeman",
       "channel": "stable",
-      "git_tree_sha": "39e6aedb33be327d8bef5d2d9cc2ff1fa3c7f9d7"
+      "git_tree_sha": "13628301a73f6c0f0433c5ee0853b15ff7d9fe7a"
     },
     {
       "name": "kafka-manage",
@@ -179,7 +179,7 @@
     {
       "name": "prometheus",
       "path": "prometheus",
-      "version": "6.2.0",
+      "version": "6.3.0",
       "kg_ref": "ATOM_Skill_prometheus",
       "channel": "stable",
       "git_tree_sha": "70d785ca3dcd1447195cfad298d09457edf662a3"
