@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-14T14:47:19+09:00",
-  "git_head_commit": "7889067fe58b59200253e3ff61a494d88f7848a2",
-  "git_head_short": "7889067",
+  "generatedAt": "2026-05-14T15:01:25+09:00",
+  "git_head_commit": "61ce6ce4df20e7613e9331848f5c2b7db6584a8b",
+  "git_head_short": "61ce6ce",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 32,
-  "merkle_root": "bb0cfc76c34219fd0992635591971b52bd2c16a96da23dac0a2a4b3b5a0d2eba",
+  "merkle_root": "a7c2dd3bed6dd501e88bb1f222047bddd304db90f053360fdd3b9df7b73454b8",
   "skills": [
     {
       "name": "88-taliban",
@@ -22,7 +22,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "78c001365c0d955d18bd669caa39d0cabea0134e"
+      "git_tree_sha": "c22a8fa7fb43003276da79dff6a3b1a01835fb55"
     },
     {
       "name": "apt-cleanup",
@@ -142,7 +142,7 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_harness",
       "channel": "stable",
-      "git_tree_sha": "6b2af368a3b6c4aabed43f80b37fc54e577c183b"
+      "git_tree_sha": "cfb2f53dd30970f78079cda2166db710a90146cb"
     },
     {
       "name": "jaebaeman",
@@ -150,7 +150,7 @@
       "version": "2.4.0",
       "kg_ref": "ATOM_Skill_jaebaeman",
       "channel": "stable",
-      "git_tree_sha": "13628301a73f6c0f0433c5ee0853b15ff7d9fe7a"
+      "git_tree_sha": "bdbf53326e60ce41e98bec2f888978686bb016ab"
     },
     {
       "name": "kafka-manage",

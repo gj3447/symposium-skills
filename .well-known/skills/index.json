@@ -2,8 +2,8 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.2",
-  "git_head_short": "b84bf9c",
-  "merkle_root": "ebbd9d9864b0b2b47c0f0349330ed31ce4582e2cb48e9f4aa7bf4d83b440eef6",
+  "git_head_short": "61ce6ce",
+  "merkle_root": "a7c2dd3bed6dd501e88bb1f222047bddd304db90f053360fdd3b9df7b73454b8",
   "skills_count": 32,
   "skills": [
     {
@@ -18,7 +18,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "78c001365c0d955d18bd669caa39d0cabea0134e"
+      "git_tree_sha": "c22a8fa7fb43003276da79dff6a3b1a01835fb55"
     },
     {
       "name": "apt-cleanup",
@@ -123,14 +123,14 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_harness",
       "channel": "stable",
-      "git_tree_sha": "6b2af368a3b6c4aabed43f80b37fc54e577c183b"
+      "git_tree_sha": "cfb2f53dd30970f78079cda2166db710a90146cb"
     },
     {
       "name": "jaebaeman",
-      "version": "2.3.0",
+      "version": "2.4.0",
       "kg_ref": "ATOM_Skill_jaebaeman",
       "channel": "stable",
-      "git_tree_sha": "13628301a73f6c0f0433c5ee0853b15ff7d9fe7a"
+      "git_tree_sha": "bdbf53326e60ce41e98bec2f888978686bb016ab"
     },
     {
       "name": "kafka-manage",
@@ -158,7 +158,7 @@
       "version": "6.3.0",
       "kg_ref": "ATOM_Skill_prometheus",
       "channel": "stable",
-      "git_tree_sha": "70d785ca3dcd1447195cfad298d09457edf662a3"
+      "git_tree_sha": "d2d3eb8eda85f5444be97409e9df77b9fa541837"
     },
     {
       "name": "server-status",
