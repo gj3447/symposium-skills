@@ -5,23 +5,21 @@ version: "27.1.0"
 channel: stable
 description: >
   APT v26.1 orchestrator — KG 정본 기반. Gate Check Hook 강제. SA→SP→ST→SCW 순환.
-  v5~v21 역사 반영. 하네스 4축 + 5대 무기(하네스/탈레반/프로메테우스/롱기누스/재배맨) + D(S)/C(S) + Crystallization Frontier.
-  v26.1: RFC1 (C(S) ↔ A3 axiom layer 분리 명시 + Greek :ARCHIVED) + RFC2 (two-tier cleanup: local RGR in transitions + global Phase 6) + Apt_FourPlusOne motif 인식.
-  # KG: ATOM_Skill_apt_orchestrator, APT_v26_RFC_draft_2026-04-21 (A1-A6 pluggable MIC slots 7→10)
-  # KG: APT_v25_RFC_draft_2026-04-17 (error_variants extension, SharedType→shared=true, meta-validation)
-  # KG: rfc-apt-cs-axiom-visibility-drift-2026-04-29, rfc-apt-two-tier-cleanup-2026-04-29, Apt_FourPlusOne
-  v26 A1: MIC slots 10 (ContractSchema/LensSet/MethodologyConfig 추가). v26 A3/A5: Gate Check Hook LensSet completeness + Cypher enforcement (3-lens shortcut 차단). v26 A6: SKILL.md resolve-only — 본문 리라이트는 별도 스프린트 (ATOM_APT_v26_Gate_Hook_Lens_Enforcement_2026-04-21).
+  하네스 4축 + 5대 무기(하네스/탈레반/프로메테우스/롱기누스/재배맨) + D(S)/C(S) + Crystallization Frontier.
+  v26.1: RFC1 (C(S) ↔ A3 axiom layer 분리 + Greek :ARCHIVED) + RFC2 (two-tier cleanup: local RGR in transitions + global Phase 6) + Apt_FourPlusOne motif.
+  v26 A1: MIC slots 10 (ContractSchema/LensSet/MethodologyConfig). A3/A5: LensSet completeness + Cypher enforcement (3-lens shortcut 차단). A6: SKILL.md resolve-only.
   v22: Gate Check enforcement via Claude Code Hook.
-  Incorporates Taliban --lens mathematical 5-round meta-verification feedback (260✓→102✓ honest convergence).
+  Taliban --lens mathematical 5-round meta-verification 반영 (260✓→102✓ honest convergence).
   Every gate requires: adversarial critic + ground truth + human sigma_oracle + evidence-backed verdicts + post-gate reflection.
-  HR11: Every APPROVED verdict MUST cite specific evidence. Approvals without evidence = RUBBER_STAMP violation.
-  Taliban 렌즈셋 플러거블: --lens constitutional(기본, 산출물 검증) / --lens mathematical(메타 검증). LensSet KG 노드로 확장.
-  피드백은 5대 무기 순환의 창발 속성 (독립 위상 아님). # KG: lesson-feedback-is-emergent-not-weapon-2026-04-16
-  Essential ✗: Arrow of Time (order-dependent), Edge of Chaos (structured complexity), Gödel (never complete).
+  HR11: Every APPROVED verdict MUST cite specific evidence (no RUBBER_STAMP).
+  Taliban LensSet pluggable: constitutional / mathematical (KG LensSet 노드 확장).
+  피드백은 5대 무기 순환의 창발 속성 (독립 위상 아님).
+  Essential ✗: Arrow of Time (order-dependent), Edge of Chaos, Gödel (never complete).
   Optional Lean 4 integration: `lake build` sorry=0 error=0 as ground truth.
   Invoke when: "start work on", "implement", "develop", "what phase am I in",
   "apt check", "validate apt", "auto mode", or any general development request.
   Enforces: phase detection, flow control, adversarial gates, validation V1-V29, feedback system, mandatory reflection.
+  # KG: ATOM_Skill_apt_orchestrator, APT_v26_RFC_draft_2026-04-21, lesson-feedback-is-emergent-not-weapon-2026-04-16
 ---
 
 ## 🎛 v26 A6 Resolve-Only Directive

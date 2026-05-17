@@ -4,16 +4,16 @@ kg_ref: ATOM_Skill_apt_st
 version: "27.1.0"
 channel: stable
 description: >
-  APT SemanticTwin (ST) — crystallization of AtomicSpans into Contract + Task + `{{cfg.st_decision_areas}}` ST Decision Areas (현재 8).
+  APT SemanticTwin (ST) — crystallization of AtomicSpans into Contract + Task + 8 ST Decision Areas.
   Enters ONLY after Crystallization Frontier (all leaves = AtomicSpan).
-  v27 (2026-04-29): Exhaustive Cover Scope — 8 ST decision areas (AST/Workflow/DesignPattern/ProjectStructure/DataFlow/Algorithm/Store/ClassDesign) mandatory before SCW entry. 96 ResearchFinding 학문 grounding. Tier 1 5 areas (AST/Workflow/DP/DataFlow/Store) HIGH ★, Tier 3 3 areas (PS/Algo/Class) MEDIUM. SCW entry gate hook enforced.
-  Contract = typed DTO/Schema (default 7 fields + v25 optional error_variants; v26 A2 schema pluggable via ContractSchema slot). NOT prose.
-  v26 A2 — Contract v2 (9 canonical axes + access_rights_closure + ArchitectureContract subtype + 6 CrossAxisInvariant + ReferenceSite/DriftMorphism) via ContractSchema slot.
-  v25: SharedType → Contract.shared=true flag. SemanticTask = MethodologyConfig.vibe_coding_sweet 200-500 line.
-  v24: KG 정본 기반 재설계. AptClarificationNote 반영.
-  Invoke when: parent /apt orchestrator dispatch only — direct user call rejected by APT_GATE_VERSION=v27_phase_st_dispatch_guard. Korean: APT 결정화 페이즈 — 상위 /apt 가 phase routing, 단독 호출 금지. ST 는 SA→SP→ST→SCW gate chain 의 3/4 phase — 단독 호출 시 SP gate APPROVED + Crystallization Frontier (all leaves = AtomicSpan) + 8 ST Decision Areas exhaustive cover precondition 자동 만족 불가, dispatch_only=true (E1.4 PATTERN_D → PATTERN_A 격상, rf-prom16-cc-eng-E1-S4-skill-activation-2026-05-14).
-  Active Weapons (2026-05-14): Longinus L3-L4 binding (Contract → AtomicSpan ReferenceSite 7-tuple, Step 8) + 재배맨 per-AtomicSpan SubagentTaskSpec seed (1:1:1:1 Contract:Task:Seed:AtomicSpan, Step 9) + Taliban `/tlb <Contract> --lens constitutional` RefinementGate (Step 9.5). hub-longinus-reference + hub-jaebaeman-sop + hub-taliban-immunity resolve.
-  # KG: ATOM_Skill_apt_st_v27, lesson-st-cover-scope-exhaustive-2026-04-29, lesson-st-cover-tier1-complete-2026-04-29, APT_v26_RFC_draft_2026-04-21, SA_Contract_v2_DbC_Interface_2026-04-21_v2, rf-prom16-cc-eng-E1-S4-skill-activation-2026-05-14
+  v27: Exhaustive Cover Scope — 8 areas (AST/Workflow/DP/PS/DataFlow/Algo/Store/Class) mandatory before SCW. Tier 1 5 areas HIGH ★, Tier 3 3 areas MEDIUM.
+  Contract = typed DTO/Schema (default 7 fields + v25 error_variants; v26 A2 pluggable via ContractSchema slot).
+  v26 A2: Contract v2 (9 axes + access_rights_closure + ArchitectureContract + 6 CrossAxisInvariant + ReferenceSite/DriftMorphism).
+  v25: SharedType→Contract.shared=true. SemanticTask via MethodologyConfig.vibe_coding_sweet.
+  Invoke when: parent /apt orchestrator dispatch only — direct user call rejected by APT_GATE_VERSION=v27_phase_st_dispatch_guard.
+  ST 는 SA→SP→ST→SCW chain 의 3/4 phase — 단독 호출 시 SP gate APPROVED + Crystallization Frontier + 8 areas exhaustive cover precondition 자동 만족 불가 (E1.4 PATTERN_D→PATTERN_A).
+  Active Weapons (2026-05-14): Longinus L3-L4 (Contract→ReferenceSite 7-tuple, Step 8) + 재배맨 per-AtomicSpan SubagentTaskSpec (1:1:1:1, Step 9) + Taliban `/tlb <Contract> --lens constitutional` (Step 9.5).
+  # KG: ATOM_Skill_apt_st_v27, lesson-st-cover-scope-exhaustive-2026-04-29, APT_v26_RFC_draft_2026-04-21, rf-prom16-cc-eng-E1-S4-skill-activation-2026-05-14
 ---
 
 ## 🎛 v26 A6 Resolve-Only

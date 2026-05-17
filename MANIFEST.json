@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-14T15:01:25+09:00",
-  "git_head_commit": "61ce6ce4df20e7613e9331848f5c2b7db6584a8b",
-  "git_head_short": "61ce6ce",
+  "generatedAt": "2026-05-15T16:18:01+09:00",
+  "git_head_commit": "06958ee59e649a2c924b8409e45ec6da3985f6b7",
+  "git_head_short": "06958ee",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 32,
-  "merkle_root": "a7c2dd3bed6dd501e88bb1f222047bddd304db90f053360fdd3b9df7b73454b8",
+  "merkle_root": "66f749744939f04fef8ba8972d2ea5fc1d7882600eebc06464123cb8c35750b9",
   "skills": [
     {
       "name": "88-taliban",
@@ -46,7 +46,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
-      "git_tree_sha": "17868a26a9fbe7d1b048b9637d35b15785809962"
+      "git_tree_sha": "ef4c5c82e1b0c8a481c9b9b6a7d0819deb10bfdc"
     },
     {
       "name": "apt-sa",
@@ -54,7 +54,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sa",
       "channel": "stable",
-      "git_tree_sha": "b15eb684f583560d274883fe417ce317fd0286a9"
+      "git_tree_sha": "b4b2fe47c6eea66f15b2707fa7312069703676dd"
     },
     {
       "name": "apt-scw",
@@ -62,7 +62,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_scw",
       "channel": "stable",
-      "git_tree_sha": "a00ecd72d120be5c894f73c333e1cd8db9662091"
+      "git_tree_sha": "7758f3b8085012fec55f03db32555547e8162930"
     },
     {
       "name": "apt-sp",
@@ -70,7 +70,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sp",
       "channel": "stable",
-      "git_tree_sha": "b562b047a097eec59b6517e4aa0eebf856bfb08d"
+      "git_tree_sha": "35887ec6ee4bea1ad52675a5987da01f1bc8e0a1"
     },
     {
       "name": "apt-st",
@@ -78,7 +78,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "e43b71c861754d298f9d7736a3e7f10620942898"
+      "git_tree_sha": "7c3ce194299273e8c12304223cfe7c4cd85cf9da"
     },
     {
       "name": "backup",
@@ -94,7 +94,7 @@
       "version": "0.1.0-draft",
       "kg_ref": "ATOM_Skill_build_agent_v28",
       "channel": "draft",
-      "git_tree_sha": "a000ac98a6f40dbd275a82c6cdfa6609d6a15796"
+      "git_tree_sha": "b337b91e9d658efcae530f14eafdf781bd010993"
     },
     {
       "name": "db-query",
@@ -118,7 +118,7 @@
       "version": "0.1.0-draft",
       "kg_ref": "ATOM_Skill_design_agent_v28",
       "channel": "draft",
-      "git_tree_sha": "8a6e6810e571b258243200be79e9efa593867334"
+      "git_tree_sha": "0e4ed03d133b8521bbb8326ebbecdcac512e2c9c"
     },
     {
       "name": "docker-logs",
@@ -134,7 +134,7 @@
       "version": "0.1.0-draft",
       "kg_ref": "ATOM_Skill_fix_agent_v28",
       "channel": "draft",
-      "git_tree_sha": "bc1a38a268d39f371b202c9ffb7e7dfa982349d6"
+      "git_tree_sha": "630f9749caf0bd0ed63e96db8a610638c097567e"
     },
     {
       "name": "harness",

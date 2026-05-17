@@ -5,20 +5,17 @@ version: "6.3.0"
 channel: stable
 description: >
   프로메테우스 방법론 v6.1 — **지식-행동 spiral** (Hegel reframe, NOT 단방향 "지식 선행").
-  "바로 고치지 마"는 유지하되, "먼저 불(지식) 훔쳐와"는 thesis-antithesis-synthesis 순환의 첫 thesis로 해석.
-  v6.1 (2026-05-05): OODA/Lean Startup 충돌 해소 — Hegel Phenomenology Begriff 자가운동(thesis 행동 없이 antithesis 못 만남).
+  "바로 고치지 마" 유지 + "먼저 불(지식) 훔쳐와"는 thesis-antithesis-synthesis 첫 thesis.
+  v6.1: OODA/Lean Startup 충돌 해소 — Hegel Phenomenology Begriff 자가운동.
   paralysis-by-analysis 회피: hot-fix latency critical 시 KG-skip + immediate action + post-hoc lesson 허용.
-  사용법: `/prometheus <N> <problem>` (N=subagent 수, 생략 시 auto_estimate, default cfg.prometheus_N_default_small=4 / medium=8 / large=16).
-  v6: Step 6.5 filesystem_dispersion sub-step 추가 + G6.5 gate. KG-first 그대로 두고 KG↔filesystem drift 차단.
-  본문은 slot resolve thin pointer — 정책 자체는 `MIC_v1.FilesystemDispersionPolicy` slot.
-  v5 계승: Step 3 prompt 본문을 KG 씨앗(axis/sub-axis/matrix-template)으로 lift.
-  SKILL.md는 프로토콜만, 내용물은 KG 정본(재배맨 원칙 준수).
-  v4 계승: 부모 하계 Pre-fetch (MCP 우회) + Finding 중복 탐지 + 재배맨 MIC 참조.
+  사용법: `/prometheus <N> <problem>` (N=subagent 수, 생략 시 auto_estimate, default cfg slot).
+  v6: Step 6.5 filesystem_dispersion + G6.5 gate (KG↔filesystem drift 차단).
+  v5: SKILL.md는 프로토콜만, 내용물은 KG 정본(재배맨 원칙).
+  v4: 부모 하계 Pre-fetch (MCP 우회) + Finding 중복 탐지 + 재배맨 MIC 참조.
   Enforces: 9+1 단계 사이클, haiku 병렬 subagent (N, 최대 100, default cfg slot),
   JSON 계약(FullFindingRecord), 부모 UNWIND 배치 write, W3C PROV provenance, filesystem dispersion gate.
   subagent 운용 = MIC_v1.SubagentSeeder (재배맨/SOP) 참조.
-  # KG: ATOM_Skill_prometheus, SA_methodology_v4_triple_upgrade, lesson-prometheus-v5-kg-reference-lift-2026-04-18, rfc-prom-filesystem-dispersion-2026-04-29, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory before any framing/diagnostic, lesson-ai-skipped-kg-check-before-framing-2026-04-29)
-  # KG: prometheus-grounding-2026-05-05, finding-prom32-prometheus-P1-F2 (OODA 충돌), finding-prom32-prometheus-P1-F3 (Hegel spiral), amdahl-analysis-prometheus-N-default-2026-05-05, lesson-prometheus-hegel-spiral-reframe-2026-05-05
+  # KG: ATOM_Skill_prometheus, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory, lesson-ai-skipped-kg-check-before-framing-2026-04-29), prometheus-grounding-2026-05-05
 ---
 
 ## 🔗 MIC Binding (SOLID-DIP)

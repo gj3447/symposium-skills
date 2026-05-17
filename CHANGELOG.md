@@ -42,6 +42,7 @@
 - *(apt-d)* RFC theorem count drift correction (29→24) ([`997196b`](#997196b5be848e8429c0fbc5f49c8af748671ec1))
 - *(apt-d)* Self-correct prior drift-correction — RFC §3 was correct (29 theorems verified) ([`51e2f13`](#51e2f139f68e915c36c5dcc7451390eb0341a75e))
 - *(prometheus)* V6.3 — Step 3-0 MANDATORY + Anti-Pattern Detection + Step 3-5 9-field bundle ([`7889067`](#7889067fe58b59200253e3ff61a494d88f7848a2))
+- *(SKILLS)* Jaebaeman v2.4 depth NOT NULL invariant + lychee fragment fix + harness/apt-core path repair ([`61ce6ce`](#61ce6ce4df20e7613e9331848f5c2b7db6584a8b))
 
 ### Performance
 
@@ -65,6 +66,10 @@
 ### Checkpoint
 
 - A15 SA Phase Activation Matrix + pending edits (2026-05-11 pre-monorepo-flatten) ([`97372a3`](#97372a39c8b5895f2dfc46ae1069061da99b75df))
+
+### Sweep
+
+- *(wave16)* 8 .claude-plugin/plugin.json + index.json regenerate (wave15 누락분) ([`06958ee`](#06958ee59e649a2c924b8409e45ec6da3985f6b7))
 
 ## [26.0.2] - 2026-04-26
 
