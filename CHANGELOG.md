@@ -43,6 +43,7 @@
 - *(apt-d)* Self-correct prior drift-correction — RFC §3 was correct (29 theorems verified) ([`51e2f13`](#51e2f139f68e915c36c5dcc7451390eb0341a75e))
 - *(prometheus)* V6.3 — Step 3-0 MANDATORY + Anti-Pattern Detection + Step 3-5 9-field bundle ([`7889067`](#7889067fe58b59200253e3ff61a494d88f7848a2))
 - *(SKILLS)* Jaebaeman v2.4 depth NOT NULL invariant + lychee fragment fix + harness/apt-core path repair ([`61ce6ce`](#61ce6ce4df20e7613e9331848f5c2b7db6584a8b))
+- *(skill-desc)* Shorten apt/apt-st/prometheus descriptions under 1536 char cap ([`8adf5c5`](#8adf5c55e3f494e09fc4db29633dbaf8b3daf828))
 
 ### Performance
 
@@ -62,6 +63,7 @@
 - *(manifest)* Merkle-check auto-refresh index.json (git_head 22a503d, harness v3.2.0 ratchet) ([`c6198aa`](#c6198aa633ab2bf61433dead1396bf0a383f0efd))
 - *(manifest)* Merkle-check auto-refresh post-PD-v3 (git_head be2dbe4) ([`bde5e58`](#bde5e582ce75f7b8db0d44d04a3293d7b5e21639))
 - *(manifest)* Rebuild post PD v3 (merkle 5fd95a03e3cb, head 3b1463e) ([`81e81f3`](#81e81f3c48d23b6ac2c764f1dfef30e5250d618d))
+- *(.well-known)* Regenerate skills index after SKILL.md desc shorten ([`c0382eb`](#c0382eb19cfecc293693f1501039be2111d52a43))
 
 ### Checkpoint
 

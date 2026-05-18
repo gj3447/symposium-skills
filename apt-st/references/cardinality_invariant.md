@@ -277,7 +277,7 @@ esac
 1. check_st_cardinality_invariant   (NEW, GAP-2)
 2. check_lensset_completeness        (v0.7 floor, lensCount >= 9)
 3. check_concern_coverage            (v0.8-A1 ensemble UNION >= 0.8)
-4. check_validation_result_approved  (Taliban APPROVED VR 존재)
+4. check_validation_result_approved  (Naesengmoon APPROVED VR 존재)
 ```
 
 1번 실패하면 2-4 실행 의미 없음 (Contract/Task 자체가 누락된 상태에서 LensSet 검증은 무의미).

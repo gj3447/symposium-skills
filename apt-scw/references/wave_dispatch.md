@@ -315,11 +315,11 @@ wave 2 결과: {D: PASS, E: FAIL}
 |---|---|---|
 | **재배맨** | Phase 2 Dispatch 가 wave 단위 single-message UNWIND | 이 정전의 골격 |
 | **프로메테우스** | SCW dispatch 와 직교 (research phase 가 별도) | wave 외부 — 사전 지식 단계 |
-| **탈레반** | wave k 결과 collect 후 FulfillmentGate critic (각 seed 별) | wave advance gate |
+| **나생문** | wave k 결과 collect 후 FulfillmentGate critic (각 seed 별) | wave advance gate |
 | **롱기누스** | code 작성 후 KG ref 주석 binding 검증 (각 seed 별) | wave 내부 검증 |
 | **하네스** | wave loop 실행 환경 (4-layer autonomy stack, churn-guard) | wave 외부 — runtime |
 
-→ wave 가 *동시 실행* 단위, 탈레반/롱기누스가 *각 seed 검증* 단위. 두 단위 직교.
+→ wave 가 *동시 실행* 단위, 나생문/롱기누스가 *각 seed 검증* 단위. 두 단위 직교.
 
 ---
 
@@ -545,7 +545,7 @@ for w in 1..W_max:
 - [x] WavePartialFail handling — wave k+1 진입 차단 + 사용자 verdict 게이트
 - [x] GH#29181 intent_N == actual_N self-check
 - [x] 3-wave 7-span worked example — GAP-1 `wave_extraction.md` §Worked Example 와 동일 atom 이름/DAG/wave 분배
-- [x] 5대 무기 cross-ref (재배맨 Phase 2 / 탈레반 gate / 롱기누스 binding / 하네스 runtime)
+- [x] 5대 무기 cross-ref (재배맨 Phase 2 / 나생문 gate / 롱기누스 binding / 하네스 runtime)
 - [x] retry policy 표 (timeout / FAIL / wave timeout / cross-wave)
 - [x] error variants W1-W6
 

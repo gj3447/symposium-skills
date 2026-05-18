@@ -208,7 +208,7 @@
 
 - **Definition**: Generating SBOMs as a compliance checkbox without integrating them into vulnerability management or verification workflows.
 - **Symptom**: SBOM produced once at release, stored in S3, never queried. No automated `cosign verify-attestation` in deployment pipeline.
-- **SYMPOSIUM/SKILLS check**: Currently SBOM.json is generated but **no consumer-side verification path documented** (no `verify-skill.sh` script, no Taliban lens for supply-chain integrity). **Risk: SBOM theater unless verification is wired.**
+- **SYMPOSIUM/SKILLS check**: Currently SBOM.json is generated but **no consumer-side verification path documented** (no `verify-skill.sh` script, no Naesengmoon lens for supply-chain integrity). **Risk: SBOM theater unless verification is wired.**
 
 ### S3.2 Unsigned attestation (unverifiable)
 

@@ -8,7 +8,7 @@ description: >
   5-axis coherent package per `rfc-apt-d-variant-coherent-package-2026-05-14`:
   M1 continuous depth (instead of 5-predicate atomicity) +
   M2 score function (instead of binary AtomicSpan gate) +
-  M3 shared-object sibling (Taliban M1 equivocation resolved) +
+  M3 shared-object sibling (Naesengmoon M1 equivocation resolved) +
   M4 smooth ODE transitions (instead of discrete SA→SP→ST→SCW) +
   M5 forward-reverse symmetric (APT+TPA unified).
   29 Lean theorem formal floor (G1 9 APT_Diffusion_Foundation + G2 6 APT_Flow_Matching + G3 14 APT_Structural_Refinement, all Mathlib-free PASS exit 0).
@@ -44,7 +44,7 @@ This skill is **EXPERIMENTAL** — `channel: experimental`, NOT production. Prod
 |------|--------------------|--------------------|----------------|
 | **M1 depth** | 5-predicate C(S) gate (binary AtomicSpan) | continuous depth metric d ∈ [0,1] (diffusion grounding) | Ho et al. 2020 DDPM; Song et al. 2021 score-based generative |
 | **M2 score** | binary AtomicSpan / non-Atomic | ∇log p_t(x) score function (Song-Ermon 2019) | Hyvärinen 2005 score matching |
-| **M3 sibling** | Taliban LensSet UNION (constitutional/longinus/solid/...) | shared-object sibling (same x, different t) — Taliban M1 equivocation 해소 | Hutchinson trace estimator |
+| **M3 sibling** | Naesengmoon LensSet UNION (constitutional/longinus/solid/...) | shared-object sibling (same x, different t) — Naesengmoon M1 equivocation 해소 | Hutchinson trace estimator |
 | **M4 transitions** | discrete SA→SP→ST→SCW phases | smooth ODE dx/dt = f(x,t) (DDIM / probability flow ODE) | Song 2021 SDE ↔ ODE bijection |
 | **M5 symmetry** | APT (forward, design→code) ≠ TPA (reverse, code→design) | unified — diffusion forward + reverse process | Anderson 1982 reverse-time SDE |
 
@@ -150,7 +150,7 @@ S2 scaffold 단계 (2026-05-14). runtime resolver / gate / executor 모두 미�
 - **Lean**: `MIND/lean_formalization/APT_Diffusion_Foundation.lean`, `APT_Flow_Matching.lean`, `APT_TPA_Dual.lean`
 - **KG node**: `rfc-apt-d-variant-coherent-package-2026-05-14` (:MethodologyRFC, PRELIMINARY)
 - **Parent skill**: `/apt` (v27 stable, this skill is sibling)
-- **Motivating lesson**: K-01 patch-level recurrence + Taliban A3 axiom relaxation REJECT verdict
+- **Motivating lesson**: K-01 patch-level recurrence + Naesengmoon A3 axiom relaxation REJECT verdict
 
 ---
 

@@ -10,13 +10,13 @@ description: >
   PARSIMONY: research artifact (5-canon convergence / Lean theorems / 27-version history /
   Hyperedge progression) preserved under THEORY/APT/ but NOT loaded by this skill.
   REACTIVATION: 6 lost operational features from v12+v18+v20 (diffusion AutoMode + Multi-
-  Taliban + FractalFeedback + DesignAgent/TalibanSquad/BuildAgent/FixAgent split +
+  Naesengmoon + FractalFeedback + DesignAgent/TalibanSquad/BuildAgent/FixAgent split +
   UserPrinciple_SelfCorrecting + KG-as-IPC + Descent Validation depth∝check density) +
   4 dormant seeds (sigma-auto-reviewer / sibling-independence-pragmatic / mcp-subagent-proxy
   / scaling-async-gate, all dormant since 2026-04-17).
   6 operational features: SA bootstrap / SP decomposition with diffusion-style descent /
   ST crystallization (informal-ok in fast_path, typed in full_cycle) / SCW = TDD + KG refs /
-  Multi-Taliban descent validation (NOT just endpoint check) / Cleanup 4-tool ratchet.
+  Multi-Naesengmoon descent validation (NOT just endpoint check) / Cleanup 4-tool ratchet.
   5 enforced HARD RULES (down from 16 in v27), 3 rigor modes (fast_path default).
   Subagent architecture: Orchestrator (this skill) + 4 specialist roles (DesignAgent /
   TalibanSquad / BuildAgent / FixAgent), KG-as-IPC, clean context per spawn, jaebaeman
@@ -24,7 +24,7 @@ description: >
   Invoke when: "apt", "start work on", "implement", "develop", "what phase am I in", "auto mode".
   Enforces: per-branch phase detection, 5 enforced HRs (each with Cypher gate), external
   reviewer mandate before PROGRESSIVE Lakatos verdict, fast_path Lakatos verdict ceiling,
-  Multi-Taliban descent validation at SP, FixAgent auto-correction loop (user σ_oracle only
+  Multi-Naesengmoon descent validation at SP, FixAgent auto-correction loop (user σ_oracle only
   at final exit).
 ---
 
@@ -82,7 +82,7 @@ RETURN 'HR2_RUBBER_STAMP' AS block_reason
 // any result → verdict force-downgraded to NEEDS_EXTERNAL_REVIEW
 ```
 
-External review = Taliban LensSet UNION (minimum 2 distinct lenses, recommended 4: constitutional + longinus + solid + lakatos).
+External review = Naesengmoon LensSet UNION (minimum 2 distinct lenses, recommended 4: constitutional + longinus + solid + lakatos).
 
 ### HR3 — AtomicSpan must have a test before SCW completion
 
@@ -133,7 +133,7 @@ RETURN slot.options, slot.default, slot.semantics
 | **full_cycle** | All phases including adversarial round per gate + typed Pydantic Contract DTO + HR14 reflection + Phase 6 Cleanup ratchet | PROGRESSIVE if external review passes | sprint-end consolidation, paper-grade work, methodology validation |
 | **methodology_audit** | full_cycle + self-application meta-test + 4-canon convergence check | PROGRESSIVE_PROVEN if Lean verifies | rare — APT-on-APT runs (Russell-bounded max_depth=1 invariant must hold) |
 
-Calling `/apt` without specifying rigor_level defaults to `fast_path`. The author's prior implicit fast-pathing (which Taliban K-01 caught as a degenerating-shift indicator) becomes *explicit and acknowledged* rather than *silent and rubber-stamped*.
+Calling `/apt` without specifying rigor_level defaults to `fast_path`. The author's prior implicit fast-pathing (which Naesengmoon K-01 caught as a degenerating-shift indicator) becomes *explicit and acknowledged* rather than *silent and rubber-stamped*.
 
 # KG: cfg-rigor-level-2026-05-14, lesson-apt-fast-path-vs-full-prescription-2026-05-13
 
@@ -194,25 +194,25 @@ D(S) recurrence until every leaf satisfies C(S) 5-predicate (= AtomicSpan). Bran
 
 **Diffusion frame (v12 AutoMode reactivation)**: think of SP as a denoising sampler. Each depth step refines from coarse (Root) to fine (AtomicSpan). Sibling spans at the same depth run in parallel — they share context via **KG-as-IPC** (no direct subagent communication; KG = Unix pipe). Refinement metric is *continuous score-like* in spirit (does this leaf satisfy C(S)? how much margin?) even though the C(S) gate is binary at decision time.
 
-**Descent Validation (v20 reactivation)**: Taliban critic dispatch is **depth-proportional**, not endpoint-only.
-- depth 0 → 1: single Taliban critic on Root decomposition
-- depth N → N+1: 1 Taliban subagent per ~5 atoms (`seed-apt-fix-sigma-auto-reviewer-2026-04-17` reactivated)
+**Descent Validation (v20 reactivation)**: Naesengmoon critic dispatch is **depth-proportional**, not endpoint-only.
+- depth 0 → 1: single Naesengmoon critic on Root decomposition
+- depth N → N+1: 1 Naesengmoon subagent per ~5 atoms (`seed-apt-fix-sigma-auto-reviewer-2026-04-17` reactivated)
 - AtomicSpan reached: final TalibanSquad UNION (4 lens: constitutional+longinus+solid+lakatos)
 
 This makes APT/diffusion analogy operational: the score function is checked *along the trajectory*, not just at t=T.
 
 **Atomic span = approximately 1 module ≈ 1 file ≈ 200-500 LOC** (`cfg.vibe_coding_sweet_min/max` resolves the exact range).
 
-**Sibling coordination** — **A3 strict independence is KEPT** (Taliban ensemble REJECT verdict 2026-05-14, `taliban-a3-axiom-relaxation-2026-05-14`, coverage 0.42, 5 BLOCKER).
+**Sibling coordination** — **A3 strict independence is KEPT** (Naesengmoon ensemble REJECT verdict 2026-05-14, `taliban-a3-axiom-relaxation-2026-05-14`, coverage 0.42, 5 BLOCKER).
 
-The relaxation was proposed (referencing diffusion cross-attention) but rejected with the following Taliban findings:
+The relaxation was proposed (referencing diffusion cross-attention) but rejected with the following Naesengmoon findings:
 - **L1 ad-hoc rescue** — contradiction-to-conclusion flip; Lakatos degenerating problemshift
 - **L2 no novel prediction** — "may improve convergence" is not falsifiable
 - **L3 predecessor poisoned** — `seed-apt-fix-sibling-dep-pragmatic-carveout-2026-04-17` is TAINTED, not resolved
 - **M1 equivocation** — APT-sibling (distinct decomposition units) ≠ Diffusion-sibling (denoising steps on *same* tensor). Category error.
 - **S1 SRP/OCP collapse** — A3 is the structural guarantor for isolated reasoning. Removing it breaks Contract-as-interface (APT19 doctrine).
 
-**Recommended path** (Taliban verdict): if generative-modeling grounding is desired, route to **separate APT-D variant track** per `rfc-seed-apt-diffusion-grounding-2026-05-14`. Do NOT surgically remove A3 while keeping the rest of APT discrete.
+**Recommended path** (Naesengmoon verdict): if generative-modeling grounding is desired, route to **separate APT-D variant track** per `rfc-seed-apt-diffusion-grounding-2026-05-14`. Do NOT surgically remove A3 while keeping the rest of APT discrete.
 
 Sibling spans remain independent under A3 in v28 unless and until a coherent APT-D package is built and externally validated.
 
@@ -283,7 +283,7 @@ Plus commit ratio metric: `refactor_commits / feature_commits ≥ 0.2` (resolves
 |---|---|
 | [`references/phases.md`](references/phases.md) | gate detail needed (full_cycle mode) |
 | [`references/gates.md`](references/gates.md) | gate sequence audit |
-| [`references/adversarial.md`](references/adversarial.md) | Taliban dispatch detail |
+| [`references/adversarial.md`](references/adversarial.md) | Naesengmoon dispatch detail |
 | [`references/kg_logging.md`](references/kg_logging.md) | Friston FEP runtime / KG write |
 | [`references/error_handling.md`](references/error_handling.md) | Lakatos hard core / mode collapse |
 | [`references/validation.md`](references/validation.md) | V1-V29 query catalog |
@@ -298,7 +298,7 @@ Plus commit ratio metric: `refactor_commits / feature_commits ≥ 0.2` (resolves
 Canonical worked example for v28:
 - [`SYMPOSIUM/SKILLS/apt/worked/03-apt-cycle-on-self/`](../../../bhgman_tool/worked/03-apt-cycle-on-self/) (bhgman_tool repo) — APT cycle dogfood, depth=1, `meta_twice_invalid` invariant.
 
-Read `review.md` for an honest assessment of what the cycle got right and wrong (Taliban verdict = REJECT_PENDING_REMEDIATION; honest, not rubber-stamp).
+Read `review.md` for an honest assessment of what the cycle got right and wrong (Naesengmoon verdict = REJECT_PENDING_REMEDIATION; honest, not rubber-stamp).
 
 ---
 
@@ -330,7 +330,7 @@ This SKILL.md tracks **last 5 versions only**. Full log: `THEORY/APT/SKILL_VERSI
 
 ## §11 Disclaimer
 
-The names `Taliban`, `재배맨`, `Longinus`, `Prometheus` are MIC slot current bindings. Slot rebinding is documented in `MIC_v1` KG node. Canonical resolution:
+The names `Naesengmoon`, `재배맨`, `Longinus`, `Prometheus` are MIC slot current bindings. Slot rebinding is documented in `MIC_v1` KG node. Canonical resolution:
 ```cypher
 MATCH (mic:MethodologyIntegrationContract {name:'MIC_v1'})-[:HAS_SLOT]->(s)
 RETURN s.name, s.currentConcrete
@@ -348,7 +348,7 @@ Per `APT18_SubagentArchitecture` KG node — Main agent (this skill) ≠ doer. M
 | **DesignAgent** | (new — to spec out, sibling of /apt-sp + /apt-st) | span decomposition + Contract crystallization | SA→SP transition |
 | **TalibanSquad** | `taliban-ensemble-critic` agent (precursor exists) | parallel multi-lens adversarial review (constitutional + longinus + solid + lakatos) | every Descent Validation step + every gate transition |
 | **BuildAgent** | (new — sibling of /apt-scw) | TDD implementation (RED → GREEN → REFACTOR) | ST→SCW transition |
-| **FixAgent** | (new — implements `UserPrinciple_SelfCorrecting_APT`) | Taliban finding auto-correction loop. Receives BlockerFinding nodes, proposes patches, re-dispatches to TalibanSquad for verification. | any BlockerFinding emitted by TalibanSquad |
+| **FixAgent** | (new — implements `UserPrinciple_SelfCorrecting_APT`) | Naesengmoon finding auto-correction loop. Receives BlockerFinding nodes, proposes patches, re-dispatches to TalibanSquad for verification. | any BlockerFinding emitted by TalibanSquad |
 
 User intervention boundary: σ_oracle at final exit + direction setting at start. **NOT at every gate.** If user has to manually catch every defect (as in this session's "너무 빨리" / "kg 잘 연결되었냐"), FixAgent is failing — system is not self-correcting. This is the K-01 BLOCKER pattern at framework level.
 
@@ -403,14 +403,14 @@ Translated to operational terms:
 
 Each level operates within its own context window. KG-as-IPC carries state across levels. The recursion is the **diffusion sampler depth**: deeper = more refined = more parallel branches.
 
-`seed-apt-fix-scaling-async-gate-2026-04-17` (reactivated) provides the runtime: async Taliban gate queue + executor pool ≥3 + lazy jaebaeman stream for 100+ atom SP.
+`seed-apt-fix-scaling-async-gate-2026-04-17` (reactivated) provides the runtime: async Naesengmoon gate queue + executor pool ≥3 + lazy jaebaeman stream for 100+ atom SP.
 
 ---
 
 ## §14 Honest limitations of reactivation
 
 - **DesignAgent / BuildAgent / FixAgent subagents do not yet exist**. Only `taliban-ensemble-critic` exists as TalibanSquad precursor. v28 promotion requires building these 3.
-- **A3 SiblingIndependence axiom relaxation is PRELIMINARY** — needs external Taliban math-lens (88-taliban or constitutional+mathematical UNION) verdict before CANONICAL.
+- **A3 SiblingIndependence axiom relaxation is PRELIMINARY** — needs external Naesengmoon math-lens (88-taliban or constitutional+mathematical UNION) verdict before CANONICAL.
 - **4 dormant seeds reactivated but not implemented** — sigma-auto-reviewer / sibling-independence-pragmatic / mcp-subagent-proxy / scaling-async-gate are referenced here but their implementation is a separate sprint.
 - **Diffusion frame is analogy-strength, not formal** — the 7 missing generative-modeling canon (Sohl-Dickstein 2015 / Ho 2020 DDPM / Song 2021 / Karras 2022 EDM / Lipman 2023 Flow Matching / Hoogeboom 2023 Cold Diffusion / Albergo 2023 Stochastic Interpolants) are *cited* but not yet *absorbed as Lean theorems* (cf. APT's existing 141 Lean theorems are all in the philosophy-of-correctness canon family).
 - **Same self-application gap as v27** — these reactivations are described by the same agent (Claude) that authored the regression analysis. External KG audit (separate agent, separate sprint) needed before v28 promotion.

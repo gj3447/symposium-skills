@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-15T16:18:01+09:00",
-  "git_head_commit": "06958ee59e649a2c924b8409e45ec6da3985f6b7",
-  "git_head_short": "06958ee",
+  "generatedAt": "2026-05-17T21:23:32+09:00",
+  "git_head_commit": "c0382eb19cfecc293693f1501039be2111d52a43",
+  "git_head_short": "c0382eb",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 32,
-  "merkle_root": "66f749744939f04fef8ba8972d2ea5fc1d7882600eebc06464123cb8c35750b9",
+  "merkle_root": "919d4e74446eb0432b4120a224955b4fbec7fdca0b3c98520d092d3a38893d60",
   "skills": [
     {
       "name": "88-taliban",
@@ -22,7 +22,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "c22a8fa7fb43003276da79dff6a3b1a01835fb55"
+      "git_tree_sha": "86e9f3ae32671fbb02f66d7f19a6b81eeef03776"
     },
     {
       "name": "apt-cleanup",
@@ -78,7 +78,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "7c3ce194299273e8c12304223cfe7c4cd85cf9da"
+      "git_tree_sha": "11f274af21cb26c68f717157be381edb972bacb4"
     },
     {
       "name": "backup",
@@ -182,7 +182,7 @@
       "version": "6.3.0",
       "kg_ref": "ATOM_Skill_prometheus",
       "channel": "stable",
-      "git_tree_sha": "d2d3eb8eda85f5444be97409e9df77b9fa541837"
+      "git_tree_sha": "80c7bf0ef4d0eec692077643851879ecb4eafcf8"
     },
     {
       "name": "server-status",

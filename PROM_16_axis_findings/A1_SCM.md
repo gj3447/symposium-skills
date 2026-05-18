@@ -89,7 +89,7 @@ Meir M. Lehman (Imperial College London), 1974 IBM OS/360 study → 1980 ICSE pa
 | # | 법칙 | 연도 | SYMPOSIUM/SKILLS 함의 |
 |---|------|------|----------------------|
 | I | Continuing Change | 1974 | 27 skill 모두 계속 진화. v26 정지 가정 = 위반 |
-| II | Increasing Complexity | 1974 | 16 commit → 27 skill → KG node + Longinus + Taliban LensSet ... 복잡도 증가. 명시적 refactor 없으면 entropy↑ |
+| II | Increasing Complexity | 1974 | 16 commit → 27 skill → KG node + Longinus + Naesengmoon LensSet ... 복잡도 증가. 명시적 refactor 없으면 entropy↑ |
 | III | Self Regulation | 1974 | commit/release 빈도 분포 normal — measurable |
 | IV | Conservation of Organisational Stability | 1978 | activity rate invariant — single dev (사용자) repo 라 N/A |
 | V | Conservation of Familiarity | 1978 | 사용자 mastery 유지 필요 — `## History` 부재 = 이 법칙 위반 |

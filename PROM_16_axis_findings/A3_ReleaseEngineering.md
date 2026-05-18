@@ -287,7 +287,7 @@
   - 75-90% match (judge vs human label) = strong alignment
   - Spearman ≥0.80 with human evaluators = production-ready
 - 통합 패턴: "three trigger types + progressive canary deployment".
-- SYMPOSIUM 적용: skill-validator + Taliban (--lens constitutional)가 이미 LLM-as-Judge 패턴. CHANNELS.md의 channel transition gate에 정량 score 도입 가능.
+- SYMPOSIUM 적용: skill-validator + Naesengmoon (--lens constitutional)가 이미 LLM-as-Judge 패턴. CHANNELS.md의 channel transition gate에 정량 score 도입 가능.
 
 ### S4.5 Skill Drift Detection (merkle_root) → 자동 강등
 
@@ -347,7 +347,7 @@ stable:        gradual override 무, 즉시 100%
 ### Tier 2 (중기)
 
 4. **OpenFeature provider integration**: `channel:` frontmatter를 OpenFeature evaluation context로 lift.
-5. **Channel transition LLM-as-Judge gate**: experimental → beta 전환 시 Taliban --lens constitutional 정량 score ≥0.8 강제.
+5. **Channel transition LLM-as-Judge gate**: experimental → beta 전환 시 Naesengmoon --lens constitutional 정량 score ≥0.8 강제.
 6. **Progressive rollout per skill** (Argo Rollouts pattern): beta → stable 시 1% → 5% → 25% → 100% step + metric gate.
 
 ### Tier 3 (장기)

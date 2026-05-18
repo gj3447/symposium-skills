@@ -104,7 +104,7 @@ output: { sub_spans: [...], cs_evaluations: [...], drafts: [...] }
    a. Split S into n ≥ 2 sub-spans by *concern* (not by file or technology)
    b. Each sub-span MUST carry the C(S) 5-predicate fields populated:
       objective / definition / keyAssertion / verification / c_s_predicate
-      (null fields → Taliban will reject the gate, per APT v28 HR1+HR2)
+      (null fields → Naesengmoon will reject the gate, per APT v28 HR1+HR2)
    c. Sub-spans are DAG nodes (N:N). A sub-span may have multiple parents
       via INFORMED_BY links; only DECOMPOSES_TO is the structural edge.
    d. A3 default: same-depth siblings are independent. v28 PRELIMINARY relaxation
@@ -146,7 +146,7 @@ Informal contract — a structured comment block, NOT a typed DTO:
 #   failure_semantics: <how does this fail>
 ```
 
-Lakatos verdict ceiling = PROGRESSIVE_CONDITIONAL (per parent HR4). External Taliban review optional but recommended.
+Lakatos verdict ceiling = PROGRESSIVE_CONDITIONAL (per parent HR4). External Naesengmoon review optional but recommended.
 
 ### §4.2 full_cycle mode
 
@@ -218,7 +218,7 @@ Once DesignAgent returns the JSON, parent orchestrator:
 3. Spawns `taliban-ensemble-critic` agent (sibling skill, already exists as TalibanSquad precursor).
 4. Awaits ValidationResult.
 
-**DesignAgent never reads its own Taliban verdict back to revise the draft**. If Taliban REJECTS, the loop is closed by FixAgent (sibling skill), not DesignAgent re-spawn. DesignAgent is *one-shot per Pre-fetch*.
+**DesignAgent never reads its own Naesengmoon verdict back to revise the draft**. If Naesengmoon REJECTS, the loop is closed by FixAgent (sibling skill), not DesignAgent re-spawn. DesignAgent is *one-shot per Pre-fetch*.
 
 Re-design (vs. fix) is triggered only when ValidationResult cites structural decomposition error (e.g., "sub-spans not independent — A3 violation"). Then orchestrator spawns a fresh DesignAgent with the rejection context as a new Pre-fetch input.
 
@@ -237,7 +237,7 @@ Cross-reference siblings:
 - **σ predicate is auto-flagged HUMAN_REVIEW, not auto-decided.** The σ (semantic completeness) predicate of C(S) is intrinsically human-judgment-bound. DesignAgent marks but cannot resolve. If parent does not surface σ flags to user, the system silently degrades to executor-judges-self (HR2 violation by omission).
 - **No sigma-auto-reviewer integration yet.** Dormant seed `seed-apt-fix-sigma-auto-reviewer-2026-04-17` is referenced by parent §4.2 but no implementation here. σ flag is currently a string in `honest_caveats`, not a structured KG escalation.
 - **One-shot per Pre-fetch is operationally rigid.** Real decomposition is iterative; the current spec forces parent to re-spawn for each depth level. May produce excessive spawn overhead for deep DAGs (depth > 5). Mitigation: jaebaeman 하노이탑 escalation, but that itself is unimplemented.
-- **A3 sibling relaxation is PRELIMINARY.** Parent §4.2 allows sibling cross-talk via INFORMED_BY; DesignAgent emits these links freely. If external Taliban math-lens later rejects the relaxation, all DesignAgent outputs with sibling INFORMED_BY edges become structurally suspect.
+- **A3 sibling relaxation is PRELIMINARY.** Parent §4.2 allows sibling cross-talk via INFORMED_BY; DesignAgent emits these links freely. If external Naesengmoon math-lens later rejects the relaxation, all DesignAgent outputs with sibling INFORMED_BY edges become structurally suspect.
 - **Schema overlap unresolved.** As parent §4.3 acknowledges, 9-axis Contract v2 ∩ 8 ST Decision Areas ∩ 9-field ST template overlap is not yet subsumed. DesignAgent passes the contradiction through rather than resolving it.
 - **Sample-of-one author.** Same agent (Claude) that designed parent /apt v28 also wrote this sibling. No independent design review.
 
