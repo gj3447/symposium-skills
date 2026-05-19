@@ -53,6 +53,10 @@
 
 - *(apt)* Progressive Disclosure split — SKILL.md 1804 → 381 lines + 8 references/ (PROM 16 F6.1) ([`79fd860`](#79fd860fba8088866e3eac08c418548767da368d))
 
+### Documentation
+
+- *(skills)* Canonical rename Taliban → 나생문 (Rashomon) ([`70a37b5`](#70a37b5c3b7617c5cdb8018a06c72187fd003cdf))
+
 ### Miscellaneous
 
 - *(cleanup)* Archive legacy SKILL.md .bak files (PROM 16 F6 prep) ([`f0fd863`](#f0fd8634862be7bc5a9d7b0c24f0913ebc4c6a7e))
