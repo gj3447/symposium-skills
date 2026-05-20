@@ -44,6 +44,7 @@
 - *(prometheus)* V6.3 — Step 3-0 MANDATORY + Anti-Pattern Detection + Step 3-5 9-field bundle ([`7889067`](#7889067fe58b59200253e3ff61a494d88f7848a2))
 - *(SKILLS)* Jaebaeman v2.4 depth NOT NULL invariant + lychee fragment fix + harness/apt-core path repair ([`61ce6ce`](#61ce6ce4df20e7613e9331848f5c2b7db6584a8b))
 - *(skill-desc)* Shorten apt/apt-st/prometheus descriptions under 1536 char cap ([`8adf5c5`](#8adf5c55e3f494e09fc4db29633dbaf8b3daf828))
+- *(naesengmoon)* Canonical 1:1 cardinality + agent KG-resident propagation ([`a08cb57`](#a08cb575b9c110401a3856b304991425641ca9bb))
 
 ### Performance
 

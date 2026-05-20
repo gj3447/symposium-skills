@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-19T05:35:49+09:00",
-  "git_head_commit": "70a37b5c3b7617c5cdb8018a06c72187fd003cdf",
-  "git_head_short": "70a37b5",
+  "generatedAt": "2026-05-19T10:52:40+09:00",
+  "git_head_commit": "a08cb575b9c110401a3856b304991425641ca9bb",
+  "git_head_short": "a08cb57",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 32,
-  "merkle_root": "a6aae6f7b04590a052b0bc5f943ac485a922f204791724b2be7ffa58caabe0ed",
+  "merkle_root": "0250fd9306a425835818c6142ced9076842927997b4693bbe616bd4c4b009d4f",
   "skills": [
     {
       "name": "88-taliban",
@@ -14,7 +14,7 @@
       "version": "3.1.0",
       "kg_ref": "ATOM_Skill_88taliban",
       "channel": "stable",
-      "git_tree_sha": "87b3d6065c2ecf54fbcdca73d06ec2a11f0513f8"
+      "git_tree_sha": "331fd6c96372de9a8004c0ca6ab6db4c8b7c3cc2"
     },
     {
       "name": "apt",
@@ -163,7 +163,7 @@
     {
       "name": "longinus",
       "path": "longinus",
-      "version": "3.2.0",
+      "version": "3.3.0",
       "kg_ref": "ATOM_Skill_longinus",
       "channel": "stable",
       "git_tree_sha": "79ed14b7403265cbe9d9ec41cc6869010a0d803c"
@@ -214,7 +214,7 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_taliban",
       "channel": "stable",
-      "git_tree_sha": "af5aa6429f24fb4599ac6a3816fed3215c071ede"
+      "git_tree_sha": "c6a7e1d91a420ff0381a53287e7d43cbf0a0653c"
     },
     {
       "name": "tlb",

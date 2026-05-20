@@ -9,8 +9,10 @@ description: >
   나생문 방법론 (Naesengmoon, 羅生門) — APT의 면역 시스템. 적대적 검증 프레임워크.
   Canonical = 나생문 (사용자 verdict 2026-05-19 PRIMARY), file name `taliban` = alias.
   렌즈셋 플러거블: --lens constitutional(기본 9), mathematical(113), solid(5), longinus(7), lakatos(4), 또는 KG에 등록된 임의 LensSet.
-  Cardinality naming default = simple 1:1 (사용자 verdict 2026-05-19 turn 2 PRIMARY): N중 나생문 = N 독립 lens.
-    1중 = 단순 나생문 / 3중 = 3 lens (constitutional+mathematical+solid default) / 5중 = 5 lens (+longinus+lakatos UNION).
+  Cardinality + lens 선택 = invocation-time user-choice flexible (사용자 verdict 2026-05-20 PRIMARY).
+    N중 나생문 = N 독립 lens (simple 1:1, cardinality 자유 정수). lens 조합 측 invocation-time 명시 (constitutional/mathematical/solid/longinus/lakatos 5종 또는 KG 등록된 임의 LensSet).
+    Aggregation policy: UNANIMOUS_PASS default, MAJORITY / WEIGHTED 측 user explicit alternative 허용.
+    Lens-mix hardcoded default 측 deprecated (cardinality_naming_rule v1, lesson-naesengmoon-cardinality-3axis-collapse-drift-2026-05-19).
     orthogonality theorem 측 formal edge anchor demoted (lesson-naesengmoon-cardinality-direct-1to1-not-orthogonal-2026-05-19).
   Agent: canonical `naesengmoon-ensemble-critic` ↔ alias `taliban-ensemble-critic` (~/.claude/agents/, 1:1 mirror).
     재배맨 v2.1 SOP-based KG-resident SubagentTaskSpec — inline parent execution 측 ban (lesson-naesengmoon-inline-bypass-jaebaeman-sop-2026-05-19).
