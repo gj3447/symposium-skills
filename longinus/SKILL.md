@@ -1,15 +1,21 @@
 ---
 name: longinus
 kg_ref: ATOM_Skill_longinus
-version: "3.2.0"
+version: "3.3.0"
 channel: stable
 description: >
-  롱기누스 방법론 v3.1 — 참조의 미학. KG 의미 계층을 소스코드까지 관통(貫通)시키는 참조 바인딩.
+  롱기누스 방법론 v3.3 — 참조의 미학. KG 의미 계층을 소스코드까지 관통(貫通)시키는 참조 바인딩.
   v3: 7-Layer Reference Model + BX Lens Laws + Refinement Types + GED Drift 정량화.
   v3.1: Reverse Orphan Scan (Code→KG blind-spot fix) + Crate/Script-level binding + Naesengmoon --lens longinus.
+  v3.2 (2026-05-13 graphify absorbed): 3-tier confidence enum (EXTRACTED/INFERRED/AMBIGUOUS) + Goodhart safeguard (T7 Lean).
+  v3.2.1 (2026-05-19 RATIFIED): refinement-types terminology canonical (Pierce TAPL §22) + Lean T7/T8 OQ1/OQ3 partial proofs.
+  v3.3 (Wave 6 absorbed 2026-05-14): sha256 baseline daemon (KG-anchored disk hash) + Forward Orphan Scan
+  (KG :KnowledgeHub → package_path materialization, GetPut blind-spot) + 7-tuple ReferenceSite schema
+  (sourceId/sourcePath/line_range/sha256/sha256_baseline/kg_anchor/layer/last_validated) + L1 ProcessPool / L2 ThreadPool parallelism.
+  Canonical implementation: `bhgman_tool/engine/longinus_drift_audit/` (production). Mirror prototype: `SYMPOSIUM/THEORY/LONGINUS/longinus_drift_audit_prototype/` (v3.1 reference).
   Invoke when: ST→SCW 전환 후 코드가 물질화되었을 때, KG 노드와 소스코드 간 추적성 확보가 필요할 때,
   기존 코드베이스를 KG에 역매핑할 때, Contract-Code 정합성 감사(audit) 시.
-  Enforces: 7-layer ref model, BX lens laws (GetPut/PutGet), branded types, GED drift metrics.
+  Enforces: 7-layer ref model, BX lens laws (GetPut/PutGet), refinement types (Pierce TAPL 2002 §22 — branded-type is colloquial alias, not canonical), GED drift metrics, sha256 baseline drift (Wave 6), forward orphan scan (Wave 6).
   # KG: ATOM_Skill_longinus, SA_methodology_v4_triple_upgrade, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory before any framing/diagnostic, lesson-ai-skipped-kg-check-before-framing-2026-04-29)
 ---
 
@@ -101,10 +107,10 @@ PUT: Code → KG  (코드 변경 시 KG 참조 갱신)
 
 ## Refinement Types for References (v3 신규)
 
-sourceId/sourcePath는 **단순 문자열이 아닌 branded type**이다.
+sourceId/sourcePath는 **단순 문자열이 아닌 refinement type** (Pierce TAPL 2002 §22; TypeScript/Rust 커뮤니티에서 *branded type* 으로 불리는 idiom — phantom-field nominal distinction).
 
 ```typescript
-// Branded Types (Zod-style)
+// Refinement Types via phantom field (TypeScript "branded type" idiom, Zod-style)
 type SourceId = string & { readonly __brand: 'SourceId' };
 type SourcePath = string & { readonly __brand: 'SourcePath' };
 
@@ -489,6 +495,79 @@ RETURN count(*) AS total_contracts,
 ---
 
 *롱기누스의 창은 한 번 꽂으면 뽑히지 않는다. KG와 코드 사이의 참조도 마찬가지다.*
+
+---
+
+## Appendix: KG Runtime Schema (현 실태, 2026-05-19 audit)
+
+> **Why added**: 본 SKILL.md 본문 Step 1-5의 spec(`SourceCodeNode` + `MATERIALIZES`)과 `references/kg_logging.md`의 spec(`BOUND_TO` + 7 namespaced props `l1_kg_node`~`l7_crate_or_script`)이 KG runtime 실태와 모두 어긋난 상태로 발견됨. 2026-05-19 5-iter audit 결과 정리.
+> KG: `lesson-longinus-multi-schema-drift-2026-05-19`.
+
+### A. 노드 인구 분포 (실측)
+
+| 라벨 | KG 노드 수 | 위치 | 비고 |
+|---|---:|---|---|
+| `(:ReferenceSite)` | **1,792** | KG runtime primary | 본문 Step 1-5에 명문화 없음 |
+| `(:SourceCodeNode)` | 50 | SKILL.md 본문 예제 | demo 규모, runtime substrate 아님 |
+| `(:CodeSymbol)` | 0 | `prototype/models.py` Pydantic 측 모델 + `references/theory.md` 명기 | KG에는 미박힘 |
+
+### B. 엣지 운용 분포 (3 패턴 공존)
+
+| 엣지 | 카운트 | 출처 | 비고 |
+|---|---:|---|---|
+| `HAS_REFERENCE_SITE` | 109 | 어디에도 문서화 없음 | KG에서 가장 의도된 owner edge처럼 동작 |
+| `MATERIALIZES` | 380 | SKILL.md Step 1-5 | `AptContract → SourceCodeNode` 패턴 |
+| `BOUND_TO` | 2 | `references/kg_logging.md` spec | 사실상 미운용 |
+
+### C. Property 실태 vs spec 차이
+
+| spec (kg_logging.md) | KG runtime 실태 |
+|---|---|
+| `rs.l1_kg_node` | (없음, 0개) |
+| `rs.l2_contract` | (없음) |
+| `rs.l3_code_symbol` | (없음) |
+| `rs.l4_file_line` | (없음) |
+| `rs.l5_line_range` | (없음) |
+| `rs.l6_sha256` | `rs.sha256` flat (1,511) |
+| `rs.l6_sha256_baseline_at` | `rs.sha256_init_at` flat (1,502) |
+| `rs.l7_crate_or_script` | (없음) |
+| `rs.layer_completeness` | `rs.layer` 단일 문자열 (1,762) — 25 ad-hoc 변종 포함 |
+| (없음) | `rs.scripture_canon` 8 enum (1,274) — 본 appendix §D에서 신규 정전화 |
+| (없음) | `rs.title_kr`, `rs.theory_folder`, `rs.kg_sub_folder`, `rs.binding_state`, `rs.anchor_strategy`, `rs.contract_uri`, `rs.iter_refresh` — 여러 운용 property 추가됨 |
+
+### D. `scripture_canon` enum (8 값 — 신규 정전화)
+
+| 값 | 카운트 | 의미 | 7-Layer 추정 |
+|---|---:|---|---|
+| `SYMPOSIUM_THEORY` | 420 | SYMPOSIUM theory 측 결정화 | L2 engineering theory |
+| `SERVER_KG_PROVENANCE` | 283 | SERVER KG archive | L2 provenance |
+| `METAHUMOTONIC_USER_PRIMARY` | 277 | 사용자 1차 정전 | L1 canonical user-authored |
+| `AI_PSEUDEPIGRAPHA` | 117 | AI 위서 | L4 |
+| `ICE_COMPUTATION` | 91 | ICE 계산 산출 | L2 computation output |
+| `Korean_Revised_Bible` | 66 | 한글 개역 성경 | L3 primary source |
+| `USER_LEAN_FORMALIZATION` | 17 | Lean 형식화 | L7 |
+| `Buddhist_3_Sutras` | 3 | 불교 3 경전 | L3 primary source |
+
+총 1,274 (property 박힌 ReferenceSite의 71%). 나머지 518의 corpus 분류는 미박힘 (forward orphan scan sprint 대상).
+
+### E. Layer 문자열 정규형 vs ad-hoc
+
+KG의 `rs.layer` property는 정규형 (L1_*, L2_*, ...) 외에 25 ad-hoc 변종 박혀있음:
+- 정규형 예: `L1_CANONICAL_USER_AUTHORED` 277, `L2_ENGINEERING_THEORY` 420, `L7_FullStack` 51
+- ad-hoc 예: `L1+L4` 20, `L4-AI_PSEUDEPIGRAPHA` 117, `L4-L5-L6` 20, `tool` 5, `Layer2_SourceRef` 49
+
+### F. 본문 7-Layer (abstract) vs theory.md 7-Layer (concrete)
+
+본문 §"7-Layer Reference Model"의 **추상 7-Layer** (Address Indirection / Lifetime / Type Permission / Semiotic / Distributed / Information / Aesthetic) 와 `references/theory.md`의 **구체 7-Layer enum** (KG_NODE / CONTRACT_BINDING / CODE_SYMBOL / FILE_LINE / LINE_RANGE / SHA256 / CRATE_SCRIPT) 은 **동일 layer의 두 표현** (개념 vs operational enum). 두 표현 공존 인정, KG의 `rs.layer` 값은 후자 enum 따름.
+
+### G. Forward Path (migration sprint 대상)
+
+1. **owner edge 정전화**: `HAS_REFERENCE_SITE` (109) vs `MATERIALIZES` (380) 어느 한쪽으로 통합 결정 → 1,683 orphan ReferenceSite에 일괄 backfill.
+2. **layer string 정규화**: 25 ad-hoc 변종 → 7 정규형으로 normalize.
+3. **scripture_canon NULL 518개**: forward orphan scan sprint (CLAUDE.md L#1 명시, user verdict gate).
+4. **kg_logging.md 측 namespaced property spec (`l1_kg_node`~`l7_crate_or_script`)**: 운용 안 됨, deprecate 또는 KG migration 결정.
+
+위 4건은 모두 destructive op이므로 사용자 verdict gate.
 
 ---
 

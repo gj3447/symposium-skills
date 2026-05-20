@@ -247,3 +247,43 @@ RETURN l.name, l.resolved
 ⚠️ **TDD REFACTOR phase 거울 부재** (cycle-level): apt-meta-review 만으로 *평면 누적 / fat file* 못 막음. atomic-span shipping 정규화 자체가 평면 누적 메커니즘. **Phase 6 (Cleanup Gate) 신설 필요** (`lesson-apt-phase6-cleanup-missing-2026-04-28`, HIGH, unresolved). meta-review 는 *방법론 메타-개선*, Phase 6 는 *cycle 차원 cleanup* — 보완 관계.
 
 # KG history: ATOM_Skill_apt_meta_review / lesson-prom16-skill-versioning-academic-2026-04-29 / lesson-apt-phase6-cleanup-missing-2026-04-28 / lesson-solid-class-level-vs-package-level-mismatch-2026-04-29
+
+---
+
+## Constrain Layer (3) — Recursive Self-Meta-Naesengmoon (2026-05-20 Wave 9)
+
+> *4번 연속 같은 형태 위반 (sha256 covenant skip + SOURCES.md MATERIALIZES gap + numeric drift + AdversarialChallenge 0건) 측 root cause* = Harness 4-axis 비대칭 (Inform overflow / Constrain near-zero / Verify retroactive only / Correct retroactive only). MetaReview 측 *retroactive Verify+Correct* 측만 측 — *next-cycle 측 같은 실수* 측 prevent 안 됨.
+
+### Mandatory at sprint end (3 fields enforced)
+
+매 cycle (SCW → MetaReview) 종료 시 측 다음 3 측 mandatory:
+
+1. **Recursive self-meta-naesengmoon dispatch**: MetaReview 측 *자기 산출물* 측 측 — *직후 cycle* 측 *naesengmoon-ensemble-critic* 측 dispatch (`/tlb <MetaReview output> --lens constitutional --lens mathematical --lens solid`). *self_application_forbidden* 측 *MetaReview→MetaReview* 측 ban, *MetaReview→Naesengmoon* 측 ALLOWED (다른 5무기 측).
+
+2. **AdversarialChallenge node ≥1 emit**: 모든 sprint-end ValidationResult 측 측 — `:AdversarialChallenge` node 측 ≥1 측 MERGE + `(vr)-[:RAISES]->(ac)` edge. 0건 측 *rubber-stamp suspicion 측 trigger* — Naesengmoon gate auto-reject.
+
+3. **Numeric claim KG count match**: 보고 송신 전 측 — *수치 N 측 claim* 측 *KG cypher count* 측 *동시 fetch* + *reconcile field SET on sv.metric_breakdown*. drift 측 detect 시 *immediate report 정정*.
+
+### Cypher gate (sprint end self-check)
+
+```cypher
+// At sprint end — verify mandatory 3 fields populated
+MATCH (vr:ValidationResult) WHERE vr.cycle_id = $cycle_id
+OPTIONAL MATCH (vr)-[:RAISES]->(ac:AdversarialChallenge)
+OPTIONAL MATCH (mr:MetaReviewOutput {cycle_id: $cycle_id})-[:VALIDATED_BY]->(naesengmoon_vr:ValidationResult)
+OPTIONAL MATCH (sv:SkillVersion {cycle_id: $cycle_id})
+WHERE sv.last_numeric_reconciled_at IS NOT NULL
+WITH vr, count(DISTINCT ac) AS challenge_count, count(DISTINCT naesengmoon_vr) AS recursive_count, count(DISTINCT sv) AS reconciled_count
+RETURN vr.name, challenge_count, recursive_count, reconciled_count,
+       (challenge_count >= 1 AND recursive_count >= 1 AND reconciled_count >= 1) AS constrain_layer_3_passed
+```
+
+`constrain_layer_3_passed = false` 측 — *sprint end gate fail* + *immediate retro emit* (3 mandatory 측 backfill).
+
+### Cross-reference
+
+- Schema-level enforcement: `t_sourcecode_required_fields_not_null` APOC trigger (Constrain Layer 1)
+- Numeric protocol: `/Users/lagyeongjun/CD/SYMPOSIUM/CLAUDE.md` §Constrain Layer (4)
+- Root cause Lesson: `lesson-longinus-self-violated-sha256-covenant-recurrence-root-cause-2026-05-20`
+
+# KG: lesson-longinus-self-violated-sha256-covenant-recurrence-root-cause-2026-05-20, ATOM_Skill_apt_meta_review, naesengmoon-canonical-2026-05-19

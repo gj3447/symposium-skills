@@ -244,6 +244,10 @@ TaskSpec: MATCH (ts:SubagentTaskSpec {name:'taskspec-tpa-ST'}) RETURN ts.*
 Target: $SYMBOL_SUBSET. 출력: {AptContract[], ConventionalContract[], GiantMethodDeferred[]} JSON (provenance='재배맨-tpa-st').
 ```
 
+> ⚠️ **`ts.parallelism_min` N개 Agent() 호출은 반드시 jaebaeman Phase 2 (single-message multi-call) 규약을 따른다** — symbol subset N개 모두 하나의 assistant message tool_use array 안에 emit. for-loop turn 분산 = sequential drift (GH#29181), `ts.parallelism_min` 측 spec 자체 무효. 정전: `SKILLS/jaebaeman/references/phases.md §Phase 2 L36-65`.
+>
+> # KG: finding-prom16-parallelism-bhgman-dep-D4 (GAP-4 patch, 2026-05-19)
+
 ### 새 씨앗 심기
 ```cypher
 MERGE (ts:SubagentTaskSpec {name:$name})

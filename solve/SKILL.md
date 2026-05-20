@@ -105,6 +105,10 @@ Agent(model=haiku, run_in_background=true) × N
 5. 참고 링크
 ```
 
+> ⚠️ **Dispatch는 반드시 jaebaeman Phase 2 (single-message multi-call) 규약을 따른다** — N개 `Agent()` tool_use를 하나의 assistant message 안에 모두 emit. for-loop 분산 = sequential drift (GH#29181, `dispatch_pattern≠'single-message-multi-call'`). 정전: `SKILLS/jaebaeman/references/phases.md §Phase 2 L36-65`.
+>
+> # KG: finding-prom16-parallelism-bhgman-dep-D4 (GAP-1 patch, 2026-05-19)
+
 ### Step 4: KG에 리서치 결과 구축
 
 ```cypher

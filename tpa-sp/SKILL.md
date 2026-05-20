@@ -304,6 +304,10 @@ TaskSpec: MATCH (ts:SubagentTaskSpec {name:'taskspec-tpa-SP'}) RETURN ts.*
 Target: $CONTRACT_SUBSET + Pattern Library. 출력: {INSTANCE_OF[{p,conf,ev,strategy}], RESEMBLES[...], NovelPattern[...]} JSON (provenance='재배맨-tpa-sp').
 ```
 
+> ⚠️ **카테고리별 5 Agent() 호출은 반드시 jaebaeman Phase 2 (single-message multi-call) 규약을 따른다** — 5 category 모두 하나의 assistant message 안에 tool_use block 5개 emit. for-loop = sequential drift (GH#29181), '카테고리별 병렬' 측 실효 N=1. 정전: `SKILLS/jaebaeman/references/phases.md §Phase 2 L36-65`.
+>
+> # KG: finding-prom16-parallelism-bhgman-dep-D4 (GAP-3 patch, 2026-05-19)
+
 ### 자동 88-Naesengmoon 트리거 (Distributed 매칭 시, 위 섹션 참조)
 ```
 역할: 88-Naesengmoon MetaVerifier (agentId=M<idx>)

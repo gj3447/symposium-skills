@@ -45,6 +45,7 @@
 - *(SKILLS)* Jaebaeman v2.4 depth NOT NULL invariant + lychee fragment fix + harness/apt-core path repair ([`61ce6ce`](#61ce6ce4df20e7613e9331848f5c2b7db6584a8b))
 - *(skill-desc)* Shorten apt/apt-st/prometheus descriptions under 1536 char cap ([`8adf5c5`](#8adf5c55e3f494e09fc4db29633dbaf8b3daf828))
 - *(naesengmoon)* Canonical 1:1 cardinality + agent KG-resident propagation ([`a08cb57`](#a08cb575b9c110401a3856b304991425641ca9bb))
+- *(naesengmoon)* Cardinality_naming_rule v1→v2 wording sync ([`b68794d`](#b68794d3464dfa945978f2d0197d57c9f460310a))
 
 ### Performance
 

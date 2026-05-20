@@ -2,6 +2,8 @@
 
 > Lazy-load reference. Parent: [`../SKILL.md`](../SKILL.md).
 
+> ⚠️ **Schema drift notice (2026-05-19 audit)** — 본 파일의 §1 spec(`BOUND_TO` edge + 7 namespaced properties `l1_kg_node`~`l7_crate_or_script`)은 *intended schema*이고, 현 KG runtime 실태와 다름. 실태는 `HAS_REFERENCE_SITE` edge 109개 + 단일 `layer` 문자열 + flat `sha256_baseline` property + `scripture_canon` 8 enum. 자세한 차이는 부모 SKILL.md의 "Appendix: KG Runtime Schema" 참조. 본 파일의 spec 적용은 migration sprint 대상 (user verdict gate). KG: `lesson-longinus-multi-schema-drift-2026-05-19`.
+
 ## 1. ReferenceSite (7-Layer Schema)
 
 ```cypher

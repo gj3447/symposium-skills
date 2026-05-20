@@ -41,6 +41,17 @@ MATCH (slot:MethodologySlot {name:'ContractSchema'})-[:RESOLVES_TO]->(schema) RE
 
 ---
 
+## 🎛 Cross-Repo Working Pattern (2026-05-19)
+
+> SYMPOSIUM (paper-layer KG 정전) ↔ bhgman_tool (apt-implementation-layer code) 측 layer split. APT skill 호출 시 작업 layer 측 명시:
+> - **KG = single canonical truth** (Neo4j on Mac VM, dgx pod worker). Cross-repo session 측에서도 KG 측 단일 entry.
+> - **File edit 측 절대경로** mandatory. `~/CD/SYMPOSIUM/...` (paper) ≠ `~/CD/bhgman_tool/...` (tool). Same-layer 비교: ruflo/LangGraph/CrewAI ↔ bhgman_tool only (paper-layer 비교 = category error).
+> - **APT-development work** default layer = bhgman_tool. SYMPOSIUM/THEORY 측 paper crystallization (자료집).
+
+# KG: feedback_layer_split_symposium_vs_bhgman_tool / reference_symposium_monorepo_mirror / reference_kg_infra_topology
+
+---
+
 ## 🎛 v26.1 Addendum — RFC1 + RFC2 + Apt_FourPlusOne (2026-04-29)
 
 > v26.1은 v26 prose에 손대지 않고 KG slot resolve로만 적용. 본문 한 줄도 직접 magic number 박지 않음 (A6 resolve-only 준수).
@@ -987,3 +998,39 @@ If ANY checkbox fails: BLOCK. Do not proceed. Fix the issue first.
 | **`## History` section + SemVer migration** | 2026-04-29 | PROM 16 F2/F3 | frontmatter `version: 26` → `"26.0.0"`. SkillVersion KG node `sv-apt-v26.0.0`. |
 
 # KG history: ATOM_Skill_apt_orchestrator (binding root) / lesson-prom16-skill-versioning-academic-2026-04-29 / lesson-prom16-skillver-progressive-disclosure-drift-2026-04-29
+
+---
+
+## 🎛 v27 Addendum — HR13 Adversarial Gate Cypher Enforcement (2026-05-19)
+
+> A6 resolve-only 준수. Prose 측 magic number 미박입 — KG `:ValidationGate` 측 enforcement_cypher field 측 단일 정전. PreToolUse hook 측 shadow rollout (warn-only) 측 BLOCK 격상은 1-sprint audit 후.
+
+```cypher
+// HR13 LensSet completeness + adversarial verdict gate (per AptDecisionLog)
+MATCH (vg:ValidationGate {name:'gate-hr13-adversarial-cypher-2026-05-19'})
+RETURN vg.enforcement_cypher, vg.violation_action
+
+// AptDecisionLog v2 schema (required fields)
+MATCH (sch:Schema {name:'schema-aptdecisionlog-v2-adversarial-gate-2026-05-19'})
+RETURN sch.required_fields, sch.gate_type_enum, sch.adversarial_verdict_enum
+```
+
+PreToolUse hook: `~/.claude/hooks/pre_tool_apt_phase_gate_check.py` (matcher `mcp__neo4j__write_neo4j_cypher`, MODE=SHADOW_OBSERVE → BLOCK after audit).
+
+# KG: gate-hr13-adversarial-cypher-2026-05-19 / schema-aptdecisionlog-v2-adversarial-gate-2026-05-19 / sprint-apt-hr1-enforcement-gate-cypher-2026-05-19 / lesson-sprint-apt-hr1-misnomer-actually-hr13-lensset-2026-05-19
+
+### v27-B. RFC2 Contract Substitution Mode Gate (2026-05-19)
+
+> SP→ST mini-RGR 측 contract substitution criteria 측 `rigor_level` 5-tier enum 측 mapping. Binary `fast_path/full_cycle` 측 deprecated (학술 정전 5-tier 측 honor).
+
+```cypher
+MATCH (sch:Schema {name:'schema-contract-substitution-mode-rfc2-2026-05-19'})
+RETURN sch.tier_mapping, sch.contract_artifact_kinds, sch.substitution_criteria
+
+MATCH (vg:ValidationGate {name:'gate-contract-substitution-rfc2-2026-05-19'})
+RETURN vg.enforcement_cypher
+```
+
+Tier mapping: `conjecture/heuristic → informal_allowed (docstring|test_signature)` · `semi-rigorous → mixed` · `rigorous → typed_pydantic_dto mandatory` · `proven → typed_pydantic_dto + lake build sorry=0`.
+
+# KG: gate-contract-substitution-rfc2-2026-05-19 / schema-contract-substitution-mode-rfc2-2026-05-19 / sprint-apt-st-informal-contract-rgr-cfg-gate-2026-05-19 / lesson-sprint-rfc2-binary-fast-vs-full-actually-rigor-level-5tier-2026-05-19

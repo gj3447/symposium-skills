@@ -129,6 +129,10 @@ N_agents = ceil(total_loc / LOC_LIMIT_PER_MODEL)
 # 예: 39K LOC + haiku → ceil(39000/5000) = 8 agents
 ```
 
+> ⚠️ **N_agents Agent() 호출은 반드시 jaebaeman Phase 2 (single-message multi-call) 규약을 따른다** — N개 모두 하나의 assistant message tool_use array 안에 emit. for-loop turn 분산 = sequential drift (GH#29181), file-bucket parallelism 자체가 무효. 정전: `SKILLS/jaebaeman/references/phases.md §Phase 2 L36-65`.
+>
+> # KG: finding-prom16-parallelism-bhgman-dep-D4 (GAP-2 patch, 2026-05-19)
+
 #### Step 3.2: 파일 단위 균등 분배 (디렉토리 단위 아님!)
 
 <!-- KG: lesson-tpa-directory-instruction-ambiguity-2026-04-16 -->
