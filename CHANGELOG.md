@@ -55,6 +55,7 @@
 ### Changed
 
 - *(apt)* Progressive Disclosure split — SKILL.md 1804 → 381 lines + 8 references/ (PROM 16 F6.1) ([`79fd860`](#79fd860fba8088866e3eac08c418548767da368d))
+- *(apt)* L4 archive History block (248KB→65KB, 76% reduction) ([`9115336`](#911533661a3d2a374b40d0189b7b22f436644406))
 
 ### Documentation
 

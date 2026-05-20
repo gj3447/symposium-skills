@@ -78,40 +78,14 @@ KG: `seed-harness-3tier-canonical-validated-2026-04-30`, `seed-anthropic-managed
 
 → 4축은 **유효한 derivative**다. 단, attribution은 **Böckeler 2축**이 1차 정전이며 SYMPOSIUM 분해는 그 미세 형태임을 명시.
 
-### 2.3 4축 진단 프로토콜 (L_IDE 내부 한정)
+### 2.3 4축 진단 → `apt-feedback-lens` 별도 skill 측 invokable LensSet
 
-에이전트가 **L_IDE 계층에서** 실패했을 때, 4축 중 어디가 약한지 진단:
-
-| 증상 | 약한 축 | 처방 |
-|------|---------|------|
-| 엉뚱한 방향으로 구현 | Inform | KG 보강, docs 추가, 프로메테우스 발동 |
-| 범위 초과 / Gold Plating | Constrain | Contract 경계 강화, Span 재분해 |
-| 틀린 코드가 통과됨 | Verify | Naesengmoon lens 추가, 테스트 강화 |
-| 같은 버그 재발 | Correct | Feedback loop 점검, Lesson 기록 |
-
-> ⚠️ **L_IDE 외 계층에서 4축 진단을 자동 적용하지 말 것.** L_RT는 orchestration model 선택, L_MC는 control plane이 진짜 frame.
-
-```cypher
-// L_IDE 4축 건강도 (기존 v2 프로토콜 그대로)
-MATCH (anchor:SemanticAnchor {name: $project})
-OPTIONAL MATCH (anchor)-[:HAS_SPAN*]->(s)
-WITH anchor, count(s) as span_count
-OPTIONAL MATCH (ct:AptContract) WHERE ct.name STARTS WITH 'CT_' + $project
-WITH anchor, span_count, count(ct) as contract_count,
-     sum(CASE WHEN ct.status = 'fulfilled' THEN 1 ELSE 0 END) as fulfilled
-OPTIONAL MATCH (vr:ValidationResult) WHERE vr.project = $project
-WITH anchor, span_count, contract_count, fulfilled,
-     count(vr) as validations,
-     sum(CASE WHEN vr.verdict = 'REJECTED' THEN 1 ELSE 0 END) as rejections
-OPTIONAL MATCH (fb:AptFeedback) WHERE fb.name STARTS WITH 'FB_' + $project
-WITH span_count, contract_count, fulfilled, validations, rejections,
-     count(fb) as feedbacks,
-     sum(CASE WHEN fb.status = 'resolved' THEN 1 ELSE 0 END) as resolved_fb
-RETURN span_count AS inform_density,
-       contract_count AS constrain_total, fulfilled AS constrain_fulfilled,
-       validations AS verify_total, rejections AS verify_rejections,
-       feedbacks AS correct_total, resolved_fb AS correct_resolved
-```
+> **2026-05-20**: 4축 진단 protocol + Cypher 측 별도 invokable LensSet skill 측 분리 (Phase 2 from `lesson-harness-drift-corrected-2026-04-29`).
+> - Skill: `~/.claude/skills/apt-feedback-lens/SKILL.md` (KG: `ATOM_Skill_apt_feedback_lens`, `lensset-apt-4axis`)
+> - Invoke: `/taliban <target> --lens apt-4axis` (cardinality=4, UNANIMOUS_PASS, L_IDE 한정)
+> - Cold archive (본문 보존, Longinus L4): [`references/CLAUDE_archive_4axis_diagnostic_2026-05-20.md`](references/CLAUDE_archive_4axis_diagnostic_2026-05-20.md)
+>
+> 본 Harness skill 측 frame (3-tier family + 4축 = Böckeler 2축 fine-grained 분해 정전) 보존, *invokable validator interface* 측 apt-feedback-lens 측 위임.
 
 ---
 

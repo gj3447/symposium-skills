@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-20T15:43:45+09:00",
-  "git_head_commit": "734931bdbbe44a3da3331258f22729795c7ef9c8",
-  "git_head_short": "734931b",
+  "generatedAt": "2026-05-20T15:54:30+09:00",
+  "git_head_commit": "911533661a3d2a374b40d0189b7b22f436644406",
+  "git_head_short": "9115336",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
-  "skills_count": 32,
-  "merkle_root": "cc6c81de2024fb438be76007872a24d5c55e84c4707a20163cc732ce7048adba",
+  "skills_count": 33,
+  "merkle_root": "cbbfd9407d035819617cf96275eff8078cf48a7f9556afaa7d3882be984e4653",
   "skills": [
     {
       "name": "88-taliban",
@@ -22,7 +22,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "fad68f9d133eab1973a9bb9838e7a05180f1d662"
+      "git_tree_sha": "27f9d74147302f0bbdbdc5eec38a851544bd13fd"
     },
     {
       "name": "apt-cleanup",
@@ -39,6 +39,14 @@
       "kg_ref": "ATOM_Skill_apt_d",
       "channel": "experimental",
       "git_tree_sha": "dd100ba72b485eda5d648f348c3aa882f3ed7ff3"
+    },
+    {
+      "name": "apt-feedback-lens",
+      "path": "apt-feedback-lens",
+      "version": "1.0.0",
+      "kg_ref": "ATOM_Skill_apt_feedback_lens",
+      "channel": "stable",
+      "git_tree_sha": null
     },
     {
       "name": "apt-meta-review",
