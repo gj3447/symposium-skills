@@ -35,6 +35,7 @@
 - *(apt-d)* S2 skill scaffold + fix-agent K-01 empirical test sprint ([`33bb3da`](#33bb3da092d962f1ad59f3ee85c3f9c0d1d77e45))
 - *(skills)* APT 5무기 active integration + ruflo cache directive + dispatch-only guard ([`b84bf9c`](#b84bf9cc4133055cf8f401a8c992f44059f95d9a))
 - *(apt/longinus/meta-review)* V27 HR13 + Longinus v3.3 + Wave 9 MetaReview + GAP-1~3 jaebaeman ([`734931b`](#734931bdbbe44a3da3331258f22729795c7ef9c8))
+- *(harness,apt-feedback-lens)* Harness v3 KG sync + 4축 invokable LensSet 분리 ([`b3f31f0`](#b3f31f04fe852da5d1aa6a874e977a3d53a977ef))
 
 ### Fixed
 

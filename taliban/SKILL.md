@@ -10,8 +10,9 @@ description: >
   Canonical = 나생문 (사용자 verdict 2026-05-19 PRIMARY), file name `taliban` = alias.
   렌즈셋 플러거블: --lens constitutional(기본 9), mathematical(113), solid(5), longinus(7), lakatos(4), 또는 KG에 등록된 임의 LensSet.
   Cardinality + lens 선택 = invocation-time user-choice flexible (사용자 verdict 2026-05-20 PRIMARY).
-    N중 나생문 = N 독립 lens (simple 1:1, cardinality 자유 정수). lens 조합 측 invocation-time 명시 (constitutional/mathematical/solid/longinus/lakatos 5종 또는 KG 등록된 임의 LensSet).
-    Aggregation policy: UNANIMOUS_PASS default, MAJORITY / WEIGHTED 측 user explicit alternative 허용.
+    N중 나생문 = N 독립 lens (simple 1:1, cardinality 자유 정수). lens 조합은 invocation-time 명시 (constitutional/mathematical/solid/longinus/lakatos 5종 또는 KG 등록된 임의 LensSet).
+    Aggregation policy: UNANIMOUS_PASS default, MAJORITY / WEIGHTED는 user explicit alternative 허용.
+    Timing axis (Wave 9 add, 2026-05-20): cross-agent-retroactive (default, /tlb subagent dispatch) / meta-sprint-self (apt-meta-review Constrain Layer 3) / pre-emit-gate (케르베로스 나생문 / Cerberus Naesengmoon, ~/.claude/hooks/placeholder_check.sh 3-head). naesengmoon-cerberus-variant-pre-emit-gate-2026-05-20.
     Lens-mix hardcoded default 측 deprecated (cardinality_naming_rule v1, lesson-naesengmoon-cardinality-3axis-collapse-drift-2026-05-19).
     orthogonality theorem 측 formal edge anchor demoted (lesson-naesengmoon-cardinality-direct-1to1-not-orthogonal-2026-05-19).
   Agent: canonical `naesengmoon-ensemble-critic` ↔ alias `taliban-ensemble-critic` (~/.claude/agents/, 1:1 mirror).
@@ -502,3 +503,48 @@ visits = 0 → 1e18 (explore-first sentinel)
 → APT v22 Gate Check enforcement 의 면역계 mechanism. 88-taliban (v3) = `--lens mathematical` 별칭, tlb (v3) = thin alias.
 
 # KG history: ATOM_Skill_taliban / lesson-prom16-skill-versioning-academic-2026-04-29
+
+---
+
+## Naesengmoon Customization Axes (Wave 9 2026-05-20)
+
+> 사용자 통찰 2026-05-20: "케르베로스 나생문 만들면 되지 나생문이 customizing 가능한 건데". 나생문은 *plugin-style framework* — 5 axes로 invocation-time customizable. Cerberus는 새 무기가 아니라 *timing axis의 새 variant*.
+
+### 5 axes
+
+| Axis | 옵션 | Default | 비고 |
+|---|---|---|---|
+| **lens** | constitutional / mathematical / solid / longinus / lakatos / KG-registered | constitutional | `--lens X` 명시 |
+| **cardinality** | N ∈ ℤ⁺ (simple 1:1) | 3 (3중) | `--cardinality N` 또는 자동 derive |
+| **aggregation** | UNANIMOUS_PASS / MAJORITY / WEIGHTED | UNANIMOUS_PASS | Tier 1 strict |
+| **timing** | cross-agent-retroactive / meta-sprint-self / **pre-emit-gate** | cross-agent-retroactive | Wave 9 add |
+| **dispatch** | subagent dispatch (Agent tool) / hook trigger / module-import-time | subagent dispatch | timing에 따라 자동 |
+
+### Timing variants (3개)
+
+| Variant | 시점 | trigger | 산출물 |
+|---|---|---|---|
+| **cross-agent-retroactive** (default) | 작업 후 | parent dispatch via Agent tool | post-hoc ValidationResult, /tlb dispatch |
+| **meta-sprint-self** | sprint 끝 | MetaReview SKILL.md mandate | apt-meta-review의 recursive self-meta-naesengmoon |
+| **pre-emit-gate** (Cerberus) | 송신 전 | hook trigger every Write/Submit | placeholder_check.sh 3-head, hard-block on fail |
+
+### Cerberus Naesengmoon (pre-emit-gate variant) — 3 heads
+
+| Head | 검사 | 구현 |
+|---|---|---|
+| **(1) regex/syntactic** | 금지된 문자/패턴 (e.g., isolated banned char) | `~/.claude/hooks/placeholder_check.sh` (Wave 9 enhanced with COUNT_ISOLATED ≥3 threshold) |
+| **(2) semantic overclaim** | "다 됐다" / "완벽" / "전부" 류 과장 | `numeric_check.sh` (pending install) |
+| **(3) coherence claim-vs-KG** | 보고 숫자가 KG 실제값과 mismatch | `coherence_check.sh` (pending install) |
+
+Aggregation: any head fail → submit hard-block + force rewrite.
+
+### Naming hierarchy
+
+- **Family root**: `naesengmoon-family-taxonomy-2026-05-20` (NaesengmoonFamily node)
+- **Canonical**: `naesengmoon-canonical-2026-05-19` (Naesengmoon framework)
+- **Variants (현재 3개)**:
+  - `naesengmoon-ensemble-critic` (cross-agent-retroactive, canonical agent)
+  - `apt-meta-review recursive self-meta-naesengmoon` (meta-sprint-self, Constrain Layer 3)
+  - `naesengmoon-cerberus-variant-pre-emit-gate-2026-05-20` (pre-emit-gate, NaesengmoonVariant node)
+
+# KG: naesengmoon-family-taxonomy-2026-05-20, naesengmoon-cerberus-variant-pre-emit-gate-2026-05-20, lesson-naesengmoon-gap-retroactive-only-2026-05-20

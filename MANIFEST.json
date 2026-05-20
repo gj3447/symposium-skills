@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-20T15:54:30+09:00",
-  "git_head_commit": "911533661a3d2a374b40d0189b7b22f436644406",
-  "git_head_short": "9115336",
+  "generatedAt": "2026-05-20T16:47:23+09:00",
+  "git_head_commit": "b3f31f04fe852da5d1aa6a874e977a3d53a977ef",
+  "git_head_short": "b3f31f0",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 33,
-  "merkle_root": "cbbfd9407d035819617cf96275eff8078cf48a7f9556afaa7d3882be984e4653",
+  "merkle_root": "fe2a16cb7a1b85d67f0cadd35af3036c55062ddce6760c0349408fdd6872d742",
   "skills": [
     {
       "name": "88-taliban",
@@ -46,7 +46,7 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_apt_feedback_lens",
       "channel": "stable",
-      "git_tree_sha": null
+      "git_tree_sha": "e82a2b19bacfbb91b2a55feff3a65c239c4d0401"
     },
     {
       "name": "apt-meta-review",
@@ -150,7 +150,7 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_harness",
       "channel": "stable",
-      "git_tree_sha": "554e9f27968910500cc51b8387047f169538fa2a"
+      "git_tree_sha": "49fe93d74548ae0c53d6fe4e7f302e2bcc641fcd"
     },
     {
       "name": "jaebaeman",
