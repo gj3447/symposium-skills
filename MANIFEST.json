@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-20T16:59:14+09:00",
-  "git_head_commit": "e169e8f312e790e7872b43a9fabcc171ffaf6846",
-  "git_head_short": "e169e8f",
+  "generatedAt": "2026-05-24T22:32:59+09:00",
+  "git_head_commit": "55b39ae19f0a8db0f6ef85d6c4e6151049a21810",
+  "git_head_short": "55b39ae",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 37,
-  "merkle_root": "231243d4b58534a01dca43a5e79ae2266e827bb11f0c4cd341e72fe4122beef5",
+  "merkle_root": "bec6628134de1bcd5b21ecbc457919b26c76559426e7a3384795ef3e837b3fe3",
   "skills": [
     {
       "name": "88-taliban",
@@ -22,7 +22,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "27f9d74147302f0bbdbdc5eec38a851544bd13fd"
+      "git_tree_sha": "d53038a62ca620ca1e0136760ebfa42c6c61afb5"
     },
     {
       "name": "apt-autoflow-guard",
@@ -30,7 +30,7 @@
       "version": "0.1.0-scaffold",
       "kg_ref": "ATOM_Skill_apt_autoflow_guard",
       "channel": "experimental",
-      "git_tree_sha": null
+      "git_tree_sha": "9228bea77b1d869f8bfe3f442fd6b55e3bac135f"
     },
     {
       "name": "apt-cleanup",
@@ -62,7 +62,7 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_apt_lens_enforce",
       "channel": "stable",
-      "git_tree_sha": null
+      "git_tree_sha": "c17746763e8e3c45292a2f21a859d8377221cde7"
     },
     {
       "name": "apt-magic-resolve",
@@ -70,7 +70,7 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_apt_magic_resolve",
       "channel": "stable",
-      "git_tree_sha": null
+      "git_tree_sha": "8002ffda02452a32434dd53027d32fc41283dd3f"
     },
     {
       "name": "apt-meta-review",
@@ -78,7 +78,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
-      "git_tree_sha": "970251f0e68758ce942bfe7cd54d31d72022b054"
+      "git_tree_sha": "3f6016eb3ffbe79896affbc6c7f80c6825a51e92"
     },
     {
       "name": "apt-orchestrator",
@@ -86,7 +86,7 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": null
+      "git_tree_sha": "0d4d96dd909fd111e43bfa02fc62b8b299867a39"
     },
     {
       "name": "apt-sa",
@@ -94,7 +94,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sa",
       "channel": "stable",
-      "git_tree_sha": "6651301f49e2d4567b7115f81e1833db3bb1cde3"
+      "git_tree_sha": "c4db43189941136808cdda8e6744453b03916fda"
     },
     {
       "name": "apt-scw",
@@ -110,7 +110,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sp",
       "channel": "stable",
-      "git_tree_sha": "9d73d6b59d4038f3ab77def99c9cf48813f46c91"
+      "git_tree_sha": "c4d31bb3f647b53075ef24cac3fcfe07ab9c114d"
     },
     {
       "name": "apt-st",

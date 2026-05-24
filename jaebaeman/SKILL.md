@@ -586,10 +586,24 @@ LIMIT 10
 씨앗: {ts.name} — {ts.role}
 기존_지식(하계): {pre_fetch_json}
 이미 조사된 내용과 중복되지 않는 새로운 관점을 조사하세요.
-출력: FullFindingRecord JSON 단일 블록.
+출력: FullFindingRecord JSON 단일 블록 (kg_write_intent_json 포함).
+
+**WRITE_DEFERRED_TO_PARENT**: 너는 KG에 직접 write 할 수 없다. MCP `mcp__neo4j__write_neo4j_cypher`
+tool 은 subagent 에 자동 상속되지 않는다 (GH anthropic/claude-code #13605, #34935).
+cypher MERGE 의도를 `kg_write_intent_json` field 에 JSON 으로 반환만 한다. 실제 write 는 parent 가
+Phase 4 UNWIND batch MERGE 로 수행한다. **금지 표현**: `kg_writes_done=true`, "MERGE 완료",
+"N개 노드 생성", "write 성공" 류 claim. 위반 시 parent ReconciliationNode 발동 + claim 폐기.
 ```
 
 **절대 금지**: SKILL.md 전체를 prompt에 넣지 않는다. 3줄 + context만.
+
+**WRITE_DEFERRED_TO_PARENT 정전 (2026-05-24 PROM 16 T3 ship)**:
+- 정전 anchor: `lesson-subagent-self-drift-kg-write-prom16-2026-05-24` (instance #4 누적)
+- 단일 예외: `naesengmoon-ensemble-critic` agent (~/.claude/agents/ 측 자체 MCP write access 명시).
+  단 그 경우도 parent spot-check cypher count match mandatory.
+- 검증 cypher (parent collect 후 mandatory): `MATCH (rf:ResearchFinding) WHERE rf.cycleId=$cid
+  OR rf.agentId CONTAINS $aid RETURN count(rf)` — subagent claim 과 actual count 불일치 시
+  ReconciliationNode MERGE + re-MERGE.
 
 ### 2-3. Agent 호출
 
@@ -832,6 +846,7 @@ STALE 씨앗은 검토 후 ARCHIVED 또는 재활성화.
 |------|------|------|
 | subagent에 SKILL.md 전체 주입 | Context Rot (Anti-Context-Rot) | 3줄 prompt + pre-fetch context |
 | subagent가 KG 직접 write | MCP 미상속 + 동시성 lock | 부모 UNWIND 단일 경로 |
+| subagent가 `kg_writes_done=true` / "MERGE 완료" 류 claim 출력 | self-drift (PROM 16 instance #4 누적 2026-05-24) | `kg_write_intent_json` field 로 의도만 반환, parent spot-check cypher count match mandatory |
 | 씨앗 없이 subagent 출격 | 추적 불가, 재현 불가 | 항상 TaskSpec 먼저 |
 | depth > 3 프랙탈 | 무한 증식 | depth 3 hard limit |
 | SKILL.md에 재배맨 로직 복사 | drift 유발 | MIC thin resolver만 |

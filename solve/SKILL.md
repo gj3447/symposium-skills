@@ -103,6 +103,12 @@ Agent(model=haiku, run_in_background=true) × N
 3. 대안 2~3개
 4. 설정 예제 / YAML / 명령어
 5. 참고 링크
+6. **WRITE_DEFERRED_TO_PARENT** clause (PROM 16 T3 2026-05-24 ship):
+   "너는 KG 에 직접 write 할 수 없다. ResearchFinding / ActionPlan / Lesson MERGE 의도는
+   `kg_write_intent_json` field 에 JSON 으로 반환만 한다. 실제 write 는 parent 가 Step 4
+   (KG 리서치 구축) + Step 5 (ActionPlan 수립) 에서 수행. 금지 표현: `kg_writes_done=true` /
+   'MERGE 완료' / 'lesson resolved 처리 완료' 류 claim. 위반 시 parent ReconciliationNode 발동."
+   정전 anchor: `lesson-subagent-self-drift-kg-write-prom16-2026-05-24`.
 ```
 
 > ⚠️ **Dispatch는 반드시 jaebaeman Phase 2 (single-message multi-call) 규약을 따른다** — N개 `Agent()` tool_use를 하나의 assistant message 안에 모두 emit. for-loop 분산 = sequential drift (GH#29181, `dispatch_pattern≠'single-message-multi-call'`). 정전: `SKILLS/jaebaeman/references/phases.md §Phase 2 L36-65`.

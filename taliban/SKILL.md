@@ -180,7 +180,15 @@ RETURN ts.name, ts.role, ts.prompt_template
 TaskSpec: MATCH (ts:SubagentTaskSpec {name: $taskspec_name}) RETURN *
 실측 권한: Bash + CLI + MCP(neo4j/redis/postgres/mongodb).
 Target: $TARGET.
-출력: FullFindingRecord JSON (verdict: ✓/✗/N/A, evidence: 실측 결과 인용, provenance='재배맨-taliban').
+출력: FullFindingRecord JSON (verdict: ✓/✗/N/A, evidence: 실측 결과 인용, provenance='재배맨-taliban',
+      kg_write_intent_json: ValidationResult MERGE 의도만 — write 자체는 parent Step 5 수행).
+
+**WRITE_DEFERRED_TO_PARENT (PROM 16 T3 2026-05-24 ship)**: 너는 KG 에 직접 write 할 수 없다.
+ValidationResult / verdict 노드 MERGE 의도는 `kg_write_intent_json` field 에 JSON 으로만 반환.
+실제 write 는 parent 가 Step 5 에서 수행. 금지 표현: `kg_writes_done=true` / "MERGE 완료" /
+"verdict 기록 완료" / "VR 노드 생성" 류 claim. 단일 예외: `naesengmoon-ensemble-critic` agent
+(~/.claude/agents/ 측 자체 mcp__neo4j__write_neo4j_cypher access 명시) — 그 경우도 parent
+spot-check cypher count match mandatory.
 ```
 
 ### Step 4: 결과 집계

@@ -253,6 +253,13 @@ RETURN collect({
   ... (N seeds 동시)
 ```
 
+> **WRITE_DEFERRED_TO_PARENT (PROM 16 T3 2026-05-24 ship)**: 각 seed prompt 본문에 다음 clause
+> mandatory 주입 — "너는 KG 에 직접 write 할 수 없다. AptContract.status='Fulfilled',
+> SemanticTask.status='PASS', SourceCode MERGE 의도는 `kg_write_intent_json` field 에 JSON 으로
+> 반환만 한다. 실제 write 는 parent 가 Step 4 (KG 물질화 기록) 에서 수행. 금지 표현:
+> `kg_writes_done=true` / 'Fulfilled 기록 완료' / 'MATERIALIZES edge 생성' 류 claim. 위반 시
+> parent ReconciliationNode 발동." 정전 anchor: `lesson-subagent-self-drift-kg-write-prom16-2026-05-24`.
+
 각 seed 내부에서 **TDD 3-step**:
 ```
 2a. acceptance_criteria → 테스트 파일 작성 (RED)

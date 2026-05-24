@@ -37,6 +37,7 @@
 - *(apt/longinus/meta-review)* V27 HR13 + Longinus v3.3 + Wave 9 MetaReview + GAP-1~3 jaebaeman ([`734931b`](#734931bdbbe44a3da3331258f22729795c7ef9c8))
 - *(harness,apt-feedback-lens)* Harness v3 KG sync + 4축 invokable LensSet 분리 ([`b3f31f0`](#b3f31f04fe852da5d1aa6a874e977a3d53a977ef))
 - *(taliban)* Timing axis + Cerberus Naesengmoon variant (Wave 9 customization) ([`e169e8f`](#e169e8f312e790e7872b43a9fabcc171ffaf6846))
+- *(skills)* Apt-autoflow-guard + apt-lens-enforce + apt-magic-resolve + apt-orchestrator + 4 APT skill updates ([`3a7dd6b`](#3a7dd6b72c868c3fc0dd5b906596c3aa22de8d1f))
 
 ### Fixed
 
@@ -74,6 +75,7 @@
 - *(manifest)* Merkle-check auto-refresh post-PD-v3 (git_head be2dbe4) ([`bde5e58`](#bde5e582ce75f7b8db0d44d04a3293d7b5e21639))
 - *(manifest)* Rebuild post PD v3 (merkle 5fd95a03e3cb, head 3b1463e) ([`81e81f3`](#81e81f3c48d23b6ac2c764f1dfef30e5250d618d))
 - *(.well-known)* Regenerate skills index after SKILL.md desc shorten ([`c0382eb`](#c0382eb19cfecc293693f1501039be2111d52a43))
+- *(skills,index)* Regen .well-known/skills/index.json after new APT skill registry ([`55b39ae`](#55b39ae19f0a8db0f6ef85d6c4e6151049a21810))
 
 ### Checkpoint
 

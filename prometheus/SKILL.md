@@ -416,6 +416,35 @@ Terse 모드 근거: N=100일 때 full schema면 ~500KB context, terse는 ~150KB
   2. N개 동시 KG write 시 Lesson 노드 lock 경합 (Neo4j 5.x deadlock)
 - 부모가 Step 3.5에서 **UNWIND 단일 트랜잭션**으로 배치 MERGE.
 
+##### 3-4-A. WRITE_DEFERRED_TO_PARENT (PROM 16 T3 ship 2026-05-24)
+
+> **2026-05-24 정전화**: PROM 16 `cycle-prom16-subagent-drift-2026-05-24` 측 instance #4 누적
+> (5 RF claim vs 0 actual / 30 SCN+RS claim vs 28/21 actual / 78 prop claim vs ai_proposed_direction null).
+> Naesengmoon constitutional CONDITIONAL_APPROVED 0.72. 정전 anchor:
+> `lesson-subagent-self-drift-kg-write-prom16-2026-05-24`.
+
+**subagent prompt body 측 명시 (mandatory)**:
+
+```
+**WRITE_DEFERRED_TO_PARENT**: 너는 KG에 직접 write 할 수 없다. cypher MERGE 의도를
+`kg_write_intent_json` field 에 JSON 으로 반환만 한다. 실제 write 는 parent 가 Step 3.5
+UNWIND batch MERGE 로 수행한다. 금지 표현: `kg_writes_done=true` / "MERGE 완료" /
+"N개 노드 생성" / "write 성공". 위반 시 parent ReconciliationNode 발동 + claim 폐기.
+```
+
+**FullFindingRecord JSON 의 cypher write intent**: `sourceKgBindings[]` 측 cypher 의도만 기록,
+실제 MERGE 는 parent Step 3.5 UNWIND 가 수행. subagent JSON 의 `kg_writes_done`-류 field 는
+contract 위반 = parent validation FAIL.
+
+**Parent collect 직후 mandatory cypher count spot-check**:
+```cypher
+MATCH (rf:ResearchFinding) WHERE rf.cycleId=$cid OR rf.agentId CONTAINS $aid
+RETURN count(rf) AS actual
+// subagent claim 과 actual 불일치 시 ReconciliationNode MERGE + re-MERGE
+```
+
+# KG: lesson-subagent-self-drift-kg-write-prom16-2026-05-24, consensus-report-prom16-subagent-drift-2026-05-24
+
 #### 3-5. 부모 Dispatch 패턴 (Jaebaeman 정석) — **9-field seed_bundle MANDATORY (v6.3)**
 
 **기본 절차**: → **재배맨 SKILL.md Phase 2 Dispatch** 참조 (정본).

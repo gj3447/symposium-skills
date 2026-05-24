@@ -392,6 +392,12 @@ RETURN 'V_ST_Cardinality_NonSharedMultiplex' AS violation,
 
 > 이 스킬의 subagent 운용은 **MIC_v1.SubagentSeeder** slot을 통해 resolve된다.
 > 아래는 thin resolver. 로직 복제 = drift 유발.
+>
+> **WRITE_DEFERRED_TO_PARENT (PROM 16 T3 ship 2026-05-24)**: per-AtomicSpan SubagentTaskSpec
+> dispatch 시 subagent prompt 본문에 jaebaeman SKILL.md §2-2 WRITE_DEFERRED_TO_PARENT clause
+> mandatory 주입. Contract / SubagentTaskSpec MERGE 의도는 `kg_write_intent_json` field 로만
+> 반환, 실제 write 는 parent (apt-st Step 7/9) 수행. 정전 anchor:
+> `lesson-subagent-self-drift-kg-write-prom16-2026-05-24`.
 
 ### Slot Resolve
 ```cypher
