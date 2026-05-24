@@ -181,7 +181,15 @@ MATCH (n) WHERE n.sourceRF IS NOT NULL RETURN DISTINCT labels(n), count(n)
 ```
 
 **모든 L1 Span에 `target_label_verified=true` 필드 강제.** 실측 없이 다음 Phase 진입 금지.
+
+#### 🔒 KG Snapshot Paste — 의무 (2026-05-22, vr-apt-autonomy-drift 대응)
+
+Step 1-1 / 1-1b / 1-2 / 1-3 의 cypher 결과 **첫 페이지**를 `apt-progress.md` 의 `## KG Snapshot (Step 1)` 섹션에 *그대로 paste* 한다 (요약 금지, raw JSON). 빈 채로 두면 Step 2 진입 금지.
+
+이유: 증상 "KG 안 보고 창작" (vr-apt-autonomy-drift-3-symptom-cluster-2026-05-22) 의 직격 fix. SKILL.md prose 만으로는 KG 탐색을 건너뛰는 것을 enforce 못함. apt-progress.md 안에 paste 가 들어가야 file-level evidence 가 생기고, 다음 phase 진입할 때 `grep -A 20 "KG Snapshot (Step 1)" apt-progress.md | wc -l` 가 ≥5 line 인지 검증 가능.
+
 # KG: lesson-apt-premise-drift-researchfinding-vs-subagenttaskspec-2026-04-15
+# KG: vr-apt-autonomy-drift-3-symptom-cluster-naesengmoon-3lens-2026-05-22
 
 ### 1-2. 키워드로 관련 KG 노드 탐색
 
@@ -478,6 +486,34 @@ SA 완료 시 후속 Phase를 위한 파일을 생성한다.
 - SemanticAnchor: {sa_name}
 - L1 Spans: {count}
 - INFORMED_BY links: {count}
+
+---
+
+## KG Snapshot (Step 1) — mandatory raw paste (SA Step 1-1b)
+
+> 빈 채로 두면 Step 2 (Anchor 결정) 진입 금지. evidence guard, vr-apt-autonomy-drift-2026-05-22.
+
+### 1-1. SemanticAnchor list
+```json
+<paste cypher first-page result here, raw>
+```
+
+### 1-1b. Property-Level Existence verification
+```json
+<paste cypher first-page result here, raw>
+```
+
+### 1-2. Keyword neighborhood
+```json
+<paste cypher first-page result here, raw>
+```
+
+### 1-3. Existing anchor Span tree (if applicable)
+```json
+<paste cypher first-page result here, raw or N/A if new anchor>
+```
+
+---
 
 ### Next Steps
 1. SP Phase: {first_branch} 분해 시작

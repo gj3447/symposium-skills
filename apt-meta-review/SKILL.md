@@ -172,7 +172,7 @@ MERGE (s)-[:MATERIALIZES]->(f)
 RETURN s.skillName, f.file_path
 ```
 
-### Step 5: Naesengmoon Gate (executor ≠ reviewer)
+### Step 5: Naesengmoon Gate (executor ≠ reviewer) — **inline parent execution 측 hard ban**
 
 ```
 /taliban apt-meta-review 산출물 --lens constitutional
@@ -181,6 +181,10 @@ RETURN s.skillName, f.file_path
 ```
 
 **executor(패치 작성자) ≠ reviewer(Naesengmoon agent)** 원칙 엄수.
+
+**Hard rule (`naesengmoon-canonical-2026-05-19` + `lesson-naesengmoon-inline-bypass-jaebaeman-sop-2026-05-19`)**:
+- Parent Claude 측 inline self-judgment 측 **금지**. 반드시 separate subagent dispatch (`naesengmoon-ensemble-critic` agent OR canonical `/tlb` skill 측 SubagentTaskSpec seed 측 통한 dispatch).
+- ValidationResult 측 record 측 `vr.executor != vr.reviewer` 측 D20 cypher 측 enforce. 같은 식별자 측 record 측 *automatic RUBBER_STAMP REJECTION*.
 
 ### Step 6: Lesson resolved 갱신
 
@@ -191,6 +195,60 @@ SET l.resolved = true,
     l.resolvedBy = 'apt-meta-review: SKILL.md patch + MATERIALIZES link'
 RETURN l.name, l.resolved
 ```
+
+### Step 7: Mandatory Recursive Self-Meta-Naesengmoon (Wave 9 binding, P0-2 install 2026-05-20)
+
+> Step 5 측 *retroactive* per-patch gate. Step 7 측 *recursive* sprint-end gate — *직후* cycle 측 self-meta-naesengmoon 측 dispatch. 두 측 별개 layer. **본 단계 측 skip 측 즉시 Constrain Layer (3) cypher gate fail (line 270-279).**
+
+#### 7-1. Dispatch protocol (parent-claude only, NOT inline)
+
+매 MetaReview cycle 종료 시 — parent Claude 측 다음 측 단일 메시지 측 dispatch:
+
+```
+Agent(subagent_type='naesengmoon-ensemble-critic',
+      description='Wave 9 recursive self-meta-naesengmoon',
+      prompt='Target = MetaReview output of cycle <cycle_id>.
+              Cardinality=3 (constitutional + mathematical + solid simple 1:1).
+              Builds on Step 5 retroactive gate VR.
+              Output: ValidationResult MERGE + ≥1 AdversarialChallenge node emit.
+              Constraint: this is sprint-end recursive verification, NOT
+                          MetaReview→MetaReview self-application (self_application_forbidden).
+              MetaReview→Naesengmoon 측 ALLOWED.')
+```
+
+**Hard rules**:
+- Parent inline self-judgment **금지** (`lesson-naesengmoon-inline-bypass-jaebaeman-sop-2026-05-19`).
+- Subagent agent != parent execution context (D20 separate).
+- AdversarialChallenge node ≥1 emit mandatory (rubber-stamp 차단).
+
+#### 7-2. AdversarialChallenge MERGE template
+
+```cypher
+MERGE (ac:AbstractNode:AdversarialChallenge {
+  name: 'challenge-meta-review-' + $cycle_id + '-' + toString(timestamp())
+})
+SET ac.cycle_id = $cycle_id,
+    ac.severity = $severity,                   -- HIGH | MEDIUM | LOW
+    ac.status = 'OPEN',                        -- OPEN | RESOLVED | SUPERSEDED
+    ac.challenge_summary = $summary,
+    ac.kg_evidence_anchors = $evidence_list,   -- list of :Lesson / :ResearchFinding node names
+    ac.lens_origin = $lens,                    -- constitutional | mathematical | solid
+    ac.emitted_at = datetime()
+WITH ac
+MATCH (vr:ValidationResult {name: $naesengmoon_vr_name})
+MERGE (vr)-[:RAISES]->(ac)
+RETURN ac.name
+```
+
+#### 7-3. Russell self-application boundary (MATH-F2 stratification)
+
+- MetaReview 측 자기 자체 측 *MetaReview→MetaReview* 측 ban (self_application_forbidden, `lesson-prom16-meta-bayes-self-application-2026-05-19` cross-ref).
+- *MetaReview→Naesengmoon* 측 ALLOWED — *다른 무기 측 5무기 측 다른 instance* 측.
+- Root MetaReview cycle (예: PROM 16 자체 측 emit 하는 정리) 측 *external sigma_oracle (사용자 verdict) gate* 측 추가 의존.
+
+#### 7-4. Gate cypher (Constrain Layer 3 측 동일)
+
+`constrain_layer_3_passed = false` 측 sprint end fail → immediate retro backfill required (자세한 cypher 측 line 270-279 참조).
 
 ---
 

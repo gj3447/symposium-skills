@@ -36,6 +36,7 @@
 - *(skills)* APT 5무기 active integration + ruflo cache directive + dispatch-only guard ([`b84bf9c`](#b84bf9cc4133055cf8f401a8c992f44059f95d9a))
 - *(apt/longinus/meta-review)* V27 HR13 + Longinus v3.3 + Wave 9 MetaReview + GAP-1~3 jaebaeman ([`734931b`](#734931bdbbe44a3da3331258f22729795c7ef9c8))
 - *(harness,apt-feedback-lens)* Harness v3 KG sync + 4축 invokable LensSet 분리 ([`b3f31f0`](#b3f31f04fe852da5d1aa6a874e977a3d53a977ef))
+- *(taliban)* Timing axis + Cerberus Naesengmoon variant (Wave 9 customization) ([`e169e8f`](#e169e8f312e790e7872b43a9fabcc171ffaf6846))
 
 ### Fixed
 

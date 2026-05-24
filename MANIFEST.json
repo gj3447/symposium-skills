@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-20T16:47:23+09:00",
-  "git_head_commit": "b3f31f04fe852da5d1aa6a874e977a3d53a977ef",
-  "git_head_short": "b3f31f0",
+  "generatedAt": "2026-05-20T16:59:14+09:00",
+  "git_head_commit": "e169e8f312e790e7872b43a9fabcc171ffaf6846",
+  "git_head_short": "e169e8f",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
-  "skills_count": 33,
-  "merkle_root": "fe2a16cb7a1b85d67f0cadd35af3036c55062ddce6760c0349408fdd6872d742",
+  "skills_count": 37,
+  "merkle_root": "231243d4b58534a01dca43a5e79ae2266e827bb11f0c4cd341e72fe4122beef5",
   "skills": [
     {
       "name": "88-taliban",
@@ -23,6 +23,14 @@
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
       "git_tree_sha": "27f9d74147302f0bbdbdc5eec38a851544bd13fd"
+    },
+    {
+      "name": "apt-autoflow-guard",
+      "path": "apt-autoflow-guard",
+      "version": "0.1.0-scaffold",
+      "kg_ref": "ATOM_Skill_apt_autoflow_guard",
+      "channel": "experimental",
+      "git_tree_sha": null
     },
     {
       "name": "apt-cleanup",
@@ -49,12 +57,36 @@
       "git_tree_sha": "e82a2b19bacfbb91b2a55feff3a65c239c4d0401"
     },
     {
+      "name": "apt-lens-enforce",
+      "path": "apt-lens-enforce",
+      "version": "1.0.0",
+      "kg_ref": "ATOM_Skill_apt_lens_enforce",
+      "channel": "stable",
+      "git_tree_sha": null
+    },
+    {
+      "name": "apt-magic-resolve",
+      "path": "apt-magic-resolve",
+      "version": "1.0.0",
+      "kg_ref": "ATOM_Skill_apt_magic_resolve",
+      "channel": "stable",
+      "git_tree_sha": null
+    },
+    {
       "name": "apt-meta-review",
       "path": "apt-meta-review",
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
       "git_tree_sha": "970251f0e68758ce942bfe7cd54d31d72022b054"
+    },
+    {
+      "name": "apt-orchestrator",
+      "path": "apt-orchestrator",
+      "version": "1.0.0",
+      "kg_ref": "ATOM_Skill_apt_orchestrator",
+      "channel": "stable",
+      "git_tree_sha": null
     },
     {
       "name": "apt-sa",
@@ -222,7 +254,7 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_taliban",
       "channel": "stable",
-      "git_tree_sha": "56ed96d09ca4f59a778336466655dc68f5d95dcc"
+      "git_tree_sha": "2fad56d711d6bbb241786899bc0706269f7f0801"
     },
     {
       "name": "tlb",

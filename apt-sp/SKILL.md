@@ -233,15 +233,44 @@ for each leaf:
 **AtomicSpan 마킹 Cypher (is_atomic=true만으로 불충분 — :AtomicSpan 라벨 필수):**
 
 ```cypher
--- C(S) 5-predicate 통과 시 반드시 이 형식으로 마킹
+-- C(S) 5-predicate 통과 시 반드시 이 형식으로 마킹 (Russell stratification: parent(S) ≠ Root)
 MATCH (s:AptSpan {name: $SPAN_NAME})
-SET s:AtomicSpan,               -- ← 라벨 추가 필수 (labels(s)에 'AtomicSpan' 포함돼야 함)
+MATCH (s)<-[:DECOMPOSES_TO]-(parent)            -- parent 존재 강제 = Root 제외 (MATH-F2 fix)
+SET s:AtomicSpan,                               -- ← 라벨 추가 필수 (labels(s)에 'AtomicSpan' 포함돼야 함)
     s.is_atomic = true,
-    s.estimated_lines = $LINES  -- ν predicate 실측값
-RETURN s.name, labels(s)        -- ['AptSpan', 'AtomicSpan'] 확인
+    s.estimated_lines = $LINES,                 -- ν predicate 실측값
+    s.measure_value = toFloat($LINES) / toFloat(cfg.vibe_coding_sweet_max),  -- contraction metric (Banach k<1)
+    s.c_s_verified_at = datetime()
+RETURN s.name, labels(s), s.measure_value       -- ['AptSpan', 'AtomicSpan'] + measure ∈ [0, 1] 확인
 ```
 
 **주의**: `s.is_atomic = true`만 쓰고 `SET s:AtomicSpan` 생략 시 Crystallization 쿼리에서 누락됨.
+
+**measure_value 의미 (D2 finding `fp16apt-D2-contraction-mechanism`)**:
+- Banach contraction metric. `measure = estimated_lines / vibe_coding_sweet_max`. AtomicSpan 도달 = `measure ≤ 1.0`.
+- 자식 `measure < 부모 measure` 측 contraction invariant (D(S) recursion 종료 보장 — Banach fixed-point + Floyd variant).
+- Kolmogorov K 측 incomputable → LOC 측 approximation (200-500 sweet range).
+
+**Russell stratification (MATH-F2 fix from 3중 나생문 `VR_prom16_apt_bhgman_3lens_synthesis_1779282744414`)**:
+- `MATCH (s)<-[:DECOMPOSES_TO]-(parent)` 측 parent 존재 강제 = **Root Span 측 :AtomicSpan 라벨 불가**.
+- Root Span (예: `SPAN_bhgman_tool_phase3_ROOT`, `apt-progress` SA Root Span 17 등) termination 측 internal contraction proof 아닌 **external sigma_oracle (사용자 verdict) gate** 측 의존.
+- Self-applied methodology cycle (예: PROM 16 자체) 측 Russell self-application paradox 회피.
+
+### Step 3.5: Contraction invariant verification (P0-1 fix, 3중 나생문 D2/MATH-F2)
+
+```cypher
+-- ∀ child AtomicSpan: measure(child) < measure(parent) (Banach contraction k<1)
+MATCH (parent)-[:DECOMPOSES_TO]->(child:AtomicSpan)
+WHERE parent.measure_value IS NOT NULL AND child.measure_value IS NOT NULL
+  AND child.measure_value >= parent.measure_value
+RETURN parent.name AS parent_span,
+       parent.measure_value AS parent_m,
+       child.name AS child_span,
+       child.measure_value AS child_m,
+       '✗ CONTRACTION VIOLATED' AS verdict
+```
+
+**비어 있어야 정상**. result row 측 1+ 측 contraction failure → C(S) 5-predicate 재검증 필요.
 
 ### Step 4: Crystallization Frontier 도달 확인
 
