@@ -2,8 +2,8 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.2",
-  "git_head_short": "55b39ae",
-  "merkle_root": "bec6628134de1bcd5b21ecbc457919b26c76559426e7a3384795ef3e837b3fe3",
+  "git_head_short": "c67094c",
+  "merkle_root": "37e64359259b1ba4158fdd7d467504edcf25aeaf11d4156d05e9f5f8d7af0620",
   "skills_count": 37,
   "skills": [
     {
@@ -67,7 +67,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
-      "git_tree_sha": "3f6016eb3ffbe79896affbc6c7f80c6825a51e92"
+      "git_tree_sha": "13c1805ba0c8132bcf91d49c8f5ced539a11897e"
     },
     {
       "name": "apt-orchestrator",
@@ -88,7 +88,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_scw",
       "channel": "stable",
-      "git_tree_sha": "28b024df3ff26b6f73237d74821386b82d7942b1"
+      "git_tree_sha": "a0f7367dabe55b5b3cd7116334353a1b0ef05e61"
     },
     {
       "name": "apt-sp",
@@ -102,7 +102,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "c1ca856ab9cbd67b613133edc1f9f52b7a97bec1"
+      "git_tree_sha": "27b1fb4ec940ff20ac3668844bff5542db0cd111"
     },
     {
       "name": "backup",
@@ -165,7 +165,7 @@
       "version": "2.4.0",
       "kg_ref": "ATOM_Skill_jaebaeman",
       "channel": "stable",
-      "git_tree_sha": "244f1be5160dd7e60ee98fea08a82c14c975d93f"
+      "git_tree_sha": "76fe8726c6bfdb50a2648471fd943eee734d720b"
     },
     {
       "name": "kafka-manage",
@@ -179,7 +179,7 @@
       "version": "3.3.0",
       "kg_ref": "ATOM_Skill_longinus",
       "channel": "stable",
-      "git_tree_sha": "c726a23677c2fe80d5de9e963964ce568ca79463"
+      "git_tree_sha": "97daa55f2cb5cb6d28a52fde10b28b0955e65bd2"
     },
     {
       "name": "prom",
@@ -193,7 +193,7 @@
       "version": "6.3.0",
       "kg_ref": "ATOM_Skill_prometheus",
       "channel": "stable",
-      "git_tree_sha": "c5a0eeaa3c9d71b67fbc98a951c8f4e0f994243c"
+      "git_tree_sha": "61d610df6b10bfbf47b5cd0b55b88e675a7fd341"
     },
     {
       "name": "server-status",
@@ -214,14 +214,14 @@
       "version": "2.0.0",
       "kg_ref": "ATOM_Skill_solve",
       "channel": "stable",
-      "git_tree_sha": "c4023c8f780ae12dc8b44a423d453895ed1ce92e"
+      "git_tree_sha": "13abfd1398d84599861339b22b1a6486bc3facbe"
     },
     {
       "name": "taliban",
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_taliban",
       "channel": "stable",
-      "git_tree_sha": "2fad56d711d6bbb241786899bc0706269f7f0801"
+      "git_tree_sha": "205c1ba2148d16e0e1e2433eb5797cec912e179d"
     },
     {
       "name": "tlb",

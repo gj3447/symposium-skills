@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-25T03:17:37+09:00",
-  "git_head_commit": "6a408a52e2a2a058a8e0b302fa21d444c250d24e",
-  "git_head_short": "6a408a5",
+  "generatedAt": "2026-05-25T22:39:51+09:00",
+  "git_head_commit": "c67094ce4e12b7067b7619ef08079d6d7afadd29",
+  "git_head_short": "c67094c",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 37,
-  "merkle_root": "5f8d7080a1b2e90f0060d1e26808405819072fe07244b5218873e61c448eb447",
+  "merkle_root": "37e64359259b1ba4158fdd7d467504edcf25aeaf11d4156d05e9f5f8d7af0620",
   "skills": [
     {
       "name": "88-taliban",
@@ -78,7 +78,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
-      "git_tree_sha": "3f6016eb3ffbe79896affbc6c7f80c6825a51e92"
+      "git_tree_sha": "13c1805ba0c8132bcf91d49c8f5ced539a11897e"
     },
     {
       "name": "apt-orchestrator",
