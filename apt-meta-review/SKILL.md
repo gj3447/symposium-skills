@@ -338,6 +338,38 @@ RETURN vr.name, challenge_count, recursive_count, reconciled_count,
 
 `constrain_layer_3_passed = false` 측 — *sprint end gate fail* + *immediate retro emit* (3 mandatory 측 backfill).
 
+### Composite gate (MVP cypher + Naesengmoon) — added 2026-05-25
+
+> *Empirical finding (PROM 32 scoring framework cycle 2026-05-25):* LLM-as-judge alone (Naesengmoon) is **noisy single sample** (0.78 measured, ~0.90 estimated, Δ=0.12 inflation). Adding **deterministic cypher predicate gate** in parallel gives composite signal.
+
+매 cycle 종료 시 **두 gate 다 PASS** mandatory:
+
+1. **Naesengmoon semantic gate** (existing): `constrain_layer_3_passed` from above. LLM verdict + ≥1 AC + numeric reconcile.
+2. **MVP cypher structural gate** (NEW): `mvp_score ≥ 0.6` from `/Users/lagyeongjun/CD/SYMPOSIUM/scripts/cycle_score_checker/predicates_v02_cycle_type_aware.cypher` (cycle-type aware: RESEARCH / REMEDIATION / IMPLEMENTATION / UNKNOWN branches).
+
+**Composite verdict node** (MERGE at sprint end):
+```cypher
+MERGE (csv:CompositeScoreVerdict {name: 'csv-' + $cycle_id + '-' + toString(date())})
+SET csv.cycle_id = $cycle_id,
+    csv.mvp_score = $mvp_score, csv.mvp_gate = $mvp_gate,
+    csv.llm_score = $naesengmoon_score, csv.llm_verdict = $naesengmoon_verdict,
+    csv.composite_band = CASE
+      WHEN $mvp_gate IN ['PASS','CONDITIONAL'] AND $naesengmoon_verdict IN ['APPROVED','CONDITIONAL_APPROVED'] THEN 'BOTH_PASS'
+      WHEN $mvp_gate = 'FAIL' AND $naesengmoon_verdict IN ['APPROVED','CONDITIONAL_APPROVED'] THEN 'LLM_PASS_MVP_FAIL'
+      WHEN $mvp_gate IN ['PASS','CONDITIONAL'] AND $naesengmoon_verdict NOT IN ['APPROVED','CONDITIONAL_APPROVED'] THEN 'MVP_PASS_LLM_FAIL'
+      ELSE 'BOTH_FAIL'
+    END
+MERGE (csv)-[:CONFORMS_TO]->(schema:CompositeScoreVerdictSchema {name: 'composite-score-verdict-schema-v1-2026-05-25'})
+```
+
+**Why composite**:
+- MVP cypher = structural compliance (KG schema). Deterministic (3 re-runs IDENTICAL). Catches structural gaps LLM misses.
+- Naesengmoon = semantic quality. LLM judgment of methodology rightness. Catches conceptual gaps cypher misses.
+- 5-cycle empirical 2026-05-25: MVP harsher than Naesengmoon mean Δ -0.12 → MVP catches gaps Naesengmoon obscured.
+- META-Goodhart self-test: MVP scored *itself* (prom32 cycle) 0.6 — not self-flattering ✓.
+
+# KG: cycle-prom32-scoring-framework-2026-05-25, lesson-scoring-framework-rigorous-predicate-based-2026-05-25, composite-score-verdict-schema-v1-2026-05-25
+
 ### Cross-reference
 
 - Schema-level enforcement: `t_sourcecode_required_fields_not_null` APOC trigger (Constrain Layer 1)
