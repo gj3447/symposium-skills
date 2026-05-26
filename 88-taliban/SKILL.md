@@ -5,6 +5,7 @@ version: "3.1.0"
 channel: stable
 canonical_name: 88-나생문
 aliases: [88-taliban, 88-naesengmoon, 113lens-naesengmoon]
+provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
 description: >
   `/taliban --lens mathematical`의 짧은 별칭(alias). Canonical 측 나생문 (사용자 verdict 2026-05-19 PRIMARY).
   `/88-taliban <target>` == `/taliban <target> --lens mathematical` == `/88-나생문 <target>`.

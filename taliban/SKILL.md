@@ -5,6 +5,7 @@ version: "3.2.0"
 channel: stable
 canonical_name: 나생문
 aliases: [taliban, tlb, 88-taliban, Rashomon, naesengmoon]
+provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
 description: >
   나생문 방법론 (Naesengmoon, 羅生門) — APT의 면역 시스템. 적대적 검증 프레임워크.
   Canonical = 나생문 (사용자 verdict 2026-05-19 PRIMARY), file name `taliban` = alias.

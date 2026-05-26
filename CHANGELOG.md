@@ -64,6 +64,7 @@
 ### Documentation
 
 - *(skills)* Canonical rename Taliban → 나생문 (Rashomon) ([`70a37b5`](#70a37b5c3b7617c5cdb8018a06c72187fd003cdf))
+- *(apt-meta-review)* Composite gate (MVP cypher + Naesengmoon) ([`c67094c`](#c67094ce4e12b7067b7619ef08079d6d7afadd29))
 
 ### Miscellaneous
 
@@ -78,6 +79,7 @@
 - *(.well-known)* Regenerate skills index after SKILL.md desc shorten ([`c0382eb`](#c0382eb19cfecc293693f1501039be2111d52a43))
 - *(skills,index)* Regen .well-known/skills/index.json after new APT skill registry ([`55b39ae`](#55b39ae19f0a8db0f6ef85d6c4e6151049a21810))
 - *(index)* Catch-up regen .well-known/skills/index.json ([`6a408a5`](#6a408a52e2a2a058a8e0b302fa21d444c250d24e))
+- *(manifest)* Reconcile MANIFEST + index.json to current HEAD ([`3f28a79`](#3f28a79a6afc115727e576e25bade26c428b243f))
 
 ### Checkpoint
 
