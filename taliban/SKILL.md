@@ -9,9 +9,10 @@ provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlyin
 description: >
   나생문 방법론 (Naesengmoon, 羅生門) — APT의 면역 시스템. 적대적 검증 프레임워크.
   Canonical = 나생문 (사용자 verdict 2026-05-19 PRIMARY), file name `taliban` = alias.
-  렌즈셋 플러거블: --lens constitutional(기본 9), mathematical(113), solid(5), longinus(7), lakatos(4), 또는 KG에 등록된 임의 LensSet.
+  렌즈셋 플러거블: --lens constitutional(기본 9), mathematical(113), solid(5), longinus(7), lakatos(4), formal-cathedral(5, over-formalization 탐지·escalate-to-oracle), 또는 KG에 등록된 임의 LensSet.
   Cardinality + lens 선택 = invocation-time user-choice flexible (사용자 verdict 2026-05-20 PRIMARY).
-    N중 나생문 = N 독립 lens (simple 1:1, cardinality 자유 정수). lens 조합은 invocation-time 명시 (constitutional/mathematical/solid/longinus/lakatos 5종 또는 KG 등록된 임의 LensSet).
+    N중 나생문 = N 독립 lens (simple 1:1, cardinality 자유 정수). lens 조합은 invocation-time 명시 (constitutional/mathematical/solid/longinus/lakatos/formal-cathedral 6종 또는 KG 등록된 임의 LensSet).
+    formal-cathedral (형식 대성당 나생문, 2026-05-27): over-formalization 전담 탐지. verdict=escalate-to-oracle (판단렌즈 논증으로 PASS 불가, 컴파일러 나생문이 실측 때려야). smell≥2 → CONDITIONAL_BLOCK + 가장 싼 oracle falsifier 강제. KG: formal-cathedral-detection-2026-05-27 / 정의 THEORY/나생문/LENSES/formal-cathedral.md.
     Aggregation policy: UNANIMOUS_PASS default, MAJORITY / WEIGHTED는 user explicit alternative 허용.
     Timing axis (Wave 9 add, 2026-05-20): cross-agent-retroactive (default, /tlb subagent dispatch) / meta-sprint-self (apt-meta-review Constrain Layer 3) / pre-emit-gate (케르베로스 나생문 / Cerberus Naesengmoon, ~/.claude/hooks/placeholder_check.sh 3-head). naesengmoon-cerberus-variant-pre-emit-gate-2026-05-20.
     Lens-mix hardcoded default 측 deprecated (cardinality_naming_rule v1, lesson-naesengmoon-cardinality-3axis-collapse-drift-2026-05-19).
