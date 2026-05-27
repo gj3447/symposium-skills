@@ -12,6 +12,7 @@ description: >
   CLI: `bhgman-tool eureka` (KG 패턴→추상 induce, **PROPOSE only·write 없음** — covenant, 실현은 하데스).
   경계: PROPOSE까지만 — 실현(추상→구체, Extract Superclass/MERGE)은 dual인 **하데스**(hades-canonical). auto-commit 금지.
   엔진 정본: `bhgman_tool/engine/eureka/` (formal_context_builder + pipeline.run_from_kg + fidelity_gate + anti_unify). CLI=`engine/cli/main.py` eureka verb.
+  induction operator **bake-off**: `PipelineConfig.method` = `fca`(default, Galois lattice) | `amie3`(Horn rule mining, Java, `amie3_adapter`가 FormalConcept으로 통일). GraphRAG stage 2/3/6/7 = `stages.py`(Leiden gds-degrade / 결정론 summarize·RRF·drift).
   # KG: eureka-canonical-2026-05-26, consensus-eureka-design-synthesis-2026-05-27,
   #     eureka-formal-context-smoketest-2026-05-27, formal-cathedral-detection-2026-05-27
 ---
