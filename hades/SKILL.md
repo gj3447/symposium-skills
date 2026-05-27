@@ -9,9 +9,10 @@ description: >
   유레카가 PROPOSE하고 fidelity/judgment gate를 통과한(ACCEPTED) 추상을 *구체 KG 구조/소스코드로 실현*(materialize). TDD GREEN.
   `/hades` == 하데스 해줘. `/eureka`(창조)가 올린 걸 `/hades`(실현)가 내린다 — 수직축 양방향.
   사용법: `/hades <concept>` (ACCEPTED 추상 realize) · `/hades --code <template> <sites>`.
+  CLI: `bhgman-tool hades [--concept X] [--apply]`. **dry-run 기본**(c6 위험), --apply만 실현. neo4j 부재 시 fetch cypher 출력.
   어원: 하계(下界=KG+소스코드 구체층)의 신. 추상을 하계로 내려보내 코드로 실현. 하네스(場)와 발음 쌍둥이지만 別 존재.
   **위험**: materialize = "가장 위험"(engine-impl c6). dry_run 기본 + ACCEPTED만 + reversibility-first + ≤5 site rollout.
-  엔진 정본: `bhgman_tool/engine/hades/` (hades.py realize_kg_abstraction/realize_code_template + hades_models).
+  엔진 정본: `bhgman_tool/engine/hades/` (hades.py realize_kg_abstraction/realize_code_template + hades_runner[fetch ACCEPTED→realize e2e] + hades_models). CLI=`engine/cli/main.py` hades verb.
   # KG: hades-canonical-2026-05-27, eureka-canonical-2026-05-26 (dual), consensus-eureka-engine-impl-2026-05-26 (c6)
 ---
 

@@ -9,8 +9,9 @@ description: >
   KG/코드의 경향·반복 패턴을 귀납·가추로 묶어 *새 추상 개념*을 induce(PROPOSE). 아르키메데스 "찾았다!".
   `/eureka` == 유레카 해줘. `/prom`이 지식수집 동사이듯 `/eureka`는 개념창조 동사.
   사용법: `/eureka` (SYMPOSIUM KG dogfood) · `/eureka --kg <facet1>×<facet2>` · `/eureka --code <path>`.
+  CLI: `bhgman-tool eureka` (KG 패턴→추상 induce, **PROPOSE only·write 없음** — covenant, 실현은 하데스).
   경계: PROPOSE까지만 — 실현(추상→구체, Extract Superclass/MERGE)은 dual인 **하데스**(hades-canonical). auto-commit 금지.
-  엔진 정본: `bhgman_tool/engine/eureka/` (formal_context_builder + run_from_kg + fidelity_gate + anti_unify).
+  엔진 정본: `bhgman_tool/engine/eureka/` (formal_context_builder + pipeline.run_from_kg + fidelity_gate + anti_unify). CLI=`engine/cli/main.py` eureka verb.
   # KG: eureka-canonical-2026-05-26, consensus-eureka-design-synthesis-2026-05-27,
   #     eureka-formal-context-smoketest-2026-05-27, formal-cathedral-detection-2026-05-27
 ---

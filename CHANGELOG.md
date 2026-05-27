@@ -71,6 +71,7 @@
 
 - *(skills)* Canonical rename Taliban → 나생문 (Rashomon) ([`70a37b5`](#70a37b5c3b7617c5cdb8018a06c72187fd003cdf))
 - *(apt-meta-review)* Composite gate (MVP cypher + Naesengmoon) ([`c67094c`](#c67094ce4e12b7067b7619ef08079d6d7afadd29))
+- *(occam)* SKILL에 실전화 반영 — CLI verb + dry-run 기본 + covenant 코드강제 ([`2e9f911`](#2e9f9116ba29cd7dd72e3ce2362356b27dbffe30))
 
 ### Miscellaneous
 
@@ -87,6 +88,7 @@
 - *(index)* Catch-up regen .well-known/skills/index.json ([`6a408a5`](#6a408a52e2a2a058a8e0b302fa21d444c250d24e))
 - *(manifest)* Reconcile MANIFEST + index.json to current HEAD ([`3f28a79`](#3f28a79a6afc115727e576e25bade26c428b243f))
 - Plugin url gira-airobotics → gj3447 (repo transfer 2026-05-27) ([`00956fd`](#00956fd1a1b849dfb5f35c9298d05d2b75b825da))
+- *(skills)* Manifest 재생성 — occam SKILL 실전화 tree_sha 반영 (merkle 정정) ([`a13b821`](#a13b821eb305e73894528e08fcc1c71219a38ab5))
 
 ### Checkpoint
 
