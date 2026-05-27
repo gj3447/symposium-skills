@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-27T14:04:39+09:00",
-  "git_head_commit": "6a4a3bd758ada33ff65d2a7e536eaca16eb35c81",
-  "git_head_short": "6a4a3bd",
+  "generatedAt": "2026-05-27T15:24:05+09:00",
+  "git_head_commit": "6a4a9ca29d9bb341f200c0eb4ce5328db09951dd",
+  "git_head_short": "6a4a9ca",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
-  "skills_count": 37,
-  "merkle_root": "811c5629c008cc21740bed010a89590065de0a90b1e58f7edb766a9716f2e755",
+  "skills_count": 39,
+  "merkle_root": "0c3d0b8246e8089a3e170cef77beca4807c121a651d29b091dca2144c63e3dad",
   "skills": [
     {
       "name": "88-taliban",
@@ -169,6 +169,14 @@
       "git_tree_sha": "d282608d65e285a9bb7f409c3fd4e6bd6311d9c8"
     },
     {
+      "name": "eureka",
+      "path": "eureka",
+      "version": "1.0.0",
+      "kg_ref": "eureka-canonical-2026-05-26",
+      "channel": "stable",
+      "git_tree_sha": null
+    },
+    {
       "name": "fix-agent",
       "path": "fix-agent",
       "version": "0.1.0-draft",
@@ -207,6 +215,14 @@
       "kg_ref": "ATOM_Skill_longinus",
       "channel": "stable",
       "git_tree_sha": "afcc07c97022f93f95a9d84c530a45c3303a6d9d"
+    },
+    {
+      "name": "occam",
+      "path": "occam",
+      "version": "1.0.0",
+      "kg_ref": "occam-kam-canonical-2026-05-26",
+      "channel": "stable",
+      "git_tree_sha": null
     },
     {
       "name": "prom",
@@ -254,7 +270,7 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_taliban",
       "channel": "stable",
-      "git_tree_sha": "6616d08d6e0c29b570e8452a4eaffbaf3eb6ff00"
+      "git_tree_sha": "9ece7f977abcc2c7c7da1dbab5933c451e0d7d69"
     },
     {
       "name": "tlb",

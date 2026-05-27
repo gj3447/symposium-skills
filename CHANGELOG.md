@@ -41,6 +41,7 @@
 - *(skills,T3)* WRITE_DEFERRED_TO_PARENT clause across 7 SKILL.md (subagent self-drift prevention) ([`b4150cb`](#b4150cb13c7d40ff8d1ce347562ec35ffc05cfcc))
 - *(provenance)* Add AI_DERIVED_FROM_USER_PRIMARY label to 15 skills ([`e0953a7`](#e0953a75ef1885bc1422bcc7456815423ff1f12a))
 - *(apt)* Contract-coupling 파이프라인 — SP coupling-min + ST enforcement + escalation lattice ([`2559387`](#255938719f0e0b56857bba727bf4d6f7229cbf87))
+- *(taliban)* Formal-cathedral 렌즈 등록 — 나생문 lens enum 6번째 ([`6a4a9ca`](#6a4a9ca29d9bb341f200c0eb4ce5328db09951dd))
 
 ### Fixed
 
