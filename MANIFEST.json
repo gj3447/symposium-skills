@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-27T10:12:09+09:00",
-  "git_head_commit": "00956fd1a1b849dfb5f35c9298d05d2b75b825da",
-  "git_head_short": "00956fd",
+  "generatedAt": "2026-05-27T13:42:17+09:00",
+  "git_head_commit": "255938719f0e0b56857bba727bf4d6f7229cbf87",
+  "git_head_short": "2559387",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 37,
-  "merkle_root": "a54af68bbb0c6a728ab8d261128ff53939497706ef61eb493f24f78796efe247",
+  "merkle_root": "a94fcfcef0310b72553c519159a2eaa86c376aae29f31f25aa71f642700c4910",
   "skills": [
     {
       "name": "88-taliban",
@@ -86,7 +86,7 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "0d4d96dd909fd111e43bfa02fc62b8b299867a39"
+      "git_tree_sha": "47251a3ca579a1baaa3915c404472100554df9dd"
     },
     {
       "name": "apt-sa",
@@ -110,7 +110,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sp",
       "channel": "stable",
-      "git_tree_sha": "afa164ff83c1791579a84195752b57f793b72202"
+      "git_tree_sha": "f72e472f3ccc8eececbe678f04e181c9edd55303"
     },
     {
       "name": "apt-st",
@@ -118,7 +118,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "271c8e8b9908617697c90058870099452e0d3b66"
+      "git_tree_sha": "45fee75aa4f4db167f254fdc48159279497ec67f"
     },
     {
       "name": "backup",
