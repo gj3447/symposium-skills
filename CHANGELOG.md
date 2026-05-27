@@ -43,6 +43,7 @@
 - *(apt)* Contract-coupling 파이프라인 — SP coupling-min + ST enforcement + escalation lattice ([`2559387`](#255938719f0e0b56857bba727bf4d6f7229cbf87))
 - *(taliban)* Formal-cathedral 렌즈 등록 — 나생문 lens enum 6번째 ([`6a4a9ca`](#6a4a9ca29d9bb341f200c0eb4ce5328db09951dd))
 - *(skills)* Eureka + occam 동사 skill 신설 (군단장 2개 invoke gap 메움) ([`0935d8c`](#0935d8c4de254508ef4d48371bf030c952fc8d38))
+- *(skills)* Hades 동사 skill — 7번째 군단장 실현(추상→구체↓, 유레카 dual) ([`8f61e1c`](#8f61e1cc89865a4a1ccaa7631fd0f31ba5101aad))
 
 ### Fixed
 

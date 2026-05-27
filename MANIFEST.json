@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-27T19:04:37+09:00",
-  "git_head_commit": "0935d8c4de254508ef4d48371bf030c952fc8d38",
-  "git_head_short": "0935d8c",
+  "generatedAt": "2026-05-27T19:15:55+09:00",
+  "git_head_commit": "8f61e1cc89865a4a1ccaa7631fd0f31ba5101aad",
+  "git_head_short": "8f61e1c",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 40,
-  "merkle_root": "260dfdf0863c1863d333b029dc49f6fd1992eb075b4360261ddc2bd49c35dbfb",
+  "merkle_root": "b254dd51cbf543a1f4bc22e39231cdc0f4b182275e8729bc7c8e760aebd6c57d",
   "skills": [
     {
       "name": "88-taliban",
@@ -190,7 +190,7 @@
       "version": "1.0.0",
       "kg_ref": "hades-canonical-2026-05-27",
       "channel": "stable",
-      "git_tree_sha": null
+      "git_tree_sha": "744d9b9732ada896635e9292f3ef2ecac41bf5b2"
     },
     {
       "name": "harness",
