@@ -39,6 +39,7 @@
 - *(taliban)* Timing axis + Cerberus Naesengmoon variant (Wave 9 customization) ([`e169e8f`](#e169e8f312e790e7872b43a9fabcc171ffaf6846))
 - *(skills)* Apt-autoflow-guard + apt-lens-enforce + apt-magic-resolve + apt-orchestrator + 4 APT skill updates ([`3a7dd6b`](#3a7dd6b72c868c3fc0dd5b906596c3aa22de8d1f))
 - *(skills,T3)* WRITE_DEFERRED_TO_PARENT clause across 7 SKILL.md (subagent self-drift prevention) ([`b4150cb`](#b4150cb13c7d40ff8d1ce347562ec35ffc05cfcc))
+- *(provenance)* Add AI_DERIVED_FROM_USER_PRIMARY label to 15 skills ([`e0953a7`](#e0953a75ef1885bc1422bcc7456815423ff1f12a))
 
 ### Fixed
 
@@ -80,6 +81,7 @@
 - *(skills,index)* Regen .well-known/skills/index.json after new APT skill registry ([`55b39ae`](#55b39ae19f0a8db0f6ef85d6c4e6151049a21810))
 - *(index)* Catch-up regen .well-known/skills/index.json ([`6a408a5`](#6a408a52e2a2a058a8e0b302fa21d444c250d24e))
 - *(manifest)* Reconcile MANIFEST + index.json to current HEAD ([`3f28a79`](#3f28a79a6afc115727e576e25bade26c428b243f))
+- Plugin url gira-airobotics → gj3447 (repo transfer 2026-05-27) ([`00956fd`](#00956fd1a1b849dfb5f35c9298d05d2b75b825da))
 
 ### Checkpoint
 

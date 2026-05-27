@@ -113,9 +113,16 @@ INFORMED_BY로 외부 지식(디자인 패턴, 기술, 도메인 개념)이 연�
 
 ### Rule 3: A3 — 같은 레이어의 형제는 완전 독립
 
-같은 레이어의 형제 Span 사이에 의존성 금지.
-의존이 발생하면 → 분해 오류. 상위로 올려서 재분해.
-**DP의 independent subproblems = APT의 sibling independence.**
+같은 레이어의 형제 Span 사이 *hidden/미선언* 의존성 금지 (사용자 verdict 2026-05-27).
+숨은 의존 발생 시 → 분해 오류, 상위로 올려 재분해. **단 irreducible coupling은 *명시적 DAG edge*(DEPENDS_ON/REQUIRES/COMMUNICATES_VIA_EVENT)로 declare + ST Contract로 묶으면 허용** (Rule 3.1 + contract dual axiom) — 이건 분해 오류 아님.
+**DP의 independent subproblems = APT의 sibling independence (hidden 의존 기준).**
+
+### Rule 3.1: Coupling-minimization criterion (Rule 3 operationalization, 2026-05-27)
+
+> Rule 3은 "독립하라"는 *당위*. **어떻게 cut하면 독립이 나오나** = information-hiding seam(Parnas 1972: 변할 design decision을 한 span에 은닉) + connascence-minimizing + DDD bounded-context. ⚠ **"병렬 위해 쪼갬"으로 독립 가정 금지** — 병렬성↑은 결합도↑ (`oq-planfirst-coupling-minimization-resolution-2026-05-27`).
+> **irreducible coupling**: Rule 3의 'error/재분해'로 강제하지 말고 — *명시적 DAG edge*(DEPENDS_ON/REQUIRES/COMMUNICATES_VIA_EVENT)로 declare + ST에서 그 edge에만 non-trivial Contract(contract dual axiom). 숨은 sibling 의존(Rule3 금지) vs declared DAG coupling 구분. **[A3 재해석 CANONICAL: 사용자 verdict 2026-05-27 — hidden/미선언만 금지, declared+contracted 허용. `decision-a3-hidden-only-reconciliation-2026-05-27`]**
+> **guard**: "완전 독립"은 edge-부재 default 금지 — information-hiding seam positive 판정.
+> # KG: apt-sp-coupling-minimization-criterion-2026-05-27, apt-contract-root-axiom-2026-05-27, oq-planfirst-coupling-minimization-resolution-2026-05-27
 
 ### Rule 4: TerminationGuarantee — 유한 단계에서 반드시 AtomicSpan 도달
 

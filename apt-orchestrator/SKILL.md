@@ -114,6 +114,20 @@ Sister Lean: `APT_Cycle_Functor.lean` (phase-level, 9 thm — object map) +
 # KG: APT_essence_canonical_2026-05-14, span-essence-S-functor-2026-05-14,
 #     apt-philosophical-foundations-2026-05-11
 
+### v26.1-E. Contract root axiom — 모든 phase contract-bound (2026-05-27)
+
+> Contract = APT 전역 root 공리 (phase-국소 ST 산출물 아님). 병렬-by-default → 병렬로 쪼갠 조각이 compose되려면 인터페이스 계약이 필수 = 재배맨(plan-first, 병렬 dispatch)의 **dual complement** (병렬분해 ↔ 인터페이스합의, 한 동전 양면).
+> **PROM16 정밀화 (2026-05-27, 4축 만장일치 HIGH)**: "계약 필수"는 무조건 아님. **contract-bound ⟺ inter-span 결합도>0** (공유상태/통신/간섭). 결합도=0(독립 span, embarrassingly-parallel)에선 계약이 **대수 항등원**(separation `emp` / rely `Id` / monoid `ε`)으로 degenerate = present but ZERO constraint (contract-free 아님 — steelman 통과로 정밀화). 계약 강도는 결합도에 **단조 비증가(ordinal)** (비례 ∝ 아님), unit(0)부터 상승. 형식근거: CSL Disjoint Concurrency Rule(O'Hearn 2007 Gödel Prize) + rely-guarantee(rely=Id) + session MIX/CUT + monoid identity. → SP 분해 시 결합도 판정, 결합 span만 ST에서 non-trivial Contract. **GUARD 해소 (steelman 2026-05-27)**: 계약은 *항상 존재*하므로 APT는 contract 분석 SKIP 안 함 — 독립 span은 항등원으로 *판정*될 뿐(부재 아님), edge-absence shortcut 무의미. 검증: `vr-prom16-contract-dual-naesengmoon-3lens-2026-05-27` (CONDITIONAL 0.72) + 독립성 재실행 PASS `rf-prom16-contract-dual-steelman-opposite-2026-05-27`.
+> 모든 phase가 contract-bound: SA=anchor/identity contract / SP=span 간 interface contract / ST=Contract v2 결정화 / SCW=contract-first TDD. 5 phase에 prose 중복 금지 — KG resolve로 상속 (A6 resolve-only).
+> enforce 세부는 KG 정본. 사용자 verdict 2026-05-27 ("contract 원칙도 apt에 뿌리깊게 박아줘야해").
+
+```cypher
+MATCH (ax:AptAxiom {name:'apt-contract-root-axiom-2026-05-27'})
+OPTIONAL MATCH (ax)-[:DUAL_WITH]-(jb) RETURN ax.principle, ax.relation_to_jaebaeman AS dual, jb.name AS jaebaeman_reframe
+```
+
+# KG: apt-contract-root-axiom-2026-05-27, jaebaeman-planfirst-essence-reframe-2026-05-27
+
 ---
 
 ## 🔗 MIC Binding (SOLID-DIP) — 재배맨 진짜 구조

@@ -124,6 +124,19 @@ SP는 Contract를 직접 소유하지 않는다.
 
 이것이 ST가 SP와 다른 핵심. SP는 하향식 분해, ST는 **수평적 전체 조감**.
 
+### 2.1 Coupling-edge contract — edge TYPE별 mechanism + strictness (2026-05-27)
+
+> per-AtomicSpan DTO(원칙 3)와 **별개로**, SP가 declare한 *inter-span coupling edge*에도 계약을 건다. **edge TYPE이 mechanism을 결정**:
+> - `DEPENDS_ON`(data) → schema/DTO + Hoare `producer.postcond ⊒ consumer.precond` (behavioral 의무 시 full DbC pre/post/invariant)
+> - `REQUIRES`(resource) → typestate(lifecycle)/ownership (fine-grained 공유 시 CSL resource invariant → rely-guarantee)
+> - `COMMUNICATES_VIA_EVENT` → message schema + consumer-driven contract test(Pact) (stateful choreography 시 MPST session type)
+>
+> **escalation = property-presence 선택** (lightest-sufficient — SP edge의 *consumer-declared required-property set* 상대; climb은 속성 PRESENT일 때만, 숫자 threshold 아님). ⚠ **구조 주의(나생문 2026-05-27): 전부 chain 아님** — data=표현력 chain(shape‹refinement‹DbC) + higher-order 직교 flag(F-F) / **resource=2축 lattice**: lifecycle축(typestate) ⊥ sharing-granularity축(none‹unique-own‹read-share‹lock-protected‹lock-free) — 축-join, 곱 아님 / event=statefulness chain(schema‹MPST‹MPST+progress; **CDC는 mechanism tier 아니라 enforcement-layer**). hybrid edge → SP서 single-type 분해, 합치면 tier **MAX(곱 금지)**. 상세 KG: `apt-st-escalation-ladders-2026-05-27`.
+>
+> **strictness = (independent-deploy, blast-radius, change-freq)의 *ordinal join*** (단조 사다리 — ∝/곱(×) 아님; ratio 근거 없음, prior contract-axiom ordinal + Lean T1-T9 정합). consumer가 *실제 의존하는 subset만* enforce(나머지 Postel tolerant-reader). 계약 자체가 coupling point → over-enforcement 금지. **강도 lever는 topology 아닌 *risk(blast-radius)*에 묶음** — co-deploy는 현재 관측치일 뿐 강등 트리거 아님(오늘 co-deploy 내일 split). intra-cycle edge도 high-blast-radius면 heavy. 계약은 항상 present, 강도만 가변("뿌리깊게" walk-back 아님). enforcement: static(type/verifier) / CI(schema-compat, Pact can-i-deploy) / runtime(validation + Findler-Felleisen blame).
+> ⚠ **structural analogy ONLY, NOT mechanism homology**: CSL/rely-guarantee/session type=런타임 동시성 기제, APT span=설계시 분해 단위(런타임 scheduler 없음). substrate-disjoint — 형식 보장 자동 전이 안 됨, 어휘 차용.
+> # KG: apt-st-contract-enforcement-criterion-2026-05-27 (MIRRORS[metaphorical] apt-sp-coupling-minimization-criterion-2026-05-27, IMPLEMENTS apt-contract-root-axiom-2026-05-27; 나생문 vr-st-contract-enf-naesengmoon-3lens-lakatos-2026-05-27 5-fix applied)
+
 ### 3. Contract = Typed DTO/Schema (NOT prose)
 
 > **Metaphysical grounding**: Contract = Aristotelian *μορφή (form)*. SCW 측 source code = *ὕλη (matter)*. ST 는 form 을 결정화 — 곧 matter 가 받을 준비를 마친 organizing principle 을 명시. (apt §🏛 Metaphysical Grounding 참조; PROM_16 P1.4 finding 2026-05-14: Plato methexis 대신 Aristotelian hylomorphism). 4 DbC fields = form 의 4 측면 (§C 아래 참조).
