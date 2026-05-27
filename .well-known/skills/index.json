@@ -2,8 +2,8 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.2",
-  "git_head_short": "c42b786",
-  "merkle_root": "dfe42acb954c046cd91be2a7ba3bbf93e629424088df041988e9755a9445c195",
+  "git_head_short": "83359c8",
+  "merkle_root": "68fae07d4ea4b6298460c5f85386f127e6ede476f930f63c9e44f2d32ee14eec",
   "skills_count": 40,
   "skills": [
     {
@@ -151,7 +151,7 @@
       "version": "1.0.0",
       "kg_ref": "eureka-canonical-2026-05-26",
       "channel": "stable",
-      "git_tree_sha": "a721d6e1c0f924c83ac5fef5ce27ce477b6b5a23"
+      "git_tree_sha": "d00371a8a18fc1e3ed80091f0621cbd35a28a01e"
     },
     {
       "name": "fix-agent",

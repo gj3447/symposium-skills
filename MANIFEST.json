@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-27T21:07:22+09:00",
-  "git_head_commit": "5a0cfcb23242545406514fb3466b77ab84f0493d",
-  "git_head_short": "5a0cfcb",
+  "generatedAt": "2026-05-27T21:22:07+09:00",
+  "git_head_commit": "83359c881dcb9ee5f210faf1c5f6c5c4a785bd15",
+  "git_head_short": "83359c8",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 40,
-  "merkle_root": "dfe42acb954c046cd91be2a7ba3bbf93e629424088df041988e9755a9445c195",
+  "merkle_root": "68fae07d4ea4b6298460c5f85386f127e6ede476f930f63c9e44f2d32ee14eec",
   "skills": [
     {
       "name": "88-taliban",
@@ -174,7 +174,7 @@
       "version": "1.0.0",
       "kg_ref": "eureka-canonical-2026-05-26",
       "channel": "stable",
-      "git_tree_sha": "a721d6e1c0f924c83ac5fef5ce27ce477b6b5a23"
+      "git_tree_sha": "d00371a8a18fc1e3ed80091f0621cbd35a28a01e"
     },
     {
       "name": "fix-agent",
