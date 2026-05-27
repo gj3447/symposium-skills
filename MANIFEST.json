@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-05-27T19:15:55+09:00",
-  "git_head_commit": "8f61e1cc89865a4a1ccaa7631fd0f31ba5101aad",
-  "git_head_short": "8f61e1c",
+  "generatedAt": "2026-05-27T20:35:52+09:00",
+  "git_head_commit": "2e9f9116ba29cd7dd72e3ce2362356b27dbffe30",
+  "git_head_short": "2e9f911",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 40,
-  "merkle_root": "b254dd51cbf543a1f4bc22e39231cdc0f4b182275e8729bc7c8e760aebd6c57d",
+  "merkle_root": "f4054aa017f7bd0699288ee613e332228bca7cfd4c0cdf791656b159991962f0",
   "skills": [
     {
       "name": "88-taliban",
@@ -230,7 +230,7 @@
       "version": "1.0.0",
       "kg_ref": "occam-kam-canonical-2026-05-26",
       "channel": "stable",
-      "git_tree_sha": "0b3b3ab6ab319b31866450748326d614ee73f226"
+      "git_tree_sha": "857fa8e19782feb1ba35e958a589f30f94719797"
     },
     {
       "name": "prom",

@@ -2,16 +2,16 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.2",
-  "git_head_short": "2559387",
-  "merkle_root": "a94fcfcef0310b72553c519159a2eaa86c376aae29f31f25aa71f642700c4910",
-  "skills_count": 37,
+  "git_head_short": "2e9f911",
+  "merkle_root": "f4054aa017f7bd0699288ee613e332228bca7cfd4c0cdf791656b159991962f0",
+  "skills_count": 40,
   "skills": [
     {
       "name": "88-taliban",
       "version": "3.1.0",
       "kg_ref": "ATOM_Skill_88taliban",
       "channel": "stable",
-      "git_tree_sha": "d285e89b6a9477c8bbe79d182e9fa64eda4eccee"
+      "git_tree_sha": "fc70dc69df1dd1dcb9b237f0cb752533a4db874f"
     },
     {
       "name": "apt",
@@ -147,11 +147,25 @@
       "git_tree_sha": "d282608d65e285a9bb7f409c3fd4e6bd6311d9c8"
     },
     {
+      "name": "eureka",
+      "version": "1.0.0",
+      "kg_ref": "eureka-canonical-2026-05-26",
+      "channel": "stable",
+      "git_tree_sha": "b325a46e3660967545ec20cbd0dd13ae6a9132e0"
+    },
+    {
       "name": "fix-agent",
       "version": "0.1.0-draft",
       "kg_ref": "ATOM_Skill_fix_agent_v28",
       "channel": "draft",
       "git_tree_sha": "2103b04c13433c60fc539a9250934f8e85541928"
+    },
+    {
+      "name": "hades",
+      "version": "1.0.0",
+      "kg_ref": "hades-canonical-2026-05-27",
+      "channel": "stable",
+      "git_tree_sha": "744d9b9732ada896635e9292f3ef2ecac41bf5b2"
     },
     {
       "name": "harness",
@@ -180,6 +194,13 @@
       "kg_ref": "ATOM_Skill_longinus",
       "channel": "stable",
       "git_tree_sha": "afcc07c97022f93f95a9d84c530a45c3303a6d9d"
+    },
+    {
+      "name": "occam",
+      "version": "1.0.0",
+      "kg_ref": "occam-kam-canonical-2026-05-26",
+      "channel": "stable",
+      "git_tree_sha": "857fa8e19782feb1ba35e958a589f30f94719797"
     },
     {
       "name": "prom",
@@ -221,7 +242,7 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_taliban",
       "channel": "stable",
-      "git_tree_sha": "6616d08d6e0c29b570e8452a4eaffbaf3eb6ff00"
+      "git_tree_sha": "9ece7f977abcc2c7c7da1dbab5933c451e0d7d69"
     },
     {
       "name": "tlb",
