@@ -2,8 +2,8 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.2",
-  "git_head_short": "2e9f911",
-  "merkle_root": "f4054aa017f7bd0699288ee613e332228bca7cfd4c0cdf791656b159991962f0",
+  "git_head_short": "c42b786",
+  "merkle_root": "dfe42acb954c046cd91be2a7ba3bbf93e629424088df041988e9755a9445c195",
   "skills_count": 40,
   "skills": [
     {
@@ -151,7 +151,7 @@
       "version": "1.0.0",
       "kg_ref": "eureka-canonical-2026-05-26",
       "channel": "stable",
-      "git_tree_sha": "b325a46e3660967545ec20cbd0dd13ae6a9132e0"
+      "git_tree_sha": "a721d6e1c0f924c83ac5fef5ce27ce477b6b5a23"
     },
     {
       "name": "fix-agent",
@@ -165,7 +165,7 @@
       "version": "1.0.0",
       "kg_ref": "hades-canonical-2026-05-27",
       "channel": "stable",
-      "git_tree_sha": "744d9b9732ada896635e9292f3ef2ecac41bf5b2"
+      "git_tree_sha": "6fe57b916c1ae402666ad9b85cf8046e142ccf64"
     },
     {
       "name": "harness",
