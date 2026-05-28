@@ -155,6 +155,46 @@ RETURN target.name, labels(target), properties(target)
 
 KG에 없으면 사용자 설명 기반으로 진행.
 
+### Step 1.5: Steelman Preflight — **MANDATORY (drift block, lesson-naesengmoon-strawman-via-literal-formalization-2026-05-28)**
+
+> **본 step 측 SKIP 시 strawman 적대 검증 발생**. 즉 target 의 *literal formalization* 만 공격하고 *weakest defensible form* 공격 안 함 → 진짜 defect 아닌 표면 over-formalization 만 까는 결과.
+> 정전 사례 (2026-05-28): `lesson-trust-equals-inbound-citation-density-2026-05-28` 의 ≡ 기호가 사용자 casual 발화의 over-formalization 이었고, 나생문 L2 lens 가 ≡ 강식 literal 공격 → 사용자 "내가 그런 말 한 적 없다" 측 strawman 판정.
+
+**Steelman 4 step**:
+1. **target.literal_form** 추출 — KG 노드의 `truth` / `claim` / 정의 field 그대로.
+2. **target.original_utterance 추적** — user_verdict 측 verbatim 또는 source 가 user direct utterance 인 경우 그 발화 원본 로드:
+   ```cypher
+   OPTIONAL MATCH (target)-[:CANONIZED_BY|ELABORATES*1..2]-(uu:UserUtterance)
+   RETURN uu.verbatim, uu.user_verdict
+   ```
+3. **weakest_defensible_form 도출** — literal vs original 사이의 *가장 약한 defensible 해석*. 흔한 over-formalization 패턴:
+   - 사용자 "X 자체가 Y" → AI 측 `X ≡ Y` (identity) — 실제는 monotone 또는 ⊇ 충분.
+   - 사용자 "X 면 보통 Y" → AI 측 `∀X. Y` (universal) — 실제는 ∃ 또는 statistical.
+   - 사용자 "X 가 Y 의 원인" → AI 측 `X ⟹ Y` (necessary+sufficient) — 실제는 contributing factor.
+4. **공격 target swap** — Step 2 이후 모든 lens 측 *steelmanned form* 공격. literal form 공격은 *추가 정보* 로만 기록 (parent over-formalization detect 용).
+
+**결정 분기**:
+| 측 시나리오 | 측 verdict |
+|---|---|
+| steelmanned form 측 통과 + literal form 측 실패 | `STRAWMAN_DETECTED` → AdversarialChallenge target *parent over-formalization*, 측 user claim 아님 |
+| 둘 다 실패 | 진짜 defect, lens 정상 verdict |
+| 둘 다 통과 | clean, lens 정상 verdict |
+| steelmanned form 측 실패 | strong defect, lens 정상 verdict |
+
+**의무 cypher 기록**:
+```cypher
+MERGE (sp:SteelmanPreflight {name:'sp-' + $target_name + '-' + $cycle_id})
+SET sp.literal_form = $literal,
+    sp.original_utterance = $verbatim,
+    sp.weakest_defensible_form = $steelmanned,
+    sp.attacked_form = 'steelmanned',
+    sp.over_formalization_detected = $bool,
+    sp.checkedAt = datetime()
+MERGE (target)-[:STEELMANNED_BY]->(sp)
+```
+
+**위반 시**: 본 cycle 의 ValidationResult 측 `steelman_skipped=true` 자동 tag → 추후 retroactive strawman audit 대상.
+
 ### Step 2: 렌즈 정의 로드
 
 ```cypher

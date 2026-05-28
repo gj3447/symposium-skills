@@ -73,6 +73,7 @@
 - *(apt-meta-review)* Composite gate (MVP cypher + Naesengmoon) ([`c67094c`](#c67094ce4e12b7067b7619ef08079d6d7afadd29))
 - *(occam)* SKILL에 실전화 반영 — CLI verb + dry-run 기본 + covenant 코드강제 ([`2e9f911`](#2e9f9116ba29cd7dd72e3ce2362356b27dbffe30))
 - *(hades,eureka)* SKILL에 CLI verb 반영 — 실전화 ([`c42b786`](#c42b786d0f93e242a7671c0c1e373b1798a1bbc9))
+- *(eureka)* SKILL에 operator bake-off(fca/amie3) + stage 2/3/6/7 반영 ([`83359c8`](#83359c881dcb9ee5f210faf1c5f6c5c4a785bd15))
 
 ### Miscellaneous
 
@@ -91,6 +92,7 @@
 - Plugin url gira-airobotics → gj3447 (repo transfer 2026-05-27) ([`00956fd`](#00956fd1a1b849dfb5f35c9298d05d2b75b825da))
 - *(skills)* Manifest 재생성 — occam SKILL 실전화 tree_sha 반영 (merkle 정정) ([`a13b821`](#a13b821eb305e73894528e08fcc1c71219a38ab5))
 - *(skills)* Manifest 재생성 — hades/eureka SKILL tree_sha 반영 (merkle 정정) ([`5a0cfcb`](#5a0cfcb23242545406514fb3466b77ab84f0493d))
+- *(skills)* Manifest 재생성 — eureka SKILL tree_sha 반영 ([`414739a`](#414739a5d1a8372e3d19d4051e6bd9734b7206fd))
 
 ### Checkpoint
 
