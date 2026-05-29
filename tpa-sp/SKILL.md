@@ -20,7 +20,13 @@ description: >
 ## 🔗 MIC Binding (SOLID-DIP)
 
 **IS slot**: TPA_Phase (SP, 3/4)
-**USES slots**: SubagentSeeder, ResearchProvider (모르는 pattern), MetaVerifier (Distributed 수학 속성), AdversarialValidator
+**USES slots**: SubagentSeeder, ResearchProvider (모르는 pattern), MetaVerifier (Distributed 수학 속성), AdversarialValidator, **AbstractionInducer(유레카), StaleArchiver(오캄)** (7-stage 2026-05-30)
+
+> **유레카 (AbstractionInducer) — SP 본령 (2026-05-30):** span 역엮기 = 소스 패턴에서 추상 계층을
+> bottom-up induction. 단순 pattern-library 매칭을 넘어 *새 추상 개념 재창조* (= APT/SCW 하데스의
+> dual). 매칭 안 되는 NovelPattern 후보가 유레카 induction 대상. `/eureka`.
+> **오캄 (StaleArchiver) — SP 보조:** 역엮기 중 만나는 dead code/stale/중복 노드는 복원 피라미드에
+> 안 싣고 격리 (archive-only, 삭제 금지). `/occam`. KG: `tpa-7stage-eureka-core-2026-05-30`.
 
 ```cypher
 MATCH (mic:MethodologyIntegrationContract {name:'MIC_v1'})-[:HAS_SLOT]->(s:MethodologySlot)

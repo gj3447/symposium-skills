@@ -19,7 +19,11 @@ description: >
 ## 🔗 MIC Binding (SOLID-DIP)
 
 **IS slot**: TPA_Phase (ST, 2/4)
-**USES slots**: SubagentSeeder, ResearchProvider (giant method 시), KgCodeBinder, AdversarialValidator
+**USES slots**: SubagentSeeder, ResearchProvider (giant method 시), KgCodeBinder, AdversarialValidator, **AbstractionInducer(유레카)** (7-stage 2026-05-30)
+
+> **유레카 (AbstractionInducer) — ST 복원 (2026-05-30):** 암묵 시그니처(ConventionalContract)에서
+> *개념 contract*를 induction. 시그니처 나열을 넘어 "이 심볼들이 표현하는 추상 개념"을 재창조 =
+> 하데스(추상→구체)의 dual. `/eureka`. KG: `tpa-7stage-eureka-core-2026-05-30`.
 
 ```cypher
 MATCH (mic:MethodologyIntegrationContract {name:'MIC_v1'})-[:HAS_SLOT]->(s:MethodologySlot)

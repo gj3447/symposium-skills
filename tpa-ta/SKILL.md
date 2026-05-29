@@ -21,7 +21,13 @@ description: >
 ## 🔗 MIC Binding (SOLID-DIP)
 
 **IS slot**: TPA_Phase (TA, 4/4)
-**USES slots**: SubagentSeeder, KgCodeBinder (전수 바인딩), MetaVerifier (drift 검증), AdversarialValidator (최종 gate)
+**USES slots**: SubagentSeeder, KgCodeBinder (전수 바인딩), MetaVerifier (drift 검증), AdversarialValidator (최종 gate), **RoundTripRealizer(하데스), StaleArchiver(오캄)** (7-stage 2026-05-30)
+
+> **하데스 (RoundTripRealizer) — TA round-trip (2026-05-30):** 복원한 추상(유레카 산출)을 하데스로
+> *재실현*(추상→구체) → 원본 코드와 대조 = recovery fidelity 검증. 불일치 = drift 신호 (기존 5종
+> drift와 직결). `/hades`. 복원-재실현 dual 루프 닫힘 (유레카↑·하데스↓).
+> **오캄 (StaleArchiver) — TA 보조:** 최종 앵커링 시 stale 노드 격리 (archive-only). `/occam`.
+> KG: `tpa-7stage-eureka-core-2026-05-30`, `hades-canonical-2026-05-27`.
 
 ```cypher
 MATCH (mic:MethodologyIntegrationContract {name:'MIC_v1'})-[:HAS_SLOT]->(s:MethodologySlot)

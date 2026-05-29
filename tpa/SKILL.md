@@ -40,8 +40,8 @@ RETURN cfg.tpa_pattern_library_size,            // 51
 > 아래 slot의 `currentConcrete`가 바뀌면 TPA 전체가 새 구현체를 사용.
 > SKILL.md 본문 수정 불필요 (DIP 원칙).
 
-**IS slot**: Orchestrator (역순 5 slots 조율)
-**USES slots**: ResearchProvider, AdversarialValidator, MetaVerifier, KgCodeBinder, SubagentSeeder
+**IS slot**: Orchestrator (역순 slots 조율)
+**USES slots**: ResearchProvider, AdversarialValidator, MetaVerifier, KgCodeBinder, SubagentSeeder, **AbstractionInducer(유레카), StaleArchiver(오캄), RoundTripRealizer(하데스)** (7-stage, 2026-05-30)
 
 **동적 resolution**:
 ```cypher
@@ -59,11 +59,27 @@ RETURN s.name, s.currentConcrete, s.invocation
 | Longinus | KgCodeBinder | `/longinus` | 코드↔KG 양방향 바인딩 |
 | 재배맨 | SubagentSeeder | taskspec 조회 | 병렬 subagent 분산 |
 | Harness | Harness | (구조적 제약) | 4축 제약 모델 |
+| **유레카** | **AbstractionInducer** | `/eureka` | **소스 패턴→추상 개념 재창조 (bottom-up induction). TPA 본령 = APT/SCW 하데스(추상→구체)의 dual(구체→추상)** |
+| **오캄** | **StaleArchiver** | `/occam` | **span 역엮기 중 만나는 dead/stale/중복은 복원 설계에 안 싣고 격리 (archive-only)** |
+| **하데스** | **RoundTripRealizer** | `/hades` | **복원한 추상을 재실현→원본 대조 = 복원 충실도(recovery fidelity) round-trip 검증** |
 
 > ⚠️ 본문의 구체 이름은 **현재 스냅샷**. 진짜 호출은 MIC `s.invocation` 경유.
 > 본질 교체(예: Naesengmoon→FutureValidator) 시 MIC 노드만 수정 → TPA 전체 자동 반영.
 
-# KG: MIC_v1, APTWeapon, lesson-skill-mic-slot-ref-weak-2026-04-15
+### 7-stage 역사이클 핵심 (2026-05-30, 사용자 verdict)
+
+TPA는 APT 정방향의 **거울**이다. APT 종착(SCW) = **하데스**(추상 spec→구체 코드, 실현).
+거울이므로 TPA의 복원 = 하데스의 **dual = 유레카**(구체 코드→추상 개념, bottom-up 재창조).
+→ **유레카는 TPA에서 옵션이 아니라, APT의 하데스가 그렇듯 TPA를 *정의하는* 핵심 엔진**이다.
+- **유레카** = 복원 본령 (SP span 역엮기 = 추상 계층 induction / ST 개념 contract 복원).
+- **오캄** = 역엮기 중 낡은 과거(dead/stale/중복) 격리 (SP/TA, archive-only·삭제금지).
+- **하데스** = 복원→재실현 round-trip (TA, recovery fidelity 검증, drift 직결).
+근본원인: 개념이 롱기누스로 소스에 안 묶이면 유레카가 induction할 대상이 없어 7-stage가 헛돎
+(`lesson-concept-nodes-created-without-longinus-binding-float-2026-05-29` 선행 closure 필요).
+
+# KG: MIC_v1, APTWeapon, lesson-skill-mic-slot-ref-weak-2026-04-15,
+#     tpa-7stage-eureka-core-2026-05-30 (TPA 복원 = 하데스 dual = 유레카 core),
+#     eureka-canonical-2026-05-26, hades-canonical-2026-05-27, occam-kam-canonical-2026-05-26
 
 ---
 
@@ -88,6 +104,9 @@ APT HR1-HR15를 역방향에 맞게 재정의. 위반 시 orchestrator HALT.
 | TR13 | **treasure_coverage_min ≥ 0.9** | 본질 활용 최소 기준 |
 | TR14 | **대형 repo(>10K LOC) 시 재배맨 병렬 분산 필수** | 단일 스캔 한계 교훈 |
 | TR15 | **Essential ✗ 인정** | Arrow of Time, Gödel limit — 역분석은 원래 불완전 |
+| TR16 | **SP/ST 복원 = AbstractionInducer(유레카) 본령** | 소스→추상 induction = 하데스 dual, TPA 정의 엔진 (2026-05-30) |
+| TR17 | **TA round-trip = RoundTripRealizer(하데스)로 복원 충실도 검증** | 복원한 추상 재실현→원본 대조, drift 직결 |
+| TR18 | **역엮기 중 dead/stale = StaleArchiver(오캄) 격리, 삭제 금지** | 복원 설계에 낡은 과거 안 실음 (archive-only) |
 
 ---
 

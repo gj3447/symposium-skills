@@ -102,6 +102,10 @@
 
 - *(wave16)* 8 .claude-plugin/plugin.json + index.json regenerate (wave15 누락분) ([`06958ee`](#06958ee59e649a2c924b8409e45ec6da3985f6b7))
 
+### Taliban/SKILL.md
+
+- Step 1.5 Steelman Preflight mandatory ([`8857d20`](#8857d208bc84afdcda145e46e93b1b2da5746c24))
+
 ## [26.0.2] - 2026-04-26
 
 ### Changed
