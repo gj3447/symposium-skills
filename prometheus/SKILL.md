@@ -884,11 +884,13 @@ MERGE (mic)-[:HAS_SLOT]->(s)
 
 ---
 
-### Step 7: 검증 — 4단계 + Naesengmoon 자동 출격 (v5)
+### Step 7: 검증 — 4단계 + Naesengmoon **user-explicit 출격** (v6.4, 2026-05-30 사용자 정정)
 
-#### 7-A. Naesengmoon 적대적 검증 (v5 자동)
+> **v6.4 정전 (2026-05-30)**: 사용자 verdict 측 "나생문이랑 prom 이랑 별개로 주면 안돼냐 ㅇㅇ" — **Naesengmoon ⊥ PROM 분리**. v5 측 *자동 출격* 측 retract. 사용자 측 explicit 발화 시에만 dispatch (`/tlb` 또는 `/naesengmoon` separate skill). PROM 본 사이클 측 Step 7-A 측 *optional*, 사용자 측 별도 호출 시 진행. KG: `naesengmoon-prom-decoupled-2026-05-30`.
 
-인프라 테스트 전에 **Prometheus-Naesengmoon GAN 루프** 완결. 자동 출격 대상:
+#### 7-A. Naesengmoon 적대적 검증 (v6.4 — user-explicit only, OPTIONAL)
+
+인프라 테스트 전 **Prometheus-Naesengmoon GAN 루프** 측 완결 측 *사용자 explicit dispatch 시에만*. 자동 출격 대상 (사용자 `/tlb <cycle_id>` 또는 `/naesengmoon` 측 호출 시):
 
 | 대상 | 기준 | Lens |
 |---|---|---|
@@ -910,7 +912,7 @@ RETURN collect(DISTINCT rf.name) AS finding_targets,
        collect(DISTINCT ts.name) AS seed_targets
 ```
 
-자동 출격: `/taliban --lens constitutional <target>` 각 target에 대해 호출. Rubber-stamp 방지 — RTI/FVR 통과 못 하면 Step 7-B 진입 불가.
+**user-explicit 출격 (v6.4)**: `/taliban --lens constitutional <target>` 각 target에 대해 사용자 측 명시적 발화 시 호출. PROM 본 cycle 측 Step 7-A skip 가능 (사용자 default behavior). 사용자 측 verdict trigger 시 진행. Rubber-stamp 방지 — RTI/FVR 통과 못 하면 Step 7-B 진입 불가 (단 본 Step 7-A 측 user-explicit dispatch 시에만 적용).
 
 #### 7-B. 4단계 실측 검증
 
@@ -1048,3 +1050,27 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 → Stale KG cleanup (2026-04-25): v1+v2 PrometheusStep 노드 :ARCHIVED.
 
 # KG history: ATOM_Skill_prometheus / lesson-prom16-skill-versioning-academic-2026-04-29
+
+---
+
+## Measurement & Conditional Dispatch (2026-05-30 추가)
+
+사용자 정전 정정 2026-05-30 (`user-verdict-7cmd-need-based-conditional-dispatch-2026-05-30`): 7군단장 측 *고정 USES edge* retract → *measurement-driven conditional dispatch*. 본 commander도 `measure()` + `decide_dispatch()` API를 따른다.
+
+### 본 commander metric & threshold
+
+- 정전 SPEC: `SYMPOSIUM/THEORY/00_공통/7CMD_NEED_BASED_DISPATCH_SPEC.md` §3 Table
+- 구현: `bhgman_tool/engine/legion/measurement.py` — 본 commander의 prometheusMeasurement class
+- KG: `:MeasurementFunction` + `:DispatchThreshold` nodes (parent: `7cmd-measurement-driven-conditional-dispatch-2026-05-30`)
+
+### Stevens scale type & 학문 grounding
+
+각 metric의 Stevens 1946 scale type (nominal/ordinal/interval/ratio)을 `:MeasurementFunction.scale` field에 기록.
+Goodhart drift (1975) mitigation은 Naesengmoon meta-check 또는 cycle-end invocation-log empirical reconcile (`lesson-occam-proxy-strength-needs-empirical-spot-check-2026-05-28`).
+
+### Dispatch 정전
+
+`measure()` → threshold-gated need detection → 다른 commander conditional invocation (Hades realization pattern universalized, parent `hades-canonical-2026-05-27`).
+고정 USES는 *historical provenance only* (`:DispatchEvent` runtime record).
+
+# KG: 7cmd-measurement-driven-conditional-dispatch-2026-05-30, user-verdict-7cmd-need-based-conditional-dispatch-2026-05-30, hades-canonical-2026-05-27, mf-prometheus-*

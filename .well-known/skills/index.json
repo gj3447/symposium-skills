@@ -2,8 +2,8 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.2",
-  "git_head_short": "83359c8",
-  "merkle_root": "68fae07d4ea4b6298460c5f85386f127e6ede476f930f63c9e44f2d32ee14eec",
+  "git_head_short": "8857d20",
+  "merkle_root": "c42bdf5bf7bb7973aea3981277e5fa61d5ad2395c1c0dc1a42d9abdc24d88af6",
   "skills_count": 40,
   "skills": [
     {
@@ -242,7 +242,7 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_taliban",
       "channel": "stable",
-      "git_tree_sha": "9ece7f977abcc2c7c7da1dbab5933c451e0d7d69"
+      "git_tree_sha": "d6b7837d56fe766a0c323affbbbf561cb1bf9bde"
     },
     {
       "name": "tlb",

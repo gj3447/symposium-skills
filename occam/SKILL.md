@@ -80,3 +80,27 @@ description: >
 | 마구잡이 정리 | "착한놈" — 대체된 낡은 과거만 선별 |
 
 # KG: ATOM_Skill_occam, occam-kam-canonical-2026-05-26, occam-pass-kg-wide-2026-05-27
+
+---
+
+## Measurement & Conditional Dispatch (2026-05-30 추가)
+
+사용자 정전 정정 2026-05-30 (`user-verdict-7cmd-need-based-conditional-dispatch-2026-05-30`): 7군단장 측 *고정 USES edge* retract → *measurement-driven conditional dispatch*. 본 commander도 `measure()` + `decide_dispatch()` API를 따른다.
+
+### 본 commander metric & threshold
+
+- 정전 SPEC: `SYMPOSIUM/THEORY/00_공통/7CMD_NEED_BASED_DISPATCH_SPEC.md` §3 Table
+- 구현: `bhgman_tool/engine/legion/measurement.py` — 본 commander의 occamMeasurement class
+- KG: `:MeasurementFunction` + `:DispatchThreshold` nodes (parent: `7cmd-measurement-driven-conditional-dispatch-2026-05-30`)
+
+### Stevens scale type & 학문 grounding
+
+각 metric의 Stevens 1946 scale type (nominal/ordinal/interval/ratio)을 `:MeasurementFunction.scale` field에 기록.
+Goodhart drift (1975) mitigation은 Naesengmoon meta-check 또는 cycle-end invocation-log empirical reconcile (`lesson-occam-proxy-strength-needs-empirical-spot-check-2026-05-28`).
+
+### Dispatch 정전
+
+`measure()` → threshold-gated need detection → 다른 commander conditional invocation (Hades realization pattern universalized, parent `hades-canonical-2026-05-27`).
+고정 USES는 *historical provenance only* (`:DispatchEvent` runtime record).
+
+# KG: 7cmd-measurement-driven-conditional-dispatch-2026-05-30, user-verdict-7cmd-need-based-conditional-dispatch-2026-05-30, hades-canonical-2026-05-27, mf-occam-*
