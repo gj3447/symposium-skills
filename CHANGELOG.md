@@ -8,6 +8,10 @@
 
 ## [Unreleased]
 
+### 7cmd
+
+- Measurement-driven conditional dispatch 섹션 8군단장 SKILL 추가 ([`d54d86d`](#d54d86d4c9fb17f6019a5da4b141efbdcb246702))
+
 ### Added
 
 - *(versioning)* Adopt Keep a Changelog 1.1.0 + git-cliff auto-regen (PROM 16 F1) ([`014bc98`](#014bc98b6c33a578918f7511fe90aad8a7267593))

@@ -98,6 +98,33 @@ SET cv.type='implicit',
 
 **조건**: N ≥ 3 심볼이 같은 메서드/필드/생성자 시그니처 공유. 명시 interface **없음**.
 
+### 암묵 precondition 발굴 (TPA-D2 fix, 2026-06-01)
+
+<!-- KG: TPA-D2-2026-06-01 (:MethodologyDefect), lesson-tpa-dogfood-spacegirl-defects-2026-06-01 -->
+
+> **결함 출처**: spacegirl_tool TPA 도그푸드 — `wall.scan`의 핵심 precondition("입력은 *잠긴* 코드여야 함")이 **docstring·시그니처 어디에도 없어서** ST가 추출 불가 → 도구가 자기 소스를 LOCKED로 오판하는 설계결함이 Contract에 안 잡혔다. **docstring만 파싱하면 암묵 가정은 영원히 누락된다.**
+
+**precondition 소스 우선순위 (docstring이 전부가 아님)**:
+
+1. docstring `pre/postcondition` (기존) —
+2. **모듈수준 주석/공시** (module docstring, `# WARNING`, `# NOTE`, THREAT_MODEL 류) → `inferred_precondition`
+3. **상수/데이터 정의가 함의하는 도메인 가정** (예: 함수가 특정 vocab/enum에만 의미 있음) →
+4. **행동 프로빙 (behavioral probe)**: 심볼을 *경계 입력*으로 실제 실행해 암묵 계약을 역추출. 특히
+   **self-application / 항등 입력**(도구가 *자기 출력/자기 소스*를 입력받으면?)을 mandatory probe로.
+
+```cypher
+// 암묵 precondition 은 별 라벨로 분리 (명시와 구분, ontology 오염 방지)
+MERGE (ip:ImplicitPrecondition:AbstractNode {name:'IP_<target>_<Symbol>'})
+SET ip.symbol=$sym,
+    ip.assumption=$inferred,                 // 예: '입력은 잠긴 코드여야 한다'
+    ip.source=$source,                        // 'module-comment' | 'behavioral-probe' | 'data-domain'
+    ip.probe_evidence=$concrete_run,          // 행동 프로빙 실제 결과
+    ip.violated_by_self_application=$bool      // self/항등 입력서 위반? (HIGH severity 설계결함 신호)
+MERGE (c)-[:HAS_IMPLICIT_PRECONDITION]->(ip)
+```
+
+**게이트**: 모든 *변환/판정 도구*(transform / detector / classifier) 심볼은 **self-application probe 1회 mandatory**. `violated_by_self_application=true` → 설계결함 flag (SP/SCW로 escalate).
+
 ### 섞지 말 것 (ontology 오염 금지)
 
 | 실수 | 결과 |

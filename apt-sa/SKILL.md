@@ -25,7 +25,29 @@ RETURN cfg.context_budget_sa_default, cfg.context_budget_l1_avg, cfg.context_bud
 
 **SA core fields** (v26 mandatory): `objective` · `definition` · `keyAssertion` · `C_S` (5-predicate) · `contextBudget`. 5 필드 null = Naesengmoon gate reject.
 
-# KG: APT_v26_A6_2026-04-21, MethodologyConfig_default_v26
+### 도구/변환 repo의 불변식 결정화 (APT-D1 fix, 2026-06-01)
+
+<!-- KG: APT-D1-2026-06-01 (:MethodologyDefect), lesson-tpa-dogfood-spacegirl-defects-2026-06-01 -->
+
+> **결함 출처**: spacegirl_tool이 APT(SA·SCW) 없이 ad-hoc로 만들어져 — SA 단계에서 잡혔어야 할 설계결함(self-scan false positive)이 출시까지 누락 + SCW 부재로 테스트 0. **신규 도구/라이브러리 repo가 SA를 건너뛰면 핵심 불변식이 코드 어디에도 없이 떠다닌다.**
+
+work-kind 가 **tool / library / transform** 이면 SA에서 `keyAssertion` 을 *형식 불변식*으로 결정화한다 (산문 목표로 끝내지 말 것):
+
+- **round-trip / 항등 불변식** 있으면 명시 (예: `unlock(lock(x)) == x`).
+- **self-application 불변식** 있으면 명시 (예: detector가 *자기 출력/자기 소스*에 오작동 안 함).
+- 각 불변식 → SCW 단계에서 **실행 가능한 테스트로 강제** (SA `keyAssertion` ↔ SCW 테스트 1:1 추적).
+
+```cypher
+MERGE (inv:Invariant:AbstractNode {name:'INV_<project>_<short>'})
+SET inv.statement=$formal,                  // 'unlock(lock(x))==x' 등
+    inv.kind=$kind,                          // 'round-trip' | 'self-application' | 'idempotence'
+    inv.must_have_scw_test=true
+MERGE (sa:SemanticAnchor {name:$anchor})-[:ASSERTS_INVARIANT]->(inv)
+```
+
+**SA→SP 게이트 확장**: work-kind=tool 인데 `ASSERTS_INVARIANT` edge 0 → Naesengmoon reject (불변식 미결정화).
+
+# KG: APT_v26_A6_2026-04-21, MethodologyConfig_default_v26, APT-D1-2026-06-01
 
 ---
 

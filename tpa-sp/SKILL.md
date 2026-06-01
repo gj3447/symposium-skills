@@ -123,6 +123,29 @@ WHERE $c < 0.7
 
 **evidence 없는 INSTANCE_OF = RUBBER_STAMP 위반.** HR11 (증거 필수).
 
+### 변환 패턴 coverage rate (TPA-D3 fix, 2026-06-01)
+
+<!-- KG: TPA-D3-2026-06-01 (:MethodologyDefect), lesson-tpa-dogfood-spacegirl-defects-2026-06-01 -->
+
+> **결함 출처**: spacegirl_tool TPA 도그푸드 — Transformer 패턴(식별자 치환)이 INSTANCE_OF로 판정됐으나, JS template literal `${...}` 내부 식별자가 **미치환**인 *불완전 구현*이 통과했다. 필수요소 체크리스트는 "패턴이 *있나*"만 보고 "패턴이 *모든 대상에 적용되나*"(coverage)는 안 본다.
+
+**Transformer / Visitor / Mapper / Interpreter 류 *적용범위가 본질인* 패턴**은 필수요소 체크리스트에 더해 **coverage rate**를 측정한다:
+
+```
+coverage_rate = (패턴이 실제 적용된 대상 site 수) / (적용 대상이어야 할 전체 site 수)
+```
+
+- 측정은 **코드레벨 실측** (정적 카운트 또는 실행 프로빙) — 추정 금지.
+- `coverage_rate < 1.0` → `INCOMPLETE_TRANSFORM` flag + 미적용 site 목록 evidence.
+- coverage가 본질인 패턴에서 `coverage_rate < 0.9` → confidence 상한 0.7 (INSTANCE_OF 못 줌, RESEMBLES).
+
+```cypher
+MERGE (src)-[r:INSTANCE_OF {confidence:$c, evidence:$ev, checklist_pass:true,
+                            coverage_rate:$cov, uncovered_sites:$gaps}]->(p:DesignPattern)
+WHERE $c >= 0.7 AND ($cov IS NULL OR $cov >= 0.9)
+// coverage 본질 패턴인데 cov < 0.9 → RESEMBLES + INCOMPLETE_TRANSFORM
+```
+
 ---
 
 ## Distributed 패턴 매칭 시 MetaVerifier 자동 호출 (v0.4 통합)
