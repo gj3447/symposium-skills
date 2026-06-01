@@ -116,6 +116,40 @@ grep -r 'pub enum' --include='*.rs' $TARGET | grep -v '/target/' | grep -v '/tes
 # 에이전트 합산과 ±10% 이내 일치 확인. 불일치 시 보충 스캔.
 ```
 
+#### Step 3.0-A: Manifest ↔ KG 정합 + #KG referent 검증 (TPA-D1/D5 fix, 2026-06-01)
+
+<!-- KG: TPA-D1-2026-06-01, TPA-D5-2026-06-01 (:MethodologyDefect), lesson-tpa-dogfood-spacegirl-defects-2026-06-01 -->
+
+> **결함 출처**: spacegirl_tool 도그푸드 — `__init__.py` 가 manifest·KG 양쪽서 누락(orphan)됐는데 Gate Hook 부재로 미차단(D1). 그리고 `# KG:` 주석 referent의 *실존*을 ST가 확인 안 해 binding 없는데 confirmed 오판(D5).
+
+**D1 — manifest는 패키지 파일 *전체*(엔트리포인트 포함)로 만들고 KG와 대조**:
+
+```bash
+# __init__.py / mod.rs / index.ts 등 엔트리포인트도 manifest에 포함 (이전엔 누락)
+# (production 한정은 유지, 단 __init__/__main__ 류 패키지 엔트리는 제외하지 말 것)
+manifest_count=$(wc -l < /tmp/manifest.txt)
+```
+```cypher
+// KG HAS_SOURCE 수와 manifest 수 대조 → 불일치 = orphan/missing flag
+MATCH (proj:SoftwareProject {name:$project})-[:HAS_SOURCE]->(scn:SourceCodeNode)
+RETURN count(scn) AS kg_sources    // != manifest_count → TR_ManifestKgMismatch 위반
+```
+
+**D5 — `# KG:` referent 실존 자동 확인** (TCW 수확 시 mandatory):
+
+```bash
+# 각 파일의 # KG: 주석에서 referent name 추출
+grep -rhoE '# KG:[^#]*' $TARGET | grep -oE '[A-Za-z0-9_가-힣-]{6,}' | sort -u > /tmp/kg_referents.txt
+```
+```cypher
+// 추출된 referent 가 KG에 실재하나 — 없으면 dangling 바인딩
+UNWIND $referents AS ref
+OPTIONAL MATCH (n {name:ref})
+WITH ref, n WHERE n IS NULL
+RETURN collect(ref) AS dangling_referents   // 비어있지 않으면 TR_DanglingKgRef 위반 flag
+```
+- `dangling_referents` 비어있지 않음 → 해당 `# KG:` 는 "binding confirmed" 로 세지 **않음**. ST coverage 에서 제외 + lesson 기록.
+
 #### Step 3.1: 에이전트 수 결정 (LOC 상한 기반)
 
 | 모델 | 에이전트당 LOC 상한 | 근거 |

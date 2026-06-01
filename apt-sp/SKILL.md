@@ -124,6 +124,17 @@ INFORMED_BY로 외부 지식(디자인 패턴, 기술, 도메인 개념)이 연�
 > **guard**: "완전 독립"은 edge-부재 default 금지 — information-hiding seam positive 판정.
 > # KG: apt-sp-coupling-minimization-criterion-2026-05-27, apt-contract-root-axiom-2026-05-27, oq-planfirst-coupling-minimization-resolution-2026-05-27
 
+### Rule 3.2: declared coupling은 *퍼블릭 경계*로만 (APT-D2 fix, 2026-06-01)
+
+<!-- KG: APT-D2-2026-06-01 (:MethodologyDefect), lesson-tpa-dogfood-spacegirl-defects-2026-06-01 -->
+
+> **결함 출처**: spacegirl_tool — span AS2(surface)가 AS1(ssb)의 *private 함수*(`_apply`/`_collect_rename_targets`)를 직접 호출 = declared coupling이 information-hiding seam을 뚫음. AS1 내부 구현 바뀌면 AS2가 조용히 깨진다.
+
+Rule 3.1의 *declared DAG edge*(DEPENDS_ON 등)는 **대상 span의 퍼블릭 경계(노출 API/Contract)로만** 결선한다. private/내부 심볼(언더스코어·non-exported) 직접 참조 = seam 위반.
+
+- ST Contract 결정화 시 각 span은 *노출 surface*(public symbols)를 명시 → 다른 span은 그 surface로만 의존.
+- private 심볼 cross-span 참조 발견 → `TR_PrivateBoundaryViolation` flag → 노출 API 추출로 정정.
+
 ### Rule 4: TerminationGuarantee — 유한 단계에서 반드시 AtomicSpan 도달
 
 모든 분해 경로는 유한 단계에서 AtomicSpan에 도달해야 한다.

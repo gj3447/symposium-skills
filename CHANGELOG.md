@@ -102,6 +102,10 @@
 
 - A15 SA Phase Activation Matrix + pending edits (2026-05-11 pre-monorepo-flatten) ([`97372a3`](#97372a39c8b5895f2dfc46ae1069061da99b75df))
 
+### Methodology
+
+- TPA-D2/D3 + APT-D1 fix (spacegirl 도그푸드 결함) ([`ddbeacb`](#ddbeacb804751fcf6db63d3fe4b3abd6750eced2))
+
 ### Sweep
 
 - *(wave16)* 8 .claude-plugin/plugin.json + index.json regenerate (wave15 누락분) ([`06958ee`](#06958ee59e649a2c924b8409e45ec6da3985f6b7))

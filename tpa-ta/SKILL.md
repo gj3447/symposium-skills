@@ -103,6 +103,26 @@ MERGE (tp)-[:LONGINUS_BINDS]->(b)
 
 **coverage = bound / total**. 임계 0.8 미달 시 SUSPENDED.
 
+### coverage 분모 고정 (TPA-D4 fix, 2026-06-01)
+
+<!-- KG: TPA-D4-2026-06-01 (:MethodologyDefect), lesson-tpa-dogfood-spacegirl-defects-2026-06-01 -->
+
+> **결함 출처**: spacegirl_tool 도그푸드 — `total` 의 단위(파일/퍼블릭심볼/Contract)가 미정의라 같은 repo가 0.89(파일 기준) vs 0.96(심볼 기준)으로 흔들렸다. 분모가 흔들리면 0.8 임계가 무의미.
+
+**`total` = 퍼블릭 심볼 수로 고정** (단일 레벨). 파일/Contract 기준 금지.
+
+- 분모 = `totalPubSymbols` (TCW manifest Step 3.0-A에서 실측된 pub 심볼 카운트). `bound` 도 동일 단위(바인딩된 pub 심볼 수).
+- 측정 대상은 **TCW manifest에서 선언된 집합**과 1:1 — TA에서 즉석 재정의 금지 (drift 자초).
+- `coverage_ratio = boundSymbols / totalPubSymbols` (둘 다 결과 기록 노드에 명시 — 분자·분모 동시 기록 의무).
+
+```cypher
+// 분모 단위 일관성 검증 — totalPubSymbols 가 TCW manifest 의 pub 심볼 카운트와 일치해야
+MATCH (tcw:TPA_TCW_Result {name:$tcw_name})
+MATCH (ta:TPA_TA_Result {name:$ta_name})
+WHERE ta.totalPubSymbols <> tcw.pubSymbolCount
+RETURN 'TR_CoverageDenominatorMismatch' AS violation   // 불일치 = 분모 drift
+```
+
 ---
 
 ## 결과 기록
