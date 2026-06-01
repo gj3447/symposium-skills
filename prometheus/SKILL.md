@@ -205,6 +205,7 @@ SET l.category = $category,
     l.truth = $truth,
     l.solution = null,          // 아직 모름
     l.severity = $severity,     // CRITICAL / HIGH / MEDIUM / LOW
+    l.lakatos_mechanism = $lakatos_mechanism,  // HR20 필수 (RFC v27 §2.2, 2026-06-01~): monster-barring/exception-barring/concept-stretching/lemma-incorporation/proof-analysis. 누락 시 t_lesson_lakatos_mechanism_required_v27 차단
     l.resolved = false,
     l.createdAt = datetime()
 RETURN l.name
@@ -932,6 +933,27 @@ curl -s "https://check-host.net/check-result/$rid" -H "Accept: application/json"
 ```
 
 **검증 실패 시** → Step 2(환경조사)로 피드백 루프. 새로운 정보로 리서치 보강.
+
+#### 7-C. Threshold instrument sync (자동, PROM 16 P3(a) 2026-05-30 wire)
+
+사이클 종료 직후 KG에 새로 쓰인 `:ValidationResult` 노드들을 instrument log에 incremental sync. ROC Youden J / Bayesian MAP derivation의 데이터 누적이 자동으로 진행되도록 함. dispatch_id dedup으로 idempotent — 매 사이클 끝에 안전하게 실행.
+
+```bash
+cd /Users/lagyeongjun/CD/bhgman_tool
+source .venv/bin/activate
+python -m engine.legion.threshold_derivation.backfill_kg \
+    --bolt bolt://100.64.0.3:7687 --password "$NEO4J_PASSWORD"
+```
+
+출력 예시 (사이클 종료 직후):
+```
+Existing entries: 762 (incremental dedup active)
+  prometheus.research_finding_count ← KG.findings_count  fetched=290  new=3  dup=287  ambig=0
+  naesengmoon.confidence_proxy       ← KG.confidence      fetched=38   new=3  dup=35   ambig=0
+TOTAL new=6 duplicates=820 ambiguous=110
+```
+
+`new>0`이면 새 데이터로 다음 사이클 ROC re-derive 가능 — 자동화의 핵심. 첫 backfill 결과 + ROC 결과는 KG `backfill-kg-vr-instrument-log-2026-05-30`.
 
 ---
 

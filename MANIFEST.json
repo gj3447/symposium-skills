@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-06-01T14:52:11+09:00",
-  "git_head_commit": "ddbeacb804751fcf6db63d3fe4b3abd6750eced2",
-  "git_head_short": "ddbeacb",
+  "generatedAt": "2026-06-01T14:59:55+09:00",
+  "git_head_commit": "b1caf795cd6769c602b4b8fb7f513389bf328bcd",
+  "git_head_short": "b1caf79",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 40,
-  "merkle_root": "3bb25b92faf23aea952c2d8a97a72eb5c5010e1070a26f53013c2f031299cbaf",
+  "merkle_root": "09a6a8d4aa0c7a0e37ddd1c0e8c7121e17c4eb9aa94864e1f79e21864dfb7874",
   "skills": [
     {
       "name": "88-taliban",
@@ -110,7 +110,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sp",
       "channel": "stable",
-      "git_tree_sha": "f72e472f3ccc8eececbe678f04e181c9edd55303"
+      "git_tree_sha": "83a9f2138e307558a8f511cfb1e9c3afc798d66d"
     },
     {
       "name": "apt-st",
@@ -318,7 +318,7 @@
       "version": "1.2.0",
       "kg_ref": "ATOM_Skill_tpa_ta",
       "channel": "stable",
-      "git_tree_sha": "6edde69eef5bbb6661f35369021273cd71290f2d"
+      "git_tree_sha": "74c07627ccdf8c53aa98c09fe7c9b2467852b3f1"
     },
     {
       "name": "tpa-tcw",
@@ -326,7 +326,7 @@
       "version": "1.2.0",
       "kg_ref": "ATOM_Skill_tpa_tcw",
       "channel": "stable",
-      "git_tree_sha": "3cbe5c20e37b36142a2b14808bd087666f3bc0ca"
+      "git_tree_sha": "d25c31b0268bd49007c7f2f68ee3e4c17366999a"
     }
   ]
 }
