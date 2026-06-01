@@ -85,7 +85,7 @@ RETURN s.name, s.currentConcrete, s.invocation
 | Step 9.5 (RefinementGate) | **Naesengmoon** (AdversarialValidator) | `/tlb <Contract_id> --lens constitutional` (LensSet completeness mandatory) | Contract + SubagentTaskSpec 작성 직후 | `VerdictRecord` APPROVED + SCW 진입 trigger |
 
 **ST→SCW mini-RGR** (RFC2 transition):
-- RED: Naesengmoon prior code conflict 검사 (작성할 file path 측 sibling 충돌)
+- RED: Naesengmoon prior code conflict 검사 (작성할 file path의 sibling 충돌)
 - GREEN: 재배맨 wave dispatch GO/NO-GO (wave_index 같은 SubagentTaskSpec batch 측 readiness)
 - REFACTOR: Harness 3-tier file placement audit (atomic-span dump 평면 누적 차단 — IDE-host / runtime / managed 측 정확 layer 배치)
 
@@ -464,6 +464,24 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 | semantic_meaning | soft_semantic | 함수 내부 설명 OK |
 | version (SemVer) | hard_rigid | 진화 추적 |
 | target_file | hard_rigid | 롱기누스 바인딩 |
+
+### module_graph.folder_path 결정 = span_path_projection 사영 (2026-06-01 배선)
+
+> `module_graph.folder_path` / `target_file`는 **임의 지정 금지**. span DAG의 *canonical-parent 선택함수 사영*으로 결정한다 — `THEORY/APT/span_path_projection_prototype/span_path_projection.py :: project_paths(spans, edges, base)`.
+>
+> **규칙** (`_canonical_parent`):
+> - 부모 0개 → `base/` (단일 root는 base 자체, 다중 root만 `base/slug`)
+> - 부모 1개 → `parent_path/slug` (nest)
+> - 부모 ≥2개 → `Span.primary_parent` 명시 시 그쪽 nest, 미지정 시 `base/shared/slug` (공유 span의 단일 home)
+>
+> **Why**: tree-ancestry 폐기 — span은 N:N 다중부모 DAG (`span-nn-dag`). 공유 span(예: 333_MOD_CRDT가 5앱의 공유 부모)을 단일경로로 강제하면 N번 복제 = fix가 중복을 생산(자기훼손). canonical-parent 사영은 well-definedness 증명(위상순서 귀납 + acyclicity)으로 "어떤 span도 두 경로를 갖지 않음"을 보장 → 중복 생산 불가.
+>
+> **ST 절차 배선**:
+> 1. SP가 만든 `DECOMPOSES_TO` edge 집합 = span DAG. ≥2 부모인 span은 SP/ST에서 `primary_parent` 명시 (없으면 `shared/`로 라우팅).
+> 2. ST 진입 시 `validate_well_defined(spans, edges)` 먼저 — cycle / primary_parent∉parents 면 BLOCK (사영 ill-defined).
+> 3. `project_paths()` 일괄 사영 → 각 AtomicSpan의 `module_graph.folder_path` + `target_file` 결정. ad-hoc 폴더 지정·SCW 사후 폴더 재건 금지.
+>
+> # KG: wqi-st-path-from-span-ancestry-2026-05-30 (DONE_CANONICAL), hades-span-path-projection-realized-2026-05-30, span-nn-dag, lesson-flat-structure-root-decomposition-tree-discarded-at-materialization-2026-05-30
 
 ### Contract Boundary Rule
 

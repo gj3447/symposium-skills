@@ -107,6 +107,10 @@
 - TPA-D2/D3 + APT-D1 fix (spacegirl 도그푸드 결함) ([`ddbeacb`](#ddbeacb804751fcf6db63d3fe4b3abd6750eced2))
 - TPA-D1/D4/D5 + APT-D2 fix (남은 도그푸드 결함 정리) ([`b1caf79`](#b1caf795cd6769c602b4b8fb7f513389bf328bcd))
 
+### Prometheus
+
+- Step 1 Lesson 템플릿에 lakatos_mechanism 필드 추가 ([`39122e4`](#39122e42030e40bf7001d82f2938b92c1a51b60f))
+
 ### Sweep
 
 - *(wave16)* 8 .claude-plugin/plugin.json + index.json regenerate (wave15 누락분) ([`06958ee`](#06958ee59e649a2c924b8409e45ec6da3985f6b7))
