@@ -17,6 +17,16 @@ description: >
   #     occam-pass-kg-wide-2026-05-27
 ---
 
+## 📚 References (lazy-load)
+
+상세 지식은 `references/`에 분리 — 필요 시 로드 (2026-06-02 엔진/KG에서 수확. occam 전용 THEORY 폴더 없음):
+- [`phases.md`](references/phases.md) — occam_pass 3 detection mode + 스테이지별 책무 + 안티패턴
+- [`gates.md`](references/gates.md) — σ verdict cascade / twin·guard gate / covenant FORBIDDEN_TOKENS / DL consistency
+- [`kg_logging.md`](references/kg_logging.md) — supersession Cypher 스키마 + CONTRACT_OccamArchiveRecord_v1 (R1-R6)
+- [`quick_ref.md`](references/quick_ref.md) — 한 장 치트시트
+
+---
+
 ## 🔗 MIC / 군단장
 
 **동사**: 정리한다 (현재↔과거 시간축, archive). **정반대 극**: 유레카(쌓기/창조). **희미한 쌍 bright-line**:

@@ -48,6 +48,7 @@
 - *(taliban)* Formal-cathedral 렌즈 등록 — 나생문 lens enum 6번째 ([`6a4a9ca`](#6a4a9ca29d9bb341f200c0eb4ce5328db09951dd))
 - *(skills)* Eureka + occam 동사 skill 신설 (군단장 2개 invoke gap 메움) ([`0935d8c`](#0935d8c4de254508ef4d48371bf030c952fc8d38))
 - *(skills)* Hades 동사 skill — 7번째 군단장 실현(추상→구체↓, 유레카 dual) ([`8f61e1c`](#8f61e1cc89865a4a1ccaa7631fd0f31ba5101aad))
+- *(apt-st)* Span_path_projection 사영 ST 배선 + placeholder 부패 1건 수정 ([`46b0357`](#46b0357758fb55dfbc1cb558b4ec76e137c8be8b))
 
 ### Fixed
 

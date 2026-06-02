@@ -17,6 +17,17 @@ description: >
   #     eureka-formal-context-smoketest-2026-05-27, formal-cathedral-detection-2026-05-27
 ---
 
+## 📚 References (lazy-load)
+
+상세 지식은 `references/`에 분리 — 필요 시 로드 (2026-06-02 기존 이론/엔진/KG에서 수확):
+- [`theory.md`](references/theory.md) — 학문 grounding 5축 (가추·colligation / Reichenbach 발견맥락 / 통찰·개념형성 / colimit·ILP·FCA / Plotkin anti-unification)
+- [`phases.md`](references/phases.md) — 파이프라인 스테이지별 책무 + 안티패턴
+- [`gates.md`](references/gates.md) — 품질/oracle(HARD)/fidelity(SOFT) 게이트 스택 + 임계값
+- [`kg_logging.md`](references/kg_logging.md) — AbstractClass/FormalConcept Cypher MERGE 스키마
+- [`quick_ref.md`](references/quick_ref.md) — 한 장 치트시트
+
+---
+
 ## 🔗 MIC / 군단장
 
 **동사**: 창조한다 (구체→추상↑). **dual**: 하데스(추상→구체↓, 실현). **정반대 극**: 오캄(빼기/subtractive).

@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-06-01T17:56:06+09:00",
-  "git_head_commit": "39122e42030e40bf7001d82f2938b92c1a51b60f",
-  "git_head_short": "39122e4",
+  "generatedAt": "2026-06-01T21:25:06+09:00",
+  "git_head_commit": "46b0357758fb55dfbc1cb558b4ec76e137c8be8b",
+  "git_head_short": "46b0357",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 40,
-  "merkle_root": "387c616f745d7831dc96ea8c98049c0d1e27863d5600e61e17b321634e4bbc9e",
+  "merkle_root": "078b31422affd0976a1a3d1bf25df1fa1a0138197949c764a7ce3a2754d88618",
   "skills": [
     {
       "name": "88-taliban",
@@ -118,7 +118,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "45fee75aa4f4db167f254fdc48159279497ec67f"
+      "git_tree_sha": "3cf6318dff9fd4195333007cdc0c4fd396ad893f"
     },
     {
       "name": "backup",

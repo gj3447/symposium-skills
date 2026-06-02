@@ -16,6 +16,15 @@ description: >
   # KG: hades-canonical-2026-05-27, eureka-canonical-2026-05-26 (dual), consensus-eureka-engine-impl-2026-05-26 (c6)
 ---
 
+## 📚 References (lazy-load)
+
+상세 지식은 `references/`에 분리 — 필요 시 로드 (2026-06-02 엔진/KG에서 수확):
+- [`phases.md`](references/phases.md) — fetch_accepted → characterization-gate → MERGE(realize)/undo 스테이지 + 안티패턴
+- [`kg_logging.md`](references/kg_logging.md) — AbstractClass status=CANONICAL realizedBy=hades + INSTANCE_OF Cypher 스키마
+- [`quick_ref.md`](references/quick_ref.md) — 한 장 치트시트
+
+---
+
 ## 🔗 MIC / 군단장
 
 **동사**: 실현한다 (추상→구체↓). **dual**: 유레카(창조, 구체→추상↑) — 둘이 수직축 양방향 완성.
