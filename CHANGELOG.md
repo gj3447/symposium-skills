@@ -79,6 +79,7 @@
 - *(occam)* SKILL에 실전화 반영 — CLI verb + dry-run 기본 + covenant 코드강제 ([`2e9f911`](#2e9f9116ba29cd7dd72e3ce2362356b27dbffe30))
 - *(hades,eureka)* SKILL에 CLI verb 반영 — 실전화 ([`c42b786`](#c42b786d0f93e242a7671c0c1e373b1798a1bbc9))
 - *(eureka)* SKILL에 operator bake-off(fca/amie3) + stage 2/3/6/7 반영 ([`83359c8`](#83359c881dcb9ee5f210faf1c5f6c5c4a785bd15))
+- *(commanders)* Harvest references/ for eureka·occam·hades (12 docs) ([`5af874f`](#5af874fd8987b246dfcbc93c7ab41905634d9cb7))
 
 ### Miscellaneous
 

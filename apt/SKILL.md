@@ -22,6 +22,19 @@ description: >
   # KG: ATOM_Skill_apt_orchestrator, APT_v26_RFC_draft_2026-04-21, lesson-feedback-is-emergent-not-weapon-2026-04-16
 ---
 
+## 🔌 표준 하네스 랩핑 (MCP / CLI) — 2026-07-12
+
+`/apt` orchestration substrate = **bhgman-tool 표준 하네스**:
+
+| 층 | 호출 | 성격 |
+|---|---|---|
+| Phase 감지 | `mcp__bhgman-tool__apt_phase_detect(...)` — 현재 SA/SP/ST/SCW/MetaReview 위치 | 결정론 |
+| Phase dispatch | `mcp__bhgman-tool__apt_dispatch(...)` — 다음 phase 전환 | 결정론 |
+| Gate 검증 | `mcp__bhgman-tool__gate_check(...)` — Gate Check Hook Cypher enforcement (**HARD GATE**) | executor≠critic + LensSet completeness + prior VR APPROVED |
+| 전군단장 파이프 | `mcp__bhgman-tool__legion_run(...)` — 획득→연결→창조→정리→검증→실현 | 결정론 코어 + LLM enrichment |
+| CLI shim | `bhgman-tool apt <task>` | SKILL.md 경로만 emit → **부모 Claude 가 본문 실행** |
+| 엔진 정본 | `engine/mcp_server/tools/apt.py` + `engine/gate/` (`engine/apt/` 별도 dir 없음) | production |
+
 ## 🎛 v26 A6 Resolve-Only Directive (migrated 2026-05-22 → apt-magic-resolve)
 
 > 책무 본문은 `SKILLS/apt-magic-resolve/SKILL.md` 로 이전. Invoke `apt-magic-resolve` skill 또는 거기 §"v26 A6 Resolve-Only Directive" 참조.

@@ -20,6 +20,19 @@ description: >
   # KG: ATOM_Skill_longinus, SA_methodology_v4_triple_upgrade, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory before any framing/diagnostic, lesson-ai-skipped-kg-check-before-framing-2026-04-29)
 ---
 
+## 🔌 표준 하네스 랩핑 (MCP / CLI) — 2026-07-12
+
+`/longinus` 실행 substrate = **bhgman-tool 표준 하네스** (나머지 6군단장과 동일 랩핑 패턴):
+
+| 층 | 호출 | 성격 |
+|---|---|---|
+| MCP 엔진 (권장) | `mcp__bhgman-tool__longinus_audit(repo_path, confidence_threshold="INFERRED")` | 결정론 직접호출 (`engine.longinus_engine.LonginusEngine` → `longinus_drift_audit`) |
+| KG float scan | `mcp__bhgman-tool__kg_query` — unbound Concept/ResearchFinding/Lesson 카운트 | live airo KG |
+| CLI shim | `bhgman-tool longinus <bind\|sha256\|ged\|reverse-scan>` | SKILL.md 경로만 emit → **부모 Claude 가 본문 실행** (phase logic 미실행) |
+| 엔진 정본 | `bhgman_tool/engine/longinus_drift_audit/` (audit_runner + code_scanner + sha256_baseline) | production |
+
+⚠️ **MCP audit 스코프 한계 (2026-07-12 실측)**: `code_scanner` 는 `# KG:` 를 **심볼 헤더 스팬(def/class + 데코레이터) 안**의 것만 심볼에 귀속시킨다. 모듈 최상단·독스트링·standalone `# KG:` 는 안 잡혀 `kg_refs_found=0` 이 나올 수 있음. 또 `files_scanned = len(refs 있는 파일)` 라서 154 심볼을 실제로 걸어도 refs 0이면 `0` 표시 (죽은 것 아님). **전수 감사는 `grep -rn "# KG:"` 로 교차검증 필수.** (KG: lesson-longinus-mcp-header-span-scope-2026-07-12 — 미기록 시 write)
+
 ## 🔗 MIC Binding (SOLID-DIP)
 
 **IS slot**: `KgCodeBinder` (MIC_v1.currentConcrete = "Longinus")

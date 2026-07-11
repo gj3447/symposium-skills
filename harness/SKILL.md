@@ -13,6 +13,17 @@ description: >
   # KG: ATOM_Skill_harness, lesson-harness-drift-corrected-2026-04-29, lesson-harness-citation-drift-bockeler-2026-04-30
 ---
 
+## 🔌 표준 하네스 랩핑 (MCP / CLI) — 2026-07-12
+
+`/harness` 진단 substrate = **bhgman-tool 표준 하네스**:
+
+| 층 | 호출 | 성격 |
+|---|---|---|
+| MCP 엔진 (권장) | `mcp__bhgman-tool__harness_diagnose(target, signals=None)` → `tier`(L_IDE/L_RUNTIME/L_MANAGED) + 4축(Inform/Constrain/Verify/Correct) + `mcp_adapter` | 결정론 분류기 (`engine/harness/`) |
+| CLI shim | `bhgman-tool harness <action>` | SKILL.md 경로만 emit → **부모 Claude 가 본문 실행** |
+
+축 부재 = **UNKNOWN(능력 없음 아님)**. framework→축 매핑은 주관 휴리스틱 KB (미검증 단정) — `tier`(이름 매치)가 근거 가장 강함. MCP=계층 간 어댑터.
+
 ## 🔗 MIC Binding (SOLID-DIP)
 
 **ROLE**: 메타원리 — MIC 설계 배경 (구조가 SOLID 5원리 *모두*를 강제하는 상위 frame).

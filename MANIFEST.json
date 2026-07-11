@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-06-01T21:25:06+09:00",
-  "git_head_commit": "46b0357758fb55dfbc1cb558b4ec76e137c8be8b",
-  "git_head_short": "46b0357",
+  "generatedAt": "2026-06-02T19:08:38+09:00",
+  "git_head_commit": "5af874fd8987b246dfcbc93c7ab41905634d9cb7",
+  "git_head_short": "5af874f",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 40,
-  "merkle_root": "078b31422affd0976a1a3d1bf25df1fa1a0138197949c764a7ce3a2754d88618",
+  "merkle_root": "f870b777d38172fc0317ea60a8a1fa5a50dc0bdbc63667aa0051cc2fdee20157",
   "skills": [
     {
       "name": "88-taliban",
@@ -174,7 +174,7 @@
       "version": "1.0.0",
       "kg_ref": "eureka-canonical-2026-05-26",
       "channel": "stable",
-      "git_tree_sha": "de4f018d95dd581d62d64ac35f2c10f17d33400e"
+      "git_tree_sha": "08a96d9a85d66406762b842b08821c5187af94a3"
     },
     {
       "name": "fix-agent",
@@ -190,7 +190,7 @@
       "version": "1.0.0",
       "kg_ref": "hades-canonical-2026-05-27",
       "channel": "stable",
-      "git_tree_sha": "a53a17e1adc19797a36fb65930250427c46fecd2"
+      "git_tree_sha": "d382c463370782b1b4c6724806530b1a87cda84f"
     },
     {
       "name": "harness",
@@ -230,7 +230,7 @@
       "version": "1.0.0",
       "kg_ref": "occam-kam-canonical-2026-05-26",
       "channel": "stable",
-      "git_tree_sha": "fff244321f06a49c848e43e1467907f88f720b3a"
+      "git_tree_sha": "36e904b736195d17c30e904fcb81f94009b20432"
     },
     {
       "name": "prom",
