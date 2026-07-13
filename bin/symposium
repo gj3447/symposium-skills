@@ -11,7 +11,7 @@
 #   tlb <target>     — Taliban adversarial verification
 #   longinus <op>    — Longinus reference binding (sha256/ged/reverse-scan)
 #   harness <action> — Harness 3-tier scaffolding (industry agent)
-#   status           — KG audit (ssh dgx → cypher-shell)
+#   status           — service status (public HTTP + KG + dgx + kubectl)
 #   verify           — Run verification/results.md regeneration
 #   help             — Show this message
 #
@@ -101,14 +101,7 @@ cmd_harness() {
 }
 
 cmd_status() {
-  log "ssh ${DGX_HOST} cypher-shell — KG audit"
-  ssh "${DGX_HOST}" 'kubectl exec -n neo4j neo4j-0 -- cypher-shell -u neo4j -p "${NEO4J_PASSWORD:-neo4j}" --format plain' <<'CYPHER'
-MATCH (n) WITH labels(n) AS l, count(*) AS c
-UNWIND l AS lbl
-RETURN lbl AS label, sum(c) AS count
-ORDER BY count DESC
-LIMIT 20;
-CYPHER
+  exec python3 "${SYMPOSIUM_ROOT}/mcp-server-symposium/service_status.py" "$@"
 }
 
 cmd_verify() {
@@ -138,7 +131,7 @@ main() {
     tlb|taliban)     cmd_tlb "$@" ;;
     longinus|long)   cmd_longinus "$@" ;;
     harness|hns)     cmd_harness "$@" ;;
-    status)    cmd_status ;;
+    status|services)    cmd_status "$@" ;;
     verify)    cmd_verify ;;
     help|-h|--help) cmd_help ;;
     *) die "unknown command: ${subcmd} (run 'symposium help')" ;;

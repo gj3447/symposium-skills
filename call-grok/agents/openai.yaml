@@ -1,0 +1,4 @@
+interface:
+  display_name: "Call Grok"
+  short_description: "Run Grok headless as a tool from Codex"
+  default_prompt: "Use $call-grok with preset readonly to have Grok research or review: "
