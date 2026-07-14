@@ -1,0 +1,4 @@
+interface:
+  display_name: "Call Codex"
+  short_description: "Run Codex headlessly from Claude or Grok"
+  default_prompt: "Use $call-codex in readonly mode to delegate this task to Codex."

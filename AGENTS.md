@@ -29,7 +29,7 @@
 | **tpa** | tpa, tpa-tcw, tpa-tt, tpa-tp, tpa-ta | Reverse cycle (code → spec). |
 | **meta** | solve, skill-creator | Meta-tooling. |
 | **ops** | db-query, docker-logs, kafka-manage, server-status, deploy, backup | Infrastructure operations. |
-| **interop** | call-grok | Other agents → Grok Super headless (`grok-agent`). |
+| **interop** | call-grok, call-codex | Cross-agent headless delegation (`grok-agent`, `codex-agent`). |
 
 ## Discovery for non-Claude agents
 

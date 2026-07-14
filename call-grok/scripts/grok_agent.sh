@@ -10,6 +10,7 @@
 #   chat       pure reasoning, no tools (cheap, fast)
 #   readonly   read codebase + web, no writes (default for other agents)
 #   research   readonly + more turns (web + deep explore)
+#   chain      parallel read-only Grok subagents + web research
 #   review     code review style (readonly, focused rules)
 #   write      full agent autonomy (yolo write/shell) — use sparingly
 #   ask        alias of readonly
@@ -18,6 +19,7 @@
 #   grok-agent chat -- "Summarize CAP theorem in 5 bullets"
 #   grok-agent readonly --cwd ~/proj -- "Explain auth flow"
 #   grok-agent research --max-turns 25 -- "Compare APT vs TPA"
+#   grok-agent chain --max-turns 30 -- "Research 3 independent axes and synthesize"
 #   grok-agent write -- "Add unit tests for src/foo.ts"
 #   grok-agent review -- "Review staged changes for bugs"
 #
@@ -32,7 +34,7 @@
 
 set -euo pipefail
 
-VERSION="1.0.0"
+VERSION="1.1.0"
 GROK_BIN="${GROK_BIN:-}"
 if [[ -z "${GROK_BIN}" ]]; then
   if command -v grok >/dev/null 2>&1; then
@@ -93,7 +95,7 @@ if [[ $# -eq 0 ]]; then
 fi
 
 case "${1:-}" in
-  chat|readonly|research|review|write|ask)
+  chat|readonly|research|chain|review|write|ask)
     PRESET="$1"
     shift
     ;;
@@ -174,10 +176,59 @@ done
 # Resolve prompt
 PROMPT=""
 TMP_PROMPT=""
+TMP_RUN_DIR=""
+TIMER_PIPE=""
+TIMER_FD_OPEN=0
+GROK_PID=""
+GROK_PGID=""
+signal_grok_group() {
+  local signal_name="$1"
+  [[ -n "${GROK_PGID:-}" ]] || return 0
+  if ! kill "-${signal_name}" -- "-${GROK_PGID}" 2>/dev/null; then
+    if [[ -n "${GROK_PID:-}" ]] && kill -0 "${GROK_PID}" 2>/dev/null; then
+      kill "-${signal_name}" "${GROK_PID}" 2>/dev/null || true
+    fi
+  fi
+}
 cleanup() {
   [[ -n "${TMP_PROMPT}" && -f "${TMP_PROMPT}" ]] && rm -f "${TMP_PROMPT}"
+  if [[ -n "${GROK_PID:-}" ]]; then
+    signal_grok_group TERM
+    signal_grok_group KILL
+  fi
+  if [[ "${TIMER_FD_OPEN:-0}" -eq 1 ]]; then
+    exec 99>&-
+    TIMER_FD_OPEN=0
+  fi
+  [[ -n "${TIMER_PIPE:-}" && -p "${TIMER_PIPE}" ]] && rm -f "${TIMER_PIPE}"
+  [[ -n "${TMP_RUN_DIR}" && -d "${TMP_RUN_DIR}" ]] && rm -rf "${TMP_RUN_DIR}"
+  return 0
+}
+terminate_grok() {
+  local exit_code="$1"
+  local killer_pid=""
+  trap '' HUP INT TERM
+  if [[ -n "${GROK_PID:-}" ]] && kill -0 "${GROK_PID}" 2>/dev/null; then
+    signal_grok_group TERM
+    (
+      if ! IFS= read -r -t 5 _ <&99; then
+        signal_grok_group KILL
+      fi
+    ) &
+    killer_pid=$!
+    wait "${GROK_PID}" 2>/dev/null || true
+    printf 'done\n' >&99 2>/dev/null || true
+    wait "${killer_pid}" 2>/dev/null || true
+    signal_grok_group KILL
+  fi
+  GROK_PID=""
+  GROK_PGID=""
+  exit "${exit_code}"
 }
 trap cleanup EXIT
+trap 'terminate_grok 129' HUP
+trap 'terminate_grok 130' INT
+trap 'terminate_grok 143' TERM
 
 if [[ -n "${PROMPT_FILE}" ]]; then
   [[ -r "${PROMPT_FILE}" ]] || die "prompt file not readable: ${PROMPT_FILE}"
@@ -193,6 +244,10 @@ TOOLS=""
 YOLO=0
 DEFAULT_TURNS=12
 BASE_RULES=""
+ENABLE_SUBAGENTS=0
+ENABLE_WEB_FETCH=0
+DISABLE_FILE_WRITE=0
+SANDBOX_PROFILE=""
 
 case "${PRESET}" in
   chat)
@@ -207,6 +262,9 @@ case "${PRESET}" in
     DISALLOWED="Agent,run_terminal_cmd,run_terminal_command,search_replace"
     DEFAULT_TURNS=15
     YOLO=1
+    ENABLE_WEB_FETCH=1
+    DISABLE_FILE_WRITE=1
+    SANDBOX_PROFILE="read-only"
     BASE_RULES="You are Grok invoked as a READ-ONLY tool by another AI agent (Claude or Codex). Explore with read/search/web tools only. Do NOT edit files, run shell that mutates state, or commit. Return a crisp structured answer the parent agent can use: findings, evidence paths, open questions, confidence."
     ;;
   research)
@@ -214,13 +272,31 @@ case "${PRESET}" in
     DISALLOWED="Agent,run_terminal_cmd,run_terminal_command,search_replace"
     DEFAULT_TURNS=30
     YOLO=1
+    ENABLE_WEB_FETCH=1
+    DISABLE_FILE_WRITE=1
+    SANDBOX_PROFILE="read-only"
     BASE_RULES="You are Grok research subagent (read-only). Prefer diverse sources + local canon when in SYMPOSIUM. Structure: consensus, divergence, open questions, recommended next steps. Cite paths/URLs. No file writes."
+    ;;
+  chain)
+    # Explicitly expose only read/web tools plus the task lifecycle needed for
+    # one-level Grok subagents. The read-only sandbox protects the workspace.
+    TOOLS="read_file,grep_search,list_dir,web_search,web_fetch,task,get_task_output,kill_task,todo_write"
+    DISALLOWED="run_terminal_cmd,run_terminal_command,bash,search_replace"
+    DEFAULT_TURNS=30
+    YOLO=1
+    ENABLE_SUBAGENTS=1
+    ENABLE_WEB_FETCH=1
+    DISABLE_FILE_WRITE=1
+    SANDBOX_PROFILE="read-only"
+    BASE_RULES="You are the lead Grok research agent invoked by another AI. Decompose independent research axes and dispatch 2-4 explore subagents in parallel with capability_mode read-only. Collect every result, reconcile conflicts, and synthesize an evidence-backed answer with source URLs. Do not edit files or run shell commands."
     ;;
   review)
     TOOLS="read_file,grep,list_dir"
     DISALLOWED="Agent,run_terminal_cmd,run_terminal_command,search_replace,web_search,web_fetch"
     DEFAULT_TURNS=20
     YOLO=1
+    DISABLE_FILE_WRITE=1
+    SANDBOX_PROFILE="read-only"
     BASE_RULES="You are Grok code-review subagent (read-only). Focus on bugs, security, regressions, missing tests. Severity-tag findings (P0/P1/P2). Include file:line evidence. No fixes unless asked — report only."
     ;;
   write)
@@ -276,6 +352,9 @@ fi
 if [[ "${YOLO}" -eq 1 ]]; then
   CMD+=(--yolo)
 fi
+if [[ -n "${SANDBOX_PROFILE}" ]]; then
+  CMD+=(--sandbox "${SANDBOX_PROFILE}")
+fi
 if [[ -n "${TOOLS}" ]]; then
   CMD+=(--tools "${TOOLS}")
 fi
@@ -287,25 +366,66 @@ if [[ ${#EXTRA_GROK_ARGS[@]} -gt 0 ]]; then
 fi
 
 # Run
-# JSON always captured so we can extract text; stderr stays for grok logs
+# JSON is captured so we can extract text. A private temp directory avoids a
+# predictable shared /tmp stderr path and lets signal traps forward cancellation.
+ENV_ARGS=()
+[[ "${ENABLE_SUBAGENTS}" -eq 1 ]] && ENV_ARGS+=("GROK_SUBAGENTS=1")
+[[ "${ENABLE_WEB_FETCH}" -eq 1 ]] && ENV_ARGS+=("GROK_WEB_FETCH=1")
+[[ "${DISABLE_FILE_WRITE}" -eq 1 ]] && ENV_ARGS+=("GROK_WRITE_FILE=0")
+
+if ! TMP_RUN_DIR="$(mktemp -d "${TMPDIR:-/tmp}/grok-agent-run.XXXXXX")"; then
+  die "could not create temporary run directory"
+fi
+RAW_FILE="${TMP_RUN_DIR}/stdout"
+ERR_FILE="${TMP_RUN_DIR}/stderr"
+TIMER_PIPE="${TMP_RUN_DIR}/signal-control"
+if ! mkfifo "${TIMER_PIPE}"; then
+  die "could not create signal control pipe"
+fi
+if ! exec 99<>"${TIMER_PIPE}"; then
+  die "could not open signal control pipe"
+fi
+TIMER_FD_OPEN=1
+rm -f "${TIMER_PIPE}"
+TIMER_PIPE=""
+
+set -m
+if [[ ${#ENV_ARGS[@]} -gt 0 ]]; then
+  (
+    exec 99>&-
+    exec env "${ENV_ARGS[@]}" "${CMD[@]}"
+  ) >"${RAW_FILE}" 2>"${ERR_FILE}" &
+else
+  (
+    exec 99>&-
+    exec "${CMD[@]}"
+  ) >"${RAW_FILE}" 2>"${ERR_FILE}" &
+fi
+GROK_PID=$!
+GROK_PGID="${GROK_PID}"
+set +m
+
 set +e
-RAW="$("${CMD[@]}" 2>/tmp/grok-agent-stderr.$$.log)"
+wait "${GROK_PID}" 2>/dev/null
 RC=$?
 set -e
+# Subagents are scoped to this invocation; none may survive the lead process.
+signal_grok_group KILL
+GROK_PID=""
+GROK_PGID=""
+RAW="$(<"${RAW_FILE}")"
 
 if [[ ${RC} -ne 0 ]]; then
   echo "grok-agent: grok exited ${RC}" >&2
-  if [[ -s /tmp/grok-agent-stderr.$$.log ]]; then
-    tail -n 40 /tmp/grok-agent-stderr.$$.log >&2
+  if [[ -s "${ERR_FILE}" ]]; then
+    tail -n 40 "${ERR_FILE}" >&2
   fi
   # still try to show error JSON if any
   if [[ -n "${RAW}" ]]; then
     printf '%s\n' "${RAW}" >&2
   fi
-  rm -f /tmp/grok-agent-stderr.$$.log
   exit "${RC}"
 fi
-rm -f /tmp/grok-agent-stderr.$$.log
 
 # Parse
 if ! command -v jq >/dev/null 2>&1; then

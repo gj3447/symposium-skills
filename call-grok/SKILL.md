@@ -1,7 +1,7 @@
 ---
 name: call-grok
 description: >
-  Invoke Grok CLI headless as a subordinate tool so Claude Code, Codex, or other agents can spend Grok Super quota on research/review/reasoning. Use when: "call grok", "ask grok", "grok-agent", "use grok", "grok subagent", "delegate to grok", "Grok Super 사용", "/call-grok", "/grok-agent". Prefer for second-opinion reviews, deep research, multi-file exploration, or tasks the parent wants offloaded to Grok.
+  Invoke Grok CLI headless as a subordinate tool so Claude Code, Codex, or other agents can spend Grok Super quota on research/review/reasoning. Use when: "call grok", "ask grok", "grok-agent", "grok-job", "use grok", "grok subagent", "delegate to grok", "Grok Super 사용", "그록에게 하급 작업 맡겨", "/call-grok", "/grok-agent". Prefer for second-opinion reviews, deep research, multi-file exploration, video pre-production packets, or tasks the parent wants offloaded to Grok.
 ---
 
 # call-grok — use Grok as a tool
@@ -22,6 +22,8 @@ Canonical script:
 
 Symlink (preferred): `~/.local/bin/grok-agent`
 
+Fixed worker-order router: `~/.local/bin/grok-job`
+
 ## When to call Grok (parent decision)
 
 | Situation | Preset |
@@ -29,6 +31,7 @@ Symlink (preferred): `~/.local/bin/grok-agent`
 | Pure reasoning / second opinion, no repo touch | `chat` |
 | Explore codebase / web, no writes (default) | `readonly` or `ask` |
 | Broad research, more turns | `research` |
+| Parallel web research with Grok child agents | `chain` |
 | Adversarial / bug-hunt code review | `review` |
 | Parent wants Grok to implement | `write` (rare; confirm with user if destructive) |
 
@@ -55,6 +58,32 @@ Treat Grok as **cheap parallel bandwidth / second brain**, not as the sole archi
 
 Rule of thumb: **Grok explores and drafts; parent judges and commits.**
 
+## Fixed worker orders (`grok-job`)
+
+Use `grok-job` when the parent wants a durable order instead of hand-writing a
+long Grok prompt. It renders a self-contained safety contract and delegates to
+the existing `grok-agent` engine with a locked preset.
+
+```bash
+grok-job list
+grok-job help video-pack
+grok-job scout -- "Map these paths and cite every important finding: PATHS"
+grok-job verify -- "Check every numeric and completion claim in REPORT.md"
+grok-job review -- "Changed files: PATHS. Intended behavior: SPEC"
+grok-job fanout -- "Research these 2-4 independent axes: AXES"
+```
+
+Catalog jobs never use the `write` preset. The durable work split is:
+
+```text
+Grok:   MAP · COLLECT · FILL · COMPARE · ATTACK · DRAFT
+Parent: DECIDE · CANONIZE · BIND · MERGE
+```
+
+The executable contract is `grok-job help <job>`; keep it as the source of truth.
+For copy-paste recipes and the video production chain, read
+[`references/worker-jobs.md`](references/worker-jobs.md).
+
 ## How to invoke (copy-paste)
 
 ### Default (readonly)
@@ -68,6 +97,17 @@ grok-agent readonly --cwd "$PWD" -- "YOUR TASK HERE"
 ```bash
 grok-agent research --cwd "$PWD" --max-turns 30 -- "Research X; return consensus / divergence / open questions"
 ```
+
+### Parallel research chain
+
+```bash
+grok-agent chain --cwd "$PWD" --max-turns 30 -- "Split X into 2-4 independent axes, dispatch read-only subagents, then synthesize with URLs"
+```
+
+The `chain` preset enables one level of Grok subagents plus web search/fetch. It
+uses an explicit read-only tool allowlist and the Grok `read-only` sandbox, so
+child agents can research in parallel without editing the workspace or running
+shell commands.
 
 ### Code review (read-only)
 
@@ -136,6 +176,7 @@ grok-agent research --prompt-file /tmp/task.md --cwd "$PWD"
 | chat | no | no | no |
 | readonly / ask | no | no | yes |
 | research | no | no | yes |
+| chain | no | no | yes (parallel child agents) |
 | review | no | no | no |
 | write | **yes** (`--yolo`) | **yes** | yes |
 

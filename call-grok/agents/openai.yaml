@@ -1,4 +1,4 @@
 interface:
   display_name: "Call Grok"
-  short_description: "Run Grok headless as a tool from Codex"
-  default_prompt: "Use $call-grok with preset readonly to have Grok research or review: "
+  short_description: "Delegate safe research and review jobs to Grok"
+  default_prompt: "Use $call-grok and the safest grok-job worker order to delegate this task to Grok:"
