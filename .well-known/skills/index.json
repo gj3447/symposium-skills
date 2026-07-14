@@ -2,9 +2,9 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": "v26.0.2",
-  "git_head_short": "5af874f",
-  "merkle_root": "f870b777d38172fc0317ea60a8a1fa5a50dc0bdbc63667aa0051cc2fdee20157",
-  "skills_count": 40,
+  "git_head_short": "41356b1",
+  "merkle_root": "01c5a590f48d80f4582b6df2f3abd820cc34216ef505e8ddb95480ebed0b2393",
+  "skills_count": 43,
   "skills": [
     {
       "name": "88-taliban",
@@ -18,7 +18,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "d53038a62ca620ca1e0136760ebfa42c6c61afb5"
+      "git_tree_sha": "60d703ccc17a68b92afadfa41997ea88c3815161"
     },
     {
       "name": "apt-autoflow-guard",
@@ -119,6 +119,27 @@
       "git_tree_sha": "f797e8dc17b2a1a2ad90e8b1245c855a38494817"
     },
     {
+      "name": "call-codex",
+      "version": "1.1.0",
+      "kg_ref": "ATOM_Skill_call_codex",
+      "channel": "stable",
+      "git_tree_sha": "b0c97fc6b3cdb2bad6171c929e34a1afbe81ed16"
+    },
+    {
+      "name": "call-grok",
+      "version": null,
+      "kg_ref": null,
+      "channel": "stable",
+      "git_tree_sha": "778050b3ae69d8e5e69041e49dbf5eea378b87ae"
+    },
+    {
+      "name": "compute-offload",
+      "version": "1.1.0",
+      "kg_ref": "reference_compute_fleet_offload_2026_07_13",
+      "channel": "stable",
+      "git_tree_sha": "f2d3b007d7b97014f4412d9fdb688760122d7a07"
+    },
+    {
       "name": "db-query",
       "version": "1.1.0",
       "kg_ref": "ATOM_Skill_db_query",
@@ -172,7 +193,7 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_harness",
       "channel": "stable",
-      "git_tree_sha": "cded2b09a844dabc1e61db7247667c5fab29963e"
+      "git_tree_sha": "36e128d62cc08b1a8145487a400e265216144c05"
     },
     {
       "name": "jaebaeman",
@@ -193,7 +214,7 @@
       "version": "3.3.0",
       "kg_ref": "ATOM_Skill_longinus",
       "channel": "stable",
-      "git_tree_sha": "b743ba740e3a5d86452b7f47fd751962441b07a0"
+      "git_tree_sha": "68a62c2e0923ef3c998eb78a46805e3fd1c2626c"
     },
     {
       "name": "occam",
