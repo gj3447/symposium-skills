@@ -1,0 +1,72 @@
+{
+  "schema_version": "fsm-spec/v1",
+  "name": "review-lifecycle",
+  "execution": {
+    "step_interface": "step(configuration, typed_event) -> next_configuration, effect_commands",
+    "event_queue": "External events are FIFO; commands emitted by one step are not re-entered synchronously.",
+    "run_to_completion": "One event is fully selected and reduced before the next external event.",
+    "action_order": "Select transition, compute next state, then emit typed effect commands."
+  },
+  "context_schema": {
+    "attempt": {"type": "non-negative integer"},
+    "evidence_complete": {"type": "boolean"},
+    "creator_id": {"type": "actor-id"},
+    "reviewer_id": {"type": "actor-id"},
+    "review_deadline": {"type": "timestamp", "role": "deadline"}
+  },
+  "event_schemas": {
+    "SUBMIT": {"type": "object", "required": ["artifact_id", "actor", "event_id"], "properties": {"artifact_id": {"type": "string"}, "actor": {"type": "actor-id"}, "event_id": {"type": "string"}}},
+    "APPROVE": {"type": "object", "required": ["artifact_id", "actor", "reviewer_id", "event_id"], "properties": {"artifact_id": {"type": "string"}, "actor": {"type": "actor-id"}, "reviewer_id": {"type": "actor-id"}, "event_id": {"type": "string"}}},
+    "REJECT": {"type": "object", "required": ["artifact_id", "actor", "reviewer_id", "event_id"], "properties": {"artifact_id": {"type": "string"}, "actor": {"type": "actor-id"}, "reviewer_id": {"type": "actor-id"}, "event_id": {"type": "string"}}},
+    "TIMEOUT": {"type": "object", "required": ["artifact_id", "actor", "deadline", "observed_at", "event_id"], "properties": {"artifact_id": {"type": "string"}, "actor": {"type": "actor-id"}, "deadline": {"type": "timestamp", "role": "deadline"}, "observed_at": {"type": "timestamp", "role": "observation_time"}, "event_id": {"type": "string"}}}
+  },
+  "guards": {
+    "approval_allowed": {"reads": ["evidence_complete", "creator_id", "reviewer_id"], "event_reads": ["reviewer_id"], "pure": true, "synchronous": true},
+    "review_timeout_due": {"kind": "deadline", "deadline_context_field": "review_deadline", "observed_event_field": "observed_at", "reads": ["review_deadline"], "event_reads": ["observed_at"], "pure": true, "synchronous": true}
+  },
+  "effects": {
+    "RecordSubmission": {"kind": "command", "payload_schema": {"type": "object", "required": ["artifact_id", "event_id"], "properties": {"artifact_id": {"type": "string"}, "event_id": {"type": "string"}}}},
+    "RecordVerdict": {"kind": "command", "payload_schema": {"type": "object", "required": ["artifact_id", "reviewer_id", "verdict"], "properties": {"artifact_id": {"type": "string"}, "reviewer_id": {"type": "actor-id"}, "verdict": {"type": "string"}}}},
+    "RecordTimeout": {"kind": "command", "payload_schema": {"type": "object", "required": ["artifact_id", "deadline"], "properties": {"artifact_id": {"type": "string"}, "deadline": {"type": "timestamp"}}}},
+    "AuditInvalidTransition": {"kind": "audit", "payload_schema": {"type": "object", "required": ["state", "event", "actor", "reason", "event_id"], "properties": {"state": {"type": "string"}, "event": {"type": "string"}, "actor": {"type": "actor-id"}, "reason": {"type": "string"}, "event_id": {"type": "string"}}}}
+  },
+  "machines": [
+    {
+      "id": "lifecycle",
+      "initial": "draft",
+      "states": [
+        {"id": "draft", "kind": "atomic"},
+        {"id": "review", "kind": "atomic"},
+        {"id": "accepted", "kind": "final"},
+        {"id": "rejected", "kind": "final"},
+        {"id": "timed_out", "kind": "final"}
+      ],
+      "events": ["SUBMIT", "APPROVE", "REJECT", "TIMEOUT"],
+      "invalid_event_policy": {
+        "mode": "reject-and-audit",
+        "guard_false": "reject-and-audit",
+        "state_change": "none",
+        "effect": "AuditInvalidTransition",
+        "effect_binding": {"state": "configuration.state", "event": "event.type", "actor": "event.actor", "reason": "rejection.reason", "event_id": "event.event_id"}
+      },
+      "transitions": [
+        {"id": "submit", "from": "draft", "event": "SUBMIT", "to": "review", "effects": ["RecordSubmission"], "effect_bindings": {"RecordSubmission": {"artifact_id": "event.artifact_id", "event_id": "event.event_id"}}},
+        {"id": "approve", "from": "review", "event": "APPROVE", "to": "accepted", "guard": "approval_allowed", "effects": ["RecordVerdict"], "effect_bindings": {"RecordVerdict": {"artifact_id": "event.artifact_id", "reviewer_id": "event.reviewer_id", "verdict": "literal:accepted"}}},
+        {"id": "reject", "from": "review", "event": "REJECT", "to": "rejected", "effects": ["RecordVerdict"], "effect_bindings": {"RecordVerdict": {"artifact_id": "event.artifact_id", "reviewer_id": "event.reviewer_id", "verdict": "literal:rejected"}}},
+        {"id": "timeout", "from": "review", "event": "TIMEOUT", "to": "timed_out", "guard": "review_timeout_due", "effects": ["RecordTimeout"], "effect_bindings": {"RecordTimeout": {"artifact_id": "event.artifact_id", "deadline": "event.deadline"}}}
+      ]
+    }
+  ],
+  "safety_properties": [
+    {"id": "distinct-reviewer", "statement": "Only a reviewer distinct from the creator may approve.", "verification": "Guard truth-table plus implementation conformance test."}
+  ],
+  "liveness_properties": [
+    {"id": "eventual-verdict", "statement": "A submitted item eventually reaches a terminal verdict.", "assumptions": ["A reviewer responds or the external TIMEOUT event is delivered by review_deadline."], "verification": "Bounded model check and timeout integration test."}
+  ],
+  "trace_fixtures": ["assets/fsm-traces.example.json"],
+  "conformance": {
+    "implementation_step": "Bind guard/effect names to typed functions implementing the declared step interface.",
+    "model_trace_runner": "scripts/run_fsm_traces.py executes the abstract fixtures with explicit guard outcomes.",
+    "contract_tests": "Run every transition, guard-false, and invalid-event fixture against both model and production reducer."
+  }
+}

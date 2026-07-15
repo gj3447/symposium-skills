@@ -1,0 +1,6 @@
+interface:
+  display_name: "Solve"
+  short_description: "Run the structured lesson-solving cycle"
+  default_prompt: "Use $solve to record, research, plan, execute, and verify this lesson-backed problem."
+policy:
+  allow_implicit_invocation: false

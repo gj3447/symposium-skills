@@ -1,0 +1,4 @@
+interface:
+  display_name: "FSM Design"
+  short_description: "Design rigorous state machines and statecharts"
+  default_prompt: "Use $fsm-design to specify and verify this behavior as a state machine."

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Longinus"
+  short_description: "Bind KG claims to code and source evidence"
+  default_prompt: "Use $longinus to verify and bind this claim across KG, contract, symbol, path, line, and hash."
+policy:
+  allow_implicit_invocation: false

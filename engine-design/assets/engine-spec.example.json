@@ -1,0 +1,56 @@
+{
+  "schema_version": "engine-spec/v1",
+  "name": "example-engine",
+  "purpose": "Own deterministic admission and lifecycle decisions for reusable work units.",
+  "decision": {
+    "verdict": "engine",
+    "current_consumers": ["cli-adapter", "service-adapter"],
+    "planned_consumers": [],
+    "fit_evidence": ["Both adapters share stable admission semantics.", "Durable recovery and one reservation authority are required."],
+    "alternatives_considered": ["Pure scheduling module", "Transactional application service"]
+  },
+  "boundary": {
+    "owns": "Work-unit state and transition authority",
+    "mechanism": "Validate commands, commit facts, and request post-commit effects",
+    "policy_outside": ["Product prioritization", "UI presentation"],
+    "non_goals": ["Calling external systems inside the reducer", "Choosing business priority"],
+    "state_authority": "One engine aggregate is the single writer per work-unit id"
+  },
+  "model": {
+    "resources": ["capacity-slot"],
+    "work_units": ["job"]
+  },
+  "state_model": "A versioned Job lifecycle FSM validated with $fsm-design.",
+  "protocol": {
+    "commands": ["SubmitJob", "CancelJob"],
+    "events": ["JobSubmitted", "JobCancelled"],
+    "effects": ["NotifyConsumer", "DispatchAcceptedJob"],
+    "versioning": "Additive fields are backward compatible; breaking changes require a new major schema."
+  },
+  "invariants": ["A terminal job cannot return to a running state."],
+  "ports": ["EventStore", "Clock", "JobDispatcher", "Notifier"],
+  "runtime": {
+    "ordering": "Commands are serialized per job id.",
+    "concurrency": "Different job ids may progress concurrently.",
+    "backpressure": "Reject admission with retry guidance when the bounded queue is full.",
+    "cancellation": "Cancellation is a command and produces an auditable terminal event.",
+    "timeouts": "External waits have typed deadlines and timeout events."
+  },
+  "durability": {
+    "persistence": "Append accepted domain events before exposing success.",
+    "atomic_commit": "Commit dedup claim, expected-version events, snapshot pointer, and outbox intents atomically.",
+    "recovery": "Rebuild state by replay, then resume unacknowledged outbox effects.",
+    "effect_idempotency": "Use event id plus effect index as the idempotency key.",
+    "migration": "Upcast old event versions during replay; retain original bytes."
+  },
+  "failure_model": ["Invalid commands are rejected without mutation.", "Transient port failures exhaust into an observable state."],
+  "observability": {
+    "traces": ["Command, decision, committed event, and effect attempt share correlation and causation ids."],
+    "metrics": ["Queue depth, rejection, version conflict, outbox lag, recovery duration, and effect failure counts."],
+    "redaction": "Security-domain identifiers stay in protected traces and never become high-cardinality metric labels."
+  },
+  "security": ["Capabilities are explicit.", "Private-domain traffic cannot alter shared decisions."],
+  "verification": ["Table-test every command/state pair.", "Crash-test every cut point around commit and effect acknowledgement."],
+  "implementation_slices": ["One consumer, SubmitJob, JobSubmitted, the event store, and one crash recovery path."],
+  "falsifiers": ["If shared state authority and durability disappear, collapse this into a pure module."]
+}

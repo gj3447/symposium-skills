@@ -1,0 +1,4 @@
+interface:
+  display_name: "Compute Offload"
+  short_description: "Route heavy work to the managed compute fleet"
+  default_prompt: "Use $compute-offload to route this heavy workload with headroom and production-safety checks."

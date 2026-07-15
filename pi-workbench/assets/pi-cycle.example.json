@@ -1,0 +1,57 @@
+{
+  "schema_version": "pi-cycle/v1",
+  "template_only": true,
+  "cycle_id": "pi-example-20260715",
+  "mode": "write",
+  "kind": "behavior",
+  "repo": {
+    "name": "lakatotree",
+    "logical_path": "PI/lakatotree",
+    "resolved_root": "/absolute/path/to/lakatotree",
+    "git_head": "0123456789abcdef0123456789abcdef01234567",
+    "instructions_read": [
+      "PI/AGENTS.md",
+      "PI/lakatotree/CLAUDE.md"
+    ]
+  },
+  "roles": {
+    "coordinator": "root",
+    "implementer": "pi_research_engineer",
+    "judge": "progress_judge"
+  },
+  "coordination": {
+    "task_id": "pi-example-20260715",
+    "agent_id": "pi_research_engineer.example",
+    "writes": [
+      "lakatotree/lakatos/example.py",
+      "lakatotree/tests/test_example.py"
+    ],
+    "claim_status": "HELD",
+    "orbit_id": "orbit-example",
+    "fence": 7,
+    "heartbeat_at": "2026-07-15T01:05:00+09:00",
+    "released": true,
+    "cancelled": true
+  },
+  "measurement": {
+    "receipt_path": "evidence/example-ooptdd-receipt.json",
+    "receipt_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "test_command": ".venv/bin/python -m pytest -q",
+    "positive_verdict": "green",
+    "negative_verdict": "red"
+  },
+  "judgment": {
+    "packet_path": "evidence/example-judgment-packet.json",
+    "packet_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "judge_command": ".venv/bin/python examples/example_programme.py",
+    "source": "scripted",
+    "verified_from_receipt": true
+  },
+  "verification": [
+    {
+      "command": ".venv/bin/python -m pytest -q",
+      "exit_code": 0,
+      "output_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    }
+  ]
+}

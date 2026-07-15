@@ -1,0 +1,6 @@
+interface:
+  display_name: "TPA TargetCodeWorld"
+  short_description: "Run the TPA code recovery phase explicitly"
+  default_prompt: "Use $tpa-tcw for the requested TargetCodeWorld phase."
+policy:
+  allow_implicit_invocation: false

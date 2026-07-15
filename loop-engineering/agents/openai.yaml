@@ -1,0 +1,4 @@
+interface:
+  display_name: "Loop Engineering"
+  short_description: "Design bounded, observable agent execution loops"
+  default_prompt: "Use $loop-engineering to design a reliable harness or agent execution loop."

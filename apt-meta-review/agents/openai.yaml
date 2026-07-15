@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT Meta Review"
+  short_description: "Run the internal APT meta-review phase explicitly"
+  default_prompt: "Use $apt-meta-review to run this APT meta-review phase."
+policy:
+  allow_implicit_invocation: false

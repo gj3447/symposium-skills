@@ -1,0 +1,6 @@
+interface:
+  display_name: "Server Backup"
+  short_description: "Run SYMPOSIUM database backup operations explicitly"
+  default_prompt: "Use $backup for this explicitly requested server backup."
+policy:
+  allow_implicit_invocation: false

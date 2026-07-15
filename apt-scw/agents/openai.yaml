@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT SourceCodeWorld"
+  short_description: "Run the APT implementation phase explicitly"
+  default_prompt: "Use $apt-scw for the requested SourceCodeWorld phase."
+policy:
+  allow_implicit_invocation: false

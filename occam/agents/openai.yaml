@@ -1,0 +1,6 @@
+interface:
+  display_name: "Occam"
+  short_description: "Archive superseded and stale material safely"
+  default_prompt: "Use $occam to separate active material from superseded history without deleting canon."
+policy:
+  allow_implicit_invocation: false

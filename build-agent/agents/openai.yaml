@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT Build Agent"
+  short_description: "Invoke the internal APT build specialist explicitly"
+  default_prompt: "Use $build-agent for this explicit crystallized build task."
+policy:
+  allow_implicit_invocation: false

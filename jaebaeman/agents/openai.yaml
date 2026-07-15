@@ -1,0 +1,6 @@
+interface:
+  display_name: "Jaebaeman"
+  short_description: "Plan and collect bounded specialist dispatch"
+  default_prompt: "Use $jaebaeman to seed, dispatch, collect, and validate this bounded multi-agent cycle."
+policy:
+  allow_implicit_invocation: false

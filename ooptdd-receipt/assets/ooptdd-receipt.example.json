@@ -1,0 +1,71 @@
+{
+  "schema_version": "symposium-ooptdd-receipt/v1",
+  "template_only": true,
+  "receipt_id": "example-runtime-contract",
+  "cycle_id": "pi-example-20260715",
+  "requirement_group": "EXAMPLE-RUNTIME-CONTRACT",
+  "spec": {
+    "path": "ooptdd_receipts/example/requirements.yaml",
+    "sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "locked_before_positive_run": true
+  },
+  "producer": {
+    "command": ".venv/bin/python ooptdd_receipts/example/example_receipt.py",
+    "cwd": "/absolute/path/to/repo",
+    "git_head": "0123456789abcdef0123456789abcdef01234567",
+    "entrypoint": "example_receipt:verify",
+    "source_path": "lakatos/example.py",
+    "source_symbol": "evaluate_example",
+    "real_code_path": true,
+    "exit_code": 0
+  },
+  "correlation": {
+    "cid": "example-runtime-contract-20260715"
+  },
+  "requirements": [
+    {
+      "id": "EXAMPLE-DEFECT",
+      "role": "guard_defect",
+      "event": "invalid_example_rejected"
+    },
+    {
+      "id": "EXAMPLE-MECHANISM",
+      "role": "guard_mechanism",
+      "event": "valid_example_accepted"
+    }
+  ],
+  "positive": {
+    "observed_verdict": "green",
+    "receipt_path": "results/example-positive.json",
+    "receipt_sha256": "2222222222222222222222222222222222222222222222222222222222222222",
+    "evidence_tier": "arrived",
+    "charge_ratio": 1.0,
+    "forbidden_events_passed": true,
+    "loop": {
+      "complete": true,
+      "methodology_ok": true,
+      "done": 2,
+      "total": 2
+    }
+  },
+  "negative_oracle": {
+    "spec_sha256": "1111111111111111111111111111111111111111111111111111111111111111",
+    "technique": "fault_injection",
+    "injection": "Suppress the required valid_example_accepted event at the real adapter boundary.",
+    "observed_verdict": "red",
+    "receipt_path": "results/example-negative.json",
+    "receipt_sha256": "3333333333333333333333333333333333333333333333333333333333333333",
+    "restored": true
+  },
+  "oracle": {
+    "separate_source": false,
+    "corroborated": false,
+    "emit_identity": "memory://example-producer",
+    "read_identity": "memory://example-producer"
+  },
+  "source_binding": {
+    "path": "lakatos/example.py",
+    "symbol": "evaluate_example",
+    "sha256": "4444444444444444444444444444444444444444444444444444444444444444"
+  }
+}

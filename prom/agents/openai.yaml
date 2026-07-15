@@ -1,0 +1,6 @@
+interface:
+  display_name: "PROM Alias"
+  short_description: "Invoke the short Prometheus alias explicitly"
+  default_prompt: "Use $prom for this explicitly requested PROM cycle."
+policy:
+  allow_implicit_invocation: false

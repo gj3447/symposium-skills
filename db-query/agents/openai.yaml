@@ -1,0 +1,6 @@
+interface:
+  display_name: "Database Query"
+  short_description: "Query SYMPOSIUM databases when explicitly requested"
+  default_prompt: "Use $db-query for this explicit database query."
+policy:
+  allow_implicit_invocation: false

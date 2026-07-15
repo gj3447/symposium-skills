@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-07-14T16:32:37+09:00",
-  "git_head_commit": "41356b125a21c51d0a997a322f9778c16a34de1a",
-  "git_head_short": "41356b1",
+  "generatedAt": "2026-07-15T14:21:08+09:00",
+  "git_head_commit": "8c163e5bfaacf0035a15cb1915b8ff6699b0aed7",
+  "git_head_short": "8c163e5",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
-  "skills_count": 43,
-  "merkle_root": "01c5a590f48d80f4582b6df2f3abd820cc34216ef505e8ddb95480ebed0b2393",
+  "skills_count": 50,
+  "merkle_root": "e02685b1712ace0c53157ea82dfd48a2171cc3645cbdfd6d207ed3d59941defa",
   "skills": [
     {
       "name": "88-taliban",
@@ -163,7 +163,7 @@
     {
       "name": "db-query",
       "path": "db-query",
-      "version": "1.1.0",
+      "version": "2.0.0",
       "kg_ref": "ATOM_Skill_db_query",
       "channel": "stable",
       "git_tree_sha": "453ee87e46b6045110319faa092a83cf6599df61"
@@ -193,6 +193,14 @@
       "git_tree_sha": "d282608d65e285a9bb7f409c3fd4e6bd6311d9c8"
     },
     {
+      "name": "engine-design",
+      "path": "engine-design",
+      "version": null,
+      "kg_ref": null,
+      "channel": "stable",
+      "git_tree_sha": null
+    },
+    {
       "name": "eureka",
       "path": "eureka",
       "version": "1.0.0",
@@ -207,6 +215,14 @@
       "kg_ref": "ATOM_Skill_fix_agent_v28",
       "channel": "draft",
       "git_tree_sha": "2103b04c13433c60fc539a9250934f8e85541928"
+    },
+    {
+      "name": "fsm-design",
+      "path": "fsm-design",
+      "version": null,
+      "kg_ref": null,
+      "channel": "stable",
+      "git_tree_sha": null
     },
     {
       "name": "hades",
@@ -241,6 +257,14 @@
       "git_tree_sha": "3f236fb3680382fb9210942626a10298217596d4"
     },
     {
+      "name": "lakatotree-judge",
+      "path": "lakatotree-judge",
+      "version": null,
+      "kg_ref": null,
+      "channel": "stable",
+      "git_tree_sha": null
+    },
+    {
       "name": "longinus",
       "path": "longinus",
       "version": "3.3.0",
@@ -249,12 +273,36 @@
       "git_tree_sha": "68a62c2e0923ef3c998eb78a46805e3fd1c2626c"
     },
     {
+      "name": "loop-engineering",
+      "path": "loop-engineering",
+      "version": null,
+      "kg_ref": null,
+      "channel": "stable",
+      "git_tree_sha": null
+    },
+    {
       "name": "occam",
       "path": "occam",
       "version": "1.0.0",
       "kg_ref": "occam-kam-canonical-2026-05-26",
       "channel": "stable",
       "git_tree_sha": "36e904b736195d17c30e904fcb81f94009b20432"
+    },
+    {
+      "name": "ooptdd-receipt",
+      "path": "ooptdd-receipt",
+      "version": null,
+      "kg_ref": null,
+      "channel": "stable",
+      "git_tree_sha": null
+    },
+    {
+      "name": "pi-workbench",
+      "path": "pi-workbench",
+      "version": null,
+      "kg_ref": null,
+      "channel": "stable",
+      "git_tree_sha": null
     },
     {
       "name": "prom",
@@ -275,7 +323,7 @@
     {
       "name": "server-status",
       "path": "server-status",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "kg_ref": "ATOM_Skill_server_status",
       "channel": "stable",
       "git_tree_sha": "d8990ff85cea5f098903d6e0e71af645001484b8"
@@ -295,6 +343,14 @@
       "kg_ref": "ATOM_Skill_solve",
       "channel": "stable",
       "git_tree_sha": "50a85426f0806649de86a06d2cde033c89f39eb4"
+    },
+    {
+      "name": "symposium-research",
+      "path": "symposium-research",
+      "version": null,
+      "kg_ref": null,
+      "channel": "stable",
+      "git_tree_sha": null
     },
     {
       "name": "taliban",

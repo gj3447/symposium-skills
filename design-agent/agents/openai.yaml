@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT Design Agent"
+  short_description: "Invoke the internal APT design specialist explicitly"
+  default_prompt: "Use $design-agent for this explicit design crystallization task."
+policy:
+  allow_implicit_invocation: false

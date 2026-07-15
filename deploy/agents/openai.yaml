@@ -1,0 +1,6 @@
+interface:
+  display_name: "Server Deploy"
+  short_description: "Deploy SYMPOSIUM services when explicitly requested"
+  default_prompt: "Use $deploy for this explicitly requested deployment."
+policy:
+  allow_implicit_invocation: false

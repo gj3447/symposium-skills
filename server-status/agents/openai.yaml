@@ -1,0 +1,6 @@
+interface:
+  display_name: "Server Status"
+  short_description: "Inspect SYMPOSIUM server health when explicitly requested"
+  default_prompt: "Use $server-status for this explicit infrastructure health check."
+policy:
+  allow_implicit_invocation: false

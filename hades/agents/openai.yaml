@@ -1,0 +1,6 @@
+interface:
+  display_name: "Hades"
+  short_description: "Realize accepted abstractions as concrete artifacts"
+  default_prompt: "Use $hades to realize this accepted abstraction in KG structure or source code with verification."
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,6 @@
+interface:
+  display_name: "TPA TargetPyramid"
+  short_description: "Run the TPA pattern phase explicitly"
+  default_prompt: "Use $tpa-sp for the requested TargetPyramid phase."
+policy:
+  allow_implicit_invocation: false

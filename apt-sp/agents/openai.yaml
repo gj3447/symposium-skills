@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT SemanticPyramid"
+  short_description: "Run the APT decomposition phase explicitly"
+  default_prompt: "Use $apt-sp for the requested SemanticPyramid phase."
+policy:
+  allow_implicit_invocation: false

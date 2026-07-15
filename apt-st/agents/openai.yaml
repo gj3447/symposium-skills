@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT SemanticTwin"
+  short_description: "Run the APT contract phase explicitly"
+  default_prompt: "Use $apt-st for the requested SemanticTwin phase."
+policy:
+  allow_implicit_invocation: false
