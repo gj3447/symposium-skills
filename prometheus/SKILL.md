@@ -1,22 +1,11 @@
 ---
 name: prometheus
 kg_ref: ATOM_Skill_prometheus
-version: "6.3.0"
+version: "6.4.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
-description: >
-  프로메테우스 방법론 v6.1 — **지식-행동 spiral** (Hegel reframe, NOT 단방향 "지식 선행").
-  "바로 고치지 마" 유지 + "먼저 불(지식) 훔쳐와"는 thesis-antithesis-synthesis 첫 thesis.
-  v6.1: OODA/Lean Startup 충돌 해소 — Hegel Phenomenology Begriff 자가운동.
-  paralysis-by-analysis 회피: hot-fix latency critical 시 KG-skip + immediate action + post-hoc lesson 허용.
-  사용법: `/prometheus <N> <problem>` (N=subagent 수, 생략 시 auto_estimate, default cfg slot).
-  v6: Step 6.5 filesystem_dispersion + G6.5 gate (KG↔filesystem drift 차단).
-  v5: SKILL.md는 프로토콜만, 내용물은 KG 정본(재배맨 원칙).
-  v4: 부모 하계 Pre-fetch (MCP 우회) + Finding 중복 탐지 + 재배맨 MIC 참조.
-  Enforces: 9+1 단계 사이클, haiku 병렬 subagent (N, 최대 100, default cfg slot),
-  JSON 계약(FullFindingRecord), 부모 UNWIND 배치 write, W3C PROV provenance, filesystem dispersion gate.
-  subagent 운용 = MIC_v1.SubagentSeeder (재배맨/SOP) 참조.
-  # KG: ATOM_Skill_prometheus, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory, lesson-ai-skipped-kg-check-before-framing-2026-04-29), prometheus-grounding-2026-05-05
+description: >-
+  Run the evidence-first Prometheus knowledge-action spiral from KG and local canon through diverse-axis research, structured findings, provenance, deduplication, conflict detection, and artifact dispersion. Invoke when: the user requests `/prometheus`, research, knowledge before action, an axis matrix, or a parameterized multi-finding cycle without using the short command. Do not use when: the user explicitly enters `/prom` or `prom N`, the main need is repository/canon lane selection, or only a latency-critical fix or stable lookup; use `$prom`, `$symposium-research`, or direct handling instead.
 ---
 
 ## 🔗 MIC Binding (SOLID-DIP)
@@ -241,6 +230,34 @@ docker network ls && docker network inspect $NETWORK
 
 ---
 
+### HSWM Primitive Layer (v6.4 신설 — ⚠️ opt-in, 기본 OFF)
+
+<!-- # KG: LakatosTree_PromSearchHSWM_20260721 (P1-binding-density / P4-equal-compute-control) -->
+
+**헬퍼**: 스킬 repo 루트의 `bin/prom_hswm.py` v1.0 — 단일 파일 CLI, JSON-in(stdin 또는 `--input`)/JSON-out. 서브커맨드 5종: `prefetch-rank`(Step 2.5) / `dedup`(Step 3.3-2) / `bind`(Step 3.5-H) / `consensus`(Step 4-0 제안기) / `fuse`(場융합, stdlib — 모델 불필요). vendor-copy 원본 = `SYMPOSIUM/HSWM/prom_search_hswm/` 5파일 (경로+sha256은 헬퍼 provenance 헤더에 명기, 원본은 LakatoTree 앵커라 이동 금지).
+
+```bash
+# 아래 각 스텝의 $HSWM = 이 SKILL.md가 있는 skills repo 루트의 bin/prom_hswm.py
+#   Mac 정본:   /Users/lagyeongjun/CD/SYMPOSIUM/SKILLS/bin/prom_hswm.py
+#   SERVER 사본: /Users/lagyeongjun/CD/SERVER/.claude/skills/bin/prom_hswm.py
+```
+
+**opt-in 조건 (LakatoTree P4 판정에 따른 강도 확정)**: 사용자가 cycle 시작 시 명시적으로 HSWM 모드를 요청(`--hswm` 플래그 또는 "HSWM 모드" 발화)한 경우에만 아래 각 스텝의 **HSWM opt-in** 블록을 사용한다. **기본값 = v6.3 lexical 경로 그대로** (아래 모든 기존 cypher 블록은 v6.3 대비 무삭제 보존 — 헬퍼는 각 스텝의 앞단 제안/재랭킹 층일 뿐이다).
+
+**판정 근거 (LakatoTree_PromSearchHSWM_20260721, judged 2026-07-22)**:
+
+- **P1-binding-density = "progressive"**: semantic weave `held_out_binding_density` **0.2121** (held-out n=33, τ=0.5928 MC-null 캘리브레이션) vs 현행 PROM 정규화 CONTAINS lexical **0.0**; `semantic_minus_lexical_binding_gap` 0.2121 ≥ threshold 0.2; MC-null z=**6.56**. (evidence: `HSWM/prom_search_hswm/evidence/EVIDENCE_p1_binding_density_2026-07-22.json`)
+- **P4-equal-compute-control = "partial"** (서버 verdict 원문: `{"verdict": "partial", "delta": 0.0303, "novel": false, "lakatos": "degenerating", "metric_verdict": "partial"}`): semantic 0.2121 vs equal-compute blind lexical control 0.1818 — `semantic_minus_equalcompute_binding_gain` **0.0303** < novel threshold 0.1, MC-null z=**1.0** (null과 통계적으로 구분 안 됨). (evidence: `HSWM/prom_search_hswm/evidence/EVIDENCE_p4_equalcompute_2026-07-22.json`)
+- **정직 anomaly (P4 evidence)**: 단순 1패스 Jaccard lexical top-1 = **0.4242** 로 τ-게이트 semantic(0.2121)과 equal-compute RRF control(0.1818) 양쪽을 이김 — D1 "lexical-shallow" 진단은 CONTAINS(0.0)에 한정 유효.
+
+**축소 문구 (P4 비-progressive 강제 조항)**: semantic weave 이득은 equal-compute control을 이기지 못함(LakatoTree partial) — 전체 프로그램 degenerating, 이후 모든 semantic weave 주장은 이 한계 하에서만 유효. 따라서 본 레이어는 default-on이 아니라 **opt-in 강등**이며, 이 문구가 있는 한 v6.4는 성능 주장이 아니라 배선 제공이다.
+
+**하위호환 계약**: 임베딩 의존 서브커맨드(prefetch-rank/dedup/consensus/bind)는 import 실패·모델 부재 시 `{"status":"UNAVAILABLE","reason":...}` + exit 0 을 반환 — 스킬은 이를 받으면 해당 스텝을 v6.3 경로로 그대로 진행한다. `fuse`는 stdlib 순수계산이라 항상 동작. 모델 = all-MiniLM-L6-v2 기본, fallback paraphrase-multilingual-MiniLM-L12-v2(한/중/영), 캐시는 `/Volumes/GM/hswm_lab/` 시도 후 로컬 폴백.
+
+**명시적 비채택 (반증 라인 부활 금지)**: GCN-II 깊이(ML19 전 지표 최악) / 의미 엣지가중 Θ-sem(ML17 −0.031 해침) / blind RRF 단독(ML5) / 순수 hypergraph 랭킹 단독(ML19 CI 0) / entity 정점 후보추가(V∪E 종결). 랭킹 경로 = hyper_fuse(flat cosine + hyper PPR 의 RRF)만.
+
+---
+
 ### Step 2.5: 하계 Pre-fetch — 부모가 KG를 대신 조회 (v4 신규)
 
 <!-- # KG: SPAN_prometheus_v4_prefetch_protocol, SA_methodology_v4_triple_upgrade -->
@@ -281,6 +298,16 @@ RETURN ts.name, ts.role, ts.priority LIMIT 10
 
 **효과**: subagent가 이미 KG에 있는 지식을 **볼 수 있음** → 중복 리서치 방지 → 엔트로피 감소.
 
+**HSWM opt-in 재랭킹 (v6.4)** — opt-in cycle에서만: 위 2.5-1/2.5-2/2.5-3 cypher를 `LIMIT 30/10/10` 대신 `LIMIT 200` 으로 실행(recall 확장 pool — cypher 블록 자체는 무변경, LIMIT 값만 실행 시 치환)한 뒤, 결과를 후보 JSON으로 저장하고 재랭킹 후 **top-30만** 주입 형식에 사용한다:
+
+```bash
+# cands.json = {"candidates":[{"name": rf.name, "text": rf.oneLineSummary, "score": <선택>}...]}
+python3 $HSWM prefetch-rank --input cands.json --query "<problem_text>"
+# → {"status":"OK","top":[{id,text,fused,semantic_cos,raw_rank}×≤30],"weights":...,"dropped":...}
+```
+
+場융합 = raw(검색순서 또는 score 필드) + semantic(cosine), strategy=gated_agreement — blind RRF 금지(ML5). `UNAVAILABLE` 시 v6.3 현행(위 cypher LIMIT 원값 결과 그대로 주입)으로 진행.
+
 ---
 
 ### Step 3.3: Finding 중복 탐지 (v4 신규)
@@ -307,6 +334,18 @@ RETURN rf.name, rf.oneLineSummary LIMIT 5
 | findingId 충돌 | MERGE (기존 노드 갱신, 생성 안 함) |
 | domain + 유사 summary | 기존 finding에 `alternatives` 추가만 |
 | 신규 | 정상 MERGE |
+
+**HSWM opt-in semantic dedup (v6.4)** — opt-in cycle에서만: 3.3-1 해시체크와 위 결정표는 그대로 유지하고, **3.3-2의 판정 입력만** semantic으로 교체한다:
+
+```bash
+# in.json = {"new_findings":[{"id":findingId,"text":oneLineSummary}...],
+#            "pool":[기존 RF {"name":rf.name,"text":rf.oneLineSummary}...]}
+python3 $HSWM dedup --input in.json
+# → results[i] = {id, verdict: duplicate|alternative|new, score, matched_rf,
+#                 semantic_cos, entity_jaccard, shared_entities}
+```
+
+신호 = 임베딩 cosine(max vs pool) + 공유엔티티 Jaccard. 임계는 헬퍼 파일 상수로 **사전고정** (`DEDUP_DUP_TAU=0.85` / `DEDUP_ALT_TAU=0.60` / `DEDUP_ENT_JACCARD=0.50`) — cycle 중 조정 금지. verdict→결정표 매핑: `duplicate`→"findingId 충돌"행 조치(기존 노드 갱신), `alternative`→"유사 summary"행(`alternatives` 추가만), `new`→정상 MERGE. `UNAVAILABLE` 시 fallback = 기존 3.3-2 CONTAINS cypher.
 
 # KG: finding_D17_swt_algorithms, lesson-longinus-rigor-theories-2026-04-16
 
@@ -535,6 +574,38 @@ RETURN bw.verified AS gate_passed,
 
 **왜 강제인가**: v4에서 partial write가 은폐되어 Step 4 집계가 잘못된 데이터로 진행. v5 gate로 즉시 감지 + 자동 재시도.
 
+#### 3.5-H. HSWM opt-in 바인딩 — RF→기존 KG노드 weight-semantic 엣지 (v6.4)
+
+opt-in cycle에서만, Gate 3.5 통과 직후: cycle 신규 RF들을 **기존 내부 KG 노드**에 의미 바인딩한다. LakatoTree hard core("외부노드는 롱기누스 weight-semantic 엣지로 내부場 바인딩 or float 플래그")의 운영 구현이자 P1 binding density의 향후 운영 측정 대상.
+
+```bash
+# in.json = {"findings":[신규 RF {"name":rf.name,"text":rf.oneLineSummary}...],
+#            "candidates":[기존 KG 후보 노드 {"name","text":desc}...]}
+python3 $HSWM bind --input in.json --tau 0.5928
+# → {"tau","bindings":[{rf,node,weight}...], "floats":[{rf,best_node,best_cos}...]}
+```
+
+τ는 P1 캘리브레이션 값 **0.5928**(calibration-set MC-null `null_mean+3·null_std`, EVIDENCE_p1 참조)을 `--tau`로 주입 — 헬퍼 기본상수 0.55는 휴리스틱이므로 운영 사용 금지. 결과를 부모가 MERGE:
+
+```cypher
+// bindings → weight-semantic 엣지 (cosine≥τ 쌍만)
+UNWIND $bindings AS b
+MATCH (rf:ResearchFinding {name: b.rf})
+MATCH (kg {name: b.node})
+MERGE (rf)-[e:SEMANTIC_BINDS_TO]->(kg)
+SET e.weight = b.weight, e.tau = $tau,
+    e.method = 'prom_hswm-bind-v6.4', e.boundAt = datetime()
+```
+
+```cypher
+// floats → float 플래그 (τ 미달 = 바인딩 실패 정직 기록, 값 조정 금지)
+UNWIND $floats AS f
+MATCH (rf:ResearchFinding {name: f.rf})
+SET rf.float_flag = true, rf.float_best_cos = f.best_cos
+```
+
+`UNAVAILABLE` 시 이 서브스텝 전체 skip — v6.3에는 이 엣지 생성 경로 자체가 없으므로 skip = v6.3 동작과 동일.
+
 ---
 
 ### Step 4: 집계/합의/충돌 탐지
@@ -552,6 +623,28 @@ Step 3.5에서 KG에 이미 적재된 N개 ResearchFinding을 **집계**한다. 
   summary: {consensusCount, conflictCount, singletonCount, totalFindings}
 }
 ```
+
+#### 4-0. HSWM opt-in 場융합 + consensus 제안기 (v6.4 신설, 선택)
+
+opt-in cycle에서만, 4-1/4-2/4-3 cypher 실행 **전에** 제안 입력을 준비한다. **제안만 — 확정은 4-4 KARMA LLM** (P2b: naive semantic-on-recommendation은 MC-null z=0.19로 REFUTED — recommendation 텍스트 유사도 단독 판정 금지, 헬퍼=제안기 / LLM=판정자 역할분리):
+
+```bash
+# rf.json = {"findings":[cycle RF {"name":rf.name,"text":rf.oneLineSummary}...]}
+python3 $HSWM consensus --input rf.json --query "<problem_text>"
+# → groups: overlapping 합의그룹 (엔티티 하이퍼엣지: entity/members/size/cohesion)
+#   + conflict_candidates (같은 그룹 내 low-cosine 쌍) + singletons
+#   + finding_ranking (hyper_fuse = flat cosine + hyper PPR 의 RRF — 유일 랭킹 경로)
+```
+
+overlapping 그룹 = 한 finding이 여러 엔티티 그룹에 동시 소속 가능 (P2b 발견: 실 consensus는 partition이 아니라 overlapping hypergraph — 4-1의 recommendation 완전동일 그룹핑이 표현 못 하는 구조). axis별 web場+KG場 랭킹 융합이 따로 필요하면 `fuse` 서브커맨드 (stdlib 순수계산, 모델 불필요 — UNAVAILABLE 없음):
+
+```bash
+# fields.json = {"rankings":{"web":[score...],"kg":[score...]},"ids":[...]}
+python3 $HSWM fuse --input fields.json     # strategy=gated_agreement 기본 — blind RRF 금지(ML5),
+                                           # 場별 측정 게이트 = 정전 7cmd-measurement-driven-conditional-dispatch 정합
+```
+
+4-1/4-2/4-3 cypher는 **fallback이자 기본 경로로 보존** — opt-in cycle이어도 cypher 결과와 헬퍼 제안을 4-4에서 함께 놓고 판정한다. `UNAVAILABLE` 시 v6.3 그대로.
 
 #### 4-1. 합의 탐지 (consensus)
 
@@ -1061,6 +1154,7 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|
+| **v6.4** | 2026-07-22 | HSWM primitive layer 배선 (⚠️ **opt-in, 기본 OFF** — fallback: v6.3 lexical). `bin/prom_hswm.py` 5 서브커맨드(prefetch-rank/dedup/bind/consensus/fuse)를 Step 2.5/3.3/3.5-H/4-0에 배선, 기존 v6.3 cypher 블록 전부 무삭제 보존. 강도 근거 = LakatoTree_PromSearchHSWM_20260721 판정 (2026-07-22): P1-binding-density **progressive** (semantic 0.2121 vs CONTAINS 0.0, gap 0.2121≥0.2, z=6.56) / P4-equal-compute-control **partial + lakatos "degenerating"** (gap 0.0303<0.1, z=1.0) → default-on 금지·opt-in 강등 + 축소 문구 명시 ("semantic weave 이득은 equal-compute control을 이기지 못함"). 정직 anomaly: 1패스 Jaccard 0.4242 > semantic 0.2121. 반증 라인 비채택 (GCN-II/Θ-sem/blind RRF 단독/순수 hypergraph 단독/entity 정점). | LakatoTree P1/P4 (tree `LakatosTree_PromSearchHSWM_20260721`), `EVIDENCE_p1_binding_density_2026-07-22.json`, `EVIDENCE_p4_equalcompute_2026-07-22.json`, helper 44f211c (W1-T4) |
 | **v6.3** | 2026-05-14 | Step 3-0 KG seed Pre-fetch **MANDATORY 격상** + Step 3-0-A Anti-Pattern Detection section 신설 (6-row drift table + self-verify cypher). Step 3-1 도메인 분배 측 KG seed mandatory 명시 (axis hardcode 금지). Step 3-5 9-field seed_bundle (재배맨 v2.2) 명시. 본 세션 (2026-05-14) 측 5 prom cycle 모두 Step 3-0 SKIP drift 측 instance — `lesson-prometheus-v5-kg-reference-lift-2026-04-18` ("SKILL.md = 프로토콜만, 내용물 = KG 정본") 위반 인정. SKILL.md 본문 정정 X (drift는 SKIP 측 발생), Step 3-0/3-0-A enforcement 강화로 mandatory 격상. | `rf-prom-manual-axis-drift-2026-05-14`, `lesson-prometheus-v5-kg-reference-lift-2026-04-18` (강제 격상), `taskspec-prometheus-matrix-research-v1` (정본 cement) |
 | **v6** | 2026-04-29 | Step 6.5 filesystem_dispersion sub-step + G6.5 gate 신설. KG-first 설계 그대로, KG↔FS drift만 차단. 본문은 thin pointer — 정책은 `MIC_v1.FilesystemDispersionPolicy` slot + `MethodologyConfig_default_v26.prometheus_md_*` 4 field. APT v26 A6 resolve-only 준수. cycle `prom64-pkgdisc-2026-04-29`가 evidence — 1 .md만 default 산출되던 문제(KG 152 nodes 풍부 ↔ filesystem 1 .md lean) 해소. | `rfc-prom-filesystem-dispersion-2026-04-29`, `lesson-prom-output-coverage-too-lean-2026-04-29`, `verdict-user-prom-too-lean-2026-04-29`, `rootcause-prom-filesystem-dispersion-missing-2026-04-29`, `FilesystemDispersionPolicy` slot, `PromV5_FilesystemDispersion_v1` policy |
 | **v5** | 2026-04-18 | Step 3 prompt 본문을 KG 씨앗 (axis/sub-axis/matrix-template) 으로 lift. SKILL.md = 프로토콜만, 내용물 = KG 정본 (재배맨 원칙 준수). PrometheusStep v5 (Step 0/1/2/2.5/3/3.3/3.5/4/4.7/5/6/7) | `lesson-prometheus-v5-kg-reference-lift-2026-04-18`, `lesson-prometheus-v26-a6-step-drift-2026-04-25` |

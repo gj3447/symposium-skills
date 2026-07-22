@@ -1,8 +1,8 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-07-15T14:31:56+09:00",
-  "git_head_commit": "0e711a43b88845be2fbdf270da42458c7e84ff97",
-  "git_head_short": "0e711a4",
+  "generatedAt": "2026-07-22T10:20:50+09:00",
+  "git_head_commit": "44f211c181b8410e5949a77032ba686669f8cd39",
+  "git_head_short": "44f211c",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 50,
@@ -315,7 +315,7 @@
     {
       "name": "prometheus",
       "path": "prometheus",
-      "version": "6.3.0",
+      "version": "6.4.0",
       "kg_ref": "ATOM_Skill_prometheus",
       "channel": "stable",
       "git_tree_sha": "5293c81e081962bf3f26a114c4d9e73daaa2acdc"

@@ -53,6 +53,8 @@
 - *(call-grok)* Grok delegation skill + grok-agent launcher + status rewire ([`3fc5e2c`](#3fc5e2c770b9ad9164238520c2fd1baf7b72afad))
 - *(delegation)* Add call-codex skill + grok-job fixed-router + compute-offload ([`41356b1`](#41356b125a21c51d0a997a322f9778c16a34de1a))
 - *(bin)* Kg-restore-drill.sh — 월1 KG restore drill Tier-A (PROM16 kg-governance T2) ([`8c163e5`](#8c163e5bfaacf0035a15cb1915b8ff6699b0aed7))
+- *(skills)* PI 연구 결정화 배치 — fsm-design 외 6종 + per-skill agents/ 매니페스트 ([`0e711a4`](#0e711a43b88845be2fbdf270da42458c7e84ff97))
+- *(bin)* Prom_hswm.py v1.0 — PROM v6.4 HSWM primitive helper (W1-T4) ([`44f211c`](#44f211c181b8410e5949a77032ba686669f8cd39))
 
 ### Fixed
 
@@ -104,6 +106,7 @@
 - *(skills)* Manifest 재생성 — occam SKILL 실전화 tree_sha 반영 (merkle 정정) ([`a13b821`](#a13b821eb305e73894528e08fcc1c71219a38ab5))
 - *(skills)* Manifest 재생성 — hades/eureka SKILL tree_sha 반영 (merkle 정정) ([`5a0cfcb`](#5a0cfcb23242545406514fb3466b77ab84f0493d))
 - *(skills)* Manifest 재생성 — eureka SKILL tree_sha 반영 ([`414739a`](#414739a5d1a8372e3d19d4051e6bd9734b7206fd))
+- *(manifest)* Regenerate for 50-skill catalog — head 0e711a4, merkle 114582b1 ([`61dda63`](#61dda6361be70acea4572ceaf445553388a32014))
 
 ### Checkpoint
 
