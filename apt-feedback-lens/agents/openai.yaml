@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT Feedback Lens"
+  short_description: "Apply the internal APT feedback lens explicitly"
+  default_prompt: "Use $apt-feedback-lens for this explicit APT feedback analysis."
+policy:
+  allow_implicit_invocation: false

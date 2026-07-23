@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT SemanticAnchor"
+  short_description: "Run the APT SemanticAnchor phase explicitly"
+  default_prompt: "Use $apt-sa for the requested SemanticAnchor phase."
+policy:
+  allow_implicit_invocation: false

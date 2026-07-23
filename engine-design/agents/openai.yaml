@@ -1,0 +1,4 @@
+interface:
+  display_name: "Engine Design"
+  short_description: "Design small, testable software engine kernels"
+  default_prompt: "Use $engine-design to turn this capability into a bounded, testable engine architecture."

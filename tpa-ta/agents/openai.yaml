@@ -1,0 +1,6 @@
+interface:
+  display_name: "TPA TargetAnchor"
+  short_description: "Run the TPA anchoring phase explicitly"
+  default_prompt: "Use $tpa-ta for the requested TargetAnchor phase."
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,6 @@
+interface:
+  display_name: "Docker Logs"
+  short_description: "Inspect server container logs when explicitly requested"
+  default_prompt: "Use $docker-logs for this explicit container log investigation."
+policy:
+  allow_implicit_invocation: false

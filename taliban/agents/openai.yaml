@@ -1,0 +1,6 @@
+interface:
+  display_name: "Naesengmoon"
+  short_description: "Run explicit adversarial multi-lens validation"
+  default_prompt: "Use $taliban to adversarially validate this target with evidence-backed independent lenses."
+policy:
+  allow_implicit_invocation: false

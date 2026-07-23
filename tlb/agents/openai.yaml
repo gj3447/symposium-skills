@@ -1,0 +1,6 @@
+interface:
+  display_name: "TLB Alias"
+  short_description: "Invoke the short Naesengmoon alias explicitly"
+  default_prompt: "Use $tlb for this explicitly requested adversarial review."
+policy:
+  allow_implicit_invocation: false

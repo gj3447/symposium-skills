@@ -1,0 +1,6 @@
+interface:
+  display_name: "Eureka"
+  short_description: "Induce abstractions from repeated concrete patterns"
+  default_prompt: "Use $eureka to lift these grounded repeated patterns into a proposed abstraction."
+policy:
+  allow_implicit_invocation: false

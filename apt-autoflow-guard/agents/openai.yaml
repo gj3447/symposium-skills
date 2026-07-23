@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT Autoflow Guard"
+  short_description: "Enforce the internal APT autoflow guard explicitly"
+  default_prompt: "Use $apt-autoflow-guard to enforce this APT autoflow boundary."
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT Magic Resolve"
+  short_description: "Resolve internal APT methodology slots explicitly"
+  default_prompt: "Use $apt-magic-resolve to resolve the requested APT slots."
+policy:
+  allow_implicit_invocation: false

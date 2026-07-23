@@ -1,0 +1,6 @@
+interface:
+  display_name: "TPA TargetTwin"
+  short_description: "Run the TPA contract recovery phase explicitly"
+  default_prompt: "Use $tpa-st for the requested TargetTwin phase."
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT Orchestrator"
+  short_description: "Invoke the internal APT phase dispatcher explicitly"
+  default_prompt: "Use $apt-orchestrator to dispatch the explicit APT phase chain."
+policy:
+  allow_implicit_invocation: false

@@ -3,8 +3,9 @@
 # Cron: 0 2 * * * /Users/lagyeongjun/CD/SYMPOSIUM/bin/kg-backup-daily.sh
 # Retention: 7 days rolling
 
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"   # cron PATH 에 brew 없음 (2026-07-15 fix)
 set -u
-NEO4J_URI="${NEO4J_URI:-bolt://100.64.0.3:7687}"
+NEO4J_URI="${NEO4J_URI:-bolt://localhost:7687}"
 NEO4J_USER="${NEO4J_USER:-neo4j}"
 NEO4J_PASS="${NEO4J_PASS:-neo4jpassword}"
 BACKUP_DIR="${KG_BACKUP_DIR:-/Users/lagyeongjun/CD/SYMPOSIUM/_archive/kg-backups}"

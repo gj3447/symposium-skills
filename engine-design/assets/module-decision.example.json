@@ -1,0 +1,23 @@
+{
+  "schema_version": "engine-decision/v1",
+  "name": "gpu-scheduler-boundary",
+  "verdict": "defer",
+  "purpose": "Deterministically select a feasible GPU placement from explicit inputs.",
+  "current_consumers": ["python-call-site"],
+  "planned_consumers": ["cli-adapter", "service-adapter"],
+  "rationale": ["Only one consumer exists today.", "No durable reservation, recovery, or single-writer requirement is established."],
+  "boundary": {
+    "owns": "Pure validation, feasibility, ranking, and placement or rejection output",
+    "mechanism": "Compute a deterministic plan from a request, capacity snapshot, and policy snapshot",
+    "policy_outside": ["Project priority", "Quota", "Authentication", "Job launch"],
+    "non_goals": ["Persistence", "Retries", "Reservation ownership", "External effects"],
+    "state_authority": "The caller owns state; this module owns none"
+  },
+  "contract": "plan(job_v1, capacity_snapshot_v1, policy_v1) -> PlacementV1 | RejectionV1",
+  "invariants": ["Identical inputs produce identical output.", "A placement never exceeds the supplied capacity snapshot."],
+  "failure_model": ["Malformed or incompatible input yields a typed rejection without mutation."],
+  "verification": ["Table and property tests cover feasibility, determinism, and rejection."],
+  "promotion_gates": ["A second current consumer shares the stable contract.", "Durable admission, reservations, cancellation, recovery, or a single writer becomes necessary."],
+  "falsifiers": ["If future adapters require different policy, keep separate adapters around the module."
+  ]
+}

@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT Lens Enforce"
+  short_description: "Enforce internal APT lens evidence explicitly"
+  default_prompt: "Use $apt-lens-enforce to enforce the requested APT lens gate."
+policy:
+  allow_implicit_invocation: false

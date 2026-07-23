@@ -110,7 +110,7 @@ RETURN 'V_FSM4_SilentTransition' AS validation, ct.name, ct.status, ct.status_up
 - `apt-st/references/contract_examples.md` (Draft → Active examples)
 - `apt-st/references/amendment_scenarios.md` (Amended 사례)
 - `apt-scw/references/fulfillment_gate.md` (Active → Fulfilled 7 check)
-- `apt-scw/references/scw_handoff.md` (Amended trigger from SCW)
+- `apt-scw/references/scw_to_sp_st_handoff.md` (Amended trigger from SCW)
 
 ---
 

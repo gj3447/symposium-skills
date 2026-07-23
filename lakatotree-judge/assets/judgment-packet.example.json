@@ -1,0 +1,70 @@
+{
+  "schema_version": "symposium-lakatotree-judgment/v1",
+  "template_only": true,
+  "programme": "example-programme",
+  "branch": "example-branch",
+  "conjecture": "example-conjecture",
+  "roles": {
+    "implementer": "pi_research_engineer",
+    "judge": "progress_judge"
+  },
+  "preregistration": {
+    "request_path": "results/example-register-request.json",
+    "request_sha256": "4444444444444444444444444444444444444444444444444444444444444444",
+    "response_path": "results/example-register-response.json",
+    "response_sha256": "5555555555555555555555555555555555555555555555555555555555555555",
+    "prediction_receipt_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+    "registered_at": "2026-07-15T01:00:00+09:00",
+    "registered_before_measurement": true,
+    "prediction": {
+      "metric": "example_error_rate",
+      "direction": "lower",
+      "baseline": 0.25,
+      "noise_band": 0.01,
+      "scale_type": "ratio"
+    },
+    "novel_target": {
+      "metric": "example_recovery_rate",
+      "direction": "higher",
+      "threshold": 0.95
+    },
+    "kill_condition": "example_error_rate >= 0.25",
+    "judge_script_path": "examples/example_programme.py",
+    "judge_script_sha256": "6666666666666666666666666666666666666666666666666666666666666666"
+  },
+  "measurement": {
+    "started_at": "2026-07-15T01:10:00+09:00",
+    "evidence_records": [
+      {
+        "path": "results/example-evidence.json",
+        "sha256": "7777777777777777777777777777777777777777777777777777777777777777",
+        "schema": "lakato-evidence-record/v1",
+        "grounded": true,
+        "contains_verdict": false
+      }
+    ],
+    "novel_result_path": "results/example-novel-target.json",
+    "novel_result_sha256": "8888888888888888888888888888888888888888888888888888888888888888"
+  },
+  "judge": {
+    "command": ".venv/bin/python examples/example_programme.py",
+    "cwd": "/absolute/path/to/lakatotree",
+    "git_head": "0123456789abcdef0123456789abcdef01234567",
+    "entrypoint": "lakatos.verdict.judge:judge",
+    "exit_code": 0,
+    "response_path": "results/example-submit-response.json",
+    "response_sha256": "9999999999999999999999999999999999999999999999999999999999999999",
+    "verdict_receipt_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "prev_receipt_sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+  },
+  "verification": {
+    "receipt_chain_path": "results/example-node-receipts.json",
+    "receipt_chain_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "verify_output_path": "results/example-verify-verdict.json",
+    "verify_output_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "head_receipt_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "ok": true,
+    "from_receipt": true,
+    "scripted_source_confirmed": true
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "cases": [
+    {
+      "id": "happy-path",
+      "machine": "lifecycle",
+      "steps": [
+        {"event": "SUBMIT", "guard_results": {}, "expected_state": "review", "expected_effects": ["RecordSubmission"]},
+        {"event": "APPROVE", "guard_results": {"approval_allowed": true}, "expected_state": "accepted", "expected_effects": ["RecordVerdict"]}
+      ]
+    },
+    {
+      "id": "guard-false-approve",
+      "machine": "lifecycle",
+      "steps": [
+        {"event": "SUBMIT", "guard_results": {}, "expected_state": "review", "expected_effects": ["RecordSubmission"]},
+        {"event": "APPROVE", "guard_results": {"approval_allowed": false}, "expected_state": "review", "expected_effects": ["AuditInvalidTransition"]}
+      ]
+    },
+    {
+      "id": "invalid-approve-from-draft",
+      "machine": "lifecycle",
+      "steps": [
+        {"event": "APPROVE", "guard_results": {"approval_allowed": true}, "expected_state": "draft", "expected_effects": ["AuditInvalidTransition"]}
+      ]
+    },
+    {
+      "id": "review-timeout",
+      "machine": "lifecycle",
+      "steps": [
+        {"event": "SUBMIT", "guard_results": {}, "expected_state": "review", "expected_effects": ["RecordSubmission"]},
+        {"event": "TIMEOUT", "guard_results": {"review_timeout_due": true}, "expected_state": "timed_out", "expected_effects": ["RecordTimeout"]}
+      ]
+    },
+    {
+      "id": "reject-review",
+      "machine": "lifecycle",
+      "steps": [
+        {"event": "SUBMIT", "guard_results": {}, "expected_state": "review", "expected_effects": ["RecordSubmission"]},
+        {"event": "REJECT", "guard_results": {}, "expected_state": "rejected", "expected_effects": ["RecordVerdict"]}
+      ]
+    },
+    {
+      "id": "timeout-not-due",
+      "machine": "lifecycle",
+      "steps": [
+        {"event": "SUBMIT", "guard_results": {}, "expected_state": "review", "expected_effects": ["RecordSubmission"]},
+        {"event": "TIMEOUT", "guard_results": {"review_timeout_due": false}, "expected_state": "review", "expected_effects": ["AuditInvalidTransition"]}
+      ]
+    }
+  ]
+}

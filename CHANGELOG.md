@@ -49,6 +49,10 @@
 - *(skills)* Eureka + occam 동사 skill 신설 (군단장 2개 invoke gap 메움) ([`0935d8c`](#0935d8c4de254508ef4d48371bf030c952fc8d38))
 - *(skills)* Hades 동사 skill — 7번째 군단장 실현(추상→구체↓, 유레카 dual) ([`8f61e1c`](#8f61e1cc89865a4a1ccaa7631fd0f31ba5101aad))
 - *(apt-st)* Span_path_projection 사영 ST 배선 + placeholder 부패 1건 수정 ([`46b0357`](#46b0357758fb55dfbc1cb558b4ec76e137c8be8b))
+- *(skills)* Wire longinus/harness/apt to standard-harness MCP tools ([`10db791`](#10db791784161887f7fcb8d3e295eda1b6e273cf))
+- *(call-grok)* Grok delegation skill + grok-agent launcher + status rewire ([`3fc5e2c`](#3fc5e2c770b9ad9164238520c2fd1baf7b72afad))
+- *(delegation)* Add call-codex skill + grok-job fixed-router + compute-offload ([`41356b1`](#41356b125a21c51d0a997a322f9778c16a34de1a))
+- *(bin)* Kg-restore-drill.sh — 월1 KG restore drill Tier-A (PROM16 kg-governance T2) ([`8c163e5`](#8c163e5bfaacf0035a15cb1915b8ff6699b0aed7))
 
 ### Fixed
 
@@ -62,6 +66,7 @@
 - *(naesengmoon)* Canonical 1:1 cardinality + agent KG-resident propagation ([`a08cb57`](#a08cb575b9c110401a3856b304991425641ca9bb))
 - *(naesengmoon)* Cardinality_naming_rule v1→v2 wording sync ([`b68794d`](#b68794d3464dfa945978f2d0197d57c9f460310a))
 - *(88-taliban)* 88≠113 명명 drift 정정 (ceremony 2026-05-27) ([`6a4a3bd`](#6a4a3bd758ada33ff65d2a7e536eaca16eb35c81))
+- *(manifest)* Validate dynamic skill catalog ([`f24645f`](#f24645fba82a7ef311bf89c4372b120e96fbe90d))
 
 ### Performance
 

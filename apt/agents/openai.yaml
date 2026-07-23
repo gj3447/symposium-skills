@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT"
+  short_description: "Run an explicit APT design-to-code cycle"
+  default_prompt: "Use $apt to run the explicitly requested SA to SP to ST to SCW crystallization cycle."
+policy:
+  allow_implicit_invocation: false

@@ -23,10 +23,13 @@
 
 | Tier | Skills | Role |
 |---|---|---|
+| **research** | symposium-research | Thin PI/internal research router; selects specialists by measured need. |
+| **pi** | pi-workbench, ooptdd-receipt, lakatotree-judge, compute-offload | PI coordination, executable measurement, independent judgment, and managed compute. |
 | **essence** | apt, harness, longinus, taliban, jaebaeman, prometheus | 5대 무기 + APT orchestrator. Constitutional governance via CODEOWNERS. |
 | **alias** | 88-taliban, tlb, prom | Thin aliases of essence (drift-sensitive). |
 | **phase** | apt-sa, apt-sp, apt-st, apt-scw, apt-meta-review | APT 5-phase cycle. |
 | **tpa** | tpa, tpa-tcw, tpa-tt, tpa-tp, tpa-ta | Reverse cycle (code → spec). |
+| **engineering** | engine-design, fsm-design, loop-engineering | Engine boundary, executable state semantics, and bounded Harness/runtime loops. |
 | **meta** | solve, skill-creator | Meta-tooling. |
 | **ops** | db-query, docker-logs, kafka-manage, server-status, deploy, backup | Infrastructure operations. |
 | **interop** | call-grok, call-codex | Cross-agent headless delegation (`grok-agent`, `codex-agent`). |
@@ -39,6 +42,16 @@ Agents that don't know about Claude's `.claude/skills/` convention can:
 2. Walk `.agents/skills/<name>/SKILL.md` (cross-tool symlink farm).
 3. Fetch `.well-known/skills/index.json` for machine-readable catalog with merkle integrity.
 4. Verify `MANIFEST.json` against `.well-known/skills/attestation.json` + cosign signature (when remote is wired).
+
+## Codex discovery budget
+
+Codex keeps only the thin `symposium-research` router plus the high-frequency APT,
+TPA, Harness, engine/FSM/loop, and compute entry points eligible for implicit
+invocation. PI evidence subskills, commander methods, thin aliases, internal
+APT/TPA phases, specialist workers, and infrastructure operations carry
+`agents/openai.yaml` with `policy.allow_implicit_invocation: false`; the router
+invokes them explicitly after measuring need. Do not expose every leaf merely to
+improve discoverability—extend the router instead.
 
 ## Drift detection
 

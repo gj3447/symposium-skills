@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT-D"
+  short_description: "Run the specialized APT-D variant explicitly"
+  default_prompt: "Use $apt-d to run the APT-D sibling variant."
+policy:
+  allow_implicit_invocation: false

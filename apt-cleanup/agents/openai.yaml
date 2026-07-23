@@ -1,0 +1,6 @@
+interface:
+  display_name: "APT Cleanup"
+  short_description: "Run the internal APT cleanup gate explicitly"
+  default_prompt: "Use $apt-cleanup to run the APT cleanup gate."
+policy:
+  allow_implicit_invocation: false

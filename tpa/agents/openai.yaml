@@ -1,0 +1,6 @@
+interface:
+  display_name: "TPA"
+  short_description: "Run explicit reverse code-to-design recovery"
+  default_prompt: "Use $tpa to run the explicitly requested TCW to ST to SP to TA recovery cycle."
+policy:
+  allow_implicit_invocation: false

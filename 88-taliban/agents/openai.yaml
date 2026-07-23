@@ -1,0 +1,6 @@
+interface:
+  display_name: "88 Taliban Alias"
+  short_description: "Invoke the mathematical Naesengmoon alias explicitly"
+  default_prompt: "Use $88-taliban for an explicit mathematical-lens review."
+policy:
+  allow_implicit_invocation: false

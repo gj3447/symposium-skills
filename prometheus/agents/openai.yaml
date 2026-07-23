@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prometheus"
+  short_description: "Run knowledge-first multi-axis research"
+  default_prompt: "Use $prometheus to research this question from KG/local canon and primary external evidence."
+policy:
+  allow_implicit_invocation: false

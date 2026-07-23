@@ -14,7 +14,17 @@ SCAN_ROOTS=(
   "$CANONICAL_SKILLS_ROOT/../ICE_ORCA_DRAGON/.claude/skills"
 )
 MANIFEST_PATH="$CANONICAL_SKILLS_ROOT/MANIFEST.json"
-EXPECTED_SKILL_COUNT=27
+
+normalize_frontmatter_scalar() {
+  local value="$1"
+  if [[ ${#value} -ge 2 ]]; then
+    case "$value" in
+      \"*\") value="${value:1:${#value}-2}" ;;
+      \'*\') value="${value:1:${#value}-2}" ;;
+    esac
+  fi
+  printf '%s' "$value"
+}
 
 validate_one() {
   local f="$1"
@@ -47,15 +57,11 @@ manifest_check() {
 
   local manifest_count
   manifest_count="$(jq '.skills_count' "$MANIFEST_PATH")"
-  if [[ "$manifest_count" != "$EXPECTED_SKILL_COUNT" ]]; then
-    echo "FAIL MANIFEST.skills_count=$manifest_count (expected $EXPECTED_SKILL_COUNT)" >&2
-    rc=1
-  fi
 
   local actual_count
   actual_count="$(find "$CANONICAL_SKILLS_ROOT" -mindepth 2 -maxdepth 2 -name SKILL.md -type f -not -path '*/.git/*' -not -path '*/_backup_*/*' | wc -l | tr -d ' ')"
-  if [[ "$actual_count" != "$EXPECTED_SKILL_COUNT" ]]; then
-    echo "FAIL filesystem skill count=$actual_count (expected $EXPECTED_SKILL_COUNT)" >&2
+  if [[ "$actual_count" != "$manifest_count" ]]; then
+    echo "FAIL filesystem skill count=$actual_count vs MANIFEST.skills_count=$manifest_count" >&2
     rc=1
   fi
 
@@ -71,8 +77,8 @@ manifest_check() {
     local name path version_m kg_ref_m sha_m
     name="$(echo "$entry" | jq -r '.name')"
     path="$(echo "$entry" | jq -r '.path')"
-    version_m="$(echo "$entry" | jq -r '.version')"
-    kg_ref_m="$(echo "$entry" | jq -r '.kg_ref')"
+    version_m="$(echo "$entry" | jq -r '.version // ""')"
+    kg_ref_m="$(echo "$entry" | jq -r '.kg_ref // ""')"
     sha_m="$(echo "$entry" | jq -r '.git_tree_sha')"
 
     local skill_md="$CANONICAL_SKILLS_ROOT/$path/SKILL.md"
@@ -85,8 +91,8 @@ manifest_check() {
     local fm
     fm="$(awk '/^---$/{c++; next} c==1{print} c==2{exit}' "$skill_md")"
     local version_f kg_ref_f
-    version_f="$(printf '%s\n' "$fm" | awk '/^version:/{sub(/^version:[[:space:]]*/,""); print; exit}')"
-    kg_ref_f="$(printf '%s\n' "$fm" | awk '/^kg_ref:/{sub(/^kg_ref:[[:space:]]*/,""); print; exit}')"
+    version_f="$(normalize_frontmatter_scalar "$(printf '%s\n' "$fm" | awk '/^version:/{sub(/^version:[[:space:]]*/,""); print; exit}')")"
+    kg_ref_f="$(normalize_frontmatter_scalar "$(printf '%s\n' "$fm" | awk '/^kg_ref:/{sub(/^kg_ref:[[:space:]]*/,""); print; exit}')")"
 
     if [[ "$version_f" != "$version_m" ]]; then
       echo "FAIL $name: version frontmatter=$version_f vs MANIFEST=$version_m" >&2
@@ -119,7 +125,7 @@ print(hashlib.sha256('\n'.join(f\"{s['path']}:{s['git_tree_sha']}\" for s in ski
   fi
 
   if [[ $rc -eq 0 ]]; then
-    echo "OK   manifest-check: $EXPECTED_SKILL_COUNT skills consistent (frontmatter ↔ MANIFEST ↔ git ↔ merkle:${manifest_merkle:0:12}...)"
+    echo "OK   manifest-check: $manifest_count skills consistent (frontmatter ↔ MANIFEST ↔ git ↔ merkle:${manifest_merkle:0:12}...)"
   fi
   return $rc
 }

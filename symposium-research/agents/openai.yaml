@@ -1,0 +1,4 @@
+interface:
+  display_name: "SYMPOSIUM Research"
+  short_description: "Route internal research through evidence gates"
+  default_prompt: "Use $symposium-research to route this PI or SYMPOSIUM research task through the right skills and specialist agents."

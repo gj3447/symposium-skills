@@ -1,0 +1,6 @@
+interface:
+  display_name: "Kafka Manage"
+  short_description: "Manage SYMPOSIUM Kafka only when explicitly requested"
+  default_prompt: "Use $kafka-manage for this explicit Kafka operation."
+policy:
+  allow_implicit_invocation: false

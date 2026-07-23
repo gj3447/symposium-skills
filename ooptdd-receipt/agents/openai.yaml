@@ -1,0 +1,6 @@
+interface:
+  display_name: "OOPTDD Receipt"
+  short_description: "Build executable positive and negative receipts"
+  default_prompt: "Use $ooptdd-receipt to design or verify an executable behavior receipt with a negative oracle."
+policy:
+  allow_implicit_invocation: false
