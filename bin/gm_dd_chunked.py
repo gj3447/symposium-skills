@@ -112,15 +112,27 @@ def run_chunk(i, expected_len):
     hang = False
 
     def pump_compressed():
+        # ssh 사망(네트워크 단절) 시 BrokenPipeError — 그대로 버리고 zstd.stdout 을
+        # 끝까지 drain 해야 zstd 가 블록되지 않아 메인 스레드가 교착에 빠지지 않는다.
         nonlocal zst_size
+        dead = False
         while True:
             data = zstd.stdout.read(1 << 20)
             if not data:
                 break
+            if dead:
+                continue
             zst_h.update(data)
             zst_size += len(data)
-            ssh.stdin.write(data)
-        ssh.stdin.close()
+            try:
+                ssh.stdin.write(data)
+            except (BrokenPipeError, ValueError):
+                dead = True
+        if not dead:
+            try:
+                ssh.stdin.close()
+            except (BrokenPipeError, ValueError):
+                pass
 
     t = threading.Thread(target=pump_compressed, daemon=True)
     t.start()
@@ -214,7 +226,6 @@ def main():
     if not verify_device():
         return 4
     os.makedirs(RUN_DIR, exist_ok=True)
-    unmount_volume()
 
     done = load_done()
     pending = [i for i in range(N_CHUNKS) if i not in done]
@@ -230,6 +241,17 @@ def main():
                     recs[rec["chunk"]] = rec
         seal_manifest(recs)
         return 0
+
+    # 네트워크 preflight — NAS 불도달 시 빠르게 종료 (watchdog 주기가 무의미한
+    # 재시도를 굽지 않도록). 복구되면 다음 watchdog 주기가 resume 한다.
+    ping = subprocess.run(
+        SSH + ["true"], capture_output=True, timeout=15
+    )
+    if ping.returncode != 0:
+        log(f"NAS({DEST_HOST}) 도달 불가 — 네트워크 복구 대기. 종료 (watchdog가 재개)")
+        return 6
+
+    unmount_volume()  # 네트워크 확인 후에만 언마운트 (불필요한 언마운트 상태 방지)
 
     start = time.time()
     consecutive_fails = 0
