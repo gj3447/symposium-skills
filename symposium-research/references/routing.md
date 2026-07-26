@@ -5,7 +5,7 @@ This table is a runtime decision aid, not a fixed `USES` graph.
 | Signal in the task | Route | Required return |
 |---|---|---|
 | Unknown prior art, unstable fact, explicit research/PROM | `$prometheus` / `prometheus_expert` | sourced claims, conflicts, caveats, confidence |
-| PI path or PI experiment | `$pi-workbench` / `pi_research_engineer` | lease state, executable evidence, judge state |
+| PI path or PI experiment | `$pi-workbench` / `pi_research_engineer` | single-writer state, executable evidence, judge state |
 | Behavior changed | `$ooptdd-receipt` | locked spec, real run, positive receipt, injected negative |
 | Scientific progress claimed | `$lakatotree-judge` / `progress_judge` | preregistration, evidence record, deterministic judge receipt |
 | Reusable mechanism boundary | `$engine-design` / `engine_systems_designer` | engine-or-module decision and falsifiers |

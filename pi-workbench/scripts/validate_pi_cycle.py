@@ -139,26 +139,37 @@ def validate(document: Any, stage: str, allow_template: bool = False) -> list[st
     if document.get("mode") == "read_only":
         if writes:
             errors.append("read_only cycles must not declare coordination.writes")
-        if coordination.get("claim_status") == "HELD":
-            errors.append("read_only cycles must not claim an OMD HELD lease")
+        if coordination.get("token_state") == "HELD":
+            errors.append("read_only cycles must not hold the repository writer token")
     else:
-        for key in ("task_id", "agent_id", "orbit_id", "heartbeat_at"):
+        for key in ("owner_id", "policy", "token_state", "base_head"):
             require_text(coordination, key, errors, "coordination")
+        if coordination.get("policy") != "canonical_main_single_writer":
+            errors.append("coordination.policy must be canonical_main_single_writer")
         if not writes or len(set(writes)) != len(writes):
             errors.append("coordination.writes must be a non-empty list of unique paths")
         for index, write_path in enumerate(writes):
             if not safe_repo_path(write_path, repo.get("name")):
                 errors.append(f"coordination.writes[{index}] must be a repo-qualified relative path without '..'")
-        if coordination.get("claim_status") != "HELD":
-            errors.append("write cycles require coordination.claim_status == 'HELD'")
-        if not isinstance(coordination.get("fence"), int) or coordination.get("fence", 0) <= 0:
-            errors.append("coordination.fence must be a positive integer")
-        parse_timestamp(coordination.get("heartbeat_at"), "coordination.heartbeat_at", errors)
+        base_head = coordination.get("base_head")
+        if not isinstance(base_head, str) or GIT_SHA.fullmatch(base_head) is None:
+            errors.append("coordination.base_head must be a lowercase 7-64 hex commit id")
         if stage == "complete":
-            if coordination.get("released") is not True:
-                errors.append("complete write cycles require coordination.released == true")
-            if coordination.get("cancelled") is not True:
-                errors.append("complete write cycles require coordination.cancelled == true")
+            if coordination.get("token_state") != "DONE":
+                errors.append("complete write cycles require coordination.token_state == 'DONE'")
+            commit_sha = coordination.get("commit_sha")
+            if not isinstance(commit_sha, str) or GIT_SHA.fullmatch(commit_sha) is None:
+                errors.append("coordination.commit_sha must be a lowercase 7-64 hex commit id")
+            published_refs = mapping(coordination.get("published_refs"))
+            if not published_refs:
+                errors.append("complete write cycles require coordination.published_refs")
+            for remote, remote_sha in published_refs.items():
+                if not text(remote) or not isinstance(remote_sha, str) or GIT_SHA.fullmatch(remote_sha) is None:
+                    errors.append(f"coordination.published_refs[{remote!r}] must be a lowercase 7-64 hex commit id")
+                elif remote_sha != commit_sha:
+                    errors.append(f"coordination.published_refs[{remote!r}] must equal coordination.commit_sha")
+        elif coordination.get("token_state") != "HELD":
+            errors.append("planned write cycles require coordination.token_state == 'HELD'")
 
     requires_receipt = stage == "complete" and (
         document.get("kind") == "behavior" or document.get("runtime_behavior") is True

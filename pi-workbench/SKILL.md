@@ -1,18 +1,14 @@
 ---
 name: pi-workbench
 description: >-
-  Coordinate PI research and engineering through its three-layer contract:
-  OMD write-set leases, executable ooptdd/LTDD measurement, and deterministic
-  LakatoTree judgment. Use for any task under PI/, its symlinked repositories,
-  EngineBoy measurement work, or a claim that a PI implementation or research
-  programme made progress.
+  Coordinate PI research and engineering through a canonical-main single-writer gate, executable ooptdd or LTDD measurement, and deterministic LakatoTree judgment. Use when: work touches `PI/`, its symlinked repositories, EngineBoy measurement, or a claim of PI implementation or research progress. Do not use when: research is elsewhere in SYMPOSIUM and has no PI measurement or judgment surface; use `$symposium-research` instead.
 ---
 
 # PI Workbench
 
-Treat coordination, measurement, and judgment as separate authorities. A Codex
-subagent does not replace the cross-session OMD lease, and an implementer does
-not grade its own result.
+Treat write authority, measurement, and judgment as separate authorities. One
+root/parent session writes canonical `main`; parallel children remain read-only,
+and an implementer does not grade its own result.
 
 ## 1. Resolve the target
 
@@ -24,16 +20,18 @@ clone; do not pretend it can be pushed.
 Choose the narrowest repo-specific test route from
 [references/pi-test-routing.md](references/pi-test-routing.md).
 
-## 2. Coordinate every shared write with OMD
+## 2. Serialize every shared write on canonical `main`
 
-For a mutating task, use stable `task` and `agent` identifiers and repo-qualified
-paths. Call `declare`, then `claim`, and edit only when every required orbit is
-`HELD`. Immediately heartbeat the agent and renew during long work. `PENDING`,
-`DENIED`, or an unavailable OMD surface means the pass remains read-only.
+OMD is retired. Never call its MCP/CLI, write its coordination DB, create a lease
+or heartbeat, run its health/heal path, or revive it as an optional fallback.
+Historical OMD code, databases, and reports are read-only evidence.
 
-Edit only claimed paths. On completion release each orbit using its exact fence,
-then cancel the lease-only task so it does not stay pending. Preserve unrelated
-dirty files and use explicit pathspecs for commits.
+For a mutating task, the root/parent session acquires the repository-wide writer
+token with `scripts/session_writer.sh` from the canonical checkout's `main` and
+declares exact paths. If another owner holds the token, remain read-only; never
+create a session branch or linked worktree as a workaround. Preserve unrelated
+dirty files, use explicit pathspecs, and release only after every configured push
+remote reads back the committed SHA. A partial publication is `IN_DOUBT`, not done.
 
 ## 3. Measure behavior through real code
 
@@ -75,8 +73,8 @@ python3 scripts/validate_pi_cycle.py assets/pi-cycle.example.json --template
 python3 scripts/validate_pi_cycle.py path/to/pi-cycle.json --verify-linked --root /absolute/repo/root
 ```
 
-Report the OMD task/orbit/fence, changed paths, correlation ID, positive and
-negative receipts, exact test commands, independent judge command/result,
-provenance, and unresolved risks. A missing required layer is `incomplete`, not
-a soft green. `--verify-linked` checks packet-linked file hashes but does not
-execute the claimed commands.
+Report the writer owner/state, exact write-set, base and commit SHAs, remote
+readback, correlation ID, positive and negative receipts, exact test commands,
+independent judge command/result, provenance, and unresolved risks. A missing
+required layer is `incomplete`, not a soft green. `--verify-linked` checks
+packet-linked file hashes but does not execute the claimed commands.

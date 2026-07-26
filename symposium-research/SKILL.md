@@ -1,11 +1,7 @@
 ---
 name: symposium-research
 description: >-
-  Route research inside SYMPOSIUM and PI through the correct canon, specialist
-  skills, agents, evidence gates, and artifact nest. Use for PI experiments,
-  internal engineering research, mythology/canon study, paper preparation,
-  cross-layer synthesis, interrupted research, or any request to investigate,
-  design, validate, or crystallize work in this repository.
+  Route repository-specific research inside SYMPOSIUM and PI through the correct canon, specialist skills, agents, evidence gates, and artifact nest. Use when: handling PI experiments, internal engineering research, mythology or canon study, paper preparation, cross-layer synthesis, interrupted research, or crystallization in this repository. Do not use when: the request is ordinary scoped implementation or debugging with no research, canon, or artifact-routing question; use direct handling instead.
 ---
 
 # SYMPOSIUM Research
@@ -72,8 +68,10 @@ messages, deployment, and destructive cleanup also require their own authority.
 With a four-thread cap, keep the root as collector and use at most three direct
 children at once. Give every child a bounded question, input paths, required
 output fields, evidence standard, and explicit non-goals. Prefer read-only axes
-in parallel. Parallel writers must have disjoint paths; PI writers additionally
-need OMD `HELD` leases before editing.
+in parallel. Parallel children remain read-only. When mutation is required, one
+root/parent session performs it sequentially on canonical `main` under the
+repository writer token. Do not create parallel writers, session branches,
+linked worktrees, or OMD leases.
 
 The parent collects all results, checks required fields, deduplicates repeated
 claims, preserves conflicts, and decides the next dispatch. A child never writes
@@ -91,4 +89,4 @@ Return:
 6. unresolved questions and the next falsifier.
 
 For PI completion or progress claims, activity and a passing local test are not
-enough: require the three-layer `$pi-workbench` contract.
+enough: require the single-writer plus two-evidence-layer `$pi-workbench` contract.

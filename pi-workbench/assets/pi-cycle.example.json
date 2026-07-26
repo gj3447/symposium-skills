@@ -20,18 +20,18 @@
     "judge": "progress_judge"
   },
   "coordination": {
-    "task_id": "pi-example-20260715",
-    "agent_id": "pi_research_engineer.example",
+    "policy": "canonical_main_single_writer",
+    "owner_id": "pi_research_engineer.example",
     "writes": [
       "lakatotree/lakatos/example.py",
       "lakatotree/tests/test_example.py"
     ],
-    "claim_status": "HELD",
-    "orbit_id": "orbit-example",
-    "fence": 7,
-    "heartbeat_at": "2026-07-15T01:05:00+09:00",
-    "released": true,
-    "cancelled": true
+    "token_state": "DONE",
+    "base_head": "0123456789abcdef0123456789abcdef01234567",
+    "commit_sha": "1111111111111111111111111111111111111111",
+    "published_refs": {
+      "origin/main": "1111111111111111111111111111111111111111"
+    }
   },
   "measurement": {
     "receipt_path": "evidence/example-ooptdd-receipt.json",
