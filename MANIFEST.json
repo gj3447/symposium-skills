@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-07-15T14:31:56+09:00",
-  "git_head_commit": "0e711a43b88845be2fbdf270da42458c7e84ff97",
-  "git_head_short": "0e711a4",
+  "generatedAt": "2026-07-26T23:00:39+09:00",
+  "git_head_commit": "aa166c24e9b0686041b1453552abdf061fef8161",
+  "git_head_short": "aa166c2",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
-  "skills_count": 50,
-  "merkle_root": "114582b11834525d601be1dae49cdeabc1fdfd89349ede6370f6324f315da851",
+  "skills_count": 53,
+  "merkle_root": "596c6b0eb00e1c4cc357a629ad4b661a8a22b7d2296bbf3a2a163bd605e4c156",
   "skills": [
     {
       "name": "88-taliban",
@@ -241,6 +241,14 @@
       "git_tree_sha": "36e128d62cc08b1a8145487a400e265216144c05"
     },
     {
+      "name": "harness-diagnose",
+      "path": "harness-diagnose",
+      "version": "1.0.0",
+      "kg_ref": "hub-harness-3tier",
+      "channel": "stable",
+      "git_tree_sha": null
+    },
+    {
       "name": "jaebaeman",
       "path": "jaebaeman",
       "version": "2.4.0",
@@ -265,6 +273,14 @@
       "git_tree_sha": "58013ec6f21fa03b5750a7972c1de7c3e4c06144"
     },
     {
+      "name": "legion-roster",
+      "path": "legion-roster",
+      "version": "1.0.0",
+      "kg_ref": "bihaenggiman-legioncommanders-2026-05-26",
+      "channel": "stable",
+      "git_tree_sha": null
+    },
+    {
       "name": "longinus",
       "path": "longinus",
       "version": "3.3.0",
@@ -279,6 +295,14 @@
       "kg_ref": null,
       "channel": "stable",
       "git_tree_sha": "f5c65473e72050a77a92b836366528341f3a1d0b"
+    },
+    {
+      "name": "naesengmoon-lens-registry",
+      "path": "naesengmoon-lens-registry",
+      "version": "1.0.0",
+      "kg_ref": "naesengmoon-canonical-2026-05-19",
+      "channel": "stable",
+      "git_tree_sha": null
     },
     {
       "name": "occam",
@@ -302,7 +326,7 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "5cdf75147bf895fa52ad1f8433f20c2ce4b6da23"
+      "git_tree_sha": "9800dcb60f1822b97eee0d21d1125391140456da"
     },
     {
       "name": "prom",
@@ -315,10 +339,10 @@
     {
       "name": "prometheus",
       "path": "prometheus",
-      "version": "6.3.0",
+      "version": "6.4.1",
       "kg_ref": "ATOM_Skill_prometheus",
       "channel": "stable",
-      "git_tree_sha": "5293c81e081962bf3f26a114c4d9e73daaa2acdc"
+      "git_tree_sha": "c26f91263e522cde754ef76435387f4e849c33f3"
     },
     {
       "name": "server-status",
@@ -350,7 +374,7 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "283bffb3009e820babc289f0a540299b4c433f00"
+      "git_tree_sha": "71022bc1b388a1edaddcb8bffa0e393cdefde5ff"
     },
     {
       "name": "taliban",
