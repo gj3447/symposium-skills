@@ -183,7 +183,7 @@ SA는 Anthropic의 **Routing 패턴**에 대응한다:
 ### 1-1. 기존 SemanticAnchor 전체 목록
 
 ```cypher
--- 모든 활성 앵커 조회
+// 모든 활성 앵커 조회
 MATCH (sa:SemanticAnchor)
 RETURN sa.name, sa.description, sa.domain, sa.status,
        sa.context_budget_total, sa.created_at
@@ -199,9 +199,12 @@ ARGUMENTS에 "N개의 X가 있음" 전제가 오면 **실측 확인 필수**.
 Plan은 신호일 뿐, 실측 없는 가정은 Contract target_label 오류로 이어짐.
 
 ```cypher
--- 예: ARGUMENTS가 "ResearchFinding에 sourceRF 10건" 가정
+// 예: ARGUMENTS가 "ResearchFinding에 sourceRF 10건" 가정
 MATCH (n:ResearchFinding) WHERE n.sourceRF IS NOT NULL RETURN count(n)
--- 실제 결과가 0이면 다른 라벨 확인:
+```
+
+```cypher
+// 실제 결과가 0이면 다른 라벨 확인:
 MATCH (n) WHERE n.sourceRF IS NOT NULL RETURN DISTINCT labels(n), count(n)
 ```
 
@@ -219,7 +222,7 @@ Step 1-1 / 1-1b / 1-2 / 1-3 의 cypher 결과 **첫 페이지**를 `apt-progress
 ### 1-2. 키워드로 관련 KG 노드 탐색
 
 ```cypher
--- 키워드로 관련 작업/개념 탐색
+// 키워드로 관련 작업/개념 탐색
 MATCH (n)
 WHERE n.name CONTAINS $keyword
    OR n.description CONTAINS $keyword
@@ -233,7 +236,7 @@ LIMIT 20
 ### 1-3. 기존 앵커의 Span 트리 확인
 
 ```cypher
--- 특정 앵커의 하위 구조 확인
+// 특정 앵커의 하위 구조 확인
 MATCH (sa:SemanticAnchor {name: $sa_name})-[:HAS_ROOT]->(root)
 OPTIONAL MATCH (root)-[:DECOMPOSES_TO*1..3]->(s)
 RETURN sa.name, sa.description,
@@ -263,7 +266,7 @@ ORDER BY s.depth, s.name
 KG 탐색 결과 관련 앵커가 없을 때만 실행한다.
 
 ```cypher
--- 새 SemanticAnchor 생성 (항상 MERGE로 중복 방지)
+// 새 SemanticAnchor 생성 (항상 MERGE로 중복 방지)
 MERGE (sa:SemanticAnchor {name: $project_name})
 SET sa.description         = $description,
     sa.domain              = $domain,
@@ -278,7 +281,7 @@ RETURN sa
 앵커 생성 직후 Root Span을 연결한다:
 
 ```cypher
--- Root Span 생성 및 연결
+// Root Span 생성 및 연결
 MATCH (sa:SemanticAnchor {name: $project_name, status: 'active'})
 MERGE (root:AptSpan {name: 'SPAN_' + $project_name + '_ROOT'})
 SET root.description   = $root_description,
@@ -305,7 +308,7 @@ RETURN sa
 기존 앵커의 Root Span 하위에 새로운 L1 브랜치를 추가한다.
 
 ```cypher
--- 기존 앵커의 Root에 새 브랜치 추가
+// 기존 앵커의 Root에 새 브랜치 추가
 MATCH (sa:SemanticAnchor {name: $existing_sa})-[:HAS_ROOT]->(root)
 MERGE (branch:AptSpan {name: $new_branch_name})
 SET branch.description   = $description,
@@ -380,7 +383,7 @@ Context Rot(토큰 증가 시 n^2으로 주의력 분산) 방지를 위해 컨�
 프로젝트 정체성과 최상위 Span 이름/설명만 로드한다. KG 전체를 읽지 않는다.
 
 ```cypher
--- L1: SA + 직계 자식 메타데이터만
+// L1: SA + 직계 자식 메타데이터만
 MATCH (sa:SemanticAnchor {name: $sa_name})-[:HAS_ROOT]->(root)
 OPTIONAL MATCH (root)-[:DECOMPOSES_TO]->(l1)
 RETURN sa.name, sa.description, sa.domain, sa.status,
@@ -397,7 +400,7 @@ ORDER BY l1.name
 선택된 브랜치의 Span 트리와 Contract 존재 여부를 로드한다. **작업 대상 브랜치만** 로드한다.
 
 ```cypher
--- L2: 선택된 브랜치의 Span 트리 + Contract 존재 여부
+// L2: 선택된 브랜치의 Span 트리 + Contract 존재 여부
 MATCH (root:AptSpan {name: $branch})-[:DECOMPOSES_TO*1..5]->(s)
 OPTIONAL MATCH (s)-[:CRYSTALLIZES_TO]->(st)-[:HAS_CONTRACT]->(c)
 RETURN s.name, s.depth, labels(s) AS labels, s.status,
@@ -414,7 +417,7 @@ ORDER BY s.depth, s.name
 SA 단계에서는 보통 L3까지 갈 필요가 없다. 기존 앵커를 재사용할 때 특정 Span의 상태를 확인할 때만 사용.
 
 ```cypher
--- L3: 특정 AtomicSpan 상세
+// L3: 특정 AtomicSpan 상세
 MATCH (atom:AtomicSpan {name: $atom})-[:CRYSTALLIZES_TO]->(st)-[:HAS_CONTRACT]->(c)
 OPTIONAL MATCH (st)-[:HAS_TASK]->(t)
 OPTIONAL MATCH (c)-[:MATERIALIZES]->(src)
@@ -456,12 +459,12 @@ SA에서 전체 프로젝트의 depth별 토큰 예산을 할당한다.
 ### 할당 Cypher
 
 ```cypher
--- SA에 Context Budget 총량 설정
+// SA에 Context Budget 총량 설정
 MATCH (sa:SemanticAnchor {name: $sa_name})
 SET sa.context_budget_total    = 100000,
     sa.context_budget_per_span = 8000
 
--- Span 생성 시 depth 기반 자동 할당
+// Span 생성 시 depth 기반 자동 할당
 MERGE (child:AptSpan {name: $name})
 SET child.context_budget = CASE
   WHEN child.depth = 0 THEN 50000
@@ -619,7 +622,7 @@ SA에서 SP로 전환하기 전 **모든 항목**을 확인한다.
 ### 핸드오프 검증 쿼리
 
 ```cypher
--- 핸드오프 준비 상태 종합 확인
+// 핸드오프 준비 상태 종합 확인
 MATCH (sa:SemanticAnchor {name: $sa_name, status: 'active'})
 MATCH (sa)-[:HAS_ROOT]->(root:AptSpan)
 WHERE sa.context_budget_total IS NOT NULL
@@ -708,7 +711,7 @@ SA는 5대 무기 중 **프로메테우스(지식 선행)**와 **롱기누스(KG
 | HR14 (Reflection) | SA 완료 후: "이 앵커의 약점은?" 기록 → SP 진입 시 참조 |
 
 ```cypher
--- v21: SA 완료 후 Reflection 기록
+// v21: SA 완료 후 Reflection 기록
 MATCH (sa:SemanticAnchor {name: $project})
 SET sa.v21_reflection = $weakness,
     sa.v21_reflectedAt = datetime()
@@ -745,6 +748,9 @@ RETURN s.currentConcrete, s.invocation, s.protocol
 ```cypher
 MATCH (l:Lesson)-[:HAS_RESEARCH]->(rf:ResearchFinding)
 WHERE l.name CONTAINS $keyword RETURN rf.name, rf.domain, rf.oneLineSummary LIMIT 20
+```
+
+```cypher
 MATCH (ts:SubagentTaskSpec {skill:'apt-sa'}) WHERE ts.status='READY'
 RETURN ts.name, ts.role LIMIT 10
 ```

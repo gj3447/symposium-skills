@@ -38,7 +38,7 @@ RETURN cfg.density_min_informed_by
 ## 적용 cypher
 
 ```cypher
--- Dense Linking: 최소 N개 INFORMED_BY 보장
+// Dense Linking: 최소 N개 INFORMED_BY 보장
 MATCH (s:AptSpan {name: $span})
 MATCH (k) WHERE k.name CONTAINS $concept AND NOT (s)-[:INFORMED_BY]->(k)
 MERGE (s)-[:INFORMED_BY {reason: $why, linked_at: datetime()}]->(k)
@@ -47,7 +47,7 @@ MERGE (s)-[:INFORMED_BY {reason: $why, linked_at: datetime()}]->(k)
 검증:
 
 ```cypher
--- V-SP3: Dense Linking 미충족
+// V-SP3: Dense Linking 미충족
 MATCH (s:AptSpan) WHERE s.status = 'open'
 OPTIONAL MATCH (s)-[ib:INFORMED_BY]->()
 WITH s, count(ib) AS ib_count

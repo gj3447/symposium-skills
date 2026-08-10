@@ -1,9 +1,9 @@
 {
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
-  "release": "v26.0.2",
-  "git_head_short": "8a0118e",
-  "merkle_root": "8d2fca7da2a488311aa0563f68197aa4f72d72aed786a89a04b233ba9fde805e",
+  "release": null,
+  "git_head_short": "20f556c",
+  "merkle_root": "c91c71fb5410227efac6108aaabc5a7255b338af1a36bacaff79d01f037c3a8c",
   "skills_count": 53,
   "skills": [
     {
@@ -67,7 +67,7 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
-      "git_tree_sha": "09d84b2a82a4def73058623d4fd3dc7043f2c9aa"
+      "git_tree_sha": "bcec2d6a694af891e5a85a81f72e68692eb9605f"
     },
     {
       "name": "apt-orchestrator",
@@ -81,28 +81,28 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sa",
       "channel": "stable",
-      "git_tree_sha": "ddc1f29b33263fcfd69c6bcd0b4f1c4d0e45f39b"
+      "git_tree_sha": "b9b5e0e9afba8efecc2f8887553af0c5e68765bc"
     },
     {
       "name": "apt-scw",
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_scw",
       "channel": "stable",
-      "git_tree_sha": "3aff808f42fbd082297c975271c316309baf646d"
+      "git_tree_sha": "84a20675e472e44c443be669cfec48534f2f25fc"
     },
     {
       "name": "apt-sp",
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sp",
       "channel": "stable",
-      "git_tree_sha": "29eb10aedc792b1ca321134301e8328099bf2f4f"
+      "git_tree_sha": "5056209a381703af569d52fd862a5ba93ca329e5"
     },
     {
       "name": "apt-st",
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "4a564434986e9eb23d7ecd2c8a9737fd99d27ac8"
+      "git_tree_sha": "92cf25d26322598f2230104a3b6d6c376c374fe0"
     },
     {
       "name": "backup",
@@ -144,7 +144,7 @@
       "version": "2.0.0",
       "kg_ref": "ATOM_Skill_db_query",
       "channel": "stable",
-      "git_tree_sha": "6f342db5be280e19931b3d8c1b6ff677e65d4977"
+      "git_tree_sha": "14c6cc31642ea2051b9d02ac9bc72ab3c51bbda0"
     },
     {
       "name": "deploy",
@@ -277,7 +277,7 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "7d31ff484b0f621ccdba2eee7249d21f29eac804"
+      "git_tree_sha": "031a76be8f6b1df5f81bf879c34a62ba16c1d8d2"
     },
     {
       "name": "pi-workbench",

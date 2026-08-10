@@ -48,7 +48,7 @@ DECOMPOSES_TO와 EXPLORES_VIA 모두 다대다 (N:N):
 - DAG이며 트리 아님. **순환 탐지 필수** (A2 termination).
 
 ```cypher
--- V-SP4: 순환 탐지 (0행이면 정상)
+// V-SP4: 순환 탐지 (0행이면 정상)
 MATCH path = (s:AptSpan)-[:DECOMPOSES_TO*2..10]->(s)
 RETURN 'V_SP4_Cycle' AS validation,
        [n IN nodes(path) | n.name] AS cycle_nodes

@@ -75,16 +75,19 @@ fi
 ## 검증 cypher
 
 ```cypher
--- V-SCW-KGRef-1: SourceCodeNode에 ref comment 없음
+// V-SCW-KGRef-1: SourceCodeNode에 ref comment 없음
 MATCH (src:SourceCodeNode)
 WHERE src.kg_refs IS NULL OR size(src.kg_refs) < 2
 RETURN 'V_SCW_KGRef_Missing' AS validation,
        src.name AS source,
        coalesce(size(src.kg_refs), 0) AS ref_count
+```
 
--- V-SCW-KGRef-2: ref'd Contract가 실제로 KG에 존재 안 함
+```cypher
+// V-SCW-KGRef-2: ref'd Contract가 실제로 KG에 존재 안 함
 MATCH (src:SourceCodeNode)
 UNWIND src.kg_refs AS ref_name
+WITH src, ref_name
 WHERE ref_name STARTS WITH 'CONTRACT_'
   AND NOT EXISTS { MATCH (:AptContract {name: ref_name}) }
 RETURN 'V_SCW_KGRef_DanglingContract' AS validation,

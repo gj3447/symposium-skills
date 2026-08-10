@@ -60,21 +60,25 @@ MERGE (cx)-[:INVOLVES {role: 'source'}]->(src)
 ## 검증 query
 
 ```cypher
--- V14: Hub must have at least atom role
+// V14: Hub must have at least atom role
 MATCH (cx:CrystallizationEvent)
 WHERE NOT (cx)-[:INVOLVES {role: 'atom'}]->()
 RETURN 'V14_HUB_INCOMPLETE' AS validation, cx.name
+```
 
--- V14-Extended: Hub should have all 4 roles (before PH5)
+```cypher
+// V14-Extended: Hub should have all 4 roles (before PH5)
 MATCH (cx:CrystallizationEvent)
 WHERE NOT (cx)-[:INVOLVES {role: 'atom'}]->()
    OR NOT (cx)-[:INVOLVES {role: 'twin'}]->()
    OR NOT (cx)-[:INVOLVES {role: 'task'}]->()
    OR NOT (cx)-[:INVOLVES {role: 'contract'}]->()
 RETURN 'V14_HUB_MISSING_ROLE' AS validation, cx.name,
-       size((cx)-[:INVOLVES]->()) AS role_count
+       COUNT { (cx)-[:INVOLVES]->() } AS role_count
+```
 
--- Consistency: Every CRYSTALLIZES_TO must have a hub
+```cypher
+// Consistency: Every CRYSTALLIZES_TO must have a hub
 MATCH (a:AtomicSpan)-[:CRYSTALLIZES_TO]->(t:SemanticTwin)
 WHERE NOT EXISTS {
   MATCH (cx:CrystallizationEvent)-[:INVOLVES {role: 'atom'}]->(a)

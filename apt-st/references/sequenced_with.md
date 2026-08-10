@@ -103,10 +103,10 @@ CT_SendEmail
 ```cypher
 MATCH (k1:AptContract {name: $upstream}), (k2:AptContract {name: $downstream})
 MERGE (k1)-[r:SEQUENCED_WITH]->(k2)
-SET r.entailment = $entailment,         -- "k1.post(X) entails k2.pre(Y)"
-    r.condition = $condition,            -- branching condition or null
-    r.parallel_group = $group,           -- parallel 시 fan-in 그룹
-    r.feedback_termination = $term_proof,-- feedback 시 종료 증명
+SET r.entailment = $entailment,         // "k1.post(X) entails k2.pre(Y)"
+    r.condition = $condition,            // branching condition or null
+    r.parallel_group = $group,           // parallel 시 fan-in 그룹
+    r.feedback_termination = $term_proof, // feedback 시 종료 증명
     r.verified_at = datetime()
 RETURN k1.name, type(r), k2.name
 ```
@@ -116,18 +116,22 @@ RETURN k1.name, type(r), k2.name
 ## 검증 query
 
 ```cypher
--- V-ST-SEQ-1: entailment 누락
+// V-ST-SEQ-1: entailment 누락
 MATCH ()-[r:SEQUENCED_WITH]->()
 WHERE r.entailment IS NULL OR r.entailment = ''
 RETURN 'V_ST_SEQ_NoEntailment' AS validation, startNode(r).name, endNode(r).name
+```
 
--- V-ST-SEQ-2: type 불일치
+```cypher
+// V-ST-SEQ-2: type 불일치
 MATCH (k1:AptContract)-[r:SEQUENCED_WITH]->(k2:AptContract)
 WHERE k1.output_type <> k2.input_type
 RETURN 'V_ST_SEQ_TypeMismatch' AS validation,
        k1.name, k1.output_type, k2.name, k2.input_type
+```
 
--- V-ST-SEQ-3: feedback loop 종료 증명 누락
+```cypher
+// V-ST-SEQ-3: feedback loop 종료 증명 누락
 MATCH (k:AptContract)-[r:SEQUENCED_WITH]->(k)
 WHERE r.feedback_termination IS NULL
 RETURN 'V_ST_SEQ_NoTerminationProof' AS validation, k.name

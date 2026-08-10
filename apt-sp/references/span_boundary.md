@@ -8,8 +8,8 @@
 
 ```cypher
 MATCH (atom:AtomicSpan {name: $atom})
-SET atom.allowed_paths = $paths,           -- ['src/module_a/', 'tests/test_module_a.py']
-    atom.forbidden_patterns = $patterns    -- ['import module_b', 'from module_c']
+SET atom.allowed_paths = $paths,           // ['src/module_a/', 'tests/test_module_a.py']
+    atom.forbidden_patterns = $patterns    // ['import module_b', 'from module_c']
 ```
 
 - **allowed_paths**: 이 Span이 *수정 가능*한 파일/디렉토리. 다른 경로 수정 시 SCW에서 차단.
@@ -70,13 +70,15 @@ if violations:
 ## 검증 query
 
 ```cypher
--- V-SP-Boundary-1: AtomicSpan에 boundary 미설정
+// V-SP-Boundary-1: AtomicSpan에 boundary 미설정
 MATCH (atom:AtomicSpan) WHERE atom.status = 'crystallized'
-WHERE atom.allowed_paths IS NULL OR size(atom.allowed_paths) = 0
+  AND (atom.allowed_paths IS NULL OR size(atom.allowed_paths) = 0)
 RETURN 'V_SP_Boundary_NoAllowedPaths' AS validation,
        atom.name AS atom
+```
 
--- V-SP-Boundary-2: forbidden_patterns에 자기 모듈 포함 (자기 차단)
+```cypher
+// V-SP-Boundary-2: forbidden_patterns에 자기 모듈 포함 (자기 차단)
 MATCH (atom:AtomicSpan)
 WHERE any(p IN atom.forbidden_patterns
           WHERE any(ap IN atom.allowed_paths WHERE p CONTAINS ap))

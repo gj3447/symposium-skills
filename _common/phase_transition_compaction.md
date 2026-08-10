@@ -69,9 +69,9 @@ SET pte.cycle_id = $cycle_id,
     pte.from_phase = $from_phase,
     pte.to_phase = $to_phase,
     pte.timestamp = datetime(),
-    pte.preserved_keys = $preserved,     -- 위 표의 "보존" 키 목록
-    pte.context_snapshot = $snapshot,    -- 압축된 요약 (JSON string)
-    pte.dropped_count = $dropped_count   -- 제거된 detail 개수
+    pte.preserved_keys = $preserved,     // 위 표의 "보존" 키 목록
+    pte.context_snapshot = $snapshot,    // 압축된 요약 (JSON string)
+    pte.dropped_count = $dropped_count   // 제거된 detail 개수
 WITH pte
 MATCH (prev:Phase {name:$from_phase}), (next:Phase {name:$to_phase})
 MERGE (prev)-[:HANDS_OFF_TO {via:pte.name}]->(next)

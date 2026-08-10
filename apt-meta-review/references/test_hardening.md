@@ -100,14 +100,16 @@ ALL PASS ✓
 bash test가 *파일 내용*을 본다면, cypher는 *KG 노드 일관성* 확인:
 
 ```cypher
--- V-MR-1: SkillVersion이 Lesson에 연결되어 있는지
+// V-MR-1: SkillVersion이 Lesson에 연결되어 있는지
 MATCH (sv:SkillVersion) WHERE sv.skill IN ['apt','apt-sa','apt-sp','apt-st','apt-scw']
 OPTIONAL MATCH (sv)-[:MATERIALIZES]->(oq:OpenQuestion)
 WITH sv, count(oq) AS oq_count
 WHERE oq_count = 0 AND sv.released_at > datetime() - duration({days: 7})
 RETURN 'V_MR_1_SkillVersionNoOQ' AS validation, sv.name
+```
 
--- V-MR-2: Lesson이 5 SKILL.md 중 어디에도 반영 안 됨
+```cypher
+// V-MR-2: Lesson이 5 SKILL.md 중 어디에도 반영 안 됨
 MATCH (l:Lesson {status:'open'}) WHERE l.created_at > datetime() - duration({days: 14})
 OPTIONAL MATCH (l)-[:APPLIED_TO_SKILL]->(s:Skill)
 WITH l, count(s) AS s_count

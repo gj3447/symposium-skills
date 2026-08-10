@@ -92,7 +92,7 @@
 CALL {
   // AP4 Silent Patch
   MATCH (ct:AptContract) WHERE ct.status = 'Amended'
-  WHERE NOT EXISTS { MATCH (ct)-[:HAS_AMENDMENT]->(:AmendmentEvent) }
+    AND NOT EXISTS { MATCH (ct)-[:HAS_AMENDMENT]->(:AmendmentEvent) }
   RETURN 'AP4_SilentPatch' AS ap, ct.name AS subject
   UNION ALL
   // AP7 Self-Approval

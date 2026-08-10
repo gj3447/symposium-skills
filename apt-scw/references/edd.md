@@ -44,8 +44,8 @@ CREATE (run:AptTestRun {
   name:              'TR_' + $contract + '_' + $run_id,
   contract:          $contract_name,
   test_file:         $test_file_path,
-  environment:       $env,               -- 'agent_local' | 'ci_linux' | 'ci_gpu'
-  trigger:           $trigger,           -- 'implementation' | 'regression' | 'ci_scheduled'
+  environment:       $env,               // 'agent_local' | 'ci_linux' | 'ci_gpu'
+  trigger:           $trigger,           // 'implementation' | 'regression' | 'ci_scheduled'
   timestamp:         datetime(),
   total_tests:       $total,
   passed:            $passed,

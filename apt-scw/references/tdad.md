@@ -59,17 +59,21 @@ SET task.impact_tests = [$actual_test_path]
 ## 검증 cypher
 
 ```cypher
--- V-SCW-TDAD-1: impact_tests 비어있음
+// V-SCW-TDAD-1: impact_tests 비어있음
 MATCH (t:SemanticTask) WHERE t.status = 'in_progress'
-WHERE t.impact_tests IS NULL OR size(t.impact_tests) = 0
+  AND (t.impact_tests IS NULL OR size(t.impact_tests) = 0)
 RETURN 'V_SCW_TDAD_EmptyImpactTests' AS validation, t.name AS task
+```
 
--- V-SCW-TDAD-2: NEW_FILE 마커 남아있음 (구현 완료인데)
+```cypher
+// V-SCW-TDAD-2: NEW_FILE 마커 남아있음 (구현 완료인데)
 MATCH (t:SemanticTask {status: 'fulfilled'})
 WHERE 'NEW_FILE' IN t.impact_tests
 RETURN 'V_SCW_TDAD_NewFileMarkerLeft' AS validation, t.name
+```
 
--- V-SCW-TDAD-3: glob/dir 사용
+```cypher
+// V-SCW-TDAD-3: glob/dir 사용
 MATCH (t:SemanticTask)
 WHERE any(p IN t.impact_tests WHERE p CONTAINS '*' OR p ENDS WITH '/')
 RETURN 'V_SCW_TDAD_GlobOrDir' AS validation, t.name, t.impact_tests

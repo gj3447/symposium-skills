@@ -70,20 +70,26 @@
 ## 검증 cypher
 
 ```cypher
--- V-FSM1: NULL status (invariant 위반)
+// V-FSM1: NULL status (invariant 위반)
 MATCH (ct:AptContract) WHERE ct.status IS NULL OR ct.status = ''
 RETURN 'V_FSM1_NullStatus' AS validation, ct.name AS contract
+```
 
--- V-FSM2: 허용 안 된 상태값
+```cypher
+// V-FSM2: 허용 안 된 상태값
 MATCH (ct:AptContract) WHERE NOT ct.status IN ['Draft','Active','Fulfilled','Amended','Rejected','Archived']
 RETURN 'V_FSM2_UnknownStatus' AS validation, ct.name, ct.status
+```
 
--- V-FSM3: terminal에서 outgoing 전이 시도 (Rejected/Archived에서 변경)
+```cypher
+// V-FSM3: terminal에서 outgoing 전이 시도 (Rejected/Archived에서 변경)
 MATCH (ct:AptContract)-[:STATE_TRANSITION]->(:ContractStateTransition {to_state:$s})
 WHERE ct.status IN ['Rejected','Archived']
 RETURN 'V_FSM3_TerminalEscape' AS validation, ct.name, ct.status
+```
 
--- V-FSM4: silent transition (Kafka event 없는 SET)
+```cypher
+// V-FSM4: silent transition (Kafka event 없는 SET)
 MATCH (ct:AptContract)
 WHERE ct.status_updated_at IS NOT NULL
   AND NOT EXISTS {

@@ -51,7 +51,7 @@ SET specific.input_type = shared.input_type,
     specific.precondition = shared.precondition,
     specific.postcondition = shared.postcondition,
     specific.semantic_meaning = shared.semantic_meaning + ' (Order variant — stricter latency)',
-    specific.nfr_latency_p99_ms = 20,  -- shared는 50
+    specific.nfr_latency_p99_ms = 20,  // shared는 50
     specific.parent_contract = shared.name,
     specific.created_at = datetime()
 DELETE r
@@ -64,7 +64,7 @@ MERGE (specific)-[:DERIVED_FROM]->(shared)
 ## 검증 query
 
 ```cypher
--- V-ST-Sandwich-1: 공유 Contract인데 Twin 간 NFR 요구 다름 (분리 누락)
+// V-ST-Sandwich-1: 공유 Contract인데 Twin 간 NFR 요구 다름 (분리 누락)
 MATCH (twin1:SemanticTwin)-[:HAS_CONTRACT]->(ct:AptContract)<-[:HAS_CONTRACT]-(twin2:SemanticTwin)
 WHERE twin1.name < twin2.name
   AND twin1.nfr_latency_p99_ms IS NOT NULL

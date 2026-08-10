@@ -11,7 +11,7 @@
 상위 정체성 + 자식 메타데이터만. 전체 트리 구조 / Contract / 코드 / 테스트 결과 제외.
 
 ```cypher
--- 예시: SemanticAnchor + 직계 L1 Span 메타
+// 예시: SemanticAnchor + 직계 L1 Span 메타
 MATCH (sa:SemanticAnchor {name: $sa_name})-[:DECOMPOSES_TO]->(l1)
 RETURN sa.name, sa.description, sa.domain, sa.status,
        l1.name, l1.description, l1.depth
@@ -23,7 +23,7 @@ ORDER BY l1.name
 선택된 브랜치의 Span 트리 + Contract 존재 여부 (필드 미포함). 작업 대상 브랜치만 로드.
 
 ```cypher
--- 예시: 선택 브랜치 Span 트리 + Contract 존재 여부
+// 예시: 선택 브랜치 Span 트리 + Contract 존재 여부
 MATCH (root:AptSpan {name: $branch})-[:DECOMPOSES_TO*1..5]->(s)
 OPTIONAL MATCH (s)-[:CRYSTALLIZES_TO]->(st)-[:HAS_CONTRACT]->(c)
 RETURN s.name, s.depth, s.is_atomic, s.status,
@@ -36,7 +36,7 @@ ORDER BY s.depth, s.name
 특정 AtomicSpan의 Contract 전문, acceptance criteria, 소스코드 메타. 한 번에 *한 atom*만 L3로.
 
 ```cypher
--- 예시: AtomicSpan + Contract 전문 + Task + 소스코드
+// 예시: AtomicSpan + Contract 전문 + Task + 소스코드
 MATCH (atom:AtomicSpan {name: $atom})-[:CRYSTALLIZES_TO]->(st)-[:HAS_CONTRACT]->(c)
 OPTIONAL MATCH (st)-[:HAS_TASK]->(t)
 OPTIONAL MATCH (c)-[:MATERIALIZES]->(src)

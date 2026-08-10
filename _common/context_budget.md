@@ -38,12 +38,14 @@ RETURN cfg.context_budget_total,
 ## 적용 cypher
 
 ```cypher
--- SA에서 SemanticAnchor 생성 시 총 예산 설정
+// SA에서 SemanticAnchor 생성 시 총 예산 설정
 MATCH (sa:SemanticAnchor {name: $sa_name})
 SET sa.context_budget_total = 100000,
     sa.context_budget_per_span = 8000
+```
 
--- Span 생성 시 depth 기반 자동 할당
+```cypher
+// Span 생성 시 depth 기반 자동 할당
 MERGE (child:AptSpan {name: $name})
 SET child.context_budget = CASE
   WHEN child.depth <= 1 THEN 50000
@@ -56,17 +58,21 @@ SET child.context_budget = CASE
 ## 검증 query (모든 phase 공통)
 
 ```cypher
--- V-CB1: Context Budget 미할당 SA
+// V-CB1: Context Budget 미할당 SA
 MATCH (sa:SemanticAnchor {status: 'active'})
 WHERE sa.context_budget_total IS NULL
 RETURN 'V_CB1_NoBudget_SA' AS validation, sa.name AS anchor
+```
 
--- V-CB2: Context Budget 미할당 Span
+```cypher
+// V-CB2: Context Budget 미할당 Span
 MATCH (s:AptSpan)
 WHERE s.context_budget IS NULL
 RETURN 'V_CB2_NoBudget_Span' AS validation, s.name AS span
+```
 
--- V-CB3: depth와 budget 불일치 (자동 할당 우회)
+```cypher
+// V-CB3: depth와 budget 불일치 (자동 할당 우회)
 MATCH (s:AptSpan) WHERE s.depth IS NOT NULL AND s.context_budget IS NOT NULL
 WITH s,
      CASE WHEN s.depth <= 1 THEN 50000

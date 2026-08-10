@@ -39,12 +39,12 @@
 ```cypher
 CREATE (fb:AptFeedback {
   name:           'FB_' + $project + '_' + $id,
-  discovery_type: $type,          -- 6 types 중 하나
-  category:       $category,      -- 10 categories 중 하나
+  discovery_type: $type,          // 6 types 중 하나
+  category:       $category,      // 10 categories 중 하나
   description:    $description,
   source_phase:   'PH5',
-  target_phase:   $target,        -- 'PH3' or 'PH4'
-  severity:       $severity,      -- 'blocking' | 'degraded' | 'cosmetic'
+  target_phase:   $target,        // 'PH3' or 'PH4'
+  severity:       $severity,      // 'blocking' | 'degraded' | 'cosmetic'
   status:         'open',
   created_at:     datetime(),
   created_by:     $agent

@@ -14,17 +14,23 @@ description: >-
 ```cypher
 // FulfillmentGate enforcement (executor != critic + LensSet completeness)
 MATCH (vr:ValidationResult)-[:USED_LENS]->(ls:LensSet) WHERE ls.deprecated <> true AND ls.lensCount >= 9 RETURN vr
+```
 
+```cypher
 // v0.8.A1 ensemble option (2026-05-05, opt-in via APT_GATE_VERSION=v08-A1)
 // — FulfillmentGate에 ensemble UNION concern-coverage>=0.8 적용 가능
 // — Agent(taliban-ensemble-critic) 권장: 4 LensSet ensemble + USED_LENS edge auto-bind
 MATCH (rfc:MethodologyRFC {name:'rfc-taliban-v08-concern-coverage-2026-05-04'})
 RETURN rfc.status
+```
 
+```cypher
 // Task line limits
 MATCH (cfg:MethodologyConfig {name:'MethodologyConfig_default_v26'})
 RETURN cfg.vibe_coding_hard_max, cfg.vibe_coding_sweet_max
+```
 
+```cypher
 // Longinus ReferenceSite 7-tuple binding (code↔KG)
 MATCH (schema:SchemaDefinition {name:'schema-ReferenceSite-v1-2026-04-20'}) RETURN schema.fields
 ```
@@ -335,7 +341,7 @@ MERGE (c)-[:MATERIALIZES]->(src)
 같은 레이어의 모든 Task가 PASS이면:
 
 ```cypher
--- 통합 검증: 모든 Contract Fulfilled?
+// 통합 검증: 모든 Contract Fulfilled?
 MATCH (sa:SemanticAnchor {name: $PROJECT})-[:HAS_ROOT]->(root)
 MATCH (root)-[:DECOMPOSES_TO*1..10]->(atom:AtomicSpan)
 MATCH (atom)-[:CRYSTALLIZES_TO]->()-[:HAS_CONTRACT]->(c)
@@ -396,7 +402,9 @@ RETURN s.currentConcrete, s.invocation, s.protocol
 // (a) Lesson/RF context pre-fetch
 MATCH (l:Lesson)-[:HAS_RESEARCH]->(rf:ResearchFinding)
 WHERE l.name CONTAINS $keyword RETURN rf.name, rf.domain, rf.oneLineSummary LIMIT 20
+```
 
+```cypher
 // (b) Wave-aware READY seed batch (GAP-1 wave_index + GAP-3 sourceId FK 통합)
 // $CURRENT_WAVE: driver loop 변수 (1..W_max)
 MATCH (a:AtomicSpan)-[:HAS_SEED]->(ts:SubagentTaskSpec {skill:'apt-scw'})
@@ -404,7 +412,9 @@ WHERE a.wave_index = $CURRENT_WAVE AND ts.status = 'READY'
 RETURN collect(ts) AS dispatch_batch
 // → 재배맨 lead_link: single-message N parallel Agent calls (same wave fully parallel)
 // → cross-wave sequential (wave k+1 은 wave k 전체 PASS 후만)
+```
 
+```cypher
 // (c) Legacy fallback (wave_index 미부여 — 차단 대상이지만 진단용)
 MATCH (ts:SubagentTaskSpec {skill:'apt-scw'}) WHERE ts.status='READY'
 RETURN ts.name, ts.role LIMIT 10

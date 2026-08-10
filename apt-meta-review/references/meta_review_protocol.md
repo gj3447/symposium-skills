@@ -22,15 +22,15 @@
 ```cypher
 MERGE (l:Lesson {name:'lesson-'+$short_name+'-'+$date})
 SET l.status = 'open',
-    l.severity = $severity,                      -- P1-P4
-    l.wrongAssumption = $assumed,                -- 무엇을 잘못 가정했나
-    l.truth = $actual,                           -- 실제로 무엇이었나
-    l.context = $context,                        -- 발견 시나리오
-    l.guard = $guard,                            -- 재발 방지 메커니즘
-    l.discoveryType = $discovery_type,           -- 6 PH6 discovery types
-    l.category = $category,                      -- 10 PH6 categories
-    l.target_skill = $skill_name,                -- 어느 SKILL.md 영향
-    l.auto_resolve = false,                      -- 절대 auto_resolve 금지
+    l.severity = $severity,                      // P1-P4
+    l.wrongAssumption = $assumed,                // 무엇을 잘못 가정했나
+    l.truth = $actual,                           // 실제로 무엇이었나
+    l.context = $context,                        // 발견 시나리오
+    l.guard = $guard,                            // 재발 방지 메커니즘
+    l.discoveryType = $discovery_type,           // 6 PH6 discovery types
+    l.category = $category,                      // 10 PH6 categories
+    l.target_skill = $skill_name,                // 어느 SKILL.md 영향
+    l.auto_resolve = false,                      // 절대 auto_resolve 금지
     l.created_at = datetime(),
     l.created_by = $agent
 WITH l
@@ -56,7 +56,9 @@ MERGE (l)-[:DISCOVERED_IN]->(cycle)
 // 1. 패치 대상 slot 존재 확인
 MATCH (slot:MethodologySlot) WHERE slot.name = $slot_name
 RETURN slot.name, slot.currentConcrete
+```
 
+```cypher
 // 2. SKILL.md 파일 패치 (filesystem write)
 // → 실제 edit은 git 위에서 (자동 push로 dgx 자동 sync)
 

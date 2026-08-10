@@ -7,7 +7,7 @@
 ## 5 조건 검증 cypher
 
 ```cypher
--- SP → ST Handoff: 모든 조건 검증
+// SP → ST Handoff: 모든 조건 검증
 MATCH (span:AptSpan {name: $span_name})
 
 // 조건 1: AtomicSpan 라벨
@@ -52,7 +52,7 @@ RETURN span.name AS span,
 [span_boundary.md](span_boundary.md) 의 V-SP-Boundary 통과 필수:
 
 ```cypher
--- V-SP-Boundary-1 추가 체크
+// V-SP-Boundary-1 추가 체크
 MATCH (atom:AtomicSpan {name: $span_name})
 WHERE atom.allowed_paths IS NULL OR size(atom.allowed_paths) = 0
 RETURN 'V_SP_Boundary_NoAllowedPaths' AS blocked,

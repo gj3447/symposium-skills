@@ -83,7 +83,7 @@ MERGE (a)-[:HAS_SEED]->(s)
 
 ### Gate Check 결과
 
-```cypher
+```cypher-template
 // 1:1:1:1 invariant gate query 실행 (SKILL.md 본문 cypher)
 // 결과:
 gate_passed: true
@@ -111,7 +111,7 @@ DELETE r
 
 ### Gate Check 결과
 
-```cypher
+```cypher-template
 // 결과:
 gate_passed: false
 violations_total: 1

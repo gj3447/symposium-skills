@@ -33,18 +33,18 @@
 ## Cypher
 
 ```cypher
--- 후보 생성
+// 후보 생성
 MERGE (gap:AptFeedback {name: $gap_name})
 SET gap.category = 'Missing', gap.status = 'open'
 WITH gap
 MERGE (cand:GapCandidate {name: $candidate_name})
 SET cand.approach = $approach,
-    cand.source = $source_type,  -- 'exploitation' | 'exploration'
+    cand.source = $source_type,  // 'exploitation' | 'exploration'
     cand.positive = 0, cand.negative = 0,
     cand.trials = 0, cand.status = 'pending'
 MERGE (gap)-[:HAS_CANDIDATE]->(cand)
 
--- 점수 업데이트 (3x 금지 적용)
+// 점수 업데이트 (3x 금지 적용)
 MATCH (cand:GapCandidate {name: $candidate_name})
 WHERE cand.trials < 3
 SET cand.trials = cand.trials + 1,
@@ -61,7 +61,7 @@ SET cand.trials = cand.trials + 1,
       ELSE 'pending' END,
     cand.last_trial = datetime()
 
--- Thompson Sampling 선택 (Beta 분포 평균 근사)
+// Thompson Sampling 선택 (Beta 분포 평균 근사)
 MATCH (gap:AptFeedback {name: $gap_name})-[:HAS_CANDIDATE]->(cand)
 WHERE cand.status = 'pending' AND cand.trials < 3
 RETURN cand.name, cand.approach, cand.source,

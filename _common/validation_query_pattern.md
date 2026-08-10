@@ -22,14 +22,18 @@ V-{PHASE_PREFIX}{INDEX} — {invariant name}
 
 ## 표준 cypher 양식
 
-```cypher
--- V-{prefix}{N}: {one-line description of invariant}
+```cypher-template
+// V-{prefix}{N}: {one-line description of invariant}
 MATCH (n:{Label})
 WHERE {invariant_violation_predicate}
 RETURN 'V_{prefix}{N}_{ShortName}' AS validation,
        n.name AS subject,
        {additional_evidence_fields}
 ```
+
+> fence가 `cypher-template`인 이유: `{...}` 플레이스홀더는 유효한 Cypher가 아니라
+> `bin/cypher_validate.sh`의 EXPLAIN 검증 대상에서 제외해야 한다. 실제 검증 쿼리는
+> ```cypher fence를 쓰고, 주석은 SQL식 `--`가 아니라 Cypher식 `//`를 쓴다.
 
 ### 4 mandatory parts
 

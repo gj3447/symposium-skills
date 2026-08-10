@@ -55,13 +55,13 @@ E-{PHASE_PREFIX}{INDEX} — {short name}
 
 ```cypher
 MERGE (e:ErrorPattern:AbstractNode {name:'E-'+$prefix+toString($n)+'-'+$shortName})
-SET e.phase = $phase,                -- 'SA' | 'SP' | 'ST' | 'SCW' | '_common'
+SET e.phase = $phase,                // 'SA' | 'SP' | 'ST' | 'SCW' | '_common'
     e.context = $context,
     e.lesson = $lesson,
     e.guard = $guard,
-    e.severity = $severity,          -- 'P1' | 'P2' | 'P3' | 'P4'
-    e.discoveryType = $discoveryType,-- (선택) PH6 6 discovery type 중 하나
-    e.category = $category,          -- (선택) PH6 10 category 중 하나
+    e.severity = $severity,          // 'P1' | 'P2' | 'P3' | 'P4'
+    e.discoveryType = $discoveryType, // (선택) PH6 6 discovery type 중 하나
+    e.category = $category,          // (선택) PH6 10 category 중 하나
     e.created_at = datetime(),
     e.created_by = $agent
 WITH e

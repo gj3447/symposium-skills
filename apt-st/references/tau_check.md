@@ -42,7 +42,7 @@ semantic_meaning: "K-means clustering of 3D points in mm, ROBOT_BASE frame.
 ## tau_check 자동 cypher
 
 ```cypher
--- 5 check 일괄 평가
+// 5 check 일괄 평가
 MATCH (ct:AptContract {name: $contract_name})
 WITH ct,
      // 1: input concrete
@@ -76,7 +76,7 @@ RETURN ct.name AS contract,
 ## 검증 query (집계)
 
 ```cypher
--- V-ST-TC-1: tau_check FAIL Contract 목록
+// V-ST-TC-1: tau_check FAIL Contract 목록
 MATCH (ct:AptContract) WHERE ct.status IN ['Draft','Active']
 WITH ct
 WHERE ct.input_type IN ['data','any','object','info','result',null,'']

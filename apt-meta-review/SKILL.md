@@ -222,11 +222,11 @@ MERGE (ac:AbstractNode:AdversarialChallenge {
   name: 'challenge-meta-review-' + $cycle_id + '-' + toString(timestamp())
 })
 SET ac.cycle_id = $cycle_id,
-    ac.severity = $severity,                   -- HIGH | MEDIUM | LOW
-    ac.status = 'OPEN',                        -- OPEN | RESOLVED | SUPERSEDED
+    ac.severity = $severity,                   // HIGH | MEDIUM | LOW
+    ac.status = 'OPEN',                        // OPEN | RESOLVED | SUPERSEDED
     ac.challenge_summary = $summary,
-    ac.kg_evidence_anchors = $evidence_list,   -- list of :Lesson / :ResearchFinding node names
-    ac.lens_origin = $lens,                    -- constitutional | mathematical | solid
+    ac.kg_evidence_anchors = $evidence_list,   // list of :Lesson / :ResearchFinding node names
+    ac.lens_origin = $lens,                    // constitutional | mathematical | solid
     ac.emitted_at = datetime()
 WITH ac
 MATCH (vr:ValidationResult {name: $naesengmoon_vr_name})
@@ -350,7 +350,7 @@ SET csv.cycle_id = $cycle_id,
     csv.composite_band = CASE
       WHEN $mvp_gate IN ['PASS','CONDITIONAL'] AND $naesengmoon_verdict IN ['APPROVED','CONDITIONAL_APPROVED'] THEN 'BOTH_PASS'
       WHEN $mvp_gate = 'FAIL' AND $naesengmoon_verdict IN ['APPROVED','CONDITIONAL_APPROVED'] THEN 'LLM_PASS_MVP_FAIL'
-      WHEN $mvp_gate IN ['PASS','CONDITIONAL'] AND $naesengmoon_verdict NOT IN ['APPROVED','CONDITIONAL_APPROVED'] THEN 'MVP_PASS_LLM_FAIL'
+      WHEN $mvp_gate IN ['PASS','CONDITIONAL'] AND NOT ($naesengmoon_verdict IN ['APPROVED','CONDITIONAL_APPROVED']) THEN 'MVP_PASS_LLM_FAIL'
       ELSE 'BOTH_FAIL'
     END
 MERGE (csv)-[:CONFORMS_TO]->(schema:CompositeScoreVerdictSchema {name: 'composite-score-verdict-schema-v1-2026-05-25'})

@@ -117,14 +117,16 @@ MERGE (ct)-[:REQUIRES_HARDWARE {criticality:'test_only', note:'Unit tests use in
 ## 검증 query
 
 ```cypher
--- V-ST-HW-1: mandatory HW 없는 nfr_hw 명시
+// V-ST-HW-1: mandatory HW 없는 nfr_hw 명시
 MATCH (ct:AptContract) WHERE ct.nfr_hw IS NOT NULL
 OPTIONAL MATCH (ct)-[:REQUIRES_HARDWARE]->(hw)
 WITH ct, count(hw) AS hw_count
 WHERE hw_count = 0
 RETURN 'V_ST_HW_NoLink' AS validation, ct.name AS contract, ct.nfr_hw AS declared_hw
+```
 
--- V-ST-HW-2: criticality 누락
+```cypher
+// V-ST-HW-2: criticality 누락
 MATCH (ct:AptContract)-[r:REQUIRES_HARDWARE]->(hw)
 WHERE r.criticality IS NULL
 RETURN 'V_ST_HW_NoCriticality' AS validation, ct.name, hw.name

@@ -14,15 +14,21 @@ description: >-
 ```cypher
 // ContractSchema (default 7-field v25 + error_variants; v2 = 9 canonical axes + SharedType)
 MATCH (slot:MethodologySlot {name:'ContractSchema'})-[:RESOLVES_TO]->(schema) RETURN schema.fields, schema.version
+```
 
+```cypher
 // Task line band (vibe-coding sweet spot)
 MATCH (cfg:MethodologyConfig {name:'MethodologyConfig_default_v26'})
 RETURN cfg.vibe_coding_sweet_min, cfg.vibe_coding_sweet_max, cfg.vibe_coding_hard_max
+```
 
+```cypher
 // Contract v2 reference instance
 MATCH (sa:SemanticAnchor {name:'SA_Contract_v2_DbC_Interface_2026-04-21_v2'})-[:USES_CANONICAL]->(axes)
 RETURN axes.name
+```
 
+```cypher
 // ST decision area cfg pointers (2026-05-04 wired, 5 ConfigSchema MIC slot)
 // — magic number hardcoding 금지, Cypher resolve only.
 MATCH (cs:ConfigSchema:MICSlot)
@@ -36,7 +42,9 @@ RETURN cs.name              AS slot,           // MIC_v1.{area}_decision
 //   T1 ★: AST / Workflow / DesignPattern / DataFlow / Store
 //   T3:   ProjectStructure / Algorithm / ClassDesign
 // Source cycles: hole{1..8} cycles (PROM-16 wave) + hole2-v2 + hole6-v2 fixes
-//
+```
+
+```cypher
 // v0.8.A1 Gate Hook reference (2026-05-05): apt-gate-check.sh dual-mode
 //   APT_GATE_VERSION=v07 (default, lensCount>=9 floor) | v08-A1 (ensemble UNION concern-coverage>=0.8)
 //   Pirsig holistic synthesis = ensemble union의 Cypher instantiation
@@ -413,6 +421,9 @@ RETURN s.currentConcrete, s.invocation, s.protocol
 ```cypher
 MATCH (l:Lesson)-[:HAS_RESEARCH]->(rf:ResearchFinding)
 WHERE l.name CONTAINS $keyword RETURN rf.name, rf.domain, rf.oneLineSummary LIMIT 20
+```
+
+```cypher
 MATCH (ts:SubagentTaskSpec {skill:'apt-st'}) WHERE ts.status='READY'
 RETURN ts.name, ts.role LIMIT 10
 ```
@@ -523,7 +534,7 @@ v2 schema가 자기자신을 기술할 때 발생하는 self-reference cycle 해
 
 ### KG schema (8 sub-decision types)
 
-```cypher
+```cypher-template
 // 모든 Decision 의 공통 supertype
 (:Decision {
   cycle_id: String,
@@ -565,7 +576,7 @@ RETURN cycle.name AS cycle,
        8 AS required_count,
        CASE WHEN size(missing) = 0
             THEN 'OK — SCW entry permitted'
-            ELSE 'BLOCKED — ST.exhaustive_cover incomplete: ' + toString(missing)
+            ELSE 'BLOCKED — ST.exhaustive_cover incomplete: ' + reduce(acc = '', a IN missing | acc + CASE WHEN acc = '' THEN '' ELSE ', ' END + a)
        END AS reason
 ```
 

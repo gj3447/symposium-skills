@@ -22,7 +22,7 @@ MATCH (sa:SemanticAnchor)
 WHERE sa.name CONTAINS $keyword
    OR sa.description CONTAINS $keyword
 RETURN sa.name, sa.description, sa.status,
-       size((sa)-[:HAS_ROOT]->()-[:DECOMPOSES_TO*]->()) AS tree_size
+       COUNT { (sa)-[:HAS_ROOT]->()-[:DECOMPOSES_TO*]->() } AS tree_size
 ORDER BY tree_size DESC
 LIMIT 5
 ```

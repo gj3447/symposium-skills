@@ -15,14 +15,20 @@ description: >-
 // Sweet spot + hard max
 MATCH (cfg:MethodologyConfig {name:'MethodologyConfig_default_v26'})
 RETURN cfg.vibe_coding_sweet_min, cfg.vibe_coding_sweet_max, cfg.vibe_coding_hard_max, cfg.infra_relaxation_min
+```
 
+```cypher
 // δ_infra exception rule
 MATCH (atom:ATOM {name:'ATOM_APT_delta_infra_exception_2026-04-21'}) RETURN atom.rule
+```
 
+```cypher
 // SP→ST gate lens completeness
 MATCH (vr:ValidationResult)-[:USED_LENS]->(ls:LensSet {name:'constitutional-9-full'})
 WHERE ls.deprecated <> true RETURN vr, ls.lensCount
+```
 
+```cypher
 // v0.8.A1 ensemble option (2026-05-05, opt-in via APT_GATE_VERSION=v08-A1)
 // — single-LensSet borderline → ensemble UNION concern-coverage>=0.8
 // — Naesengmoon gate: prefer Agent(taliban-ensemble-critic) over single /taliban call
@@ -253,16 +259,16 @@ for each leaf:
 
 **AtomicSpan 마킹 Cypher (is_atomic=true만으로 불충분 — :AtomicSpan 라벨 필수):**
 
-```cypher
--- C(S) 5-predicate 통과 시 반드시 이 형식으로 마킹 (Russell stratification: parent(S) ≠ Root)
+```cypher-template
+// C(S) 5-predicate 통과 시 반드시 이 형식으로 마킹 (Russell stratification: parent(S) ≠ Root)
 MATCH (s:AptSpan {name: $SPAN_NAME})
-MATCH (s)<-[:DECOMPOSES_TO]-(parent)            -- parent 존재 강제 = Root 제외 (MATH-F2 fix)
-SET s:AtomicSpan,                               -- ← 라벨 추가 필수 (labels(s)에 'AtomicSpan' 포함돼야 함)
+MATCH (s)<-[:DECOMPOSES_TO]-(parent)            // parent 존재 강제 = Root 제외 (MATH-F2 fix)
+SET s:AtomicSpan,                               // ← 라벨 추가 필수 (labels(s)에 'AtomicSpan' 포함돼야 함)
     s.is_atomic = true,
-    s.estimated_lines = $LINES,                 -- ν predicate 실측값
-    s.measure_value = toFloat($LINES) / toFloat(cfg.vibe_coding_sweet_max),  -- contraction metric (Banach k<1)
+    s.estimated_lines = $LINES,                 // ν predicate 실측값
+    s.measure_value = toFloat($LINES) / toFloat(cfg.vibe_coding_sweet_max),  // contraction metric (Banach k<1)
     s.c_s_verified_at = datetime()
-RETURN s.name, labels(s), s.measure_value       -- ['AptSpan', 'AtomicSpan'] + measure ∈ [0, 1] 확인
+RETURN s.name, labels(s), s.measure_value       // ['AptSpan', 'AtomicSpan'] + measure ∈ [0, 1] 확인
 ```
 
 **주의**: `s.is_atomic = true`만 쓰고 `SET s:AtomicSpan` 생략 시 Crystallization 쿼리에서 누락됨.
@@ -280,7 +286,7 @@ RETURN s.name, labels(s), s.measure_value       -- ['AptSpan', 'AtomicSpan'] + m
 ### Step 3.5: Contraction invariant verification (P0-1 fix, 3중 나생문 D2/MATH-F2)
 
 ```cypher
--- ∀ child AtomicSpan: measure(child) < measure(parent) (Banach contraction k<1)
+// ∀ child AtomicSpan: measure(child) < measure(parent) (Banach contraction k<1)
 MATCH (parent)-[:DECOMPOSES_TO]->(child:AtomicSpan)
 WHERE parent.measure_value IS NOT NULL AND child.measure_value IS NOT NULL
   AND child.measure_value >= parent.measure_value
@@ -296,7 +302,7 @@ RETURN parent.name AS parent_span,
 ### Step 4: Crystallization Frontier 도달 확인
 
 ```cypher
--- 모든 leaf가 :AtomicSpan 라벨 보유인지 확인 (is_atomic 속성만으로는 불충분)
+// 모든 leaf가 :AtomicSpan 라벨 보유인지 확인 (is_atomic 속성만으로는 불충분)
 MATCH (sa:SemanticAnchor {name: $PROJECT})-[:HAS_ROOT]->(root)
 MATCH (root)-[:DECOMPOSES_TO*1..10]->(leaf)
 WHERE NOT (leaf)-[:DECOMPOSES_TO]->()
@@ -323,7 +329,9 @@ RETURN leaf.name,
 MATCH (atom:AtomicSpan) WHERE NOT ()-[:DEPENDS_ON]->(atom) AND atom.wave_index IS NULL
 SET atom.wave_index = 1
 RETURN count(atom) AS wave1_size
+```
 
+```cypher
 // Wave k (k=2,3,...) — driver script 가 wave_size > 0 까지 반복
 WITH $k AS k
 MATCH (atom:AtomicSpan)
@@ -334,7 +342,9 @@ WHERE atom.wave_index IS NULL
   }
 SET atom.wave_index = k
 RETURN k, count(atom) AS wave_size
+```
 
+```cypher
 // 종료 검증 — NULL 잔존 시 CyclicDAG
 MATCH (atom:AtomicSpan) WHERE atom.wave_index IS NULL
 RETURN atom.name AS cyclic_atom
@@ -414,6 +424,9 @@ RETURN s.currentConcrete, s.invocation, s.protocol
 ```cypher
 MATCH (l:Lesson)-[:HAS_RESEARCH]->(rf:ResearchFinding)
 WHERE l.name CONTAINS $keyword RETURN rf.name, rf.domain, rf.oneLineSummary LIMIT 20
+```
+
+```cypher
 MATCH (ts:SubagentTaskSpec {skill:'apt-sp'}) WHERE ts.status='READY'
 RETURN ts.name, ts.role LIMIT 10
 ```
@@ -489,7 +502,7 @@ User APPROVED → exit Plan Mode → atomic Cypher commit:
 
 ### Atomic KG Commit 패턴 (Plan Mode exit 후)
 
-```cypher
+```cypher-template
 // Plan Mode 에서 user 확정된 wave 1 + wave 2 batch 를 단일 transaction 으로 commit
 BEGIN
 UNWIND $atomic_spans AS span

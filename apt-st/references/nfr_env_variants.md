@@ -58,12 +58,14 @@ Dev는 latency 완화, Prod 50ms p99 강제. Deploy 전 load testing 필수.
 ## 검증 query
 
 ```cypher
--- V-ST-NFR-1: nfr_env_prod 누락 (prod 환경 가정 위반)
+// V-ST-NFR-1: nfr_env_prod 누락 (prod 환경 가정 위반)
 MATCH (ct:AptContract) WHERE ct.status IN ['Active','Fulfilled']
-WHERE ct.nfr_env_prod IS NULL AND ct.nfr_latency_p99_ms IS NOT NULL
+  AND ct.nfr_env_prod IS NULL AND ct.nfr_latency_p99_ms IS NOT NULL
 RETURN 'V_ST_NFR_NoProdVariant' AS validation, ct.name AS contract
+```
 
--- V-ST-NFR-2: dev 환경 값이 prod보다 엄격 (anomaly)
+```cypher
+// V-ST-NFR-2: dev 환경 값이 prod보다 엄격 (anomaly)
 MATCH (ct:AptContract)
 WHERE ct.nfr_env_dev IS NOT NULL AND ct.nfr_env_prod IS NOT NULL
 WITH ct,

@@ -11,7 +11,7 @@
 **실패 시:** 누락된 Span 추가. 부모 description에서 커버되지 않은 의미 영역 식별 → 새 자식 생성.
 
 ```cypher
--- Coverage 검증: 부모 description의 핵심 단어가 자식 description에 등장
+// Coverage 검증: 부모 description의 핵심 단어가 자식 description에 등장
 MATCH (p:AptSpan {name: $parent})-[:DECOMPOSES_TO]->(child)
 WITH p, collect(child) AS children, p.description AS pdesc
 WITH p, children, [word IN split(pdesc, ' ') WHERE size(word) > 4] AS pwords
@@ -31,7 +31,7 @@ RETURN 'V_SP_Coverage_Missing' AS validation,
 **실패 시:** 모순되는 자식의 description 수정. 동일 입력에 대해 상충하는 postcondition이 있으면 하나 조정.
 
 ```cypher
--- 동일 입력 → 다른 postcondition 자식 페어 탐지 (휴리스틱)
+// 동일 입력 → 다른 postcondition 자식 페어 탐지 (휴리스틱)
 MATCH (p:AptSpan {name: $parent})-[:DECOMPOSES_TO]->(c1:AtomicSpan),
       (p)-[:DECOMPOSES_TO]->(c2:AtomicSpan)
 WHERE c1 <> c2
@@ -52,13 +52,13 @@ RETURN 'V_SP_Consistency_Conflict' AS validation,
 **실패 시:** 의존 관계 형제 재분해. 의존을 부모 레벨로 올리거나 구조 변경.
 
 ```cypher
--- Independence 검증 (반드시 0행 반환)
+// Independence 검증 (반드시 0행 반환)
 MATCH (p:AptSpan {name: $parent})-[:DECOMPOSES_TO]->(a),
       (p)-[:DECOMPOSES_TO]->(b)
 WHERE a <> b AND (a)-[:DEPENDS_ON]->(b)
 RETURN 'V_SP_Independence_Violation' AS validation,
        a.name AS dependent, b.name AS dependency
--- 결과 있으면 A3 위반: 재분해 필요
+// 결과 있으면 A3 위반: 재분해 필요
 ```
 
 ---
@@ -81,7 +81,7 @@ CALL {
   // Consistency (simplified — full version cypher 별도 파일)
   MATCH (p:AptSpan {name: $parent})-[:DECOMPOSES_TO]->(c1:AtomicSpan),
         (p)-[:DECOMPOSES_TO]->(c2:AtomicSpan)
-  WHERE c1.name < c2.name  -- avoid duplicate pair
+  WHERE c1.name < c2.name  // avoid duplicate pair
   MATCH (c1)-[:CRYSTALLIZES_TO]->()-[:HAS_CONTRACT]->(ct1),
         (c2)-[:CRYSTALLIZES_TO]->()-[:HAS_CONTRACT]->(ct2)
   WHERE ct1.input_type = ct2.input_type AND ct1.postcondition <> ct2.postcondition

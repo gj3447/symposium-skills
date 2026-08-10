@@ -83,7 +83,7 @@ MATCH (ct:AptContract {name: $contract_name, status: 'Fulfilled'})
 SET ct.status = 'Amended',
     ct.amended_at = datetime(),
     ct.amendment_reason = $reason,
-    ct.amendment_trigger = $trigger     -- 'downstream_change'|'new_requirement'|'hardware_change'|'accuracy_drift'|'performance_drift'
+    ct.amendment_trigger = $trigger     // 'downstream_change'|'new_requirement'|'hardware_change'|'accuracy_drift'|'performance_drift'
 WITH ct
 // AmendmentEvent 노드 생성
 MERGE (ae:AmendmentEvent {name:'AE_'+ct.name+'_'+toString(datetime().epochMillis)})
@@ -104,14 +104,16 @@ Kafka 이벤트는 [_common/kafka_event_convention.md](../../_common/kafka_event
 ## 검증 query
 
 ```cypher
--- V-ST-AM-1: silent amendment (ContractAmended event 없는 status 변경)
+// V-ST-AM-1: silent amendment (ContractAmended event 없는 status 변경)
 MATCH (ct:AptContract) WHERE ct.status = 'Amended'
 WITH ct
 OPTIONAL MATCH (ct)-[:HAS_AMENDMENT]->(ae:AmendmentEvent)
 WHERE ae IS NULL
 RETURN 'V_ST_Amendment_Silent' AS validation, ct.name AS contract
+```
 
--- V-ST-AM-2: amendment_reason 누락
+```cypher
+// V-ST-AM-2: amendment_reason 누락
 MATCH (ct:AptContract)-[:HAS_AMENDMENT]->(ae:AmendmentEvent)
 WHERE ae.reason IS NULL OR ae.reason = ''
 RETURN 'V_ST_Amendment_NoReason' AS validation, ct.name, ae.name

@@ -40,7 +40,7 @@ Parent (탐색 소유자)
 두 대안이 동등한 결과를 산출하면 **confluent** (합류).
 
 ```cypher
--- 벤치마크 후 두 대안 결과가 허용 범위 내 동등
+// 벤치마크 후 두 대안 결과가 허용 범위 내 동등
 MATCH (a1:AtomicSpan)<-[:EXPLORES_VIA]-(parent)-[:EXPLORES_VIA]->(a2:AtomicSpan)
 WHERE a1 <> a2
   AND a1.benchmark_result IS NOT NULL

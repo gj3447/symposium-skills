@@ -31,7 +31,7 @@ WITH ct, task, run,
      // 1: all tests pass
      CASE WHEN run.failed = 0 AND run.skipped = 0 THEN true ELSE false END AS c1_tests,
      // 5: complexity
-     CASE WHEN run.lines <= 500 THEN true ELSE false END AS c5_complex,  -- {{cfg.complexity_threshold}}
+     CASE WHEN run.lines <= 500 THEN true ELSE false END AS c5_complex,  // {{cfg.complexity_threshold}}
      // 7: NFR
      CASE WHEN ct.nfr_latency_p99_ms IS NULL
               OR run.latency_p99_ms <= ct.nfr_latency_p99_ms THEN true ELSE false END AS c7_nfr

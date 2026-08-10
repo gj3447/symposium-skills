@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-08-03T15:22:01+09:00",
-  "git_head_commit": "8a0118e6a9eb225cc12f80bd71966de047dbbf68",
-  "git_head_short": "8a0118e",
-  "git_latest_tag": "v26.0.2",
-  "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
+  "generatedAt": "2026-08-10T06:22:02Z",
+  "git_head_commit": "20f556cef9868bf4200e5ac4318fb32b962c6a2e",
+  "git_head_short": "20f556c",
+  "git_latest_tag": null,
+  "canonical_path": "/home/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 53,
-  "merkle_root": "8d2fca7da2a488311aa0563f68197aa4f72d72aed786a89a04b233ba9fde805e",
+  "merkle_root": "c91c71fb5410227efac6108aaabc5a7255b338af1a36bacaff79d01f037c3a8c",
   "skills": [
     {
       "name": "88-taliban",
@@ -86,8 +86,8 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
-      "git_tree_sha": "09d84b2a82a4def73058623d4fd3dc7043f2c9aa",
-      "content_sha256": "a0578cfae0406ff9b3390609ed85d098886fa13e9684c5decb0f48e94d035d14"
+      "git_tree_sha": "bcec2d6a694af891e5a85a81f72e68692eb9605f",
+      "content_sha256": "230a686f4d89175f040ac2d53f2bdf4ba62ff8b20bd0352fd29eeb0bffa517ea"
     },
     {
       "name": "apt-orchestrator",
@@ -104,8 +104,8 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sa",
       "channel": "stable",
-      "git_tree_sha": "ddc1f29b33263fcfd69c6bcd0b4f1c4d0e45f39b",
-      "content_sha256": "0145eda023b6104ad863f576e2c79e44f1b6fbc9b7c2b1eca2eecfdf33a92b54"
+      "git_tree_sha": "b9b5e0e9afba8efecc2f8887553af0c5e68765bc",
+      "content_sha256": "77c7cb57f3bcbf3a6a298d30749e6b3801fb7c7cdd6e810dc94f029604238d55"
     },
     {
       "name": "apt-scw",
@@ -113,8 +113,8 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_scw",
       "channel": "stable",
-      "git_tree_sha": "3aff808f42fbd082297c975271c316309baf646d",
-      "content_sha256": "f52f1b6ed15a0b5e6db07be9de51bac6fa3f9949fd7539ebe64420e76e2c83bd"
+      "git_tree_sha": "84a20675e472e44c443be669cfec48534f2f25fc",
+      "content_sha256": "dde5e4e04993aa50e6b0ece4d8157daa035aa22144193767a4d162cc886b9233"
     },
     {
       "name": "apt-sp",
@@ -122,8 +122,8 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sp",
       "channel": "stable",
-      "git_tree_sha": "29eb10aedc792b1ca321134301e8328099bf2f4f",
-      "content_sha256": "b20681f6e22444ec9e605da5ead9c896b82b2c3f259e2f7ae793109221588d46"
+      "git_tree_sha": "5056209a381703af569d52fd862a5ba93ca329e5",
+      "content_sha256": "e32de09fce54b9f4dcc56bbc7a119ec80c5c0416042f916de8014c0ffc602027"
     },
     {
       "name": "apt-st",
@@ -131,8 +131,8 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "4a564434986e9eb23d7ecd2c8a9737fd99d27ac8",
-      "content_sha256": "7719b629abd0fc85395d6ce56c247f93df5ecb49661ee97c428167d3518fd05c"
+      "git_tree_sha": "92cf25d26322598f2230104a3b6d6c376c374fe0",
+      "content_sha256": "041a4c23369787c95ef7f117161bc46a82678529ea12d0c39a0eef93980ddeb8"
     },
     {
       "name": "backup",
@@ -185,8 +185,8 @@
       "version": "2.0.0",
       "kg_ref": "ATOM_Skill_db_query",
       "channel": "stable",
-      "git_tree_sha": "6f342db5be280e19931b3d8c1b6ff677e65d4977",
-      "content_sha256": "17be3eb9d6bebebc7f05a12cbb7d7cc6957bbea00e61beee3b29050fef173633"
+      "git_tree_sha": "14c6cc31642ea2051b9d02ac9bc72ab3c51bbda0",
+      "content_sha256": "54df12622add4e388cdc745a2e2ceb962038285ea1a81754173bfbfed8d19684"
     },
     {
       "name": "deploy",
@@ -356,7 +356,7 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "7d31ff484b0f621ccdba2eee7249d21f29eac804",
+      "git_tree_sha": "031a76be8f6b1df5f81bf879c34a62ba16c1d8d2",
       "content_sha256": "61e4cf26f7d0d6465b8f32e7e8257e6fda1dcbc00a3d8eff4b9ff868aa013f65"
     },
     {

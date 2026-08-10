@@ -21,29 +21,37 @@
 ## 자동 탐지 cypher
 
 ```cypher
--- Over-ambition: estimated_lines 초과
+// Over-ambition: estimated_lines 초과
 MATCH (t:SemanticTask)
-WHERE t.estimated_lines > 500   -- cfg.complexity_threshold ({{cfg.complexity_threshold}})
+WHERE t.estimated_lines > 500   // cfg.complexity_threshold ({{cfg.complexity_threshold}})
 RETURN 'F_ST_OverAmbition_Lines' AS pattern, t.name AS subject, t.estimated_lines AS evidence
+```
 
--- Over-ambition: "and also" in description
+```cypher
+// Over-ambition: "and also" in description
 MATCH (t:SemanticTask)
 WHERE t.description CONTAINS 'and also' OR t.description CONTAINS '그리고 또한'
 RETURN 'F_ST_OverAmbition_AndAlso' AS pattern, t.name AS subject, t.description AS evidence
+```
 
--- False completion: postcondition prose
+```cypher
+// False completion: postcondition prose
 MATCH (ct:AptContract)
 WHERE ct.postcondition CONTAINS '잘 작동' OR ct.postcondition CONTAINS 'works correctly'
    OR NOT (ct.postcondition CONTAINS '==' OR ct.postcondition CONTAINS '>'
         OR ct.postcondition CONTAINS '<' OR ct.postcondition CONTAINS 'is not None')
 RETURN 'F_ST_FalseCompletion_Prose' AS pattern, ct.name, ct.postcondition
+```
 
--- Testing gap: impact_tests empty
+```cypher
+// Testing gap: impact_tests empty
 MATCH (t:SemanticTask)
 WHERE t.impact_tests IS NULL OR size(t.impact_tests) = 0
 RETURN 'F_ST_TestingGap_Empty' AS pattern, t.name AS subject
+```
 
--- Testing gap: NFR set, perf test 없음
+```cypher
+// Testing gap: NFR set, perf test 없음
 MATCH (t:SemanticTask)-[:HAS_CONTRACT]->(ct:AptContract)
 WHERE ct.nfr_latency_p99_ms IS NOT NULL
   AND NONE(test IN t.impact_tests WHERE test CONTAINS 'latency' OR test CONTAINS 'perf')

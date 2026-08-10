@@ -171,7 +171,9 @@ wave w 의 N seeds 중 M (M ≥ 1) 개가 FAIL → wave w+1 진입 **차단**.
 UNWIND $failed_seed_names AS sn
 MATCH (ts:SubagentTaskSpec {name: sn})
 SET ts.status = 'FAILED', ts.failedAt = datetime();
+```
 
+```cypher
 // 2. WavePartialFail 노드 + 사용자 게이트
 MERGE (wpf:WavePartialFail {
   project: $PROJECT,

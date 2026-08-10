@@ -45,29 +45,29 @@ optional_mcp_tools:
     mcp__neo4j__write_neo4j_cypher:     "Neo4j write Cypher (CREATE/MERGE/SET — user confirm)"
     mcp__neo4j__get_neo4j_schema:       "Neo4j schema (label / rel / property)"
 description: >-
-  Query Bihaenggiman databases running on DGX Kubernetes through approved endpoints, with Mac acting as gateway rather than a local Docker host. Use when: reading or safely updating Neo4j, PostgreSQL, MongoDB, Redis, or related server data. Do not use when: the goal is health inspection, backup, or Kafka administration rather than a database query; use `$server-status`, `$backup`, or `$kafka-manage` instead.
+  Query Bihaenggiman databases on VM200 data-01 (192.168.0.25) through approved endpoints from any gateway node (dev-01 canonical / Mac), never a local Docker host. Use when: reading or safely updating Neo4j, PostgreSQL, MongoDB, Redis, or related server data. Do not use when: the goal is health inspection, backup, or Kafka administration rather than a database query; use `$server-status`, `$backup`, or `$kafka-manage` instead.
 ---
 
-# DB 쿼리 실행 (v2 — DGX 정본)
+# DB 쿼리 실행 (v3 — VM200 정본, 2026-08-10 dev-01 이관 반영)
 
 ## 아키텍처 (절대 잊지 말 것)
 
 ```
-Mac Mini  = thin client (Docker 설치 금지, 무거운 DB 서버 금지)
-DGX       = 유일한 서버 (kubeadm single-node @ 192.168.0.23)
-Mac localhost:PORT → user socat → DGX NodePort
-정본: SERVER/05_DOCS/BHGMAN_SERVER_ARCHITECTURE.md
+DB 실체   = Proxmox VM200 data-01 @ 192.168.0.25 (2026-07-19 4TB 컷오버로 DGX k8s에서 이사)
+게이트웨이 = dev-01 (canonical) / Mac (지휘·읽기) — 둘 다 thin client, DB 서버 기동 금지
+클라이언트 → localhost:PORT (각 노드 socat → 192.168.0.25) 또는 192.168.0.25:PORT 직결
+정본: ~/CD/SERVER/05_DOCS/BHGMAN_SERVER_ARCHITECTURE.md (SERVER는 gj3447/SERVER repo)
 ```
 
 **금지**
-- `docker exec …` (Mac에 docker 없음, 컨테이너는 DGX k8s)
-- Mac에 Neo4j/Postgres/Mongo/Redis 서버 기동
-- Multipass `192.168.2.2` / 옛 k8s-cp 가정
+- `docker exec …` (게이트웨이 노드에 docker 없음)
+- 게이트웨이 노드에 Neo4j/Postgres/Mongo/Redis 서버 기동
+- Multipass `192.168.2.2` / 옛 k8s-cp / **DGX NodePort(30687 등) 가정 — 2026-07-19 이후 폐기, 실측 CLOSED**
 
 **허용 경로 (우선순위)**
 1. MCP tools (`mcp__neo4j__*`, `mcp__postgres__*`, …)
-2. Mac CLI → `localhost` (socat 경유)
-3. `ssh dgx` + `kubectl exec -n data …` (CLI 없을 때 / 디버그)
+2. CLI → `localhost` (socat 경유) 또는 `192.168.0.25` 직결 — cypher-shell 없으면 HTTP API(`:7474/db/neo4j/tx/commit`)
+3. `ssh dgx` + `kubectl exec -n data …` (레거시 디버그 전용 — DB 본체는 더 이상 DGX에 없음)
 
 ---
 

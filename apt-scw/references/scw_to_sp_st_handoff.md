@@ -72,14 +72,16 @@ RETURN fb.name, fb.status, fb.resolution
 ## 검증 query
 
 ```cypher
--- V-SCW-Handoff-1: max returns 초과 (인간 에스컬레이션 누락)
+// V-SCW-Handoff-1: max returns 초과 (인간 에스컬레이션 누락)
 MATCH (span:AptSpan)<-[:AFFECTS]-(fb:AptFeedback)
 WITH span, count(fb) AS return_count
-WHERE return_count > 3   -- cfg.max_returns_per_span
+WHERE return_count > 3   // cfg.max_returns_per_span
 RETURN 'V_SCW_Handoff_MaxReturnsExceeded' AS validation,
        span.name AS span, return_count
+```
 
--- V-SCW-Handoff-2: severity 누락
+```cypher
+// V-SCW-Handoff-2: severity 누락
 MATCH (fb:AptFeedback) WHERE fb.severity IS NULL
 RETURN 'V_SCW_Handoff_NoSeverity' AS validation, fb.name
 ```
