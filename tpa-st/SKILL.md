@@ -4,12 +4,8 @@ kg_ref: ATOM_Skill_tpa_st
 version: "1.2.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
-description: >
-  TPA TargetTwin (ST) — Phase 2/4. APT ST 거울 (역순).
-  각 pub 심볼의 암묵적/명시적 Contract 추출. AptContract(명시 interface/trait)
-  vs ConventionalContract(암묵 시그니처) 분리 라벨. LOC>100 giant method는 SP로 위임.
-  pre/postcondition 주석 파싱. Gate Check Hook 강제: TCW Gate 통과 없이 진입 불가.
-  # KG: ATOM_Skill_tpa_st, CONTRACT_AS_TPA_st_SKILL, TPA_methodology_v10
+description: >-
+  Extract explicit and conventional contracts, signatures, and preconditions or postconditions from inventoried public symbols in TPA phase 2. Use when: the parent `$tpa` workflow dispatches ST after an approved TargetCodeWorld inventory. Do not use when: code inventory is incomplete or extracted contracts are ready for pattern recovery; use `$tpa-tcw` or `$tpa-sp` instead.
 ---
 
 <!-- KG: TASK_AS_TPA_st_SKILL -->

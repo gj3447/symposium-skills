@@ -4,14 +4,8 @@ kg_ref: ATOM_Skill_apt_autoflow_guard
 version: "0.1.0-scaffold"
 channel: experimental
 canonical_name: apt-autoflow-guard
-description: >
-  APT autoflow guarantee 책무 — KG-first check + AskUserQuestion 차단 + Span-MERGE-KG-paste guard.
-  APT 는 monolithic auto-flow. 중간 결정 (gate dispatch, seed 우선순위, fix 방식) 은 시스템
-  자율 처리, 사용자는 초기 input + 최종 산출물 + 비가역 리스크 검토만.
-  lesson-apt-monolithic-autoflow-no-mid-questions-2026-04-17 enforce 본체.
-  Scaffold 2026-05-22: 실행 layer = 3개 hook 묶음.
-  Invoke when: APT 사이클 시작 시 marker touch, autoflow violation 진단.
-  # KG: ATOM_Skill_apt_autoflow_guard, lesson-apt-monolithic-autoflow-no-mid-questions-2026-04-17, vr-apt-autonomy-drift-3-symptom-cluster-naesengmoon-3lens-2026-05-22
+description: >-
+  Enforce APT monolithic auto-flow through KG-first checks, no mid-cycle questions for reversible decisions, and Span, MERGE, and KG-paste guards. Use when: installing or auditing the APT autoflow marker/hooks, or diagnosing a concrete autoflow guard violation. Do not use when: starting an APT cycle, choosing phases, or implementing the work; use `$apt` instead.
 ---
 
 ## 🚧 Scaffold Status (2026-05-22)

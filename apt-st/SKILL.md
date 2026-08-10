@@ -3,17 +3,8 @@ name: apt-st
 kg_ref: ATOM_Skill_apt_st
 version: "27.1.0"
 channel: stable
-description: >
-  APT SemanticTwin (ST) — crystallization of AtomicSpans into Contract + Task + 8 ST Decision Areas.
-  Enters ONLY after Crystallization Frontier (all leaves = AtomicSpan).
-  v27: Exhaustive Cover Scope — 8 areas (AST/Workflow/DP/PS/DataFlow/Algo/Store/Class) mandatory before SCW. Tier 1 5 areas HIGH ★, Tier 3 3 areas MEDIUM.
-  Contract = typed DTO/Schema (default 7 fields + v25 error_variants; v26 A2 pluggable via ContractSchema slot).
-  v26 A2: Contract v2 (9 axes + access_rights_closure + ArchitectureContract + 6 CrossAxisInvariant + ReferenceSite/DriftMorphism).
-  v25: SharedType→Contract.shared=true. SemanticTask via MethodologyConfig.vibe_coding_sweet.
-  Invoke when: parent /apt orchestrator dispatch only — direct user call rejected by APT_GATE_VERSION=v27_phase_st_dispatch_guard.
-  ST 는 SA→SP→ST→SCW chain 의 3/4 phase — 단독 호출 시 SP gate APPROVED + Crystallization Frontier + 8 areas exhaustive cover precondition 자동 만족 불가 (E1.4 PATTERN_D→PATTERN_A).
-  Active Weapons (2026-05-14): Longinus L3-L4 (Contract→ReferenceSite 7-tuple, Step 8) + 재배맨 per-AtomicSpan SubagentTaskSpec (1:1:1:1, Step 9) + Naesengmoon `/tlb <Contract> --lens constitutional` (Step 9.5).
-  # KG: ATOM_Skill_apt_st_v27, lesson-st-cover-scope-exhaustive-2026-04-29, APT_v26_RFC_draft_2026-04-21, rf-prom16-cc-eng-E1-S4-skill-activation-2026-05-14
+description: >-
+  Crystallize approved AtomicSpans into typed contracts, semantic tasks, exhaustive decision areas, and Longinus reference sites before code. Use when: the parent `$apt` workflow dispatches ST after SP reaches the Crystallization Frontier. Do not use when: design recovery starts from existing code rather than forward APT spans; use `$tpa` instead.
 ---
 
 ## 🎛 v26 A6 Resolve-Only

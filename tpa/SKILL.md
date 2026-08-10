@@ -4,14 +4,8 @@ kg_ref: ATOM_Skill_tpa_orchestrator_v10
 version: "1.2.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
-description: >
-  TPA v1.0 orchestrator — APT v24 역분석 기반 역순 사이클.
-  코드→설계 복원 (TCW→ST→SP→TA). 5대 본질 MIC 참조.
-  오답노트 피드백 루프 내장. Gate Check Hook 강제.
-  # KG: ATOM_Skill_tpa_orchestrator_v10, TPA_methodology_v10, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory before any framing/diagnostic, lesson-ai-skipped-kg-check-before-framing-2026-04-29)
-  Invoke when: "/tpa <path>", "/tpa --audit <anchor>", "/tpa --status",
-  "reverse engineer", "analyze codebase", "코드 분석", "리버스 엔지니어링".
-  Enforces: phase detection, flow control, adversarial gates, feedback loop, mandatory reflection.
+description: >-
+  Orchestrate the TPA reverse code-to-design cycle TCW→ST→SP→TA with phase gates, drift audit, adversarial validation, and lesson feedback. Invoke when: the user requests `/tpa`, reverse engineering, external or legacy code analysis, design recovery, status, or anchor audit. Do not use when: a new feature or project should be designed forward from intent to code; use `$apt` instead.
 ---
 
 <!-- KG: TASK_AS_TPA_orchestrator_v10, CONTRACT_AS_TPA_orchestrator_v10 -->

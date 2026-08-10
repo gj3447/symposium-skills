@@ -4,10 +4,8 @@ kg_ref: ATOM_Skill_solve
 version: "2.0.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
-description: >
-  오답노트 체계적 해결 사이클 — 문제 발견 → KG 기록 → 병렬 리서치 → KG 구축 → 계획 수립 → 실행 → 검증의 7단계.
-  /solve <문제설명> 또는 /solve lesson-XXX로 호출.
-  # KG: ATOM_Skill_solve, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory before any framing/diagnostic, lesson-ai-skipped-kg-check-before-framing-2026-04-29)
+description: >-
+  Run the seven-stage error-notebook resolution cycle: identify a problem, record it in KG, research in parallel, build grounded knowledge, plan, execute, and verify. Invoke when: the user calls `/solve <problem>`, names a lesson node, or requests the complete recorded remediation cycle. Do not use when: the request needs only research, adversarial audit, or forward implementation without the full lesson cycle; use `$prometheus`, `$taliban`, or `$apt` instead.
 ---
 
 ## 🔗 MIC Binding (SOLID-DIP)

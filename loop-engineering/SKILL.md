@@ -1,12 +1,7 @@
 ---
 name: loop-engineering
 description: >-
-  Design or review bounded, observable, resumable agent and harness execution loops.
-  Use for model-tool loops, long-running coding agents, evaluator-optimizer cycles,
-  human approval pauses, retries, checkpoints, replay, budget and no-progress controls,
-  idempotent effects, or production loop failures. Preserves the Bihaenggiman Harness
-  1:N family and treats loop control primarily as an L_RT specialization, with measured
-  conditional commander dispatch rather than fixed USES edges.
+  Design or review bounded, observable, resumable agent and harness execution loops with retries, approvals, checkpoints, replay, budgets, no-progress controls, and idempotent effects. Use when: building model-tool loops, long-running coding agents, evaluator-optimizer cycles, or diagnosing production loop failures. Do not use when: domain lifecycle semantics or the reusable engine boundary is the main object; use `$fsm-design` or `$engine-design` instead.
 ---
 
 # Loop Engineering

@@ -1,12 +1,7 @@
 ---
 name: lakatotree-judge
 description: >-
-  Preregister and independently judge a PI research-program result with the
-  LakatoTree deterministic engine. Use when claiming progressive, partial,
-  equivalent, or rejected research progress; when consuming
-  lakato-evidence-record/v1 data; or when auditing that a verdict was derived
-  from a locked prediction, grounded measurement, and replayable provenance
-  rather than typed by an agent.
+  Preregister and independently judge a PI research-program result with the deterministic LakatoTree engine using a locked prediction, grounded measurement, and replayable provenance. Use when: claiming progressive, partial, equivalent, or rejected progress or consuming `lakato-evidence-record/v1` evidence. Do not use when: executable behavior evidence has not yet been produced or only a runtime path needs proof; use `$ooptdd-receipt` instead.
 ---
 
 # LakatoTree Judge

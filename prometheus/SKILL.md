@@ -1,7 +1,7 @@
 ---
 name: prometheus
 kg_ref: ATOM_Skill_prometheus
-version: "6.4.0"
+version: "6.4.1"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
 description: >-
@@ -255,6 +255,50 @@ docker network ls && docker network inspect $NETWORK
 **하위호환 계약**: 임베딩 의존 서브커맨드(prefetch-rank/dedup/consensus/bind)는 import 실패·모델 부재 시 `{"status":"UNAVAILABLE","reason":...}` + exit 0 을 반환 — 스킬은 이를 받으면 해당 스텝을 v6.3 경로로 그대로 진행한다. `fuse`는 stdlib 순수계산이라 항상 동작. 모델 = all-MiniLM-L6-v2 기본, fallback paraphrase-multilingual-MiniLM-L12-v2(한/중/영), 캐시는 `/Volumes/GM/hswm_lab/` 시도 후 로컬 폴백.
 
 **명시적 비채택 (반증 라인 부활 금지)**: GCN-II 깊이(ML19 전 지표 최악) / 의미 엣지가중 Θ-sem(ML17 −0.031 해침) / blind RRF 단독(ML5) / 순수 hypergraph 랭킹 단독(ML19 CI 0) / entity 정점 후보추가(V∪E 종결). 랭킹 경로 = hyper_fuse(flat cosine + hyper PPR 의 RRF)만.
+
+#### HSWM multi-agent absorb pointer (v6.4.1 — thin pointer, 본문 중복 금지)
+
+> **정본 스킬**: `/hswm-solid-absorb` (Grok: `CD/19/.grok/skills/hswm-solid-absorb/`; 계약 `HSWM/ABSORB_CONTRACT_v1.md`).  
+> **정본 CLI**: `bin/hswm_absorb_cli.py` (`handoff` / `validate-contract` / `contract-print`) — stdlib 전용, 모델 불필요.  
+> **연구 트리**: `LakatosTree_HSWM_SolidMultiAgent_20260722` (2Wiki external joint +0.10, stale cut +0.35).
+
+**두 표면 분리 (collapse 금지):**
+
+| 표면 | CLI | 기본 | 모델 |
+|---|---|---|---|
+| PROM semantic weave (이 절 v6.4) | `prom_hswm.py` 5종 | **OFF** (opt-in) | 필요(fuse 제외) |
+| Multi-agent handoff absorb | `hswm_absorb_cli.py handoff` | **`flat_L4` 안전 기본** | 불필요 |
+
+**Deploy slogan (실측 잠금):** `Admit flat. Expand gated (optional). Govern late. TRAVERSAL_OFF. Fuse weight may be 0.`
+
+멀티에이전트 후보를 다음 에이전트에 넘길 때 (Step 3 collect / Step 4 이후 handoff):
+
+```bash
+# $ABSORB = skills repo 루트 bin/hswm_absorb_cli.py
+python3 $ABSORB handoff --mode flat_L4 --input cands.json
+# → handoff[]: {doc_id, rank, score, version, supersede_flag, path}
+# structure mode = diagnostic only (deploy 금지; CLI warning)
+python3 $ABSORB validate-contract --input ship_claims.txt   # exit 2 = 출하 금지
+```
+
+**Step 3 collect 직후 (MANDATORY when multi-agent handoff is claimed):** parent builds `cands.json` from collected findings (`doc_id=findingId`, `score` from confidence rank, `supersede` from L4 events or 0), runs `handoff --mode flat_L4`, and attaches the handoff list to the cycle packet / next-step prompt. Do **not** pass raw unsorted finding dumps as the next-agent context when absorb path is on.
+
+**VR stamp (bhgman):** use `engine.naesengmoon.vr_honesty.VrHonesty` / `default_hswm_ship_honesty` + `ConsensusResult.to_kg_shape(..., honesty=...)`. Hard-fail fake N중 (`subagent_count` ≠ `claimed_n` under `AGENT_TOOL_N`).
+**비행기맨 VR 정직 필드 (HSWM 관련 출격 시 parent VR에 기입 — GRID_SCAN 위장 금지):**
+
+| Field | 값 예 | 의미 |
+|---|---|---|
+| `dispatch_mode` | `AGENT_TOOL_N` / `ENGINE_DISPATCH` / `FS_AUTOMATION+hostile` | 실제 출격 방식 (기존 정직 축) |
+| `subagent_count` | 정수 N | 독립 subagent 수 (GRID_SCAN이면 ≈1) |
+| `n_eff` | float | 상관 보정 유효 독립 수 (나생문 decorrelation) |
+| `automation_flag` | bool/string | 자동화 여부 |
+| `hswm_mode` | `off` \| `flat_L4` \| `optin_weave` | HSWM 사용 모드 (**default ship=`flat_L4` or off**) |
+| `traversal_mu` | `0` | query-time traversal 끔 (실측 OFF) |
+| `readout` | `flat_L4` | 핸드오프 readout 경로 |
+
+상세·RED·anti-absorb 목록은 `/hswm-solid-absorb` 스킬 본문만 수정한다. **이 SKILL.md에는 pointer만 유지** (A6 resolve-only / drift 방지).
+
+# KG: ABSORB_CONTRACT_v1, LakatosTree_HSWM_SolidMultiAgent_20260722, lesson-naesengmoon-100x-fs-automation-not-n-dispatch-2026-07-15
 
 ---
 
@@ -1154,6 +1198,7 @@ MATCH (wb:WorkBuffer {status:'CURRENT'}) RETURN wb
 
 | Version | Date | Summary | KG Ref |
 |---|---|---|---|
+| **v6.4.1** | 2026-07-22 | HSWM multi-agent **absorb pointer** only (본문 중복 없음). `/hswm-solid-absorb` + `bin/hswm_absorb_cli.py` (`handoff` flat_L4 / `validate-contract`) + 비행기맨 VR 정직 필드표(`dispatch_mode`/`subagent_count`/`n_eff` + `hswm_mode`/`traversal_mu`/`readout`). semantic weave v6.4 표면과 handoff 표면 분리. 2Wiki external 실측 앵커. | `ABSORB_CONTRACT_v1`, `LakatosTree_HSWM_SolidMultiAgent_20260722`, skill `hswm-solid-absorb` |
 | **v6.4** | 2026-07-22 | HSWM primitive layer 배선 (⚠️ **opt-in, 기본 OFF** — fallback: v6.3 lexical). `bin/prom_hswm.py` 5 서브커맨드(prefetch-rank/dedup/bind/consensus/fuse)를 Step 2.5/3.3/3.5-H/4-0에 배선, 기존 v6.3 cypher 블록 전부 무삭제 보존. 강도 근거 = LakatoTree_PromSearchHSWM_20260721 판정 (2026-07-22): P1-binding-density **progressive** (semantic 0.2121 vs CONTAINS 0.0, gap 0.2121≥0.2, z=6.56) / P4-equal-compute-control **partial + lakatos "degenerating"** (gap 0.0303<0.1, z=1.0) → default-on 금지·opt-in 강등 + 축소 문구 명시 ("semantic weave 이득은 equal-compute control을 이기지 못함"). 정직 anomaly: 1패스 Jaccard 0.4242 > semantic 0.2121. 반증 라인 비채택 (GCN-II/Θ-sem/blind RRF 단독/순수 hypergraph 단독/entity 정점). | LakatoTree P1/P4 (tree `LakatosTree_PromSearchHSWM_20260721`), `EVIDENCE_p1_binding_density_2026-07-22.json`, `EVIDENCE_p4_equalcompute_2026-07-22.json`, helper 44f211c (W1-T4) |
 | **v6.3** | 2026-05-14 | Step 3-0 KG seed Pre-fetch **MANDATORY 격상** + Step 3-0-A Anti-Pattern Detection section 신설 (6-row drift table + self-verify cypher). Step 3-1 도메인 분배 측 KG seed mandatory 명시 (axis hardcode 금지). Step 3-5 9-field seed_bundle (재배맨 v2.2) 명시. 본 세션 (2026-05-14) 측 5 prom cycle 모두 Step 3-0 SKIP drift 측 instance — `lesson-prometheus-v5-kg-reference-lift-2026-04-18` ("SKILL.md = 프로토콜만, 내용물 = KG 정본") 위반 인정. SKILL.md 본문 정정 X (drift는 SKIP 측 발생), Step 3-0/3-0-A enforcement 강화로 mandatory 격상. | `rf-prom-manual-axis-drift-2026-05-14`, `lesson-prometheus-v5-kg-reference-lift-2026-04-18` (강제 격상), `taskspec-prometheus-matrix-research-v1` (정본 cement) |
 | **v6** | 2026-04-29 | Step 6.5 filesystem_dispersion sub-step + G6.5 gate 신설. KG-first 설계 그대로, KG↔FS drift만 차단. 본문은 thin pointer — 정책은 `MIC_v1.FilesystemDispersionPolicy` slot + `MethodologyConfig_default_v26.prometheus_md_*` 4 field. APT v26 A6 resolve-only 준수. cycle `prom64-pkgdisc-2026-04-29`가 evidence — 1 .md만 default 산출되던 문제(KG 152 nodes 풍부 ↔ filesystem 1 .md lean) 해소. | `rfc-prom-filesystem-dispersion-2026-04-29`, `lesson-prom-output-coverage-too-lean-2026-04-29`, `verdict-user-prom-too-lean-2026-04-29`, `rootcause-prom-filesystem-dispersion-missing-2026-04-29`, `FilesystemDispersionPolicy` slot, `PromV5_FilesystemDispersion_v1` policy |

@@ -1,12 +1,7 @@
 ---
 name: engine-design
 description: >-
-  Design or review a reusable software engine: its boundary, deterministic kernel,
-  commands/events/effects protocol, ports, persistence, concurrency, failure model,
-  and verification. Use when creating an engine, runtime, scheduler, orchestration
-  core, reusable subsystem, or when deciding whether a capability should become an
-  engine at all. Route detailed lifecycle behavior to $fsm-design and agent execution
-  loops to $loop-engineering.
+  Design or review a reusable software engine boundary, deterministic kernel, command-event-effect protocol, ports, persistence, concurrency, failure model, and verification. Use when: creating an engine, runtime, scheduler, orchestration core, reusable subsystem, or deciding whether a capability should become an engine. Do not use when: the task is a one-off feature or only detailed lifecycle or agent-loop behavior is in scope; use direct implementation, `$fsm-design`, or `$loop-engineering` instead.
 ---
 
 # Engine Design

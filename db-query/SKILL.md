@@ -44,9 +44,8 @@ optional_mcp_tools:
     mcp__neo4j__read_neo4j_cypher:      "Neo4j read-only Cypher (KG 조회 default)"
     mcp__neo4j__write_neo4j_cypher:     "Neo4j write Cypher (CREATE/MERGE/SET — user confirm)"
     mcp__neo4j__get_neo4j_schema:       "Neo4j schema (label / rel / property)"
-description: >
-  비행기맨 서버 DB 쿼리. 모든 DB는 DGX k8s 위. Mac 로컬 Docker 없음.
-  Mac localhost = socat → DGX NodePort. defer_loading=true.
+description: >-
+  Query Bihaenggiman databases running on DGX Kubernetes through approved endpoints, with Mac acting as gateway rather than a local Docker host. Use when: reading or safely updating Neo4j, PostgreSQL, MongoDB, Redis, or related server data. Do not use when: the goal is health inspection, backup, or Kafka administration rather than a database query; use `$server-status`, `$backup`, or `$kafka-manage` instead.
 ---
 
 # DB 쿼리 실행 (v2 — DGX 정본)

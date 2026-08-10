@@ -5,16 +5,8 @@ kg_ref: ATOM_Skill_jaebaeman
 version: "2.4.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
-description: >
-  재배맨(JaebaeMan) v2.1 — Subagent Orchestration Protocol (SOP). 모든 AI subagent 동작의 바닥(foundation).
-  씨앗(SubagentTaskSpec)을 KG에서 관리하고, 부모가 Pre-fetch → Dispatch → Collect → Write하는 프로토콜.
-  재배맨은 서비스가 아닌 프로토콜이다. 부모 Claude가 따르는 규약.
-  v2.1 (2026-05-05): MAS misnomer 정정 — Wooldridge BDI agent와 다름(internal state 부재, KG seed=외부 명세).
-  학문적 정확 명칭 = SOP(Subagent Orchestration Protocol). 재배맨은 한국어 alias 유지.
-  Invoke when: subagent 출격이 필요할 때 (프로메테우스/나생문/solve 등이 내부적으로 호출).
-  직접 호출보다는 MIC_v1.SubagentSeeder slot을 통해 간접 resolve.
-  # KG: ATOM_Skill_jaebaeman, 재배맨-v2-subagent-runtime-protocol, SA_methodology_v4_triple_upgrade
-  # KG: jaebaeman-grounding-2026-05-05, finding-prom32-jaebaeman-J1-F2 (MAS misnomer), lesson-jaebaeman-rebrand-SOP-2026-05-05
+description: >-
+  Coordinate subagents through the KG-resident SubagentTaskSpec and the parent-side Pre-fetch→Dispatch→Collect→Write SOP. Invoke when: independent research, review, solve, or implementation work should be dispatched and collected with explicit seeds and provenance. Do not use when: the task has no independent subtasks or needs only ordinary local planning; use direct handling instead.
 ---
 
 ## 🔗 MIC Binding (SOLID-DIP)

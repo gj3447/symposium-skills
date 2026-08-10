@@ -3,8 +3,8 @@ name: docker-logs
 kg_ref: ATOM_Skill_docker_logs
 version: "1.0.0"
 channel: stable
-description: >
-  Docker 컨테이너의 로그를 확인합니다. 서비스 장애 원인 파악이나 디버깅 시 사용합니다.
+description: >-
+  Inspect Docker container logs for Bihaenggiman service failures and debugging evidence. Use when: a named container or service needs log-level diagnosis. Do not use when: the request is a broad server, Kubernetes, endpoint, or SSH health check; use `$server-status` instead.
 ---
 
 # Docker 로그 조회

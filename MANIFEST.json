@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-07-26T23:00:39+09:00",
-  "git_head_commit": "aa166c24e9b0686041b1453552abdf061fef8161",
-  "git_head_short": "aa166c2",
+  "generatedAt": "2026-08-03T15:22:01+09:00",
+  "git_head_commit": "8a0118e6a9eb225cc12f80bd71966de047dbbf68",
+  "git_head_short": "8a0118e",
   "git_latest_tag": "v26.0.2",
   "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 53,
-  "merkle_root": "596c6b0eb00e1c4cc357a629ad4b661a8a22b7d2296bbf3a2a163bd605e4c156",
+  "merkle_root": "8d2fca7da2a488311aa0563f68197aa4f72d72aed786a89a04b233ba9fde805e",
   "skills": [
     {
       "name": "88-taliban",
@@ -14,7 +14,8 @@
       "version": "3.1.0",
       "kg_ref": "ATOM_Skill_88taliban",
       "channel": "stable",
-      "git_tree_sha": "fd213abfea4c694276d26c0ce074774933c79d4b"
+      "git_tree_sha": "3d888f4315dea794c2b5a37d768422fa5472a36b",
+      "content_sha256": "28614d4524654d4fc7c6b1c055f5a4821e5b46a0a99caef65e722776095b7fdd"
     },
     {
       "name": "apt",
@@ -22,7 +23,8 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "af2d9110106dbbbfa6e07a98df70413a932212b2"
+      "git_tree_sha": "086cd2313a6a7ed0fa86088d2cf5905953e57226",
+      "content_sha256": "8501a3dd9fdf1b0deea906194be717adaeb3978d6c1365f286d2772c75d3ed2f"
     },
     {
       "name": "apt-autoflow-guard",
@@ -30,7 +32,8 @@
       "version": "0.1.0-scaffold",
       "kg_ref": "ATOM_Skill_apt_autoflow_guard",
       "channel": "experimental",
-      "git_tree_sha": "ce66bd8ecb8e810ff77e08e1b66e80adf98bb9ed"
+      "git_tree_sha": "ff8982ee781bfb9c9153002d6edc04ce9178594c",
+      "content_sha256": "81c86d5b26017344d26cfdf0064c9350b09c8de4913105d495367ee42069b721"
     },
     {
       "name": "apt-cleanup",
@@ -38,7 +41,8 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_cleanup",
       "channel": "experimental",
-      "git_tree_sha": "cb6597b37e73ff8bb6024021f44273a399fa1db9"
+      "git_tree_sha": "de78f49456c975b309029828d1b93efb6fd0f724",
+      "content_sha256": "f6aa87960961499fd1b9577dadc327fa410510e30d0e2adb48275e87833f11df"
     },
     {
       "name": "apt-d",
@@ -46,7 +50,8 @@
       "version": "0.1.0-draft",
       "kg_ref": "ATOM_Skill_apt_d",
       "channel": "experimental",
-      "git_tree_sha": "8cca34f9e164bfb2b5ef87d84fa60abe00d8af34"
+      "git_tree_sha": "be02524fab36d31e5270e8905f87e2ee5d5d43f2",
+      "content_sha256": "90e7cd04e4c62b072afc791aaada5578e642af2096479bf29796f678209ee2d8"
     },
     {
       "name": "apt-feedback-lens",
@@ -54,7 +59,8 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_apt_feedback_lens",
       "channel": "stable",
-      "git_tree_sha": "5a6c5032b561fea5fb207060f5874606b099f5d6"
+      "git_tree_sha": "c27fa7f8405d205601e58853bd1fd7680530e7e4",
+      "content_sha256": "a67e9261ab0a7b81bdb4d4b7f6f197c0d60280a9bae3cb5a0628ca5addc8f129"
     },
     {
       "name": "apt-lens-enforce",
@@ -62,7 +68,8 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_apt_lens_enforce",
       "channel": "stable",
-      "git_tree_sha": "9e974f9dd45cbce5a15820804119dfb6e8fe2ac8"
+      "git_tree_sha": "1e8241f260415452b5b50d06a7eadee622ef6e2b",
+      "content_sha256": "27313d20a32a6820ba552faf0be1037456cd085baa28a050aadfb646bada2817"
     },
     {
       "name": "apt-magic-resolve",
@@ -70,7 +77,8 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_apt_magic_resolve",
       "channel": "stable",
-      "git_tree_sha": "ed2ecb605e075bc1172a12c1ef95abdc3f91679d"
+      "git_tree_sha": "1ef09605905077bcd03ec99fba2cbc9a728a6ad0",
+      "content_sha256": "b08338e9529ef92c53dc3aa604da67c747f19dd48905dc883d0dee7a3dd17e85"
     },
     {
       "name": "apt-meta-review",
@@ -78,7 +86,8 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
-      "git_tree_sha": "e38a25f33ef72c221dcd5275f56bc4edc7718dca"
+      "git_tree_sha": "09d84b2a82a4def73058623d4fd3dc7043f2c9aa",
+      "content_sha256": "a0578cfae0406ff9b3390609ed85d098886fa13e9684c5decb0f48e94d035d14"
     },
     {
       "name": "apt-orchestrator",
@@ -86,7 +95,8 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "599dda5811d1b7ee99620ca805dbf7f77712d20c"
+      "git_tree_sha": "3cb2580ae51b1f1a29130bbfa239398e48d36e9c",
+      "content_sha256": "9ad8800c0a14dd923ac5ffc6c38944f52e5b2c2cb97b5a2dbf0ea9f6ca857c15"
     },
     {
       "name": "apt-sa",
@@ -94,7 +104,8 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sa",
       "channel": "stable",
-      "git_tree_sha": "4ed512d3018a4a08a9fa2925faf9f01ac44d4242"
+      "git_tree_sha": "ddc1f29b33263fcfd69c6bcd0b4f1c4d0e45f39b",
+      "content_sha256": "0145eda023b6104ad863f576e2c79e44f1b6fbc9b7c2b1eca2eecfdf33a92b54"
     },
     {
       "name": "apt-scw",
@@ -102,7 +113,8 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_scw",
       "channel": "stable",
-      "git_tree_sha": "60e9a5961ff73dba765bc7a134a11f2efc2f3f83"
+      "git_tree_sha": "3aff808f42fbd082297c975271c316309baf646d",
+      "content_sha256": "f52f1b6ed15a0b5e6db07be9de51bac6fa3f9949fd7539ebe64420e76e2c83bd"
     },
     {
       "name": "apt-sp",
@@ -110,7 +122,8 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_sp",
       "channel": "stable",
-      "git_tree_sha": "a9b1df288250b0eb919f5087dafe4fe2dfab5d92"
+      "git_tree_sha": "29eb10aedc792b1ca321134301e8328099bf2f4f",
+      "content_sha256": "b20681f6e22444ec9e605da5ead9c896b82b2c3f259e2f7ae793109221588d46"
     },
     {
       "name": "apt-st",
@@ -118,7 +131,8 @@
       "version": "27.1.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "121a0db91ed95800860524747ce87184b1357f6c"
+      "git_tree_sha": "4a564434986e9eb23d7ecd2c8a9737fd99d27ac8",
+      "content_sha256": "7719b629abd0fc85395d6ce56c247f93df5ecb49661ee97c428167d3518fd05c"
     },
     {
       "name": "backup",
@@ -126,7 +140,8 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_backup",
       "channel": "stable",
-      "git_tree_sha": "7f9bd07782732181e0151a939e142ea776d6667a"
+      "git_tree_sha": "0ac11d4c18b1ef4b0366306bbb8a5f5ca6d8f1c1",
+      "content_sha256": "8349c9c6ff6d0924a280a889b8e44c7bc75e6143c7e6c1f801ff09482e9f0a3e"
     },
     {
       "name": "build-agent",
@@ -134,7 +149,8 @@
       "version": "0.1.0-draft",
       "kg_ref": "ATOM_Skill_build_agent_v28",
       "channel": "draft",
-      "git_tree_sha": "a2d8889bf887d40b7ac85e6ae3975e0b645dc243"
+      "git_tree_sha": "905630fd4ed69dcc07f452813b85f77094495ee0",
+      "content_sha256": "dd2e5e1f6576a2d95f4938cb826e9433fa4ae3c901d3bc3c3fc75ea0bc97030d"
     },
     {
       "name": "call-codex",
@@ -142,7 +158,8 @@
       "version": "1.1.0",
       "kg_ref": "ATOM_Skill_call_codex",
       "channel": "stable",
-      "git_tree_sha": "b0c97fc6b3cdb2bad6171c929e34a1afbe81ed16"
+      "git_tree_sha": "ef5c18001f8ffea437fd02d9f86ad9a7473e7c5d",
+      "content_sha256": "a492449fdf3d0cf21d48e9754520ae6085ef98a5b11c054de1b2b63898461aed"
     },
     {
       "name": "call-grok",
@@ -150,7 +167,8 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "778050b3ae69d8e5e69041e49dbf5eea378b87ae"
+      "git_tree_sha": "9bdf448f4cf96c7c560cb28a9b997507c27d89d7",
+      "content_sha256": "284b1b48c986758d1fb9ec832ef39f47d25078bafd9d0ec7ffa743f1c76a8a56"
     },
     {
       "name": "compute-offload",
@@ -158,7 +176,8 @@
       "version": "1.1.0",
       "kg_ref": "reference_compute_fleet_offload_2026_07_13",
       "channel": "stable",
-      "git_tree_sha": "8ebe561aa040815fc121a41d64a91f05359fd6fd"
+      "git_tree_sha": "9b4cb082fde0b0180f1d7c5a6d24eb8588d9e23c",
+      "content_sha256": "0b013a413ad3e65df56b45a5be0554ffceffc438a1c34a9e4bcd7e0181a1f639"
     },
     {
       "name": "db-query",
@@ -166,7 +185,8 @@
       "version": "2.0.0",
       "kg_ref": "ATOM_Skill_db_query",
       "channel": "stable",
-      "git_tree_sha": "bf285f718abbfe3352811138feaa26912684b84e"
+      "git_tree_sha": "6f342db5be280e19931b3d8c1b6ff677e65d4977",
+      "content_sha256": "17be3eb9d6bebebc7f05a12cbb7d7cc6957bbea00e61beee3b29050fef173633"
     },
     {
       "name": "deploy",
@@ -174,7 +194,8 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_deploy",
       "channel": "stable",
-      "git_tree_sha": "4a2246b98494f2a45fd5d488f7aaee6413e32b5a"
+      "git_tree_sha": "7005eda0619edff807aee324ce496c98b150cca1",
+      "content_sha256": "0c439b7fdafb8e6a09f99147c58a040e4c620686af28e349992f735d7dc5827c"
     },
     {
       "name": "design-agent",
@@ -182,7 +203,8 @@
       "version": "0.1.0-draft",
       "kg_ref": "ATOM_Skill_design_agent_v28",
       "channel": "draft",
-      "git_tree_sha": "8e83bf22217386b8299d74461d541cd53a7b7a88"
+      "git_tree_sha": "65a551921c1df1a5d0a5a3dccf96f960323571a9",
+      "content_sha256": "ba69c4db67aa581ccc77a0f654a0bac76fe6552bb7151f9ccd63eb78469d9f99"
     },
     {
       "name": "docker-logs",
@@ -190,7 +212,8 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_docker_logs",
       "channel": "stable",
-      "git_tree_sha": "a5bbc6eb4b44d9f9b7e7ca6329b7c4d22b6cc3d4"
+      "git_tree_sha": "051a7b8e0f53cfb4703e54ba08dc5525c04bac28",
+      "content_sha256": "e93613f1f7dd6f530c9439ec4d6b0e712414a8a3b0621d320ed8930d4c0c89e7"
     },
     {
       "name": "engine-design",
@@ -198,7 +221,8 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "86f882814b9a6ed22a0849ac86728a7b6ca5acba"
+      "git_tree_sha": "341e747e87952d24dde6803d638122394c9fe2a1",
+      "content_sha256": "96f54cf8eaacedfd768c2dd67e217961cdb1fbdd9771c6c307249a76da96334f"
     },
     {
       "name": "eureka",
@@ -206,7 +230,8 @@
       "version": "1.0.0",
       "kg_ref": "eureka-canonical-2026-05-26",
       "channel": "stable",
-      "git_tree_sha": "37670ff38039ace5316a29c0e0710cce7bf83092"
+      "git_tree_sha": "48c294b12d186179b90a146faf93dda2e3f484c2",
+      "content_sha256": "5264091660ea4b594b345653eca9becf9ba7b530792e7dee2798bd51c8d2a7fc"
     },
     {
       "name": "fix-agent",
@@ -214,7 +239,8 @@
       "version": "0.1.0-draft",
       "kg_ref": "ATOM_Skill_fix_agent_v28",
       "channel": "draft",
-      "git_tree_sha": "7aeb14934756bcce2ea4b7a4906e348778e9fdde"
+      "git_tree_sha": "ba3ff9749c14dd385e86b23105e8a8d383f5e00a",
+      "content_sha256": "249d5b86d2a3eff6f19ba4e763b5e959be2eeaec7a0f39ef2d2658b277d3d3e6"
     },
     {
       "name": "fsm-design",
@@ -222,7 +248,8 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "a47cbf4fe501fb5f574d72e34ab42a60929c313d"
+      "git_tree_sha": "d90e6a1436a70b773644ffc335e7f09e37b844bd",
+      "content_sha256": "9c6d1b6b9a72e6b9718341b2e5bfd8d5df616a67a589cfc35878688078ca01d5"
     },
     {
       "name": "hades",
@@ -230,7 +257,8 @@
       "version": "1.0.0",
       "kg_ref": "hades-canonical-2026-05-27",
       "channel": "stable",
-      "git_tree_sha": "679e6a8ca04afff05c9d86bcfb99f9b7cd3d99e7"
+      "git_tree_sha": "60ef009c1f73fca673a73905afb5d883ff78de34",
+      "content_sha256": "3eaa1c861f885c19ebedb9eb4768a1c25984ca89a729654b821489a63314ef34"
     },
     {
       "name": "harness",
@@ -238,7 +266,8 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_harness",
       "channel": "stable",
-      "git_tree_sha": "36e128d62cc08b1a8145487a400e265216144c05"
+      "git_tree_sha": "824e7715b424fc952469b723cb70eb031a656369",
+      "content_sha256": "4816708da96733ea3ef2d64e313a59df4ec4b982901318061c38ae2dd45189d4"
     },
     {
       "name": "harness-diagnose",
@@ -246,7 +275,8 @@
       "version": "1.0.0",
       "kg_ref": "hub-harness-3tier",
       "channel": "stable",
-      "git_tree_sha": null
+      "git_tree_sha": "3936c1c3f3e13097ee68c45069b746ecfc330cb5",
+      "content_sha256": "46412f55173c57da7a4af649e25dd91f0b3de09e57e8133c438c0a95d31ba931"
     },
     {
       "name": "jaebaeman",
@@ -254,7 +284,8 @@
       "version": "2.4.0",
       "kg_ref": "ATOM_Skill_jaebaeman",
       "channel": "stable",
-      "git_tree_sha": "d87931d0285e1bdeadca3164e3f036402f6b174c"
+      "git_tree_sha": "b84ced2bc749ae773efb60cfad74743cd450a627",
+      "content_sha256": "602f224625ac3cab6bbc5ecbf24a5a6efc7207fab1b35c551c17b85ba778fd3f"
     },
     {
       "name": "kafka-manage",
@@ -262,7 +293,8 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_kafka_manage",
       "channel": "stable",
-      "git_tree_sha": "0338a81c486e69100d7db6147d4a341b607d4126"
+      "git_tree_sha": "e1ec0fb90dde51b83ffa5da940ee86f22b9f343b",
+      "content_sha256": "efc9079100f82fcf94a8889de83a3e962eb0bf12e2fe650ddcf724c8f00af893"
     },
     {
       "name": "lakatotree-judge",
@@ -270,7 +302,8 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "58013ec6f21fa03b5750a7972c1de7c3e4c06144"
+      "git_tree_sha": "22627276c6688650e3aa54dd5865dd91a199aa6a",
+      "content_sha256": "baff23525fded39c85f118f6751eacb533343bdf588fd54af931769672161aec"
     },
     {
       "name": "legion-roster",
@@ -278,7 +311,8 @@
       "version": "1.0.0",
       "kg_ref": "bihaenggiman-legioncommanders-2026-05-26",
       "channel": "stable",
-      "git_tree_sha": null
+      "git_tree_sha": "a549f5090f44012e75bd2d07f5fde0491552e665",
+      "content_sha256": "a9f2bf12e4c4275c27f28fe4602960f0ee83845897a90ac28c2fc64abd5678ba"
     },
     {
       "name": "longinus",
@@ -286,7 +320,8 @@
       "version": "3.3.0",
       "kg_ref": "ATOM_Skill_longinus",
       "channel": "stable",
-      "git_tree_sha": "5578e8d3274cf56d9a38c3de9055e9cd5c7675c0"
+      "git_tree_sha": "d19f9cd358f3540f10c7d37aa016acd6012d682c",
+      "content_sha256": "8188dcaa443d63b75112230b9dfa450246ebea836dd157b780baea87f9eb0a56"
     },
     {
       "name": "loop-engineering",
@@ -294,7 +329,8 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "f5c65473e72050a77a92b836366528341f3a1d0b"
+      "git_tree_sha": "da9e77651fcdcc497c5d70d351a608ef62fb818c",
+      "content_sha256": "d6f77e7d78935aae8875af64a76296e6759e72550aa16da1da45cfb9dd9ab2d1"
     },
     {
       "name": "naesengmoon-lens-registry",
@@ -302,7 +338,8 @@
       "version": "1.0.0",
       "kg_ref": "naesengmoon-canonical-2026-05-19",
       "channel": "stable",
-      "git_tree_sha": null
+      "git_tree_sha": "2d00855cf79b69cc2d551f4488eacab23e7e5025",
+      "content_sha256": "0da347d6b2ad7a88c28f8650ad9021af4e91ea5fd70db30bfdacf4426b98094d"
     },
     {
       "name": "occam",
@@ -310,7 +347,8 @@
       "version": "1.0.0",
       "kg_ref": "occam-kam-canonical-2026-05-26",
       "channel": "stable",
-      "git_tree_sha": "548391c6e31d6f45752ca72281abd8b2a7d87657"
+      "git_tree_sha": "ce17b4c232a9f28e7a3e6d5f32872d73c4e552c9",
+      "content_sha256": "ecf27bf5d0aeb02315b94535e4a3507cb808548540b835b8764ce1c17eda8081"
     },
     {
       "name": "ooptdd-receipt",
@@ -318,7 +356,8 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "cdf83e6af4706c12d0d90b95464144ab3fb273e4"
+      "git_tree_sha": "7d31ff484b0f621ccdba2eee7249d21f29eac804",
+      "content_sha256": "61e4cf26f7d0d6465b8f32e7e8257e6fda1dcbc00a3d8eff4b9ff868aa013f65"
     },
     {
       "name": "pi-workbench",
@@ -326,7 +365,8 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "9800dcb60f1822b97eee0d21d1125391140456da"
+      "git_tree_sha": "9800dcb60f1822b97eee0d21d1125391140456da",
+      "content_sha256": "265c3c62716777f546bdb4371290328a9ab05531b258be8be226bac4a2d48b16"
     },
     {
       "name": "prom",
@@ -334,7 +374,8 @@
       "version": "3.0.0",
       "kg_ref": "ATOM_Skill_prom_alias",
       "channel": "stable",
-      "git_tree_sha": "92aa39ed0fc98bc8f841a12654cdad697f835032"
+      "git_tree_sha": "2e54e8bc46e7969ec7821c778949afbc0f7022c5",
+      "content_sha256": "6a39de415e4a2c75f4ba738e7e50a6855a1ebd7cc0c5df46a89d588fa673dbb1"
     },
     {
       "name": "prometheus",
@@ -342,7 +383,8 @@
       "version": "6.4.1",
       "kg_ref": "ATOM_Skill_prometheus",
       "channel": "stable",
-      "git_tree_sha": "c26f91263e522cde754ef76435387f4e849c33f3"
+      "git_tree_sha": "20becceecb3007e0b734cef0cf8c6bbe5cc77619",
+      "content_sha256": "639562946c2a9fcb04967c31a521a81cd731acf8dfc4b713e0580277885d0204"
     },
     {
       "name": "server-status",
@@ -350,7 +392,8 @@
       "version": "2.0.0",
       "kg_ref": "ATOM_Skill_server_status",
       "channel": "stable",
-      "git_tree_sha": "ab1e7827e14069f2de81d2520b3a20baea13c934"
+      "git_tree_sha": "194dc519ccb301dfad839e6aa2d61bb2337e8f9f",
+      "content_sha256": "c17f0e9eb73aa00dfd7b1ec404d505599df849b1ef7552b5dd008a236bc53d29"
     },
     {
       "name": "skill-creator",
@@ -358,7 +401,8 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_skill_creator",
       "channel": "stable",
-      "git_tree_sha": "52c2daa4b5d16401be943d2413a4f9b8aa79fe13"
+      "git_tree_sha": "d9f1b629dc5b7e47cbbb922e59f1a14f7ea113b0",
+      "content_sha256": "42219b6c88a42a15b029e7098da3c46afa66bbe3ec560d8230b0bad9ccff4013"
     },
     {
       "name": "solve",
@@ -366,7 +410,8 @@
       "version": "2.0.0",
       "kg_ref": "ATOM_Skill_solve",
       "channel": "stable",
-      "git_tree_sha": "63481f4e0a5e1f098bada88d590b64f088add0d1"
+      "git_tree_sha": "159f2beb6d184b604c96a3193602537c7ca3ec5e",
+      "content_sha256": "b618303df3ba75c83990c05d06027975da0afd406851a61ab6b0aa79b797ae19"
     },
     {
       "name": "symposium-research",
@@ -374,7 +419,8 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "71022bc1b388a1edaddcb8bffa0e393cdefde5ff"
+      "git_tree_sha": "71022bc1b388a1edaddcb8bffa0e393cdefde5ff",
+      "content_sha256": "a8951f429aa2d61e531148a4e6a6d408c8c1d4a44dc2c61340aa34d5bc1a7121"
     },
     {
       "name": "taliban",
@@ -382,7 +428,8 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_taliban",
       "channel": "stable",
-      "git_tree_sha": "cd97ce42b9957df2c1cfccb3c09274a639f9dd7c"
+      "git_tree_sha": "ab105e7f38cb1284e2ae6a5a2f6cfe018bc4ff34",
+      "content_sha256": "b0a62ae4bfccacd10180f5d5168652cc00d2d4b01c8b93d6987b0b637c481a22"
     },
     {
       "name": "tlb",
@@ -390,7 +437,8 @@
       "version": "2.0.0",
       "kg_ref": "ATOM_Skill_tlb_alias",
       "channel": "stable",
-      "git_tree_sha": "c9015de2aa7d8592683fd7fdb0bbecd94904dff3"
+      "git_tree_sha": "476cfedf537d1b61cc81bdf38aac73382cc1d48a",
+      "content_sha256": "99bee8b26a960557ad12e293a7879aa94b808e0c4f0526865ef0ade105dc8fe7"
     },
     {
       "name": "tpa",
@@ -398,7 +446,8 @@
       "version": "1.2.0",
       "kg_ref": "ATOM_Skill_tpa_orchestrator_v10",
       "channel": "stable",
-      "git_tree_sha": "8cc07a45801ac5a6e6a3e405278113104b747dc4"
+      "git_tree_sha": "02016922d0a48f1cdf86f7c96c3bf3517705e6fd",
+      "content_sha256": "ba292d037b6ce7cf34408e600f7c75c3fe5876e90b8c9e4ed2c8a5879655fc36"
     },
     {
       "name": "tpa-sp",
@@ -406,7 +455,8 @@
       "version": "1.2.0",
       "kg_ref": "ATOM_Skill_tpa_sp",
       "channel": "stable",
-      "git_tree_sha": "ab2fe03bc797e80c7a05338fef0052b31581080e"
+      "git_tree_sha": "31139457d3846363f7cd8d65a572930e72cf0e33",
+      "content_sha256": "5916ea18e3994a654ef49ece4d975c15eab69d2157d140b275ee240e510ade8b"
     },
     {
       "name": "tpa-st",
@@ -414,7 +464,8 @@
       "version": "1.2.0",
       "kg_ref": "ATOM_Skill_tpa_st",
       "channel": "stable",
-      "git_tree_sha": "829862806542cbf4d46a8f53b2cd28281f71fdc0"
+      "git_tree_sha": "b866827290a9e347b92a6aa5bca1a92ef7849c79",
+      "content_sha256": "f130b0c706d868cc2a1d0724050080583597f52c31482df50e8d79215bfcfa10"
     },
     {
       "name": "tpa-ta",
@@ -422,7 +473,8 @@
       "version": "1.2.0",
       "kg_ref": "ATOM_Skill_tpa_ta",
       "channel": "stable",
-      "git_tree_sha": "3fafa25db6c37f33d856fc8678b11afb900f9b7e"
+      "git_tree_sha": "c1375b189dfb46f8bd2b1aa9880d128894a00806",
+      "content_sha256": "82071146974a1c349d652017ad4011aaec0106fc38bc977e2ca2e43583416c27"
     },
     {
       "name": "tpa-tcw",
@@ -430,7 +482,8 @@
       "version": "1.2.0",
       "kg_ref": "ATOM_Skill_tpa_tcw",
       "channel": "stable",
-      "git_tree_sha": "c7d0d68395da19cd493a08f44d89dfd0da749155"
+      "git_tree_sha": "daaad7fee25b7430529514a84556ee4cc71da3ee",
+      "content_sha256": "5339f45cb8931904f3d4f7c19b7294b8d7e108bacbbb504bc9751dec4039863e"
     }
   ]
 }

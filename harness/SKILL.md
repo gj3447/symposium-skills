@@ -4,13 +4,8 @@ kg_ref: ATOM_Skill_harness
 version: "3.2.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
-description: >
-  하네스 — industry agent scaffolding. 12사도 #4 비행기맨의 공학 측 결정화이며 1:N sibling family.
-  "구조가 에이전트를 제약한다" 4축 모델(Inform/Constrain/Verify/Correct)은 *각 instance 내부* 조직 원리이지
-  family 정의가 아니다. v3 정정본 — Böckeler citation drift + family-as-1:1 drift 모두 해소.
-  Invoke when: APT 구조 설계/검토, 에이전트 실패 원인 분석, 3계층 중 어느 계층의 결정인지 식별,
-  IDE-host 내부 4축 진단, runtime orchestration model 선택, managed cloud control plane 설계.
-  # KG: ATOM_Skill_harness, lesson-harness-drift-corrected-2026-04-29, lesson-harness-citation-drift-bockeler-2026-04-30
+description: >-
+  Classify and design agent scaffolding across L_MC, L_RT, and L_IDE, then assess each instance through Inform, Constrain, Verify, and Correct evidence. Invoke when: reviewing APT structure, diagnosing agent failure, choosing a harness tier, or evaluating IDE-host, runtime, or managed-cloud controls. Do not use when: a concrete execution loop or domain lifecycle transition is the primary design object; use `$loop-engineering` or `$fsm-design` instead.
 ---
 
 ## 🔌 표준 하네스 랩핑 (MCP / CLI) — 2026-07-12

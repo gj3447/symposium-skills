@@ -5,16 +5,8 @@ version: "0.1.0-draft"
 channel: draft
 status: PRELIMINARY
 draft_of: APT18_SubagentArchitecture
-description: >
-  APT v28 FixAgent — specialist subagent that consumes :BlockerFinding nodes from TalibanSquad,
-  proposes :ProposedPatch nodes, and re-dispatches to TalibanSquad for verification until
-  verdict ≠ REJECT or cfg.fix_agent_max_attempts exhausted.
-  Implements UserPrinciple_SelfCorrecting_APT: user σ_oracle intervention ONLY at final exit,
-  NOT at every retry. If user must catch every defect, FixAgent is failing (K-01 BLOCKER).
-  Sibling of DesignAgent + BuildAgent + TalibanSquad. Operates from clean context per spawn.
-  Does NOT critique — that is TalibanSquad's role. FixAgent fixes what TalibanSquad found.
-  Invoke when: any BlockerFinding emitted by TalibanSquad needs remediation before phase progression.
-  # KG: ATOM_Skill_fix_agent_v28, UserPrinciple_SelfCorrecting_APT, APT18_SubagentArchitecture
+description: >-
+  Consume Naesengmoon `BlockerFinding` nodes, propose bounded patches, and redispatch them for independent verification until accepted or the retry budget ends. Use when: the parent `$apt` workflow has a reviewer-confirmed blocker that must be remediated before progression. Do not use when: no blocker exists or the underlying span or contract still needs redesign; use `$design-agent` instead.
 ---
 
 ## §0 Resolve-Only Directive

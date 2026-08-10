@@ -3,16 +3,8 @@ name: apt-sp
 kg_ref: ATOM_Skill_apt_sp
 version: "27.1.0"
 channel: stable
-description: >
-  APT SemanticPyramid (SP) — recursive Span decomposition.
-  SP is ONE world. Spans are DAG nodes (N:N, not tree).
-  D(S) recurrence until ALL leaves satisfy C(S) 5-predicate = AtomicSpan.
-  Then Crystallization Frontier → ST.
-  v26: C(S) 5-predicate fields (objective/definition/keyAssertion/verification/c_s_predicate) MUST be non-null on every Span. v26 A3/A5: SP→ST gate enforces LensSet completeness via Cypher (lesson-taliban-shortcut-antipattern-2026-04-21). δ_infra exception via ATOM_APT_delta_infra_exception_2026-04-21. Magic number 500/200-500 → MethodologyConfig slot (A4).
-  v24: KG 정본 기반 재설계. v5~v21 AptClarificationNote 22개 반영.
-  Invoke when: parent /apt orchestrator dispatch only — direct user call rejected by APT_GATE_VERSION=v27_phase_sp_dispatch_guard. Korean: APT 디컴포즈 페이즈 — 상위 orchestrator dispatch only. SP 는 SA→SP→ST→SCW gate chain 의 2/4 phase — 단독 호출 시 SA gate APPROVED + Root Span HAS_ROOT precondition 자동 만족 불가, dispatch_only=true (E1.4 PATTERN_D guard, rf-prom16-cc-eng-E1-S4-skill-activation-2026-05-14).
-  Active Weapons (2026-05-14): 재배맨 SubagentTaskSpec seed per Span (D(S) parallel decomposition, Step 4) + Naesengmoon `/tlb <SPAN> --lens constitutional` per Crystallization Frontier 진입 후보 (C(S) 5-predicate gate, Step 6). hub-jaebaeman-sop + hub-taliban-immunity resolve.
-  # KG: ATOM_Skill_apt_sp, CONTRACT_apt_sp, APT_v26_RFC_draft_2026-04-21, lesson-taliban-shortcut-antipattern-2026-04-21, rf-prom16-cc-eng-E1-S4-skill-activation-2026-05-14
+description: >-
+  Recursively decompose an approved APT SemanticAnchor into DAG spans until every leaf satisfies C(S), then expose the Crystallization Frontier. Use when: the parent `$apt` workflow dispatches the whole SP protocol after an approved SA root span. Do not use when: one bounded child-span draft is delegated from an already framed brief, or leaves are ready for contract crystallization; use `$design-agent` or `$apt-st` instead.
 ---
 
 ## 🎛 v26 A6 Resolve-Only
@@ -75,6 +67,17 @@ RETURN s.name, s.currentConcrete, s.invocation
 - REFACTOR: Longinus 중복 ReferenceSite 통합
 
 **SP 진입 hub**: `hub-jaebaeman-sop` (Span DAG decomposition seed) + `hub-taliban-immunity` (C(S) gate).
+
+### SP reviewer allocation gate (2026-07-21)
+
+Crystallization Frontier reviewer는 proposer와 resolved weight family, prompt
+hash, temperature band, session을 분리하고
+`../apt/scripts/review_independence.py` receipt를 남긴다. 같은 model family의
+다른 alias·prompt·temperature만으로는 독립성이 생기지 않는다. Lite Mode는
+deterministic oracle + artifact-bound human approval이 모두 있을 때
+`CONDITIONAL`까지만 가능하다. `BLOCK`은 분해 작업 전체를 멈추라는 뜻이 아니라
+AtomicSpan/Frontier 승격만 보류한다; receipt remediation 후 동일 artifact
+SHA-256을 다시 검증한다.
 
 # KG: hub-jaebaeman-sop, hub-taliban-immunity, MIC_v1.SubagentSeeder, MIC_v1.AdversarialValidator
 

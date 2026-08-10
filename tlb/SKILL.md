@@ -4,13 +4,8 @@ kg_ref: ATOM_Skill_tlb_alias
 version: "2.0.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
-description: >
-  `/taliban`의 짧은 별칭(alias). `/tlb <target>` == `/taliban <target>`.
-  사용법: `/tlb SPAN_xxx`, `/tlb CONTRACT_yyy`, `/tlb --lens solid 대상`.
-  Invoke when: 적대적 검증 빠르게 실행. 나생문 방법론과 동일.
-  실제 로직(렌즈셋 플러거블 + 재배맨 SubagentTaskSpec 씨앗 기반 자동 출격)은
-  /taliban SKILL.md를 그대로 따른다. 본문 복제 없음 (drift 방지).
-  # KG: ATOM_Skill_taliban, alias-of-taliban
+description: >-
+  Alias `/taliban` for the same Naesengmoon adversarial validation workflow and LensSet selection. Invoke when: the user enters `/tlb <target>` or explicitly requests the short Naesengmoon command. Do not use when: the target specifically requires the mathematical preset or needs no adversarial validation; use `$88-taliban` or direct review instead.
 ---
 
 # /tlb — `/taliban` alias

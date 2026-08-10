@@ -3,7 +3,8 @@ name: call-codex
 kg_ref: ATOM_Skill_call_codex
 version: "1.1.0"
 channel: stable
-description: Invoke Codex CLI headlessly as a subordinate tool from Claude, Grok, or another agent. Use when asked to "call Codex", "ask Codex", delegate repository exploration or implementation to Codex, get a Codex second opinion or code review, run `codex-agent`, or use `/call-codex`. Provides isolated read-only defaults, explicit write mode, resumable sessions, and normalized machine-readable output.
+description: >-
+  Invoke Codex CLI headlessly as a subordinate, isolated agent for repository exploration, code review, research, or explicitly authorized implementation through `codex-agent`. Use when: the user asks to call, ask, or delegate to Codex or requests a Codex second opinion. Do not use when: the parent agent can complete a trivial local task or the user explicitly requests Grok; use direct handling or `$call-grok` instead.
 ---
 
 # Call Codex headlessly

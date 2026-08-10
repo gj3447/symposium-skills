@@ -3,22 +3,8 @@ name: apt-d
 kg_ref: ATOM_Skill_apt_d
 version: "0.1.0-draft"
 channel: experimental
-description: >
-  APT-D variant orchestrator — **SIBLING VARIANT** of /apt v27 (NOT replacement).
-  5-axis coherent package per `rfc-apt-d-variant-coherent-package-2026-05-14`:
-  M1 continuous depth (instead of 5-predicate atomicity) +
-  M2 score function (instead of binary AtomicSpan gate) +
-  M3 shared-object sibling (Naesengmoon M1 equivocation resolved) +
-  M4 smooth ODE transitions (instead of discrete SA→SP→ST→SCW) +
-  M5 forward-reverse symmetric (APT+TPA unified).
-  29 Lean theorem formal floor (G1 9 APT_Diffusion_Foundation + G2 6 APT_Flow_Matching + G3 14 APT_Structural_Refinement, all Mathlib-free PASS exit 0).
-  Honest load-bearing limitation: shared-object sibling assumes UNIFIED artifact.
-  Multi-file boundary forces back to v28-like decomposition.
-  Invoke when: single-artifact problem + continuous metric available + smooth transition required.
-  Reject when: multi-file refactor (use /apt v27 instead).
-  # KG: ATOM_Skill_apt_d, rfc-apt-d-variant-coherent-package-2026-05-14
-  # KG: lesson-fixagent-k01-patch-recurrence-2026-05-14 (motivating)
-  # KG: taliban-a3-axiom-relaxation-2026-05-14 (REJECT verdict → APT-D branch)
+description: >-
+  Orchestrate the APT-D sibling variant for a unified single artifact using continuous depth, score-based atomicity, smooth transitions, and forward/reverse symmetry. Use when: one artifact has a continuous metric and genuinely benefits from smooth APT-D flow. Do not use when: the task crosses multiple files or needs ordinary discrete SA→SP→ST→SCW decomposition; use `$apt` instead.
 ---
 
 ## 🚧 Draft Status (S2 scaffold, 2026-05-14)

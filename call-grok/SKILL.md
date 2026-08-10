@@ -1,7 +1,7 @@
 ---
 name: call-grok
-description: >
-  Invoke Grok CLI headless as a subordinate tool so Claude Code, Codex, or other agents can spend Grok Super quota on research/review/reasoning. Use when: "call grok", "ask grok", "grok-agent", "grok-job", "use grok", "grok subagent", "delegate to grok", "Grok Super 사용", "그록에게 하급 작업 맡겨", "/call-grok", "/grok-agent". Prefer for second-opinion reviews, deep research, multi-file exploration, video pre-production packets, or tasks the parent wants offloaded to Grok.
+description: >-
+  Invoke Grok CLI headlessly as a subordinate agent for Grok-backed research, review, reasoning, multi-file exploration, or explicitly authorized implementation. Use when: the user asks to call or delegate to Grok, spend Grok Super quota, run `grok-agent`, or obtain a Grok second opinion. Do not use when: the task is trivial or the user explicitly requests Codex as the subordinate; use direct handling or `$call-codex` instead.
 ---
 
 # call-grok — use Grok as a tool

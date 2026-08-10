@@ -3,15 +3,8 @@ name: apt-sa
 kg_ref: ATOM_Skill_apt_sa
 version: "27.1.0"
 channel: stable
-description: >
-  APT SemanticAnchor (SA) phase — project identity and context bootstrap.
-  # KG: ATOM_Skill_apt_sa, APT_v26_RFC_draft_2026-04-21 (A1 MIC slot expansion, A4 MethodologyConfig slot), APT_v25_RFC_draft_2026-04-17
-  Invoke when: starting a new project/feature, establishing work identity,
-  bootstrapping agent environment, or determining where new work fits in the KG.
-  Enforces: Anchor identity, Progressive Disclosure, Context Budget, KG-first exploration.
-  v26: Context budget + SA core fields (objective/definition/keyAssertion/C_S/contextBudget) from MethodologyConfig slot (A4). SA→SP gate uses LensSet slot (A3). v22: Gate Check enforcement via Claude Code Hook. 5대 무기(하네스/나생문/프로메테우스/롱기누스/재배맨) 기반. SA는 프로메테우스(지식 선행)와 롱기누스(KG 접지)의 시작점.
-  Active Weapons (2026-05-14): Prometheus `/prom <N> "<sa_topic>"` (Step 1 KG sparse OR Step 3 5 core fields 외부 grounding) + Longinus L1-L2 reverse binding (Step 2 기존 SemanticAnchor 후보 reverse scan). hub-prometheus-research + hub-longinus-reference resolve.
-  # KG: lesson-feedback-is-emergent-not-weapon-2026-04-16, lesson-sa-contract-v2-rejected-redesign-2026-04-20 (5 mandatory core fields enforced)
+description: >-
+  Establish or recover APT SemanticAnchor identity, objective, definition, key assertion, C(S), context budget, and KG placement before decomposition. Use when: the parent `$apt` workflow starts a project or feature and dispatches SA bootstrap. Do not use when: an anchor already exists and needs recursive decomposition; use `$apt-sp` instead.
 ---
 
 ## 🎛 v26 A6 Resolve-Only
@@ -133,6 +126,16 @@ RETURN s.name, s.currentConcrete, s.invocation
 | SA→SP Gate | **Naesengmoon** | `/tlb <SA_id> --lens constitutional` (LensSet completeness mandatory) | 5 core fields 작성 직후 | `VerdictRecord` APPROVED + post-gate reflection |
 
 **SA 진입 hub**: `hub-prometheus-research` (지식 선행 spiral) + `hub-longinus-reference` (KG anchor binding).
+
+### SA reviewer allocation gate (2026-07-21)
+
+SA→SP의 proposer와 Naesengmoon reviewer는 이름만 달라서는 안 된다. Gate
+승인 전에 `../apt/scripts/review_independence.py` receipt를 생성한다. Clean
+`PASS`는 resolved weight family, prompt hash, temperature band, session이 모두
+달라야 한다. 같은 model family밖에 없으면 deterministic oracle + artifact-bound
+human approval을 갖춘 `CONDITIONAL`까지만 허용하며, 이를 독립 합의로 세지 않는다.
+Receipt가 `BLOCK`이면 SA 산출물 작성은 유지하되 SA→SP 승격만 보류하고, receipt의
+remediation을 수행한 뒤 같은 artifact SHA-256으로 재검증한다.
 
 # KG: hub-prometheus-research, hub-longinus-reference, MIC_v1.ResearchProvider, MIC_v1.KgCodeBinder
 

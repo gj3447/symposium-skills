@@ -4,13 +4,8 @@ kg_ref: ATOM_Skill_tpa_sp
 version: "1.2.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
-description: >
-  TPA TargetPyramid (SP) — Phase 3/4. APT SP 거울 (역순).
-  Pattern Library (51 DesignPattern 노드) 매칭. confidence ≥0.7 INSTANCE_OF / <0.7 RESEMBLES.
-  카테고리별 검증 전략 매핑: Distributed→MetaVerifier(Naesengmoon --lens mathematical), Structural→AST,
-  Behavioral→call graph, Creational→grep, PL→ResearchProvider.
-  Gate Check Hook 강제: ST Gate 통과 없이 진입 불가.
-  # KG: ATOM_Skill_tpa_sp, CONTRACT_AS_TPA_sp_SKILL, TPA_methodology_v10
+description: >-
+  Recover the TPA TargetPyramid from extracted contracts by matching design patterns, recording confidence, and selecting category-appropriate verification in phase 3. Use when: the parent `$tpa` workflow dispatches SP after an approved TargetTwin. Do not use when: raw symbols still need contract extraction or recovered structure is ready for final anchoring; use `$tpa-st` or `$tpa-ta` instead.
 ---
 
 <!-- KG: TASK_AS_TPA_sp_SKILL -->

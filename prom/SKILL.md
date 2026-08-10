@@ -4,13 +4,8 @@ kg_ref: ATOM_Skill_prom_alias
 version: "3.0.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
-description: >
-  `/prometheus`의 짧은 별칭(alias). `/prom <N> <problem>` == `/prometheus <N> <problem>`.
-  사용법: `/prom 16 "문제"`, `/prom 100 "TOE"`, `/prom "간단한 문제"`.
-  Invoke when: `/prometheus`를 빨리 치고 싶을 때. 프로메테우스 방법론 트리거와 동일.
-  실제 로직(8단계 사이클, N-파라미터화, JSON 계약, UNWIND 배치, 충돌 탐지)은
-  /prometheus SKILL.md를 그대로 따른다. 본문 복제 없음 (drift 방지).
-  # KG: ATOM_Skill_prometheus, alias-of-prometheus
+description: >-
+  Alias the Prometheus knowledge-action research spiral while preserving its N-axis or N-subagent invocation contract. Invoke when: the user enters `/prom`, `prom N`, or otherwise requests the short Prometheus command. Do not use when: the request is a stable one-step lookup or direct action that needs no research cycle; use direct handling instead.
 ---
 
 # /prom — `/prometheus` alias

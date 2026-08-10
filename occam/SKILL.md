@@ -4,17 +4,8 @@ kg_ref: occam-kam-canonical-2026-05-26
 version: "1.0.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # 동사 "정리한다" = 사용자 정전(비행기맨 #4 군단장, "오캄, 줄여서 캄").
-description: >
-  오캄(Occam, 줄여서 캄) 방법론 — 비행기맨 #4 산하 군단장 동사 **"정리한다"**(현재→과거↓, archive).
-  하계(KG+소스코드) 전체에서 *업데이트로 대체된 낡은 과거*(중복·dead·stale 노드)만 선별 아카이빙.
-  `/occam` == 오캄 해줘. `/prom`이 지식수집·`/eureka`가 개념창조이듯 `/occam`은 정리 동사.
-  사용법: `/occam` (KG 전체 dedup, **dry-run 기본**) · `/occam --scope <label|path>` · `--apply`(write).
-  CLI: `bhgman-tool occam [--scope X] [--apply]`. neo4j 부재 시 fetch cypher 출력(부모 Claude MCP 실행용).
-  **covenant: archive-only, 삭제 금지** (occam.py·kg_adapter에 delete 함수 부재; write cypher에 DELETE/DETACH/REMOVE 토큰 assert로 차단). 마구잡이 금지 — twin 있는 superseded만. dry-run 기본.
-  유레카(쌓기/+1)의 정반대 극(빼기/-, subtractive). 어원: William of Ockham 면도날.
-  엔진 정본: `bhgman_tool/engine/occam/` (occam.py occam_pass[순수 분류] + kg_adapter[read/write IO, covenant] + occam_runner[end-to-end] + occam_models + oracle_lens). CLI=`engine/cli/main.py` occam verb.
-  # KG: occam-kam-canonical-2026-05-26, lesson-occam-must-query-kg-node-dedup-not-just-filesystem-2026-05-27,
-  #     occam-pass-kg-wide-2026-05-27
+description: >-
+  Archive only superseded, stale, dead, or duplicate KG and code artifacts with twin evidence and dry-run-first safety; never delete canon blindly. Invoke when: active and historical material must be separated or a scoped deduplication and supersession pass is requested. Do not use when: the goal is generic disk deletion or creation of a new abstraction; use direct safe-storage maintenance or `$eureka` instead.
 ---
 
 ## 📚 References (lazy-load)

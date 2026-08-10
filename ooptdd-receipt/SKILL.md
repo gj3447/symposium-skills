@@ -1,17 +1,29 @@
 ---
 name: ooptdd-receipt
 description: >-
-  Design, produce, or audit an executable ooptdd/LTDD behavior receipt with a
-  pre-run locked trace gate, real-code execution, positive readback, source
-  binding, and an injected negative oracle. Use after PI behavior changes,
-  when an agent claims a runtime path works, or when a green may be vacuous,
-  self-authored, uncorroborated, or disconnected from the changed code.
+  Design, produce, or audit an executable ooptdd or LTDD behavior receipt with a locked pre-run trace, real-code execution, positive readback, source binding, and injected negative oracle. Use when: PI behavior changes or a claimed runtime path needs non-vacuous executable proof. Do not use when: completed evidence must be classified as research-program progress; use `$lakatotree-judge` instead.
 ---
 
 # OOPTDD Receipt
 
 An OOPTDD green is evidence that named events matched a spec, not proof that the
 system is correct. Build the strongest honest receipt the target supports.
+
+Full ouroboros protocol (S→R→G→N→B, sizing table, regress stop rule):
+`SYMPOSIUM/PI/OOPTDD_OUROBOROS_V1_2026-08-05.md`.
+
+## 0. Size the target before building the stack
+
+Measure first; the estimate decides the layers — never build a demonstration
+stack and rationalize afterwards. Record LOC/functions, I/O effect sites,
+consumers (internal refs + transport surfaces), blast radius
+(scratch<operational<canon<irreversible), and claim exposure (self<team<public).
+Behavior tests always run in CI; a structural-contract layer only when a shared
+core serves ≥2 transports or purity is an API promise; the receipt loop itself
+is an event at release/claim time unless blast radius is canon-or-worse. Prefer
+widening (mutation score, domain counterexamples) over stacking; verifier
+self-audit depth ≤ 1 (APT_MetaReview_Bounded.lean). Put the numbers in a
+`sizing` block in the receipt.
 
 ## 1. Lock a falsifiable gate before Green
 
@@ -44,6 +56,16 @@ make an explicitly separate territory probe refute the claim. The verifier must
 return `red`/`failed`/`rejected`. Restore the fault and rerun the positive case.
 
 A negative that only breaks a mock outside the changed path does not count.
+Quarantine prior green artifacts before injecting the fault — stale outputs can
+make a dead gate look alive; restore them after the red is recorded.
+
+## 3b. Bite — feed findings back down
+
+Every finding surfaced by the negative (or the green) must land as either an
+immediate fix plus a regression test at the behavior layer (record the commit),
+or an explicit carry-over: an `observations` entry plus a KG/backlog item. A
+receipt with findings and no bite record is INCOMPLETE — the loop is what makes
+this an ouroboros rather than a tower.
 
 ## 4. Surface the oracle boundary
 

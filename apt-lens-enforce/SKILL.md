@@ -4,16 +4,8 @@ kg_ref: ATOM_Skill_apt_lens_enforce
 version: "1.0.0"
 channel: stable
 canonical_name: apt-lens-enforce
-description: >
-  APT Naesengmoon LensSet enforcement 책무 — HR1/HR11/HR13 + AdversarialGate Cypher enforcement.
-  Every APPROVED verdict MUST cite specific evidence (HR11 no rubber-stamp).
-  Adversarial validation at every gate: critic + ground truth + sigma_oracle + post-gate reflection.
-  apt-feedback-lens (4축 진단) 과는 책무 다름:
-    - apt-feedback-lens = Inform/Constrain/Verify/Correct 4축 *진단* (어디 위치인지 lens)
-    - apt-lens-enforce  = HR rules *강제* (every gate Cypher field 검증 + missing 차단)
-  Migrated 2026-05-22: body 본 skill 안에 이전 완료 (was at apt/SKILL.md HARD RULES + v27 HR13 Addendum).
-  Invoke when: gate 통과 시 lens 검증 강제, HR11/HR13 Cypher schema 확인.
-  # KG: ATOM_Skill_apt_lens_enforce, gate-hr13-adversarial-cypher-2026-05-19, schema-aptdecisionlog-v2-adversarial-gate-2026-05-19, vr-apt-fix2-partial-install-naesengmoon-3lens-2026-05-22
+description: >-
+  Enforce Naesengmoon LensSet evidence rules at APT gates, including HR1/HR11/HR13, independent critic, ground truth, sigma oracle, and post-gate reflection. Use when: admitting or auditing an APT gate verdict or its Cypher schema. Do not use when: diagnosing which Inform/Constrain/Verify/Correct axis is weak; use `$apt-feedback-lens` instead.
 ---
 
 # APT Adversarial Validation — Anti-Rubber-Stamp Layer

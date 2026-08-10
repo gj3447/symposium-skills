@@ -4,12 +4,8 @@ kg_ref: ATOM_Skill_skill_creator
 version: "1.0.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
-description: >
-  Anthropic's official Skill Creator — develop, test, and refine Claude skills through iterative workflow.
-  Creates SKILL.md files with frontmatter, instructions, examples, and references structure.
-  Invoke when: "skill 만들어줘", "새 skill 생성", "SKILL.md 작성", "skill 업데이트",
-  "slash command 만들기", "create skill", "build skill".
-  Source: https://github.com/anthropics/skills/tree/main/skills/skill-creator
+description: >-
+  Create, update, test, and refine Codex or Claude skills with concise frontmatter routing, progressive disclosure, reusable resources, agent metadata, validation, and forward tests. Invoke when: the user asks to create or update a skill, write `SKILL.md`, add a slash-command workflow, or repair skill triggering. Do not use when: the task merely consumes an existing skill or edits ordinary documentation or code; use the relevant domain skill or direct handling instead.
 ---
 
 # Skill Creator Guide
@@ -44,8 +40,8 @@ The fundamental loop:
 ---
 name: my-skill              # kebab-case, max 64 chars. Becomes /slash-command.
 description: >               # CRITICAL: Claude uses this to decide when to invoke.
-  What this skill does.       # Max ~200 chars effective.
-  Invoke when: trigger keywords.
+  What this skill does. Use when: concrete routing conditions and trigger keywords.
+  Do not use when: a plausible near miss belongs elsewhere; use the named skill or direct workflow instead.
 ---
 ```
 
@@ -82,6 +78,7 @@ Remove instructions that aren't productive. Watch transcripts for wasted effort.
 Ask:
 - What does this skill do?
 - When should it trigger? (keywords)
+- What similar-looking request should not trigger it, and where should that request route?
 - What tools does it need?
 - What does good output look like?
 - Are there edge cases?
@@ -92,7 +89,8 @@ Ask:
 ---
 name: example-skill
 description: >
-  Does X when Y. Invoke when: "keyword1", "keyword2", "keyword3".
+  Does X when Y. Use when: "keyword1", "keyword2", "keyword3".
+  Do not use when: the request only needs Z; use the Z workflow instead.
 ---
 
 # Skill Title
@@ -116,7 +114,9 @@ Common mistakes to avoid.
 
 - [ ] `name` matches directory name (kebab-case)
 - [ ] `description` has 3+ trigger keywords
-- [ ] `description` includes "Invoke when:" pattern
+- [ ] `description` includes exact `Use when:` or `Invoke when:` positive boundary
+- [ ] `description` includes exact `Do not use when: <near miss>; use <explicit route> instead.` boundary
+- [ ] Normalized `description` is at most 1,024 characters
 - [ ] Body ≤ 500 lines
 - [ ] Step-by-step instructions present
 - [ ] Next skill call noted (if chained)
@@ -134,9 +134,13 @@ Common mistakes to avoid.
 
 After the skill is complete, optimize its description for triggering accuracy:
 
-1. Create 20 eval queries — 10 that should trigger, 10 that should NOT
+1. Create 20 eval queries — 10 that should trigger and 10 ambiguous near misses that should NOT
 2. Run the automated loop with `scripts/run_loop`
 3. Iterate description until trigger accuracy is high
+
+Near misses should resemble the skill's real inputs while belonging to another
+named skill or direct workflow. Unrelated negative examples do not test routing
+precision.
 
 ## Skill Chaining
 

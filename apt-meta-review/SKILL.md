@@ -3,14 +3,8 @@ name: apt-meta-review
 kg_ref: ATOM_Skill_apt_meta_review
 version: "27.1.0"
 channel: stable
-description: >
-  APT MetaReview Phase (5/5) — 의심/피드백을 자동으로 스킬 강화로 이어지는 피드백 루프.
-  SCW 완료 후 자동 제안. Lesson 생성 → SKILL.md 패치 → MATERIALIZES 갱신 → Naesengmoon Gate.
-  v2 (APT v26 A6 alignment): SKILL.md 패치는 resolve_slot(ContractSchema|LensSet|MethodologyConfig) 패턴 유지. Prose magic number 주입 금지. KG = 정본.
-  종료조건: self_application_forbidden, max_depth=1, delta=0.
-  Invoke when: parent /apt orchestrator dispatch only — direct user call rejected by APT_GATE_VERSION=v27_phase_meta_review_dispatch_guard. Korean: APT 메타-리뷰 페이즈 (5/5) — 상위 /apt 가 SCW 완료 후 자동 dispatch, 단독 호출 금지. MetaReview 는 SA→SP→ST→SCW→MetaReview chain 의 terminal phase — 단독 호출 시 SCW Fulfillment Gate APPROVED + Lesson/Verdict provenance + Naesengmoon Gate precondition 자동 만족 불가, dispatch_only=true (E1.4 PATTERN_D → PATTERN_A 격상, self_application_forbidden 재귀 차단 포함, rf-prom16-cc-eng-E1-S4-skill-activation-2026-05-14).
-  Active Weapons (2026-05-14): Naesengmoon `/tlb <MetaReview output> --lens constitutional` (rubber-stamp 방지 자체재검증, Step 17) + Prometheus `/prom <small N> "<lesson_topic>"` (lesson distillation 외부 grounding, Step 15) + Longinus MATERIALIZES 갱신 (SKILL.md 패치 ↔ KG slot drift 차단, Step 16). hub-taliban-immunity + hub-prometheus-research + hub-longinus-reference resolve.
-  # KG: ATOM_Skill_apt_meta_review, CONTRACT_Hardening_MetaReview, SPAN_Hardening_MetaReview, APT_v26_RFC_draft_2026-04-21, MIC_v1.ReasoningProtocol→KGFirstCheck_v1 (R1-R5 mandatory before any framing/diagnostic, lesson-ai-skipped-kg-check-before-framing-2026-04-29), rf-prom16-cc-eng-E1-S4-skill-activation-2026-05-14
+description: >-
+  Run the terminal APT MetaReview phase after approved SCW: distill lessons, patch skill or config references through KG slots, refresh MATERIALIZES bindings, and pass Naesengmoon review with bounded self-application. Use when: the parent `$apt` orchestrator dispatches MetaReview after SCW. Do not use when: a user directly requests general skill improvement without an approved APT phase chain; use `$skill-creator` instead.
 ---
 
 ## 🎛 v26 A6 Resolve-Only

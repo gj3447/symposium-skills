@@ -4,13 +4,8 @@ kg_ref: ATOM_Skill_apt_orchestrator
 version: "1.0.0"
 channel: stable
 canonical_name: apt-orchestrator
-description: >
-  APT phase orchestration 책무 — SA→SP→ST→SCW→MetaReview→Cleanup chain dispatch.
-  v26.1 RFC1 (C(S) ↔ A3 axiom layer 분리) + RFC2 (two-tier cleanup) + Apt_FourPlusOne motif.
-  MIC Binding + 5무기 Phase Integration Matrix 본체.
-  Migrated 2026-05-22 (4/4 final): Cross-Repo + v26.1 + MIC + 5무기 Matrix body 본 skill 안에 이전 완료.
-  Invoke when: parent /apt orchestrator dispatch only; phase 흐름 조회 / 5무기 invocation 조회.
-  # KG: ATOM_Skill_apt_orchestrator, challenge-apt-fix2-srp-label-mislabel-2026-05-22, vr-apt-fix2-partial-install-naesengmoon-3lens-2026-05-22
+description: >-
+  Dispatch the APT SA→SP→ST→SCW→MetaReview→Cleanup chain and resolve MIC bindings plus conditional commander integration. Use when: the parent `$apt` workflow needs phase routing, dispatch, or commander lookup. Do not use when: a user wants a complete APT cycle entry point rather than internal phase dispatch; use `$apt` instead.
 ---
 
 ## 🎛 Cross-Repo Working Pattern (2026-05-19)

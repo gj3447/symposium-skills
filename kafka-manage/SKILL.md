@@ -3,8 +3,8 @@ name: kafka-manage
 kg_ref: ATOM_Skill_kafka_manage
 version: "1.0.0"
 channel: stable
-description: >
-  Kafka 토픽 관리, 메시지 생산/소비, 클러스터 상태 확인에 사용합니다.
+description: >-
+  Manage Kafka topics, produce or consume messages, and inspect cluster state on the Bihaenggiman infrastructure. Use when: administering Kafka or tracing a Kafka message path. Do not use when: the target is a database query or a broad infrastructure health check; use `$db-query` or `$server-status` instead.
 ---
 
 # Kafka 관리

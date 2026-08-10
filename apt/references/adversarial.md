@@ -60,12 +60,43 @@ findings with documented evidence of thorough review methodology.
 | Any model | Same model, different temperature | INSUFFICIENT -- same weights |
 | Any model | Same model, different prompt only | INSUFFICIENT -- framing contagion |
 
-**v17 enforcement**: Before spawning critic, check that critic_model != design_model.
-If they match, BLOCK and log error.
+**v17 enforcement**: Before spawning critic, compare the resolved provider,
+model revision, and weight family. Display names or aliases are not identity.
+Clean `PASS` also requires a separately authored prompt, a different
+temperature band, and a separate session/context.
 
 **Lite Mode exception**: When only one model is available, the same model MAY serve as
 critic but MUST use the full D22.3 template AND all anti-rubber-stamp techniques are
-MANDATORY. This exception must be logged as AptDecisionLog with reason.
+MANDATORY. Same-family review is `CORRELATED_SAME_MODEL`; it can never emit a
+clean `PASS`. It reaches at most `CONDITIONAL` when a deterministic oracle and
+human decision are both bound to the exact artifact digest.
+
+#### Machine-checkable allocation receipt (v1, 2026-07-21)
+
+Use [`../scripts/review_independence.py`](../scripts/review_independence.py)
+before accepting an SA/SP/MetaReview critic verdict. The request records:
+
+- artifact SHA-256;
+- producer and reviewer provider, resolved model revision, weight family,
+  prompt SHA-256, temperature, and session ID;
+- any exact-query/source-snapshot/test-result oracle receipts;
+- an artifact-bound human decision for Lite Mode.
+
+```bash
+python3 SKILLS/apt/scripts/review_independence.py review-allocation.json
+```
+
+Verdicts:
+
+| Verdict | Meaning | Gate effect |
+|---|---|---|
+| `PASS` | different weight family + prompt + temperature band + session | independent review may satisfy the gate |
+| `CONDITIONAL` | same family, but deterministic oracle and human approval both bound | record limitation; never elevate to independent evidence |
+| `BLOCK` | missing identity/diversity, same-family self-agreement, or unbound fallback | rotate reviewer or add the exact external checks |
+
+Changing only prompt text or temperature on the same weights remains
+insufficient. Conversely, changing model aliases without changing the resolved
+weight family is still the same model.
 
 ### 7.4 Anti-Rubber-Stamp Techniques (10)
 

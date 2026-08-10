@@ -1,12 +1,7 @@
 ---
 name: fsm-design
 description: >-
-  Design, review, and verify finite-state machines or hierarchical/orthogonal
-  statecharts from a machine-readable semantic source. Use for lifecycle protocols,
-  workflow controllers, parsers, device or UI modes, agent control loops, forbidden
-  transitions, timers, recovery, or when enum-and-if logic is drifting. Covers model
-  selection, events, guards, actions, invalid-event policy, determinism, reachability,
-  safety/liveness, generated diagrams, and conformance tests.
+  Design, review, and verify finite-state machines or hierarchical and orthogonal statecharts from a machine-readable semantic source, including events, guards, timers, recovery, safety, and conformance tests. Use when: lifecycle protocols, controllers, parsers, device or UI modes, forbidden transitions, or enum-and-if drift require explicit state semantics. Do not use when: the target is a static schema or only an outer agent retry and checkpoint loop; use direct contract design or `$loop-engineering` instead.
 ---
 
 # FSM Design

@@ -5,17 +5,8 @@ version: "0.1.0-draft"
 channel: draft
 status: PRELIMINARY
 draft_of: APT18_SubagentArchitecture
-description: >
-  APT v28 BuildAgent — specialist subagent for TDD implementation of crystallized Contracts.
-  Sibling of /apt-scw; reactivates the v18 split (Orchestrator ≠ Builder).
-  Receives: :AptContract + APPROVED :ValidationResult via parent Pre-fetch (jaebaeman SOP).
-  Produces: :SourceCodeNode with # KG: comment refs at every non-trivial section (Longinus binding).
-  Cycle: RED (test file first) → GREEN (minimal code) → REFACTOR (4-tool ratchet inline).
-  Does NOT design — Contract is given as input; do not re-decompose.
-  Does NOT self-review — Naesengmoon verdict on output is mandatory before MATERIALIZES edge is set.
-  Operates from clean context per spawn (no parent conversation inheritance).
-  Invoke when: parent /apt orchestrator dispatches ST→SCW transition with APPROVED contract.
-  # KG: ATOM_Skill_build_agent_v28, APT18_SubagentArchitecture, apt-cw-spawn-sequence
+description: >-
+  Implement an approved APT contract as source code in a clean-context specialist using TDD and Longinus bindings, without redesign or self-review. Use when: the parent `$apt` workflow dispatches ST→SCW with an approved contract. Do not use when: spans or contracts still require design and decomposition; use `$design-agent` instead.
 ---
 
 ## §0 Resolve-Only Directive

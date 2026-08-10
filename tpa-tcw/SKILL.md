@@ -4,12 +4,8 @@ kg_ref: ATOM_Skill_tpa_tcw
 version: "1.2.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
-description: >
-  TPA TargetCodeWorld (TCW) — Phase 1/4. APT SCW 거울 (역순).
-  외부/레거시 코드에서 실제 존재하는 모든 것을 기록. AST 기반 pub 심볼 추출.
-  Unknown 발견시 ResearchProvider 자동 호출. 종료시 AdversarialValidator gate.
-  Gate Check Hook 강제: TCW는 시작 스킬이라 pre-gate 없음. 종료시 VR 기록.
-  # KG: ATOM_Skill_tpa_tcw, CONTRACT_AS_TPA_tcw_SKILL, TPA_methodology_v10
+description: >-
+  Inventory external or legacy code into TPA TargetCodeWorld with structured AST symbol extraction, unknown-symbol research, and an evidence-backed exit gate. Use when: the parent `$tpa` workflow begins reverse engineering from an actual codebase. Do not use when: the target is forward design or an approved inventory already needs contract recovery; use `$apt` or `$tpa-st` instead.
 ---
 
 <!-- KG: TASK_AS_TPA_tcw_SKILL -->

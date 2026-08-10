@@ -4,13 +4,8 @@ kg_ref: ATOM_Skill_apt_magic_resolve
 version: "1.0.0"
 channel: stable
 canonical_name: apt-magic-resolve
-description: >
-  APT v26 A6 Resolve-Only directive 책무 — magic number / lens count / contract field count
-  를 SKILL.md prose hardcode 가 아닌 KG `MethodologyConfig` slot resolve 로만 해결.
-  Treasure 교체 시 KG 노드만 수정, SKILL.md 본문 무수정.
-  Migrated 2026-05-22: body 본 skill 안에 이전 완료 (was at apt/SKILL.md §v26 A6).
-  Invoke when: skill 안 magic number resolve, MethodologyConfig 조회, A6 compliance 검증.
-  # KG: ATOM_Skill_apt_magic_resolve, APT_v26_A6_2026-04-21, MethodologyConfig_default_v26, lesson-apt-v26-a6-skill-resolve-only-2026-04-25
+description: >-
+  Resolve APT magic numbers, lens counts, contract field counts, and other methodology parameters from KG `MethodologyConfig` slots instead of hard-coding prose. Use when: authoring or auditing APT configuration references and A6 compliance. Do not use when: selecting or orchestrating an APT phase; use `$apt-orchestrator` instead.
 ---
 
 ## 🎛 v26 A6 Resolve-Only Directive

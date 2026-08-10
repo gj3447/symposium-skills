@@ -5,17 +5,8 @@ version: "1.0.0"
 channel: stable
 canonical_name: apt-feedback-lens
 aliases: [apt-4axis-lens, harness-4axis-lens]
-description: >
-  APT 피드백 4축 (Inform/Constrain/Verify/Correct) — Böckeler 2축(Guides/Sensors) 의 SYMPOSIUM
-  fine-grained 분해를 invokable Naesengmoon LensSet 으로 결정화. Harness SKILL.md 본문에서
-  *진단-only* 로 죽어있던 4축을 `lensset-apt-4axis` KG-resident LensSet 으로 격상.
-  Tier 한정: **L_IDE 계층만** (L_RT는 orchestration model, L_MC는 control plane 이 진짜 frame).
-  parent_skill: Harness (분리 motivation, Phase 2 from lesson-harness-drift-corrected-2026-04-29).
-  resolves_via: Naesengmoon `/taliban <target> --lens apt-4axis`.
-  Invoke when: APT phase gate 측 L_IDE 4축 health 명시 검증 필요,
-  '엉뚱한 방향 / Gold Plating / 틀린 코드 통과 / 같은 버그 재발' 증상 진단,
-  /tlb <target> --lens apt-4axis 호출.
-  # KG: ATOM_Skill_apt_feedback_lens, ATOM_Skill_harness, ATOM_Skill_taliban, lensset-apt-4axis, lesson-harness-drift-corrected-2026-04-29
+description: >-
+  Apply the APT Inform/Constrain/Verify/Correct diagnostic LensSet to L_IDE harness health and route it through Naesengmoon. Use when: an APT gate shows wrong direction, gold plating, false-green verification, recurrence, or explicitly requests `--lens apt-4axis`. Do not use when: enforcing HR1/HR11/HR13 verdict fields or gate admissibility; use `$apt-lens-enforce` instead.
 ---
 
 ## 🔗 MIC Binding

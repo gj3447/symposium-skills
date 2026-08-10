@@ -3,23 +3,8 @@ name: apt
 kg_ref: ATOM_Skill_apt_orchestrator
 version: "27.1.0"
 channel: stable
-description: >
-  APT v26.1 orchestrator — KG 정본 기반. Gate Check Hook 강제. SA→SP→ST→SCW 순환.
-  하네스 4축 + 5대 무기(하네스/나생문/프로메테우스/롱기누스/재배맨) + D(S)/C(S) + Crystallization Frontier.
-  v26.1: RFC1 (C(S) ↔ A3 axiom layer 분리 + Greek :ARCHIVED) + RFC2 (two-tier cleanup: local RGR in transitions + global Phase 6) + Apt_FourPlusOne motif.
-  v26 A1: MIC slots 10 (ContractSchema/LensSet/MethodologyConfig). A3/A5: LensSet completeness + Cypher enforcement (3-lens shortcut 차단). A6: SKILL.md resolve-only.
-  v22: Gate Check enforcement via Claude Code Hook.
-  Naesengmoon --lens mathematical 5-round meta-verification 반영 (260✓→102✓ honest convergence).
-  Every gate requires: adversarial critic + ground truth + human sigma_oracle + evidence-backed verdicts + post-gate reflection.
-  HR11: Every APPROVED verdict MUST cite specific evidence (no RUBBER_STAMP).
-  Naesengmoon LensSet pluggable: constitutional / mathematical (KG LensSet 노드 확장).
-  피드백은 5대 무기 순환의 창발 속성 (독립 위상 아님).
-  Essential ✗: Arrow of Time (order-dependent), Edge of Chaos, Gödel (never complete).
-  Optional Lean 4 integration: `lake build` sorry=0 error=0 as ground truth.
-  Invoke when: "start work on", "implement", "develop", "what phase am I in",
-  "apt check", "validate apt", "auto mode", or any general development request.
-  Enforces: phase detection, flow control, adversarial gates, validation V1-V29, feedback system, mandatory reflection.
-  # KG: ATOM_Skill_apt_orchestrator, APT_v26_RFC_draft_2026-04-21, lesson-feedback-is-emergent-not-weapon-2026-04-16
+description: >-
+  Orchestrate the KG-grounded APT forward design-to-code cycle SA→SP→ST→SCW→MetaReview→Cleanup with phase gates, evidence, and conditional commander dispatch. Use when: the user invokes APT or auto-flow, a new project needs the formal phase cycle, or an existing APT cycle must continue or be validated. Do not use when: an ordinary scoped implementation or debug can proceed directly, or existing code needs design recovery; use direct handling or `$tpa` instead.
 ---
 
 ## 🔌 표준 하네스 랩핑 (MCP / CLI) — 2026-07-12

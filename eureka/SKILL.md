@@ -4,17 +4,8 @@ kg_ref: eureka-canonical-2026-05-26
 version: "1.0.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # 동사 "창조한다" = 사용자 정전(비행기맨 #4 군단장). 엔진=공학 결정화.
-description: >
-  유레카(Eureka) 방법론 — 비행기맨 #4 산하 군단장 동사 **"창조한다"**(구체→추상↑).
-  KG/코드의 경향·반복 패턴을 귀납·가추로 묶어 *새 추상 개념*을 induce(PROPOSE). 아르키메데스 "찾았다!".
-  `/eureka` == 유레카 해줘. `/prom`이 지식수집 동사이듯 `/eureka`는 개념창조 동사.
-  사용법: `/eureka` (SYMPOSIUM KG dogfood) · `/eureka --kg <facet1>×<facet2>` · `/eureka --code <path>`.
-  CLI: `bhgman-tool eureka` (KG 패턴→추상 induce, **PROPOSE only·write 없음** — covenant, 실현은 하데스).
-  경계: PROPOSE까지만 — 실현(추상→구체, Extract Superclass/MERGE)은 dual인 **하데스**(hades-canonical). auto-commit 금지.
-  엔진 정본: `bhgman_tool/engine/eureka/` (formal_context_builder + pipeline.run_from_kg + fidelity_gate + anti_unify). CLI=`engine/cli/main.py` eureka verb.
-  induction operator **bake-off**: `PipelineConfig.method` = `fca`(default, Galois lattice) | `amie3`(Horn rule mining, Java, `amie3_adapter`가 FormalConcept으로 통일). GraphRAG stage 2/3/6/7 = `stages.py`(Leiden gds-degrade / 결정론 summarize·RRF·drift).
-  # KG: eureka-canonical-2026-05-26, consensus-eureka-design-synthesis-2026-05-27,
-  #     eureka-formal-context-smoketest-2026-05-27, formal-cathedral-detection-2026-05-27
+description: >-
+  Induce a new abstraction from repeated KG or code patterns through FCA, AMIE, or anti-unification, emitting PROPOSE-only output without materialization. Use when: repeated concrete evidence should be lifted into a candidate concept, rule, or reusable workflow. Do not use when: an accepted abstraction must be materialized or the task only needs evidence gathering; use `$hades` or `$prometheus` instead.
 ---
 
 ## 📚 References (lazy-load)

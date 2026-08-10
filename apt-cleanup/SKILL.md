@@ -3,16 +3,8 @@ name: apt-cleanup
 kg_ref: ATOM_Skill_apt_cleanup
 version: "27.1.0"
 channel: experimental
-description: >
-  APT Phase 6 Cleanup Gate — TDD REFACTOR phase의 cycle-level 거울. SA→SP→ST→SCW + meta-review 만으로는
-  평면 누적 / fat file 못 막음 (atomic-span shipping = 1 task = 1 file 정규화 자체가 평면 누적 메커니즘).
-  Robert Martin Package Principles (CCP/CRP/REP/ADP/SDP/SAP) 의 *folder-level* enforcement.
-  4-tool ratchet (Tach / complexipy --ratchet / Lizard / vulture / deptry) + commit ratio metric (refactor:feature ≥ 0.2).
-  Gate Check Hook Cypher 강제: 이전 N 사이클의 fat-file LOC + duplication ratio + dependency cycle 측정.
-  Invoke when: SCW 완료 후 / N 사이클 누적 후 / "왜 폴더가 평면이지?" 의문 시 / "SOLID 했는데 폴더 개판" 진단 시.
-  Enforces: CCP folder cohesion / CRP shared lifecycle / ADP no cycles / cycle-level ratchet.
-  Active Weapons (2026-05-14): Harness 3-tier (IDE-host / runtime / managed) 매핑 진단 (Step 18 folder ↔ tier audit) + Naesengmoon `/88-taliban <folder>` mathematical lens (Step 19-20 CCP/CRP/REP/ADP/SDP/SAP folder-level audit). hub-harness-3tier + hub-taliban-immunity resolve.
-  # KG: ATOM_Skill_apt_cleanup, lesson-apt-phase6-cleanup-missing-2026-04-28, lesson-solid-class-level-vs-package-level-mismatch-2026-04-29
+description: >-
+  Run APT Phase 6 package-level cleanup after implementation, measuring folder cohesion, dependency cycles, fat files, duplication, and refactor ratchets under CCP/CRP/REP/ADP/SDP/SAP. Use when: SCW or several APT cycles have accumulated structural debt, flat folders, or package-level drift. Do not use when: performing local code refactoring inside the current RED-GREEN-REFACTOR loop; use `$apt-scw` instead.
 ---
 
 ## 🔗 MIC Binding (SOLID-DIP)

@@ -3,16 +3,8 @@ name: apt-scw
 kg_ref: ATOM_Skill_apt_scw
 version: "27.1.0"
 channel: stable
-description: >
-  APT SourceCodeWorld (SCW) — TDD implementation of crystallized Contracts.
-  Contract → Test first (RED) → Code (GREEN) → Refactor.
-  Same-layer Tasks are fully parallel. Code MUST have KG refs in comments (Longinus ReferenceSite 7-tuple, v26 A2).
-  v26 A5: FulfillmentGate 7 checks enforced via apt-gate-check.sh Cypher query (executor!=critic + LensSet completeness + prior VR APPROVED). TDAD (impact_tests mandatory).
-  v26 A4: vibe_coding_sweet/min/hard_max via MethodologyConfig slot (no more hardcoded 500).
-  v24: KG 정본 기반 재설계. AptClarificationNote 반영.
-  Invoke when: parent /apt orchestrator dispatch only; direct user call 금지 (PATTERN_D guard, E1.4). SCW 는 SP→ST→SCW gate chain 의 4/4 phase — 단독 호출 시 ST gate APPROVED + AtomicSpan.wave_index + SubagentTaskSpec FK precondition 자동 만족 불가, dispatch_only=true.
-  Active Weapons (2026-05-14): 재배맨 single-message N parallel Task dispatch (wave_index batch, Step 10) + Longinus L5-L7 forward binding (Code → `# KG:` ref comment, Step 12) + Naesengmoon `/tlb <SourceCodeNode> --lens constitutional` FulfillmentGate 7-check (Step 13). hub-jaebaeman-sop + hub-longinus-reference + hub-taliban-immunity resolve.
-  # KG: ATOM_Skill_apt_scw, CONTRACT_apt_scw, APT_v26_RFC_draft_2026-04-21, ATOM_APT_v26_Gate_Hook_Lens_Enforcement_2026-04-21, rf-prom16-cc-eng-E1-S4
+description: >-
+  Execute approved APT contracts through TDD RED→GREEN→REFACTOR, wave-parallel tasks, impact tests, Longinus code bindings, and FulfillmentGate evidence. Use when: the parent `$apt` workflow dispatches SCW after an approved ST contract. Do not use when: the task still lacks crystallized contracts or exhaustive design decisions; use `$apt-st` instead.
 ---
 
 ## 🎛 v26 A6 Resolve-Only

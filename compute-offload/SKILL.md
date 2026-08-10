@@ -4,14 +4,7 @@ kg_ref: reference_compute_fleet_offload_2026_07_13
 version: "1.1.0"
 channel: stable
 description: >-
-  Mac(디스크압박·GPU없음)의 무거운 작업을 회사 GPU 플릿으로 오프로드. 조종도구 = SYMPOSIUM/PI/dt.sh,
-  정본 = SYMPOSIUM/PI/DELLTOWER_OFFLOAD.md (+ airo KG InfraHost = 인프라 정본). 필수세트 4대 전부 Mac SSH OK
-  = 워크스테이션 2대(델타워 Precision 7960 Blackwell 98GB `ssh precision7960` / diamondperl Precision
-  7875 Ada 48GB `ssh diamondperl`) + GB10 Duo 2대(`ssh spark1`=i2b-llm-no1 vLLM Head Qwen3.6-35B /
-  `ssh spark2`=edgexpert-e86b Worker, 델타워 ProxyJump). Invoke when: "델타워", "델 타워", "dell tower",
-  "dell precision", "diamondperl", "dgx", "GB10", "airo jetson", "회사 컴퓨터로 돌려", "GPU로 돌려",
-  "오프로드", "무거운 작업 넘겨", "vLLM 서버 띄워", "원격 실행", "embedding populate", "32b A/B",
-  "dt run/job/serve". 회사 프로덕션(prismv2) 무중단 + 안전 샌드박스(cgroup/oom/디스크가드) 계율 내장.
+  Offload GPU-heavy or disk-intensive work from Mac to the approved Precision and GB10 fleet through `PI/dt.sh`, preserving production and sandbox guards. Invoke when: the user names the Dell towers, DGX, GB10, Jetson, remote GPU execution, vLLM, embeddings, or a workload that exceeds the Mac. Do not use when: the job is lightweight, fits the Mac, or only needs reachability inspection; use direct local execution or `$server-status` instead.
 ---
 
 # compute-offload — 회사 GPU 플릿 오프로드 (thin pointer)

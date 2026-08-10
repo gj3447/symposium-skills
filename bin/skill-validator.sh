@@ -138,6 +138,11 @@ if [[ "${1:-}" == "--all" ]]; then
       validate_one "$f" || rc=1
     done < <(find "$root" -maxdepth 3 -name 'SKILL.md' -type f -not -path '*/_backup_*/*' -not -path '*/.git/*' 2>/dev/null)
   done
+  # Description routing is a canonical-catalog contract. Parse the rendered
+  # frontmatter value rather than accepting the literal `description: >` token.
+  if ! python3 "$_SCRIPT_DIR/skill-description-audit.py" --all --strict; then
+    rc=1
+  fi
   exit "$rc"
 elif [[ "${1:-}" == "--manifest-check" ]]; then
   manifest_check

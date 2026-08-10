@@ -5,16 +5,8 @@ version: "0.1.0-draft"
 channel: draft
 status: PRELIMINARY
 draft_of: APT18_SubagentArchitecture
-description: >
-  APT v28 DesignAgent — specialist subagent for span decomposition + draft Contract crystallization.
-  Sibling of /apt-sp + /apt-st; reactivates the v18 split (Orchestrator ≠ Designer).
-  Receives: AptSpan ref via parent Pre-fetch (jaebaeman SOP). Produces: child :AptSpan nodes + draft :AptContract nodes.
-  Does NOT promote any verdict to APPROVED — that is TalibanSquad's role (KG-as-IPC discipline).
-  Does NOT implement code — that is BuildAgent's role.
-  Operates from clean context per spawn (no parent conversation inheritance, per §12.2 spawn sequence).
-  Rigor-aware: fast_path = informal contract (docstring shape); full_cycle = typed Pydantic Contract DTO.
-  Invoke when: parent /apt orchestrator dispatches SA→SP transition or recursive SP descent.
-  # KG: ATOM_Skill_design_agent_v28, APT18_SubagentArchitecture, apt-cw-spawn-sequence, apt-cw-kg-as-ipc
+description: >-
+  Draft child spans or contracts from a supplied APT phase brief in a clean-context specialist, without running phase gates, approving verdicts, or implementing code. Use when: the parent `$apt` workflow delegates one bounded SP/ST design artifact after phase framing is complete. Do not use when: SemanticAnchor identity or the whole recursive SP protocol must be executed, or an approved contract is ready for code; use `$apt-sa`, `$apt-sp`, or `$build-agent` instead.
 ---
 
 ## §0 Resolve-Only Directive

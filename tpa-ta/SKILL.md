@@ -4,14 +4,8 @@ kg_ref: ATOM_Skill_tpa_ta
 version: "1.2.0"
 channel: stable
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
-description: >
-  TPA TargetAnchor (TA) — Phase 4/4. APT SA 거울 (최종 앵커링).
-  SemanticAnchor 라우팅 (2-A 신규/2-B 재사용/2-C 브랜치).
-  5종 Drift 측정 (Missing/Orphan/SigMismatch/PatternDiv/LabelRot).
-  coverage_ratio < 0.8 → status='SUSPENDED' 강제.
-  Longinus 전수 바인딩 + 최종 Naesengmoon gate.
-  Gate Check Hook 강제: SP Gate 통과 없이 진입 불가.
-  # KG: ATOM_Skill_tpa_ta, CONTRACT_AS_TPA_ta_SKILL, TPA_methodology_v10
+description: >-
+  Anchor recovered TPA design into a new, reused, or branched SemanticAnchor, measure five drift classes, bind references through Longinus, and run the final Naesengmoon gate. Use when: the parent `$tpa` workflow dispatches TA after an approved TargetPyramid. Do not use when: reverse recovery has not completed pattern and structure analysis; use `$tpa-sp` instead.
 ---
 
 <!-- KG: TASK_AS_TPA_ta_SKILL -->

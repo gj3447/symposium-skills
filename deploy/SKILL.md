@@ -3,8 +3,8 @@ name: deploy
 kg_ref: ATOM_Skill_deploy
 version: "1.0.0"
 channel: stable
-description: >
-  비행기맨 서버의 Docker 서비스를 재배포합니다. docker-compose.yml 변경 후 적용하거나 특정 서비스를 재시작할 때 사용합니다.
+description: >-
+  Redeploy or restart Bihaenggiman Docker services after Compose, configuration, or image changes. Use when: applying a changed `docker-compose.yml`, rolling a service, or verifying a deployment restart. Do not use when: only inspecting a failure or checking fleet health without changing deployment state; use `$docker-logs` or `$server-status` instead.
 disable-model-invocation: true
 ---
 

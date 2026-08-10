@@ -9,9 +9,11 @@ Re-run safe — atomic overwrite. Idempotent if no source changes.
 """
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
+import stat
 from pathlib import Path
 
 SKILLS_DIR = Path(__file__).resolve().parent.parent
@@ -48,11 +50,68 @@ def parse_frontmatter(skill_md):
     return fm
 
 
-def tree_sha_for_path(path_in_repo):
+def _git_oid_algorithm() -> str:
     try:
-        return run_git("rev-parse", f"HEAD:{path_in_repo}")
+        algorithm = run_git("config", "extensions.objectFormat").strip()
+        if algorithm == "sha256":
+            return "sha256"
     except subprocess.CalledProcessError:
-        return None
+        pass
+    return "sha1"
+
+
+def _git_object_digest(kind: str, payload: bytes, algorithm: str) -> bytes:
+    if algorithm not in {"sha1", "sha256"}:
+        raise ValueError(f"Unsupported git object algorithm: {algorithm}")
+    header = f"{kind} {len(payload)}\0".encode("ascii")
+    return hashlib.new(algorithm, header + payload).digest()
+
+
+def _git_tree_body(directory: Path, algorithm: str) -> bytes:
+    entries: list[tuple[bytes, bytes]] = []
+    for child in directory.iterdir():
+        if child.name == ".git":
+            continue
+        name = os.fsencode(child.name)
+        if b"\0" in name or b"/" in name:
+            raise ValueError("Git tree entry contains an invalid name")
+        if child.is_symlink():
+            mode = b"120000"
+            digest = _git_object_digest("blob", os.fsencode(os.readlink(child)), algorithm)
+            sort_key = name
+        elif child.is_dir():
+            child_body = _git_tree_body(child, algorithm)
+            if not child_body:
+                continue
+            mode = b"40000"
+            digest = _git_object_digest("tree", child_body, algorithm)
+            sort_key = name + b"/"
+        elif child.is_file():
+            executable_bits = stat.S_IXUSR | stat.S_IXGRP | stat.S_IXOTH
+            mode = b"100755" if child.stat().st_mode & executable_bits else b"100644"
+            digest = _git_object_digest("blob", child.read_bytes(), algorithm)
+            sort_key = name
+        else:
+            continue
+        entries.append((sort_key, mode + b" " + name + b"\0" + digest))
+    return b"".join(entry for _key, entry in sorted(entries))
+
+
+def _git_tree_oid(directory: Path, *, algorithm: str) -> str:
+    return _git_object_digest("tree", _git_tree_body(directory, algorithm), algorithm).hex()
+
+
+def tree_sha_for_path(skill_dir: Path, *, algorithm: str) -> str:
+    if not skill_dir.is_dir():
+        return ""
+    try:
+        return _git_tree_oid(skill_dir, algorithm=algorithm)
+    except (OSError, ValueError):
+        return ""
+
+
+def _content_sha256(skill_md: Path) -> str:
+    return hashlib.sha256(skill_md.read_bytes()).hexdigest()
 
 
 def run_resolve_check():
@@ -83,6 +142,7 @@ def main():
         latest_tag = None
 
     skills = []
+    algorithm = _git_oid_algorithm()
     for skill_dir in sorted(SKILLS_DIR.iterdir()):
         if not skill_dir.is_dir() or skill_dir.name.startswith("."):
             continue
@@ -96,7 +156,8 @@ def main():
             "version": fm.get("version"),
             "kg_ref": fm.get("kg_ref"),
             "channel": fm.get("channel", "stable"),
-            "git_tree_sha": tree_sha_for_path(skill_dir.name),
+            "git_tree_sha": tree_sha_for_path(skill_dir, algorithm=algorithm),
+            "content_sha256": _content_sha256(skill_md),
         })
 
     merkle_input = "\n".join(f"{s['path']}:{s['git_tree_sha']}" for s in skills)

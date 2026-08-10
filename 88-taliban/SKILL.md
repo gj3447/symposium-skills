@@ -6,12 +6,8 @@ channel: stable
 canonical_name: 88-나생문
 aliases: [88-taliban, 88-naesengmoon, 113lens-naesengmoon]
 provenance: AI_DERIVED_FROM_USER_PRIMARY  # SKILL.md = AI engineering; underlying methodology = user-primary mythology (12 apostles + 5 weapons). Per PseudepigraphaValidationGate-v1-2026-04-30.
-description: >
-  `/taliban --lens mathematical`의 짧은 별칭(alias). Canonical 측 나생문 (사용자 verdict 2026-05-19 PRIMARY).
-  `/88-taliban <target>` == `/taliban <target> --lens mathematical` == `/88-나생문 <target>`.
-  수학적 렌즈 113개로 임의 대상을 적대적 검증. 단 N중 명명 측 "88중" 측면 *아님* — `--lens mathematical` 측 113 lens 측 single LensSet 측 선택, default 명명 시 1중 나생문 (cardinality=1) + lens_diversity 측 113 측 explicit edge case (사용자 verdict 2026-05-19 turn 2: N중 = N 독립 lens default 1:1, 본 88-taliban 측 100중1-lens 류 edge case 측 explicit specification 측 invoke).
-  실제 로직은 /taliban SKILL.md를 그대로 따른다. 본문 복제 없음 (drift 방지).
-  # KG: ATOM_Skill_88taliban, alias-of-taliban, alias-of-naesengmoon, naesengmoon-canonical-2026-05-19 (CanonicalName), lesson-naesengmoon-cardinality-direct-1to1-not-orthogonal-2026-05-19 (edge case explicit specification example)
+description: >-
+  Alias for Naesengmoon adversarial validation with the mathematical LensSet; `/88-taliban <target>` maps to `/taliban <target> --lens mathematical` and does not imply 88 independent critics. Invoke when: a target specifically needs the mathematical LensSet or the `/88-taliban` alias is requested. Do not use when: ordinary adversarial review needs another LensSet or user-selected cardinality; use `$taliban` instead.
 ---
 
 # /88-taliban — `/taliban --lens mathematical` 별칭

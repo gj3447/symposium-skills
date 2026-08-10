@@ -3,9 +3,8 @@ name: server-status
 kg_ref: ATOM_Skill_server_status
 version: "2.0.0"
 channel: stable
-description: >
-  비행기맨 서버 상태 점검. Mac=gateway, DGX=server. Docker Desktop 없음.
-  kubectl + localhost(socat) + ssh dgx 로 점검.
+description: >-
+  Check Bihaenggiman infrastructure health across the Mac gateway, DGX server, Kubernetes, socat-forwarded endpoints, and SSH routes. Use when: the user requests a broad server, cluster, endpoint, host, or connectivity status check. Do not use when: the request targets one container log, a database query, or a deployment mutation; use `$docker-logs`, `$db-query`, or `$deploy` instead.
 ---
 
 # 비행기맨 서버 상태 점검 (v2)
