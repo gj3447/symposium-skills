@@ -1,288 +1,139 @@
-# apt — Kg Logging
+# APT — evidence receipts and persistence boundary
 
-> **Lazy-load reference for `apt` skill.**
-> Loaded *only when* the orchestrator enters the relevant phase/gate.
-> Parent skill: [`../SKILL.md`](../SKILL.md). Repo CHANGELOG: [`../../CHANGELOG.md`](../../CHANGELOG.md).
-> Refactor source: PROM 16 F6.1 Progressive Disclosure (2026-04-29).
-> KG: `lesson-prom16-skillver-progressive-disclosure-drift-2026-04-29`.
+This reference defines how an APT cycle records evidence without turning every transition into knowledge
+graph ceremony. The parent skill is [`../SKILL.md`](../SKILL.md).
 
----
+## Default rule
 
-## 8. KG Logging Procedures (MANDATORY)
+Keep ordinary gate decisions, findings, tests, and overrides in the local cycle artifact or parent
+handoff. Do not create a KG node for every finding or transition. Counts are telemetry, never votes for
+truth, priority, confidence, or ratification.
 
-### 8.1 AptDecisionLog Node (Every Gate Transition)
+Durable persistence is considered only for evidence that is repeated, high-risk, cross-repository, or
+reusable across sessions. Such evidence is proposed as `PENDING`; it does not directly mutate canon,
+status, confidence, configuration, a Span, a Contract, or a Lesson.
 
-```cypher
-CREATE (dl:AptDecisionLog {
-  id: randomUUID(),
-  gate_type: $gate_type,
-  span_name: $span_name,
-  decision: $decision,
-  decided_by: $decided_by,
-  decided_at: datetime(),
-  adversarial_verdict: $adversarial_verdict,
-  adversarial_findings_count: $findings_count,
-  adversarial_blockers: $blocker_count,
-  ground_truth_pass: $ground_truth_pass,
-  ground_truth_details: $ground_truth_details,
-  evidence_summary: $evidence_summary,
-  override_reason: $override_reason
-})
-WITH dl
-MATCH (s:AptSpan {name: $span_name})
-MERGE (dl)-[:TARGETS]->(s)
-RETURN dl.id, dl.gate_type, dl.decision
+## Local decision receipt
+
+Record a receipt when a gate materially changes execution:
+
+```yaml
+receipt_id: stable local identifier
+cycle_id: parent cycle
+target: exact artifact, Span, or contract under review
+gate: gate name
+decision: PASS | RETURN | ESCALATE | BLOCK | OVERRIDE | INCONCLUSIVE
+actor: executor or reviewer identity
+observed_at: timestamp
+inputs:
+  command: optional exact command
+  environment: relevant versions or commit
+  artifacts: paths or external identifiers
+evidence:
+  supporting: []
+  contradicting: []
+  unknowns: []
+independence: executor_same_as_reviewer | independent_reviewer | not_applicable
+reason: concise evidence-based rationale
+followups: bounded candidates
 ```
 
-**gate_type values**: `DensityCheck`, `C_S_sigma`, `RefinementGate`, `FulfillmentGate`, `IntegrationGate`
+An override additionally records who authorized it, the exact boundary waived, duration, and rollback or
+review condition. Human approval is not inferred from silence.
 
-**decision values**: `PASS`, `RETURN`, `ESCALATE`, `BLOCKED`, `OVERRIDE`
+## Local finding receipt
 
-### 8.2 AptFeedback Node (Every Adversarial Finding)
-
-```cypher
-MERGE (fb:AptFeedback {name: $finding_id})
-SET fb.category = $category,
-    fb.severity = $severity,
-    fb.status = 'open',
-    fb.description = $claim,
-    fb.evidence = $evidence,
-    fb.suggestion = $suggestion,
-    fb.ground_truth_testable = $ground_truth_testable,
-    fb.ground_truth_result = $ground_truth_result,
-    fb.gate_type = $gate_type,
-    fb.critic_model = $critic_model,
-    fb.created_at = datetime(),
-    fb.created_by = 'adversarial-critic',
-    fb.target_span = $target_span,
-    fb.target_contract = $target_contract
-WITH fb
-OPTIONAL MATCH (s:AptSpan {name: $target_span})
-FOREACH (_ IN CASE WHEN s IS NOT NULL THEN [1] ELSE [] END |
-  MERGE (fb)-[:TARGETS]->(s)
-)
-RETURN fb.name, fb.severity, fb.status
+```yaml
+finding_id: stable local identifier
+cycle_id: parent cycle
+target: exact claim or artifact
+category: correctness | evidence | security | performance | operations | method | other
+severity: blocker | high | medium | low | note
+claim: one falsifiable statement
+observation: what was actually observed
+provenance: path, command, URL, dataset, commit, and date as applicable
+relation: SUPPORTS | CONTRADICTS | INCONCLUSIVE | NOT_APPLICABLE
+dependence: independent | shared_input | derivative | unknown
+reproduction: not_run | reproduced | failed_to_reproduce | not_applicable
+limitations: []
+suggested_action: optional bounded proposal
 ```
 
-### 8.3 Override/Skip Log (When Human Explicitly Allows)
+Preserve evidence-backed dissent. Do not merge contradictory findings into a synthetic consensus score.
 
-```cypher
-CREATE (ol:AptDecisionLog {
-  id: randomUUID(),
-  gate_type: $gate_type,
-  span_name: $span_name,
-  decision: 'OVERRIDE',
-  decided_by: 'human',
-  decided_at: datetime(),
-  override_reason: $human_provided_reason,
-  overridden_rule: $rule_id,
-  adversarial_verdict: $original_verdict,
-  adversarial_findings_count: $findings_count,
-  adversarial_blockers: $blocker_count
-})
-WITH ol
-MATCH (s:AptSpan {name: $span_name})
-MERGE (ol)-[:TARGETS]->(s)
-RETURN ol.id, ol.decision, ol.override_reason
+## Pending evidence proposal
+
+Use only when the persistence threshold is met:
+
+```yaml
+pending_id: proposed stable identifier
+proposal_type: EVIDENCE | VERDICT | ROOT_CAUSE | LESSON | POLICY_CHANGE
+target: exact claim, artifact, or policy
+target_fiber: algebra | physics | engineering | narrative | operations
+source_receipts: []
+proposed_change: specific field-level change, or NONE
+reason_reusable: recurrence, risk, or cross-repository value
+root_cause: required only when evidenced
+reusable_prevention: required only for a Lesson proposal
+provenance: actor, timestamp, commit, paths, and source identifiers
+status: PENDING
+ratifier_required: explicit authority or user decision
 ```
 
-**CRITICAL**: The `override_reason` MUST come from the human. The agent MUST NOT generate
-a reason on behalf of the human. If the human says "skip", ask "Why?" and log their answer.
+A recurrence threshold may justify `PENDING_VERDICT`; it does not establish a `RootCause`. A Lesson
+proposal requires both evidenced cause and reusable prevention. Do not invent `truth`, a mechanism, or a
+Lakatos label to fill a schema.
 
-### 8.4 Query Open Feedback
+## Ratification request and receipt
 
-```cypher
-MATCH (fb:AptFeedback)
-WHERE fb.status = 'open'
-RETURN fb.category AS category,
-       fb.severity AS severity,
-       count(fb) AS open_count,
-       collect(fb.name) AS items
-ORDER BY
-  CASE fb.severity
-    WHEN 'BLOCKER' THEN 0
-    WHEN 'PERFORMANCE' THEN 1
-    WHEN 'DESIGN_DEBT' THEN 2
-    WHEN 'NITPICK' THEN 3
-  END
+Ordinary APT execution cannot self-ratify. A ratification request must name:
+
+```yaml
+pending_id: existing pending proposal
+ratifier: explicitly authorized person or role
+allowed_fields: exact fields that may change
+previous_values: exact current values
+proposed_values: exact requested values
+evidence_reviewed: source receipt ids
 ```
 
-### 8.5 Query Decision Audit Trail
+The authorized writer performs a bounded mutation, then returns an exact readback receipt containing the
+pending ID, actor, timestamp, changed fields, before/after values, and external record identifier. If any
+precondition is missing, retain `PENDING` and report the blocker.
 
-```cypher
-// Full audit trail for a span
-MATCH (dl:AptDecisionLog)-[:TARGETS]->(s:AptSpan {name: $span_name})
-RETURN dl.gate_type, dl.decision, dl.decided_by, dl.decided_at,
-       dl.adversarial_verdict, dl.adversarial_findings_count,
-       dl.adversarial_blockers, dl.ground_truth_pass,
-       dl.override_reason
-ORDER BY dl.decided_at ASC
-```
+Independent reproduction adds evidence; it is not ratification. Majority, unanimity, critic count, or a
+producer's own success return is not ratification.
 
-### 8.6 Resolve Feedback
+## Scientific evidence
 
-```cypher
-MATCH (fb:AptFeedback {name: $finding_id})
-SET fb.status = 'resolved',
-    fb.resolved_at = datetime(),
-    fb.resolved_by = $agent,
-    fb.resolution = $resolution
-RETURN fb.name, fb.status, fb.resolution
-```
+When an APT cycle materially affects a scientific claim, apply the highest applicable T0/T1/T2 tier
+before execution. T2 receipts identify the target claim and algebra/physics fiber and keep these axes
+independent:
 
-### 8.7 Adversarial Round Trajectory Record (for KG persistence)
+- relation: `SUPPORTS | CONTRADICTS | INCONCLUSIVE`;
+- novelty: `REPRODUCTION | DISCOVERY_CANDIDATE`;
+- fitting risk: `NULL_PASS | NUMEROLOGY_HOLD | NOT_APPLICABLE | NOT_ASSESSED`.
 
-```python
-# v17 trajectory record -- saved to KG after each adversarial round
-trajectory_record = {
-    "gate": "FulfillmentGate",
-    "span_name": "SpanName",
-    "critic_model": "sonnet",
-    "design_model": "opus",
-    "findings_count": 4,
-    "blockers": 1,
-    "performance": 1,
-    "design_debt": 1,
-    "nitpick": 1,
-    "ground_truth_overrides": 0,
-    "verdict": "REJECT",
-    "resolution": "fixed blocker, re-passed",
-    "ground_truth_results": {
-        "cargo_test": "PASS (12/12)",
-        "cargo_clippy": "PASS (0 warnings)",
-        "coverage": 0.87
-    },
-    "sigma_oracle_decision": "APPROVE",
-    "sigma_oracle_is_human": True,
-    "timestamp": "2026-03-26T12:00:00Z"
-}
-```
+Null/multiplicity checks apply only when a valid null exists. Numerical Bayes and Lakatos assessments
+remain behind their canonical gates; do not add them merely to satisfy a logging template.
 
----
+## Retention and deduplication
 
+- Keep exact commands, versions, commits, and source dates near the observation.
+- Link derivative findings to their shared source so reruns are not double-counted.
+- Prefer one pending proposal referencing several receipts over duplicate proposals.
+- Redact secrets and personal data before any durable persistence.
+- Keep local receipts append-only when they are an audit trail; correct them with a superseding receipt.
 
+This follows W3C PROV's useful separation of entity, activity, and agent without requiring a graph write.
 
-## 14. Feedback System
+## Definition of done
 
-### 14.1 Categories (10)
+- Material decisions have local provenance-bearing receipts.
+- Ordinary events stayed local.
+- Durable candidates are `PENDING`, deduplicated, and scoped to an exact target.
+- Canonical changes have separate authority and exact readback.
+- No count-vote, automatic Lesson creation, or automatic recursive follow-up occurred.
 
-| # | Category | When to Use |
-|---|----------|-------------|
-| 1 | Bug | Code defect, postcondition violation |
-| 2 | Confusion | Spec ambiguity, interpretation divergence |
-| 3 | Missing | Missing Span, Contract, or test |
-| 4 | Improvement | Feature enhancement request |
-| 5 | Violation | Axiom or Principle violation detected |
-| 6 | Conflict | Contradiction between Contracts or Spans |
-| 7 | FalsePositive | Validation flagged normal as violation |
-| 8 | FalseNegative | Validation missed a real violation |
-| 9 | PerformanceDrift | Performance metric below baseline |
-| 10 | SLABreach | SLA exceeded |
-
-### 14.2 Record Feedback
-
-```cypher
-MERGE (fb:AptFeedback {name: $title})
-SET fb.category = $category,
-    fb.severity = $severity,
-    fb.status = 'open',
-    fb.description = $description,
-    fb.created_at = datetime(),
-    fb.created_by = $agent,
-    fb.target_span = $target_span,
-    fb.target_contract = $target_contract
-WITH fb
-OPTIONAL MATCH (s:AptSpan {name: $target_span})
-FOREACH (_ IN CASE WHEN s IS NOT NULL THEN [1] ELSE [] END |
-  MERGE (fb)-[:TARGETS]->(s)
-)
-RETURN fb.name, fb.status
-```
-
-Record feedback **immediately** when you discover a problem. Even minor confusion
-accumulates into major APT violations.
-
-### 14.3 Anti-Pattern: Adversarial Theater (v17)
-
-| # | Anti-Pattern | Symptom | Detection | Prevention |
-|---|-------------|---------|-----------|------------|
-| 18 | Adversarial Theater | Critic produces exactly 3 NITPICK findings every round | Severity distribution audit, historical finding rate | Model rotation, sigma_oracle meta-review |
-
----
-
-## 15. KG Logging Philosophical Grounding (2026-05-11 추가)
-
-> Cross-ref: `THEORY/APT/PHILOSOPHICAL_FOUNDATIONS.md` §6 (Friston FEP) + `producer-reviewer-triple-canonical-2026-05-10` + `mcp-quadruple-canonical-multi-grounding-2026-05-10` (W3C PROV-DM in MCP cross-canon).
-> **iter 104 갱신**: 17 APT Lean files / 156 theorems Mathlib-free 0 sorry — 9-tier architecture. Per-KG-logging-mechanism explicit Lean theorem cite:
-> - **Friston active inference 5-component bijection** (KAL→prior / Contract→prediction / SCW→action / Validation→error / KGLog→posterior) → `APT_Friston_FEP.lean:apt_active_inference_complete` + `low_prediction_error_implies_pass` + `high_prediction_error_implies_block`
-> - **Lesson Bayesian update** (`wrongAssumption ↔ truth` symmetric pair) → `APT_Friston_FEP.lean:lesson_nonempty_complete` + `apt_majority_lesson_autopoietic` (closure ≥ 50%)
-> - **Tarski metalanguage** (KG = APT 의 외부 truth predicate) → `APT_Tarski_Metalanguage.lean:apt_tarski_compliant` + `apt_has_metalanguage` (object language vs metalanguage 명확 distinction)
-> - **W3C PROV-DM 6 relations** (wasGeneratedBy / used / wasInformedBy / wasAttributedTo / wasAssociatedWith / actedOnBehalfOf) → `mcp-quadruple-canonical-multi-grounding-2026-05-10` hyperedge (cross-canon Lean 후보)
-> - **Maturana autopoietic closure** (Lesson → Pattern Library extension) → `APT_Maturana_Autopoiesis.lean:apt_full_autopoietic_coverage` + `pure_self_feedback_full_closure` + `apt_completion_pure_autopoietic`
-> - **Anti-Theater (V18 mode collapse)** → `APT_Adversarial_Triple.lean:mode_collapse_no_refutation` (Goodfellow GAN-D detect)
->
-> KG logging 가 *왜* APT cycle 전체 entry 의 정전적 mechanism인지 학문 grounding.
-
-### Friston Free Energy Principle ↔ KG Logging = Bayesian update
-
-```
-APT cycle = active inference loop (Friston 2010):
-  ┌─────────────────────────────────────────┐
-  │ prior → prediction (SA + SP + ST) Contract │
-  │           ↓                                 │
-  │ action (SCW) — TDD execution                │
-  │           ↓                                 │
-  │ prediction error (Naesengmoon verdict + VR)     │
-  │           ↓                                 │
-  │ KG LOGGING — :Lesson + :ValidationResult    │
-  │           ↓                                 │
-  │ Bayesian update — model 갱신 (next prior)   │
-  └─────────────────────────────────────────┘
-```
-
-| Friston FEP component | APT KG logging entry |
-|---|---|
-| **prior** (model 사전 분포) | KG :SemanticAnchor + Pattern Library + 5무기 substrate |
-| **prediction** (expected) | :Contract v2 9-axis + :AptDecisionLog gate_intent |
-| **action** | :ValidationResult execution + cargo test pass |
-| **prediction error** (surprise) | :Lesson `wrongAssumption ↔ truth` symmetric pair |
-| **Bayesian update** | KG MERGE + :EXPLAINED_BY edge + :GENERALIZES :Lesson |
-
-**Friston 함의**: KG logging *없으면* free energy 측정 ✗ → active inference loop 깨짐 → APT cycle = blind. 그래서 v17 mandatory KG logging 모든 decision = *active inference completeness* enforcement.
-
-### W3C PROV-DM ↔ KG Logging = provenance recording
-
-> W3C PROV-DM 2013 (provenance data model) — 6 relations: wasGeneratedBy / used / wasInformedBy / wasAttributedTo / wasAssociatedWith / actedOnBehalfOf.
-
-| W3C PROV | APT KG logging |
-|---|---|
-| **wasGeneratedBy** | :Lesson - GENERATED_BY → :APTCycle |
-| **used** | :APTCycle - USED → :Contract / :Pattern / :SemanticAnchor |
-| **wasInformedBy** | :Lesson - INFORMED_BY → :Verdict (external) |
-| **wasAttributedTo** | :Decision - ATTRIBUTED_TO → :SkillVersion / :Agent |
-| **wasAssociatedWith** | :APTCycle - ASSOCIATED_WITH → :User / :Agent |
-| **actedOnBehalfOf** | :Subagent - ACTED_ON_BEHALF_OF → :ParentClaude |
-
-**W3C PROV 함의**: APT KG logging = 산업 표준 provenance recording 의 instantiation. SLSA L1-L4 supply chain provenance 기반 동일 정전 (Longinus 7-Layer cross-canon `longinus-7layer-hierarchical-reference-triple-canonical-2026-05-11`).
-
-### Tarski undefinability 회피 ↔ KG = external metalanguage
-
-> APT methodology object language ✗ truth predicate (Tarski 1936) → metalanguage mandatory.
-
-```
-APT methodology = object language (자기 truth ✗)
-KG = metalanguage (외부 truth predicate)
-  - :ValidationResult = APT 의 truth verdict (외부)
-  - :Lesson `truth` field = correction 정전화
-  - :SemanticAnchor = grounding (앵커)
-```
-
-KG 가 APT 의 *외부 metalanguage* 로 작용 — Tarski 회피 mechanism의 산업 instantiation.
-
-### Anti-Theater (v17) ↔ Producer-Reviewer triple-canonical (Cross-Canon)
-
-§14.3 Anti-Pattern 18 = `producer-reviewer-triple-canonical-2026-05-10` Cross-Canon Hyperedge 의 KG logging 측 instantiation. Goodfellow GAN-D mode collapse + Bacchelli-Bird empirical + revfactory Phase 2 pattern 4 = 3 정전 합치점.
-
-KG: `apt-philosophical-quadruple-canonical-2026-05-11` (Aristotle + Hegel + Lakatos + Friston) + `producer-reviewer-triple-canonical-2026-05-10` + `mcp-quadruple-canonical-multi-grounding-2026-05-10` (W3C PROV-DM 정전)
-
----
+Legacy mandatory Cypher and every-transition KG logging remain in Git history. They are not active APT
+instructions.

@@ -1,373 +1,131 @@
 ---
 name: apt-meta-review
 kg_ref: ATOM_Skill_apt_meta_review
-version: "27.1.0"
+version: "28.0.0"
 channel: stable
 description: >-
-  Run the terminal APT MetaReview phase after approved SCW: distill lessons, patch skill or config references through KG slots, refresh MATERIALIZES bindings, and pass Naesengmoon review with bounded self-application. Use when: the parent `$apt` orchestrator dispatches MetaReview after SCW. Do not use when: a user directly requests general skill improvement without an approved APT phase chain; use `$skill-creator` instead.
+  Run the terminal APT MetaReview phase after an approved SCW by classifying deltas, identifying evidenced reusable prevention, and returning a bounded local or pending handoff. Use when: the parent `$apt` orchestrator dispatches MetaReview after SCW or a user explicitly requests review of an APT cycle. Do not use when: a user wants general skill creation or an ordinary code review; use `$skill-creator` or direct review instead.
 ---
 
-## 🎛 v26 A6 Resolve-Only
+# APT MetaReview — bounded method review
 
-> SKILL.md 패치 시 prose hardcoding 금지. KG slot 참조만. magic number/lens count 주입 시 Naesengmoon reject.
+MetaReview asks whether a completed APT cycle revealed a reusable method improvement. It is not a
+mandatory Lesson factory, a KG writer, or a self-recursive validation loop.
 
-```cypher
-// Before patching SKILL.md, verify slot targets exist
-MATCH (slot:MethodologySlot) RETURN slot.name, slot.currentConcrete
-// Lesson 생성은 resolved=false로 시작 (auto_resolve 금지)
-// MATERIALIZES 갱신: Contract.materialization_status, AptSpan.contract_dto_status
+## Entry contract
+
+The parent supplies:
+
+```yaml
+cycle_id: stable local identifier
+target: exact Span, artifact, or decision reviewed
+inputs: specs, diffs, test outputs, and reviewer verdicts
+completion_state: what SCW approved or left open
+write_authority: files and systems this run may modify, if any
+validation_budget: bounded checks and reviewers
 ```
 
-**Self-application forbidden, max_depth=1, delta=0**. MetaReview가 자기 자신 재귀 호출 금지. # KG: APT_v26_A6_2026-04-21
+If the evidence set is incomplete, return `INCONCLUSIVE` with missing inputs. Do not manufacture a root
+cause or broaden the task to make the cycle appear complete.
 
----
+## Workflow
 
-## 🔗 MIC Binding (SOLID-DIP)
+### 1. Normalize observations
 
-**IS slot**: APT_Phase (MetaReview, 5/5)
-**USES slots**: AdversarialValidator (Naesengmoon Gate 자체재검증), KgCodeBinder (Longinus MATERIALIZES 갱신), SubagentSeeder (재배맨 taskspec, Lesson 생성 자동화)
+Record each material delta with provenance:
 
-**동적 resolution**:
-```cypher
-MATCH (mic:MethodologyIntegrationContract {name:'MIC_v1'})-[:HAS_SLOT]->(s:MethodologySlot)
-WHERE s.name IN ['AdversarialValidator','KgCodeBinder','SubagentSeeder']
-RETURN s.name, s.currentConcrete, s.invocation
+```yaml
+observation_id: stable local identifier
+expected: prior contract or behavior
+observed: actual behavior
+evidence: command, path, test, or external verdict
+impact: local | reusable | high_risk | cross_repository
 ```
 
-본문의 `Naesengmoon`/`Longinus`/`재배맨`은 MIC slot 현재 스냅샷. 진짜 호출은 `s.invocation`.
-**Self-application 금지**: MetaReview가 자기 자신을 다시 MetaReview하면 무한루프. `max_depth=1, delta=0` 경계 준수.
+Success is not automatically a Lesson. Failure is not automatically a method defect.
 
-# KG: MIC_v1, ATOM_Skill_apt_meta_review, lesson-apt-skill-drift-audit-2026-04-17
+### 2. Classify the causal state
 
----
+For each material observation choose one:
 
-## ⚔ Active Weapons — Phase MetaReview (5/5)
+- `NO_METHOD_CHANGE`: ordinary completion, local fix, or no reusable implication;
+- `CAUSE_UNKNOWN`: the symptom is real but the cause is not established;
+- `ROOT_CAUSE_EVIDENCED`: evidence isolates the cause;
+- `PREVENTION_EVIDENCED`: the cause and a reusable prevention are both demonstrated.
 
-> MetaReview 측 활성 5무기 (parent /apt orchestrator §"5무기 Phase Integration Matrix" mirror).
+Repeated occurrence or high risk raises persistence priority but does not prove causation.
 
-| Step | Weapon | Invocation | Trigger | Output |
-|------|--------|-----------|---------|--------|
-| Step 14 (의심 발견) | (5무기 emergent) | 5무기 순환 측 창발 — FeedbackProvider slot EMERGENT 상태 | SCW FulfillmentGate APPROVED 후 자동 dispatch | Doubt log + AptFeedback 후보 |
-| Step 15 (Lesson 결정화) | **Prometheus** (mini) | `/prom 4 "<lesson_topic> — 외부 정전 grounding"` (small N) | Doubt log 분석 후 lesson 추출 필요 | `Lesson` node (wrongAssumption↔truth symmetric pair 둘 다 채움) |
-| Step 16 (SKILL.md 패치) | **Longinus** (KgCodeBinder) | MATERIALIZES 갱신: SKILL.md ↔ MethodologyConfig slot resolve, prose hardcoding 금지 | Lesson 적재 후 SKILL.md 패치 필요 | SKILL.md patch + KG slot update (drift 차단) |
-| Step 17 (Naesengmoon Gate 자체재검증) | **Naesengmoon** (AdversarialValidator) | `/tlb <Lesson + SKILL.md patch> --lens constitutional` (self_application_forbidden + max_depth=1) | SKILL.md 패치 직후 | `VerdictRecord` APPROVED + cycle 종료 |
+### 3. Choose the smallest outcome
 
-**Self-application 금지** (재귀 차단): MetaReview Output 측 Naesengmoon Gate 적용은 *external* critic — 자기 자신 MetaReview 재호출 금지. `max_depth=1, delta=0`.
-
-**MetaReview 진입 hub**: `hub-taliban-immunity` (rubber-stamp 방지) + `hub-prometheus-research` (lesson distillation grounding) + `hub-longinus-reference` (MATERIALIZES sync).
-
-**MT_SuccessBias 회피**: success 도 비자명한 경우 Lesson 으로 기록 (corrections 만 모이면 over-cautious).
-
-# KG: hub-taliban-immunity, hub-prometheus-research, hub-longinus-reference, MIC_v1.AdversarialValidator, MIC_v1.ResearchProvider, MIC_v1.KgCodeBinder, lesson-agent-learns-from-verdict-not-success-2026-04-27
-
----
-
-# KG: CONTRACT_Hardening_MetaReview, lesson-apt-scw-tdd-skipped-context-compression-2026-04-16
-
----
-
-# /apt-meta-review — 피드백→스킬 강화 루프
-
-> **APT의 5번째 Phase. 면역 시스템의 학습 사이클.**
-> 의심이 들면 → 즉시 Lesson → SKILL 패치 → 검증.
-> 이 루프가 없으면 APT는 같은 실수를 반복한다.
-
----
-
-## 트리거 조건 (3가지 경로)
-
-### 경로 A: 사용자 피드백
-```
-"제대로 한 거 맞아?" / "왤케 금방이야?" / "나생문 제대로 동작했어?"
-→ apt-meta-review 즉시 발동
+```yaml
+outcome: LOCAL_REPORT | PENDING_VERDICT | PENDING_LESSON | PATCH_PROPOSAL
+reason: concise evidence-based rationale
+target: exact skill, method, or contract
+evidence_ids: supporting observation ids
+root_cause: required only for PENDING_LESSON
+prevention: required only for PENDING_LESSON
+unknowns: unresolved causal questions
 ```
 
-### 경로 B: SCW 완료 후 자동 제안
-```
-SCW 완료 시 항상 물음:
-"이번 사이클에서 방법론 문서에 보완이 필요한 부분이 있었나요?"
-→ YES → apt-meta-review 발동
-→ NO → 종료
-```
+- Use `LOCAL_REPORT` for ordinary cycle learning.
+- Use `PENDING_VERDICT` when recurrence or risk matters but the cause is unresolved.
+- Use `PENDING_LESSON` only when cause and reusable prevention are evidenced.
+- Use `PATCH_PROPOSAL` when a specific authorized method change follows from the evidence.
 
-### 경로 C: Naesengmoon REJECTED 패턴
-```
-같은 렌즈에서 반복 REJECTED →
-동일 Lesson 2번 이상 재등장 시 → SKILL.md에 구조적 결함 존재 → apt-meta-review 발동
-```
+No outcome directly changes KG status, confidence, configuration, canon, methodology slots, or
+materialization links.
 
----
+### 4. Apply a patch only when authorized
 
-## 종료조건 (무한 재귀 방지)
+If the task explicitly authorizes a method or skill change and the parent owns the write boundary:
 
-```
-1. self_application_forbidden: MetaReview는 자기 자신(apt-meta-review/SKILL.md)에 재적용 금지
-2. max_depth = 1: MetaReview 산출물이 다시 MetaReview를 트리거하면 차단
-3. delta = 0: 새로운 Lesson이 생성되지 않으면 자동 종료
-```
+1. identify the exact contradictory instruction or missing guard;
+2. make the smallest coherent patch;
+3. preserve useful behavior and remove only the evidenced failure path;
+4. validate frontmatter, references, formatting, and directly affected behavior;
+5. record the observed checks in the local report.
 
----
+Otherwise return the proposal without editing. A proposed patch is not authorization.
 
-## 실행 절차
+### 5. Request independent review only when material
 
-### Step 1: Lesson 즉시 기록
+Use an external reviewer when the patch affects a gate, safety boundary, shared contract, or canonical
+policy. The executor does not impersonate the reviewer. Reviewer headcount is coverage metadata; one
+evidence-backed blocker can block and unsupported agreement cannot approve.
 
-```cypher
-MERGE (l:AbstractNode:Lesson {name: $lesson_name})
-SET l.category = $category,
-    l.problem = $problem,
-    l.wrongAssumption = $wrong_assumption,
-    l.truth = $truth,
-    l.solution = null,
-    l.severity = $severity,
-    l.resolved = false,
-    l.createdAt = datetime(),
-    l.source = 'apt-meta-review'
-RETURN l.name
-```
+### 6. Stop
 
-### Step 2: 영향 스킬 식별
+MetaReview completes after the evidence is classified, any authorized patch is checked, and bounded
+follow-ups are recorded. It never invokes itself. A follow-up is a separate task with its own scope and
+tier.
 
-어떤 SKILL.md가 이 Lesson에 의해 수정돼야 하는가?
+## Persistence and ratification
 
-```cypher
-MATCH (s:ClaudeCodeSkill)
-WHERE s.skillName IN $affected_skills
-RETURN s.skillName, s.file_path
+The default output is a local report or parent handoff. Material reusable results may be returned as a
+provenance-bearing `PENDING` proposal. Ratification requires an identified pending ID and an explicitly
+authorized external ratifier/writer; independent reproduction alone cannot self-ratify.
+
+## Output
+
+```yaml
+cycle_id: string
+target: string
+classification: NO_METHOD_CHANGE | CAUSE_UNKNOWN | ROOT_CAUSE_EVIDENCED | PREVENTION_EVIDENCED
+outcome: LOCAL_REPORT | PENDING_VERDICT | PENDING_LESSON | PATCH_PROPOSAL
+evidence: []
+patches: []
+checks: []
+followups: []
+persistence: LOCAL_ONLY | PENDING_PROPOSAL
 ```
 
-### Step 3: SKILL.md 패치
+## Definition of done
 
-Contract postcondition에 따라 구체적 방어 블록 삽입:
-- **Naesengmoon** 계열 → Anti-Rubber-Stamp 섹션 강화
-- **APT Phase** 계열 → 해당 Phase GATE CHECK 섹션 추가
-- **Longinus** 계열 → MATERIALIZES 의무화 절차 추가
+- Claims are tied to observed evidence.
+- Root cause and prevention are present only when demonstrated.
+- Relevant engineering checks ran for any code or skill patch.
+- No direct KG/canon/config/status mutation occurred.
+- No automatic recursion, sibling creation, or count-based decision occurred.
 
-패치 형식:
-```markdown
-## ⛔ [결함명] 방어 (lesson-XXX)
-
-> [무엇이 문제였는가]
-> [어떻게 감지하는가]
-> [어떻게 차단하는가]
-```
-
-### Step 4: MATERIALIZES KG 갱신
-
-패치된 SKILL.md 파일 경로를 KG에 바인딩:
-
-```cypher
-MATCH (s:ClaudeCodeSkill {skillName: $skill_name})
-MERGE (f:AbstractNode:SourceFile {name: $file_node_name})
-SET f.file_path = $skill_md_path,
-    f.language = 'markdown',
-    f.updated_at = datetime()
-MERGE (s)-[:MATERIALIZES]->(f)
-RETURN s.skillName, f.file_path
-```
-
-### Step 5: Naesengmoon Gate (executor ≠ reviewer) — **inline parent execution 측 hard ban**
-
-```
-/taliban apt-meta-review 산출물 --lens constitutional
-→ APPROVED: ValidationResult(phase='MetaReview', verdict='APPROVED') 기록
-→ REJECTED: Finding 반영 후 Step 3으로 돌아가 재패치 (max_depth 카운터 확인)
-```
-
-**executor(패치 작성자) ≠ reviewer(Naesengmoon agent)** 원칙 엄수.
-
-**Hard rule (`naesengmoon-canonical-2026-05-19` + `lesson-naesengmoon-inline-bypass-jaebaeman-sop-2026-05-19`)**:
-- Parent Claude 측 inline self-judgment 측 **금지**. 반드시 separate subagent dispatch (`naesengmoon-ensemble-critic` agent OR canonical `/tlb` skill 측 SubagentTaskSpec seed 측 통한 dispatch).
-- ValidationResult 측 record 측 `vr.executor != vr.reviewer` 측 D20 cypher 측 enforce. 같은 식별자 측 record 측 *automatic RUBBER_STAMP REJECTION*.
-
-### Step 6: Lesson resolved 갱신
-
-```cypher
-MATCH (l:Lesson {name: $lesson_name})
-SET l.resolved = true,
-    l.resolvedAt = datetime(),
-    l.resolvedBy = 'apt-meta-review: SKILL.md patch + MATERIALIZES link'
-RETURN l.name, l.resolved
-```
-
-### Step 7: Mandatory Recursive Self-Meta-Naesengmoon (Wave 9 binding, P0-2 install 2026-05-20)
-
-> Step 5 측 *retroactive* per-patch gate. Step 7 측 *recursive* sprint-end gate — *직후* cycle 측 self-meta-naesengmoon 측 dispatch. 두 측 별개 layer. **본 단계 측 skip 측 즉시 Constrain Layer (3) cypher gate fail (line 270-279).**
-
-#### 7-1. Dispatch protocol (parent-claude only, NOT inline)
-
-매 MetaReview cycle 종료 시 — parent Claude 측 다음 측 단일 메시지 측 dispatch:
-
-```
-Agent(subagent_type='naesengmoon-ensemble-critic',
-      description='Wave 9 recursive self-meta-naesengmoon',
-      prompt='Target = MetaReview output of cycle <cycle_id>.
-              Cardinality=3 (constitutional + mathematical + solid simple 1:1).
-              Builds on Step 5 retroactive gate VR.
-              Output: ValidationResult MERGE + ≥1 AdversarialChallenge node emit.
-              Constraint: this is sprint-end recursive verification, NOT
-                          MetaReview→MetaReview self-application (self_application_forbidden).
-              MetaReview→Naesengmoon 측 ALLOWED.')
-```
-
-**Hard rules**:
-- Parent inline self-judgment **금지** (`lesson-naesengmoon-inline-bypass-jaebaeman-sop-2026-05-19`).
-- Subagent agent != parent execution context (D20 separate).
-- AdversarialChallenge node ≥1 emit mandatory (rubber-stamp 차단).
-
-#### 7-2. AdversarialChallenge MERGE template
-
-```cypher
-MERGE (ac:AbstractNode:AdversarialChallenge {
-  name: 'challenge-meta-review-' + $cycle_id + '-' + toString(timestamp())
-})
-SET ac.cycle_id = $cycle_id,
-    ac.severity = $severity,                   // HIGH | MEDIUM | LOW
-    ac.status = 'OPEN',                        // OPEN | RESOLVED | SUPERSEDED
-    ac.challenge_summary = $summary,
-    ac.kg_evidence_anchors = $evidence_list,   // list of :Lesson / :ResearchFinding node names
-    ac.lens_origin = $lens,                    // constitutional | mathematical | solid
-    ac.emitted_at = datetime()
-WITH ac
-MATCH (vr:ValidationResult {name: $naesengmoon_vr_name})
-MERGE (vr)-[:RAISES]->(ac)
-RETURN ac.name
-```
-
-#### 7-3. Russell self-application boundary (MATH-F2 stratification)
-
-- MetaReview 측 자기 자체 측 *MetaReview→MetaReview* 측 ban (self_application_forbidden, `lesson-prom16-meta-bayes-self-application-2026-05-19` cross-ref).
-- *MetaReview→Naesengmoon* 측 ALLOWED — *다른 무기 측 5무기 측 다른 instance* 측.
-- Root MetaReview cycle (예: PROM 16 자체 측 emit 하는 정리) 측 *external sigma_oracle (사용자 verdict) gate* 측 추가 의존.
-
-#### 7-4. Gate cypher (Constrain Layer 3 측 동일)
-
-`constrain_layer_3_passed = false` 측 sprint end fail → immediate retro backfill required (자세한 cypher 측 line 270-279 참조).
-
----
-
-## 피드백 루프 다이어그램
-
-```
-사용자 의심 / SCW 완료 / Naesengmoon 반복 REJECTED
-          ↓
-    apt-meta-review 트리거
-          ↓
-    Lesson 기록 (KG)
-          ↓
-    SKILL.md 패치 (파일)
-          ↓
-    MATERIALIZES 갱신 (KG↔파일 바인딩)
-          ↓
-    Naesengmoon Gate (executor≠reviewer)
-          ↓
-    APPROVED → Lesson resolved → 종료
-    REJECTED → 재패치 (depth+1, delta 체크)
-          ↓ (delta=0)
-        종료
-```
-
----
-
-## What NOT To Do
-
-| 금지 | 이유 |
-|------|------|
-| MetaReview를 자기 자신에 적용 | self_application_forbidden — 무한 루프 |
-| Lesson 없이 SKILL 패치 | 근거 없는 수정 — KG 정본 위반 |
-| executor가 Naesengmoon Gate 통과 선언 | VR Self-Fulfillment 위반 |
-| delta=0인데 계속 실행 | 종료조건 위반 |
-| max_depth 초과 후 계속 실행 | 무한 재귀 — 강제 종료 |
-
----
-
-*MetaReview는 APT가 스스로를 개선하는 메커니즘이다.*
-*이 루프가 없으면 방법론은 정적이고 결함은 누적된다.*
-*# KG: APT_SkillHardening_v1, lesson-apt-scw-tdd-skipped-context-compression-2026-04-16*
-
----
-
-## History
-
-> Repo-level changes: [`/CHANGELOG.md`](../CHANGELOG.md). Per-commit: `git log -- apt-meta-review/SKILL.md`.
-
-| Version | Date | Summary | KG Ref |
-|---|---|---|---|
-| **v2** | 2026-04-21 | APT v26 A6 alignment. SKILL.md 패치는 resolve_slot(ContractSchema/LensSet/MethodologyConfig) 패턴 유지. Prose magic number 주입 금지. KG = 정본. self_application_forbidden, max_depth=1, delta=0 종료조건 | `APT_v26_RFC_draft_2026-04-21`, `CONTRACT_Hardening_MetaReview`, `SPAN_Hardening_MetaReview` |
-| **v1** | 2026-04 | Lesson → SKILL.md 패치 → MATERIALIZES 갱신 → Naesengmoon Gate. SCW 완료 후 자동 제안 | `APT_SkillHardening_v1`, `lesson-apt-scw-tdd-skipped-context-compression-2026-04-16` |
-
-⚠️ **TDD REFACTOR phase 거울 부재** (cycle-level): apt-meta-review 만으로 *평면 누적 / fat file* 못 막음. atomic-span shipping 정규화 자체가 평면 누적 메커니즘. **Phase 6 (Cleanup Gate) 신설 필요** (`lesson-apt-phase6-cleanup-missing-2026-04-28`, HIGH, unresolved). meta-review 는 *방법론 메타-개선*, Phase 6 는 *cycle 차원 cleanup* — 보완 관계.
-
-# KG history: ATOM_Skill_apt_meta_review / lesson-prom16-skill-versioning-academic-2026-04-29 / lesson-apt-phase6-cleanup-missing-2026-04-28 / lesson-solid-class-level-vs-package-level-mismatch-2026-04-29
-
----
-
-## Constrain Layer (3) — Recursive Self-Meta-Naesengmoon (2026-05-20 Wave 9)
-
-> *4번 연속 같은 형태 위반 (sha256 covenant skip + SOURCES.md MATERIALIZES gap + numeric drift + AdversarialChallenge 0건) 측 root cause* = Harness 4-axis 비대칭 (Inform overflow / Constrain near-zero / Verify retroactive only / Correct retroactive only). MetaReview 측 *retroactive Verify+Correct* 측만 측 — *next-cycle 측 같은 실수* 측 prevent 안 됨.
-
-### Mandatory at sprint end (3 fields enforced)
-
-매 cycle (SCW → MetaReview) 종료 시 측 다음 3 측 mandatory:
-
-1. **Recursive self-meta-naesengmoon dispatch**: MetaReview 측 *자기 산출물* 측 측 — *직후 cycle* 측 *naesengmoon-ensemble-critic* 측 dispatch (`/tlb <MetaReview output> --lens constitutional --lens mathematical --lens solid`). *self_application_forbidden* 측 *MetaReview→MetaReview* 측 ban, *MetaReview→Naesengmoon* 측 ALLOWED (다른 5무기 측).
-
-2. **AdversarialChallenge node ≥1 emit**: 모든 sprint-end ValidationResult 측 측 — `:AdversarialChallenge` node 측 ≥1 측 MERGE + `(vr)-[:RAISES]->(ac)` edge. 0건 측 *rubber-stamp suspicion 측 trigger* — Naesengmoon gate auto-reject.
-
-3. **Numeric claim KG count match**: 보고 송신 전 측 — *수치 N 측 claim* 측 *KG cypher count* 측 *동시 fetch* + *reconcile field SET on sv.metric_breakdown*. drift 측 detect 시 *immediate report 정정*.
-
-### Cypher gate (sprint end self-check)
-
-```cypher
-// At sprint end — verify mandatory 3 fields populated
-MATCH (vr:ValidationResult) WHERE vr.cycle_id = $cycle_id
-OPTIONAL MATCH (vr)-[:RAISES]->(ac:AdversarialChallenge)
-OPTIONAL MATCH (mr:MetaReviewOutput {cycle_id: $cycle_id})-[:VALIDATED_BY]->(naesengmoon_vr:ValidationResult)
-OPTIONAL MATCH (sv:SkillVersion {cycle_id: $cycle_id})
-WHERE sv.last_numeric_reconciled_at IS NOT NULL
-WITH vr, count(DISTINCT ac) AS challenge_count, count(DISTINCT naesengmoon_vr) AS recursive_count, count(DISTINCT sv) AS reconciled_count
-RETURN vr.name, challenge_count, recursive_count, reconciled_count,
-       (challenge_count >= 1 AND recursive_count >= 1 AND reconciled_count >= 1) AS constrain_layer_3_passed
-```
-
-`constrain_layer_3_passed = false` 측 — *sprint end gate fail* + *immediate retro emit* (3 mandatory 측 backfill).
-
-### Composite gate (MVP cypher + Naesengmoon) — added 2026-05-25
-
-> *Empirical finding (PROM 32 scoring framework cycle 2026-05-25):* LLM-as-judge alone (Naesengmoon) is **noisy single sample** (0.78 measured, ~0.90 estimated, Δ=0.12 inflation). Adding **deterministic cypher predicate gate** in parallel gives composite signal.
-
-매 cycle 종료 시 **두 gate 다 PASS** mandatory:
-
-1. **Naesengmoon semantic gate** (existing): `constrain_layer_3_passed` from above. LLM verdict + ≥1 AC + numeric reconcile.
-2. **MVP cypher structural gate** (NEW): `mvp_score ≥ 0.6` from `/Users/lagyeongjun/CD/SYMPOSIUM/scripts/cycle_score_checker/predicates_v02_cycle_type_aware.cypher` (cycle-type aware: RESEARCH / REMEDIATION / IMPLEMENTATION / UNKNOWN branches).
-
-**Composite verdict node** (MERGE at sprint end):
-```cypher
-MERGE (csv:CompositeScoreVerdict {name: 'csv-' + $cycle_id + '-' + toString(date())})
-SET csv.cycle_id = $cycle_id,
-    csv.mvp_score = $mvp_score, csv.mvp_gate = $mvp_gate,
-    csv.llm_score = $naesengmoon_score, csv.llm_verdict = $naesengmoon_verdict,
-    csv.composite_band = CASE
-      WHEN $mvp_gate IN ['PASS','CONDITIONAL'] AND $naesengmoon_verdict IN ['APPROVED','CONDITIONAL_APPROVED'] THEN 'BOTH_PASS'
-      WHEN $mvp_gate = 'FAIL' AND $naesengmoon_verdict IN ['APPROVED','CONDITIONAL_APPROVED'] THEN 'LLM_PASS_MVP_FAIL'
-      WHEN $mvp_gate IN ['PASS','CONDITIONAL'] AND NOT ($naesengmoon_verdict IN ['APPROVED','CONDITIONAL_APPROVED']) THEN 'MVP_PASS_LLM_FAIL'
-      ELSE 'BOTH_FAIL'
-    END
-MERGE (csv)-[:CONFORMS_TO]->(schema:CompositeScoreVerdictSchema {name: 'composite-score-verdict-schema-v1-2026-05-25'})
-```
-
-**Why composite**:
-- MVP cypher = structural compliance (KG schema). Deterministic (3 re-runs IDENTICAL). Catches structural gaps LLM misses.
-- Naesengmoon = semantic quality. LLM judgment of methodology rightness. Catches conceptual gaps cypher misses.
-- 5-cycle empirical 2026-05-25: MVP harsher than Naesengmoon mean Δ -0.12 → MVP catches gaps Naesengmoon obscured.
-- META-Goodhart self-test: MVP scored *itself* (prom32 cycle) 0.6 — not self-flattering ✓.
-
-# KG: cycle-prom32-scoring-framework-2026-05-25, lesson-scoring-framework-rigorous-predicate-based-2026-05-25, composite-score-verdict-schema-v1-2026-05-25
-
-### Cross-reference
-
-- Schema-level enforcement: `t_sourcecode_required_fields_not_null` APOC trigger (Constrain Layer 1)
-- Numeric protocol: `/Users/lagyeongjun/CD/SYMPOSIUM/CLAUDE.md` §Constrain Layer (4)
-- Root cause Lesson: `lesson-longinus-self-violated-sha256-covenant-recurrence-root-cause-2026-05-20`
-
-# KG: lesson-longinus-self-violated-sha256-covenant-recurrence-root-cause-2026-05-20, ATOM_Skill_apt_meta_review, naesengmoon-canonical-2026-05-19
+Historical automatic Lesson, Cypher, recursive self-gate, and composite count-gate procedures remain in
+Git history. They are not active instructions in v28.

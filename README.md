@@ -1,7 +1,7 @@
 # SYMPOSIUM Skills
 
-> 5 무기 (apt / harness / longinus / taliban / jaebaeman / prometheus) + APT/TPA cycle + 인프라 28-skill bundle.
-> v30.0.0 / Merkle-gated MANIFEST / Cosign keyless attestation / Lakatos PROGRESSIVE_CONFIRMED.
+> 5 무기 (apt / harness / longinus / taliban / jaebaeman / prometheus) + APT/TPA cycle + 인프라 skill bundle.
+> live catalog와 version은 `MANIFEST.json`, 무결성은 Merkle/attestation 자료를 기준으로 한다.
 
 ## 외부 머신에서 1줄 설치
 

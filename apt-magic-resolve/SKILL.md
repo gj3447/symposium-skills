@@ -8,9 +8,15 @@ description: >-
   Resolve APT magic numbers, lens counts, contract field counts, and other methodology parameters from KG `MethodologyConfig` slots instead of hard-coding prose. Use when: authoring or auditing APT configuration references and A6 compliance. Do not use when: selecting or orchestrating an APT phase; use `$apt-orchestrator` instead.
 ---
 
+## Root policy boundary (supersedes legacy examples below)
+
+Resolve ratified configuration read-only. If a slot is wrong or missing, return the observed value,
+proposed value, evidence, and provenance as a `PENDING_CONFIG_CHANGE`; do not directly modify the KG.
+
 ## 🎛 v26 A6 Resolve-Only Directive
 
-> APT skill family 의 모든 magic number / lens count / contract field count 는 KG `MethodologySlot` 조회로만 해결. Direct prose edit 금지 — KG 노드만 수정.
+> APT skill family의 magic number, lens count, contract field count는 ratified
+> `MethodologySlot`에서 읽는다. 변경은 proposal + 별도 ratification으로 처리한다.
 
 ```cypher
 // Config resolve (magic number 대체)

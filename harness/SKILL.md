@@ -8,6 +8,12 @@ description: >-
   Classify and design agent scaffolding across L_MC, L_RT, and L_IDE, then assess each instance through Inform, Constrain, Verify, and Correct evidence. Invoke when: reviewing APT structure, diagnosing agent failure, choosing a harness tier, or evaluating IDE-host, runtime, or managed-cloud controls. Do not use when: a concrete execution loop or domain lifecycle transition is the primary design object; use `$loop-engineering` or `$fsm-design` instead.
 ---
 
+## Root policy boundary (supersedes legacy examples below)
+
+Harness diagnosis reports observations and directly relevant checks locally. A recurring/high-risk
+anti-pattern may become a `PENDING` Lesson candidate only when root cause and reusable prevention are
+evidenced. Do not create a Lesson merely because a gate or run failed.
+
 ## 🔌 표준 하네스 랩핑 (MCP / CLI) — 2026-07-12
 
 `/harness` 진단 substrate = **bhgman-tool 표준 하네스**:
@@ -89,7 +95,8 @@ KG: `seed-harness-3tier-canonical-validated-2026-04-30`, `seed-anthropic-managed
 
 > **2026-05-20**: 4축 진단 protocol + Cypher 측 별도 invokable LensSet skill 측 분리 (Phase 2 from `lesson-harness-drift-corrected-2026-04-29`).
 > - Skill: `~/.claude/skills/apt-feedback-lens/SKILL.md` (KG: `ATOM_Skill_apt_feedback_lens`, `lensset-apt-4axis`)
-> - Invoke: `/taliban <target> --lens apt-4axis` (cardinality=4, UNANIMOUS_PASS, L_IDE 한정)
+> - Invoke: `/taliban <target> --lens apt-4axis` (4 concern preset, coverage telemetry, L_IDE 한정).
+>   판정은 evidence-backed blocker 조건으로 하며 cardinality나 unanimity로 하지 않는다.
 > - Cold archive (본문 보존, Longinus L4): [`references/CLAUDE_archive_4axis_diagnostic_2026-05-20.md`](references/CLAUDE_archive_4axis_diagnostic_2026-05-20.md)
 >
 > 본 Harness skill 측 frame (3-tier family + 4축 = Böckeler 2축 fine-grained 분해 정전) 보존, *invokable validator interface* 측 apt-feedback-lens 측 위임.
@@ -211,7 +218,8 @@ L1~L3 의심 신호:
 - URL 미검증
 - AI 단독 정전화 (사용자 verdict 없이)
 
-→ 발견 시 즉시 정정 + Lesson 결정화. 선례: `lesson-harness-citation-drift-bockeler-2026-04-30`.
+→ 발견 시 응답과 citation을 즉시 정정한다. 반복·고위험이며 root cause와 재사용 예방책이
+증거로 확인된 경우에만 PENDING Lesson candidate를 제안한다.
 
 ---
 

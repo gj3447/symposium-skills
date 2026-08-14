@@ -1,48 +1,39 @@
 ---
 name: apt-autoflow-guard
 kg_ref: ATOM_Skill_apt_autoflow_guard
-version: "0.1.0-scaffold"
+version: "1.0.0"
 channel: experimental
 canonical_name: apt-autoflow-guard
 description: >-
-  Enforce APT monolithic auto-flow through KG-first checks, no mid-cycle questions for reversible decisions, and Span, MERGE, and KG-paste guards. Use when: installing or auditing the APT autoflow marker/hooks, or diagnosing a concrete autoflow guard violation. Do not use when: starting an APT cycle, choosing phases, or implementing the work; use `$apt` instead.
+  Audit APT automation hooks for bounded phase routing, explicit authority, evidence preservation, safe user-choice handling, and prevention of unauthorized persistence or recursion. Use when: installing or auditing APT automation markers/hooks or diagnosing a concrete guard violation. Do not use when: starting an APT cycle, choosing phases, or implementing work; use `$apt` instead.
 ---
 
-## 🚧 Scaffold Status (2026-05-22)
+# APT automation guard
 
-SRP 4-책무 분해 중 4번째. 본 책무 측 실행 layer 는 *이미 박혀 있음* — 3개 hook + apt-progress.md template.
+Automation may remove mechanical friction but cannot suppress material user choices or broaden authority.
 
-## 실행 layer (이미 install)
+## Audit rules
 
-| Hook | matcher | mode | symptom 직격 |
-|------|---------|------|--------------|
-| `~/.claude/hooks/pre_tool_apt_autoflow_guard.py` | `AskUserQuestion` | BLOCK_WHEN_CYCLE_ACTIVE | 자동 사이클 도중 질문 차단 |
-| `~/.claude/hooks/pre_tool_apt_phase_gate_check.py` | `mcp__neo4j__write_neo4j_cypher` | BLOCK_NEW (legacy bypass `UNKNOWN_LEGACY`) | AptDecisionLog 측 lens/verdict/gate 누락 차단 |
-| `~/.claude/hooks/pre_tool_apt_sa_kg_paste_check.py` | `mcp__neo4j__write_neo4j_cypher` | BLOCK on Span MERGE without apt-progress.md ## KG Snapshot ≥5 lines | KG-skip 창작 차단 |
+- Reversible deterministic steps may proceed within the user's requested scope.
+- A genuine material choice, missing authority, destructive action, or external uncertainty pauses for the
+  owning user/actor.
+- Hooks must not require a KG write, fixed finding count, human ceremony, or specific legacy phrase at every
+  transition.
+- Any persistent write requires an identified pending record, explicit writer/ratifier authority, exact
+  target fields, and readback.
+- Automatic phase routing is bounded and cancellable; discoveries do not recursively reopen the cycle.
+- Hook failures report the exact rule, observed input, and recovery path without mutating state.
 
-## 사용법
+## Output
 
-APT 사이클 시작 시:
-```bash
-touch ~/.claude/hooks/state/apt_cycle_active.marker
-# 또는 export APT_CYCLE_ACTIVE=1
+```yaml
+hook_or_marker: exact path/version
+observed_behavior: string
+decision: PASS | WARN | BLOCK | INCONCLUSIVE
+evidence: []
+authority_gap: optional
+safe_recovery: bounded action
 ```
 
-종료 시:
-```bash
-rm ~/.claude/hooks/state/apt_cycle_active.marker
-# 또는 unset APT_CYCLE_ACTIVE
-```
-
-Override (debug only):
-- `APT_AUTOFLOW_GUARD=off` — autoflow guard 비활성
-- `APT_SA_KG_PASTE=off` — KG paste check 비활성
-- `APT_SA_KG_PASTE_BYPASS=1` — single bypass (seed Span)
-
-## SKILL.md body migration status
-
-apt/SKILL.md 본문 측 description L20 ("auto mode") + invoke condition 측 본 책무 측 *의도 선언*. enforcement 측 위 3 hook 측 실행.
-
-**Migration deferred to**: APT meta-review cycle (next session). 본 scaffold 측 hook docs 측 *consolidate* 측 SKILL.md 측 분리.
-
-# KG: scaffold-apt-skill-decomposition-2026-05-22, pre_tool_apt_autoflow_guard, pre_tool_apt_phase_gate_check, pre_tool_apt_sa_kg_paste_check
+This skill audits or proposes hook changes. It does not install global hooks, alter user configuration,
+write KG/canon/status, or start an APT cycle unless the current task explicitly authorizes that operation.

@@ -8,7 +8,7 @@
 | Field | Value |
 |---|---|
 | Publisher | SYMPOSIUM |
-| Canonical path | `/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS` |
+| Canonical path | `/home/lagyeongjun/CD/SYMPOSIUM/SKILLS` |
 | Release | `v26.0.0` |
 | Schema | `claude-skill v1` (frontmatter: `name`, `version`, `description`, `kg_ref`, `channel`) |
 | Manifest | `MANIFEST.json` (merkle-rooted, drift-gated) |
@@ -52,6 +52,29 @@ APT/TPA phases, specialist workers, and infrastructure operations carry
 `agents/openai.yaml` with `policy.allow_implicit_invocation: false`; the router
 invokes them explicitly after measuring need. Do not expose every leaf merely to
 improve discoverability—extend the router instead.
+
+## Root persistence boundary
+
+This section governs every descendant skill, including older instructions that still say to create a
+Lesson, write every finding to the KG, mutate status/config/canon, or recurse automatically.
+
+- Default persistence is the execution log, local artifact, or parent handoff.
+- A repeated, high-risk, cross-repository, or reusable result may be returned as a provenance-bearing
+  `PENDING` proposal. Ordinary success, failure, gate transition, or discovery does not require a KG node.
+- Create a `RootCause` or `Lesson` candidate only when evidence establishes the cause and a reusable
+  prevention. Do not invent `truth` or a mechanism to satisfy completion criteria.
+- Skills and subagents do not directly change canon, confidence, status, config, ActionPlan, seed, or
+  supersession. Such mutation needs an identified pending record, current user intent, and a separately
+  authorized ratifier/writer.
+- Follow-up research and re-entry are separate bounded invocations. Start them only when they block the
+  current decision or the user explicitly requests them.
+- Agent, lens, finding, dispatch, and scan counts are coverage/telemetry, never votes for truth,
+  priority, confidence, or ratification. Preserve evidence-backed dissent.
+
+Scientific work uses the highest applicable T0/T1/T2 tier declared before execution. T0/T1 escalate to
+T2 when the result materially affects a claim, and T2 is never downgraded after the outcome is observed.
+Null/multiplicity, numerical Bayes, and Lakatos checks apply only under their explicit gates; they are
+not mandatory ceremony for exact algebra or ordinary engineering.
 
 ## Drift detection
 
