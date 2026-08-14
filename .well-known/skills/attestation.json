@@ -4,19 +4,19 @@
     {
       "name": "MANIFEST.json",
       "digest": {
-        "sha256": "3c87c318ba9d882e5fd54132f041ef7afe732e1a890c75ff028ae43502d254ac"
+        "sha256": "3b3fc8ed40a445f42d263e19775b98d073a5d2b95842566effe9c27a3eca723f"
       }
     },
     {
       "name": "SBOM.json",
       "digest": {
-        "sha256": "61d7257b28beba23ad4d164cc588277fe12e1a07a780676778cc8a71484a73b2"
+        "sha256": "227fed4fb6095c0d295a556ed730a92a727b310f9b44e561ef4dbcd73fed249f"
       }
     },
     {
       "name": ".well-known/skills/index.json",
       "digest": {
-        "sha256": "30a85bd5327f33c52e9ab82caf966c2f148475b76a31363f27367fdeafad3a9e"
+        "sha256": "537744cab14be801ed3fda31a3377d4d917e6c3cae18503c4615b10ce31feda3"
       }
     }
   ],
@@ -25,175 +25,331 @@
     "buildDefinition": {
       "buildType": "https://symposium.local/skill-build/v1",
       "externalParameters": {
-        "git_head_commit": "2ca6d68ada33c478756f6d8d553f654f8a2dfbb8",
-        "git_latest_tag": "v26.0.0",
-        "canonical_path": "/Users/lagyeongjun/CD/SYMPOSIUM/SKILLS"
+        "git_head_commit": "af01c0df3b5c54690db8ef049de7cd68581b2c64",
+        "git_latest_tag": null,
+        "canonical_path": "/home/lagyeongjun/CD/SYMPOSIUM/SKILLS"
       },
       "internalParameters": {
-        "merkle_root": "d8c62efd4d88ee58b70d2335d93907d7c6a606db0ba62b4a9ed7f9e69b28b7dd",
-        "skills_count": 27
+        "merkle_root": "1792f6a2069d0dbba9a6d145a7555dfee67213f271fe14d46d308d03d90da929",
+        "skills_count": 53
       },
       "resolvedDependencies": [
         {
-          "uri": "pkg:claude-skill/88-taliban@3",
+          "uri": "pkg:claude-skill/88-taliban@3.2.0",
           "digest": {
-            "sha1": "29421b8fe03575fbe5617405fbb6ca59d5ca8ea7"
+            "sha1": "c13dad538a347648c72ce495b3fceb7a3f0c3cdc"
           }
         },
         {
-          "uri": "pkg:claude-skill/apt@26",
+          "uri": "pkg:claude-skill/apt@28.0.0",
           "digest": {
-            "sha1": "8b8a4bf4d0a50177e124a9295b860e7c9d73db0a"
+            "sha1": "80dac8014d792e451d98d8fe0465692a2e70f3a7"
           }
         },
         {
-          "uri": "pkg:claude-skill/apt-meta-review@2",
+          "uri": "pkg:claude-skill/apt-autoflow-guard@1.0.0",
           "digest": {
-            "sha1": "91e35ce397faa5640e19c99927fec9500ddacfb9"
+            "sha1": "5fbd156dc0553da3339d71924fd9ef75f33d6db5"
           }
         },
         {
-          "uri": "pkg:claude-skill/apt-sa@26",
+          "uri": "pkg:claude-skill/apt-cleanup@28.0.0",
           "digest": {
-            "sha1": "382b0a76424ccd8b1453c6083b553254fc1aacb9"
+            "sha1": "b0be65462c224333ff0baa1f047396e58db08db3"
           }
         },
         {
-          "uri": "pkg:claude-skill/apt-scw@26",
+          "uri": "pkg:claude-skill/apt-d@0.1.0-draft",
           "digest": {
-            "sha1": "28cb779e60fe9945c55e09d8716155b895494414"
+            "sha1": "be02524fab36d31e5270e8905f87e2ee5d5d43f2"
           }
         },
         {
-          "uri": "pkg:claude-skill/apt-sp@26",
+          "uri": "pkg:claude-skill/apt-feedback-lens@2.0.0",
           "digest": {
-            "sha1": "4841712886381d0f522047a3db5ad71ce1fb6f95"
+            "sha1": "03dbf0b51b5ac0cf386247ba2e85d309473b2a4a"
           }
         },
         {
-          "uri": "pkg:claude-skill/apt-st@26",
+          "uri": "pkg:claude-skill/apt-lens-enforce@2.0.0",
           "digest": {
-            "sha1": "65a226f7be0d139d20dde410e89f4c03bb535203"
+            "sha1": "d9cecf0fc298c3ab33a66a3d626bb45f0c450318"
           }
         },
         {
-          "uri": "pkg:claude-skill/backup@1",
+          "uri": "pkg:claude-skill/apt-magic-resolve@1.0.0",
           "digest": {
-            "sha1": "40c241e609bef4e7bc3929cf5cc66923ff69492b"
+            "sha1": "2c3fbe57ec585b65dbb5380bd991c97def0bf2ce"
           }
         },
         {
-          "uri": "pkg:claude-skill/db-query@1",
+          "uri": "pkg:claude-skill/apt-meta-review@28.0.0",
           "digest": {
-            "sha1": "169ce127fabcd688884633a804628d5ba1bdd5d0"
+            "sha1": "54088f4674ec3eb14f28e1e4e0c72588b991abb8"
           }
         },
         {
-          "uri": "pkg:claude-skill/deploy@1",
+          "uri": "pkg:claude-skill/apt-orchestrator@2.0.0",
           "digest": {
-            "sha1": "cd2bcee0703373b18aef54bd69d3d3490596bef8"
+            "sha1": "94c0e3c321f92a1d0b28750f9f0c9e1c922c5502"
           }
         },
         {
-          "uri": "pkg:claude-skill/docker-logs@1",
+          "uri": "pkg:claude-skill/apt-sa@28.0.0",
           "digest": {
-            "sha1": "015ad71d83eca75cbf896047e7f0c48ba0a2a72a"
+            "sha1": "29e08cf0bff4fab4dcd9356276ee03e0ef1dc925"
           }
         },
         {
-          "uri": "pkg:claude-skill/harness@2",
+          "uri": "pkg:claude-skill/apt-scw@28.0.0",
           "digest": {
-            "sha1": "cf5e69d6cbf6ef070c93c4474aab28c62f45d797"
+            "sha1": "7e51942fa30578fccc3d41792ec164df6427e045"
           }
         },
         {
-          "uri": "pkg:claude-skill/jaebaeman@2",
+          "uri": "pkg:claude-skill/apt-sp@28.0.0",
           "digest": {
-            "sha1": "028fb8475152cc946a987c1675e77a4b3f58ab95"
+            "sha1": "befae9c6d65c143f11342fc272b2b498223e8516"
           }
         },
         {
-          "uri": "pkg:claude-skill/kafka-manage@1",
+          "uri": "pkg:claude-skill/apt-st@28.0.0",
           "digest": {
-            "sha1": "4110e5e5f1219acbc40d34327a327ee418beee5f"
+            "sha1": "6fc9fdcebc99b53c0dff17af1d5ae45e1919ee33"
           }
         },
         {
-          "uri": "pkg:claude-skill/longinus@3.1",
+          "uri": "pkg:claude-skill/backup@1.0.0",
           "digest": {
-            "sha1": "2f5a330283f6faf65283e42d5cc229a90511de93"
+            "sha1": "0ac11d4c18b1ef4b0366306bbb8a5f5ca6d8f1c1"
           }
         },
         {
-          "uri": "pkg:claude-skill/prom@3",
+          "uri": "pkg:claude-skill/build-agent@0.1.0-draft",
           "digest": {
-            "sha1": "16a1c76ec935ee99af7c32213455c09bb496c3c0"
+            "sha1": "905630fd4ed69dcc07f452813b85f77094495ee0"
           }
         },
         {
-          "uri": "pkg:claude-skill/prometheus@5",
+          "uri": "pkg:claude-skill/call-codex@1.1.0",
           "digest": {
-            "sha1": "5f50f5c21736737ab473a92c9093c49ccec14fc6"
+            "sha1": "ef5c18001f8ffea437fd02d9f86ad9a7473e7c5d"
           }
         },
         {
-          "uri": "pkg:claude-skill/server-status@1",
+          "uri": "pkg:claude-skill/call-grok@None",
           "digest": {
-            "sha1": "64c62b278d33faee580c8dfa0899cd7da9cada1f"
+            "sha1": "9bdf448f4cf96c7c560cb28a9b997507c27d89d7"
           }
         },
         {
-          "uri": "pkg:claude-skill/skill-creator@1",
+          "uri": "pkg:claude-skill/compute-offload@1.1.0",
           "digest": {
-            "sha1": "308859482bc5b356a5d00b35e9e075da44dc47f1"
+            "sha1": "9b4cb082fde0b0180f1d7c5a6d24eb8588d9e23c"
           }
         },
         {
-          "uri": "pkg:claude-skill/solve@2",
+          "uri": "pkg:claude-skill/db-query@2.0.0",
           "digest": {
-            "sha1": "4ea8ccaa8b8f1784b5ac7e844f5ddec18a73d8ac"
+            "sha1": "14c6cc31642ea2051b9d02ac9bc72ab3c51bbda0"
           }
         },
         {
-          "uri": "pkg:claude-skill/taliban@3",
+          "uri": "pkg:claude-skill/deploy@1.0.0",
           "digest": {
-            "sha1": "e85a69b9fe93c488c918bdb9eef8c353792002eb"
+            "sha1": "7005eda0619edff807aee324ce496c98b150cca1"
           }
         },
         {
-          "uri": "pkg:claude-skill/tlb@2",
+          "uri": "pkg:claude-skill/design-agent@0.1.0-draft",
           "digest": {
-            "sha1": "6808dbdf0f218cd75538cc05958eba55020c85d0"
+            "sha1": "65a551921c1df1a5d0a5a3dccf96f960323571a9"
           }
         },
         {
-          "uri": "pkg:claude-skill/tpa@1.0",
+          "uri": "pkg:claude-skill/docker-logs@1.0.0",
           "digest": {
-            "sha1": "33b6514bd2e62103abd956a8db82b12ee0b206a4"
+            "sha1": "051a7b8e0f53cfb4703e54ba08dc5525c04bac28"
           }
         },
         {
-          "uri": "pkg:claude-skill/tpa-ta@1.0",
+          "uri": "pkg:claude-skill/engine-design@None",
           "digest": {
-            "sha1": "a1e87aee84cdd90a1e3043e7779724f541b39880"
+            "sha1": "341e747e87952d24dde6803d638122394c9fe2a1"
           }
         },
         {
-          "uri": "pkg:claude-skill/tpa-tcw@1.0",
+          "uri": "pkg:claude-skill/eureka@1.0.0",
           "digest": {
-            "sha1": "635ca417e616a86b67bdeb86cc5e77f041c480e0"
+            "sha1": "48c294b12d186179b90a146faf93dda2e3f484c2"
           }
         },
         {
-          "uri": "pkg:claude-skill/tpa-tp@1.0",
+          "uri": "pkg:claude-skill/fix-agent@0.1.0-draft",
           "digest": {
-            "sha1": "e857c686c34bbea886bdbb46fbed90d3124b04dd"
+            "sha1": "ba3ff9749c14dd385e86b23105e8a8d383f5e00a"
           }
         },
         {
-          "uri": "pkg:claude-skill/tpa-tt@1.0",
+          "uri": "pkg:claude-skill/fsm-design@None",
           "digest": {
-            "sha1": "1b9e3798eb3227f5b73c936c06e97334df4eb824"
+            "sha1": "d90e6a1436a70b773644ffc335e7f09e37b844bd"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/hades@1.0.0",
+          "digest": {
+            "sha1": "60ef009c1f73fca673a73905afb5d883ff78de34"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/harness@3.2.0",
+          "digest": {
+            "sha1": "fab6f548b011d9cd22a9690c0afa41f8455cd3c4"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/harness-diagnose@1.0.0",
+          "digest": {
+            "sha1": "3936c1c3f3e13097ee68c45069b746ecfc330cb5"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/jaebaeman@3.0.0",
+          "digest": {
+            "sha1": "56d6ce6c557f2e704534196ab2bb8d8cfa8ba94a"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/kafka-manage@1.0.0",
+          "digest": {
+            "sha1": "e1ec0fb90dde51b83ffa5da940ee86f22b9f343b"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/lakatotree-judge@None",
+          "digest": {
+            "sha1": "22627276c6688650e3aa54dd5865dd91a199aa6a"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/legion-roster@1.0.0",
+          "digest": {
+            "sha1": "a549f5090f44012e75bd2d07f5fde0491552e665"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/longinus@4.0.0",
+          "digest": {
+            "sha1": "4e5d0386e43a32d9a8947f719cf5280b48b5f487"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/loop-engineering@None",
+          "digest": {
+            "sha1": "da9e77651fcdcc497c5d70d351a608ef62fb818c"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/naesengmoon-lens-registry@1.0.0",
+          "digest": {
+            "sha1": "2d00855cf79b69cc2d551f4488eacab23e7e5025"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/occam@1.0.0",
+          "digest": {
+            "sha1": "ce17b4c232a9f28e7a3e6d5f32872d73c4e552c9"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/ooptdd-receipt@None",
+          "digest": {
+            "sha1": "031a76be8f6b1df5f81bf879c34a62ba16c1d8d2"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/pi-workbench@None",
+          "digest": {
+            "sha1": "9800dcb60f1822b97eee0d21d1125391140456da"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/prom@3.1.0",
+          "digest": {
+            "sha1": "ae81eae8c0e29632b5b00918ff700d6776969822"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/prometheus@7.0.0",
+          "digest": {
+            "sha1": "720638ab3de1df5a5cb66d6fb0bc123f100fe62a"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/server-status@2.0.0",
+          "digest": {
+            "sha1": "194dc519ccb301dfad839e6aa2d61bb2337e8f9f"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/skill-creator@1.0.0",
+          "digest": {
+            "sha1": "d9f1b629dc5b7e47cbbb922e59f1a14f7ea113b0"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/solve@3.0.0",
+          "digest": {
+            "sha1": "ef799a1fc51bb9224639e92a53e84cd48eabb4ba"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/symposium-research@None",
+          "digest": {
+            "sha1": "71022bc1b388a1edaddcb8bffa0e393cdefde5ff"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/taliban@4.0.0",
+          "digest": {
+            "sha1": "7b8b326a8ae8d433b3735a26b7b163c36eee4b34"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/tlb@3.0.0",
+          "digest": {
+            "sha1": "fb5d95cc918dc77cd402ad99c09847a1de0c4179"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/tpa@2.0.0",
+          "digest": {
+            "sha1": "296ec76ba5d9d38ef1407fce859c333f7d2f40f0"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/tpa-sp@2.0.0",
+          "digest": {
+            "sha1": "9498fa8338cb69bc5161838d1188fa7a6e430f7e"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/tpa-st@2.0.0",
+          "digest": {
+            "sha1": "c092b45884eab2b0a391f11608438b670d00ab22"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/tpa-ta@2.0.0",
+          "digest": {
+            "sha1": "f60cbefcc524161f360723e05e3837bb5329c634"
+          }
+        },
+        {
+          "uri": "pkg:claude-skill/tpa-tcw@2.0.0",
+          "digest": {
+            "sha1": "cea42b7a1eeb2875f11fb2c58e96d74d04f6c688"
           }
         }
       ]
@@ -203,9 +359,9 @@
         "id": "https://symposium.local/builders/skill-build@v1"
       },
       "metadata": {
-        "invocationId": "d8c62efd4d88ee58b70d2335d93907d7c6a606db0ba62b4a9ed7f9e69b28b7dd",
-        "startedOn": "2026-04-26T17:33:59+09:00",
-        "finishedOn": "2026-04-26T17:33:59+09:00"
+        "invocationId": "1792f6a2069d0dbba9a6d145a7555dfee67213f271fe14d46d308d03d90da929",
+        "startedOn": "2026-08-14T08:43:10Z",
+        "finishedOn": "2026-08-14T08:43:10Z"
       },
       "byproducts": [
         {

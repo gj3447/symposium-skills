@@ -1,48 +1,48 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-08-10T13:42:42Z",
-  "git_head_commit": "965773cf070716b1570ca014aca375ba7b6063c2",
-  "git_head_short": "965773c",
+  "generatedAt": "2026-08-14T08:43:10Z",
+  "git_head_commit": "af01c0df3b5c54690db8ef049de7cd68581b2c64",
+  "git_head_short": "af01c0d",
   "git_latest_tag": null,
   "canonical_path": "/home/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 53,
-  "merkle_root": "c91c71fb5410227efac6108aaabc5a7255b338af1a36bacaff79d01f037c3a8c",
+  "merkle_root": "1792f6a2069d0dbba9a6d145a7555dfee67213f271fe14d46d308d03d90da929",
   "skills": [
     {
       "name": "88-taliban",
       "path": "88-taliban",
-      "version": "3.1.0",
+      "version": "3.2.0",
       "kg_ref": "ATOM_Skill_88taliban",
       "channel": "stable",
-      "git_tree_sha": "3d888f4315dea794c2b5a37d768422fa5472a36b",
-      "content_sha256": "28614d4524654d4fc7c6b1c055f5a4821e5b46a0a99caef65e722776095b7fdd"
+      "git_tree_sha": "c13dad538a347648c72ce495b3fceb7a3f0c3cdc",
+      "content_sha256": "5fb6f64bd71a033c27f8716c48bd53144d4a75f16a56828ff2498d4947e79f26"
     },
     {
       "name": "apt",
       "path": "apt",
-      "version": "27.1.0",
+      "version": "28.0.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "086cd2313a6a7ed0fa86088d2cf5905953e57226",
-      "content_sha256": "8501a3dd9fdf1b0deea906194be717adaeb3978d6c1365f286d2772c75d3ed2f"
+      "git_tree_sha": "80dac8014d792e451d98d8fe0465692a2e70f3a7",
+      "content_sha256": "3cb2b67985ebbf0aa916b85745c27e611d20823f9cff86972a03e3109c45b8d9"
     },
     {
       "name": "apt-autoflow-guard",
       "path": "apt-autoflow-guard",
-      "version": "0.1.0-scaffold",
+      "version": "1.0.0",
       "kg_ref": "ATOM_Skill_apt_autoflow_guard",
       "channel": "experimental",
-      "git_tree_sha": "ff8982ee781bfb9c9153002d6edc04ce9178594c",
-      "content_sha256": "81c86d5b26017344d26cfdf0064c9350b09c8de4913105d495367ee42069b721"
+      "git_tree_sha": "5fbd156dc0553da3339d71924fd9ef75f33d6db5",
+      "content_sha256": "3238bec071120cb42fd973a1501a1160c5a46e8f54f24d1d17145b8043e435a3"
     },
     {
       "name": "apt-cleanup",
       "path": "apt-cleanup",
-      "version": "27.1.0",
+      "version": "28.0.0",
       "kg_ref": "ATOM_Skill_apt_cleanup",
       "channel": "experimental",
-      "git_tree_sha": "de78f49456c975b309029828d1b93efb6fd0f724",
-      "content_sha256": "f6aa87960961499fd1b9577dadc327fa410510e30d0e2adb48275e87833f11df"
+      "git_tree_sha": "b0be65462c224333ff0baa1f047396e58db08db3",
+      "content_sha256": "c57df3299fc93d7f3c1fc826bb3a96531eadd1c1b253cc5b2ca7934fc487eeec"
     },
     {
       "name": "apt-d",
@@ -56,20 +56,20 @@
     {
       "name": "apt-feedback-lens",
       "path": "apt-feedback-lens",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "kg_ref": "ATOM_Skill_apt_feedback_lens",
       "channel": "stable",
-      "git_tree_sha": "c27fa7f8405d205601e58853bd1fd7680530e7e4",
-      "content_sha256": "a67e9261ab0a7b81bdb4d4b7f6f197c0d60280a9bae3cb5a0628ca5addc8f129"
+      "git_tree_sha": "03dbf0b51b5ac0cf386247ba2e85d309473b2a4a",
+      "content_sha256": "df5c85480bf8b61ca3bf28b41234f854b6f3e0488b8a6ac8b7f5663ce354e2d3"
     },
     {
       "name": "apt-lens-enforce",
       "path": "apt-lens-enforce",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "kg_ref": "ATOM_Skill_apt_lens_enforce",
       "channel": "stable",
-      "git_tree_sha": "1e8241f260415452b5b50d06a7eadee622ef6e2b",
-      "content_sha256": "27313d20a32a6820ba552faf0be1037456cd085baa28a050aadfb646bada2817"
+      "git_tree_sha": "d9cecf0fc298c3ab33a66a3d626bb45f0c450318",
+      "content_sha256": "8677b13caaeaa608c2eef631303a05e00519c7ba971f2e1d2228828c93101a89"
     },
     {
       "name": "apt-magic-resolve",
@@ -77,62 +77,62 @@
       "version": "1.0.0",
       "kg_ref": "ATOM_Skill_apt_magic_resolve",
       "channel": "stable",
-      "git_tree_sha": "1ef09605905077bcd03ec99fba2cbc9a728a6ad0",
-      "content_sha256": "b08338e9529ef92c53dc3aa604da67c747f19dd48905dc883d0dee7a3dd17e85"
+      "git_tree_sha": "2c3fbe57ec585b65dbb5380bd991c97def0bf2ce",
+      "content_sha256": "fa2bae284f0bd845bd8ecee7ef7218355ad2ab82d530a32e586aa349e12f28cf"
     },
     {
       "name": "apt-meta-review",
       "path": "apt-meta-review",
-      "version": "27.1.0",
+      "version": "28.0.0",
       "kg_ref": "ATOM_Skill_apt_meta_review",
       "channel": "stable",
-      "git_tree_sha": "bcec2d6a694af891e5a85a81f72e68692eb9605f",
-      "content_sha256": "230a686f4d89175f040ac2d53f2bdf4ba62ff8b20bd0352fd29eeb0bffa517ea"
+      "git_tree_sha": "54088f4674ec3eb14f28e1e4e0c72588b991abb8",
+      "content_sha256": "5fc63d9011ecf40e018ef29cb72b54cabf8c50544213ae95f1b8cb1298fa08bb"
     },
     {
       "name": "apt-orchestrator",
       "path": "apt-orchestrator",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "kg_ref": "ATOM_Skill_apt_orchestrator",
       "channel": "stable",
-      "git_tree_sha": "3cb2580ae51b1f1a29130bbfa239398e48d36e9c",
-      "content_sha256": "9ad8800c0a14dd923ac5ffc6c38944f52e5b2c2cb97b5a2dbf0ea9f6ca857c15"
+      "git_tree_sha": "94c0e3c321f92a1d0b28750f9f0c9e1c922c5502",
+      "content_sha256": "13a2fd88c8eab80f003cf5296053f809f9b6cd4f051b8c5ffeac905ef8614ae9"
     },
     {
       "name": "apt-sa",
       "path": "apt-sa",
-      "version": "27.1.0",
+      "version": "28.0.0",
       "kg_ref": "ATOM_Skill_apt_sa",
       "channel": "stable",
-      "git_tree_sha": "b9b5e0e9afba8efecc2f8887553af0c5e68765bc",
-      "content_sha256": "77c7cb57f3bcbf3a6a298d30749e6b3801fb7c7cdd6e810dc94f029604238d55"
+      "git_tree_sha": "29e08cf0bff4fab4dcd9356276ee03e0ef1dc925",
+      "content_sha256": "1d1ed484ba956f277d6c614a2594d37b5af774af8025fb9a24110168d9bf3d21"
     },
     {
       "name": "apt-scw",
       "path": "apt-scw",
-      "version": "27.1.0",
+      "version": "28.0.0",
       "kg_ref": "ATOM_Skill_apt_scw",
       "channel": "stable",
-      "git_tree_sha": "84a20675e472e44c443be669cfec48534f2f25fc",
-      "content_sha256": "dde5e4e04993aa50e6b0ece4d8157daa035aa22144193767a4d162cc886b9233"
+      "git_tree_sha": "7e51942fa30578fccc3d41792ec164df6427e045",
+      "content_sha256": "21ec6fdaf0f3d9f11c02307a9ce7cad61fa765de7a2337d4fc8c16b15d97cba5"
     },
     {
       "name": "apt-sp",
       "path": "apt-sp",
-      "version": "27.1.0",
+      "version": "28.0.0",
       "kg_ref": "ATOM_Skill_apt_sp",
       "channel": "stable",
-      "git_tree_sha": "5056209a381703af569d52fd862a5ba93ca329e5",
-      "content_sha256": "e32de09fce54b9f4dcc56bbc7a119ec80c5c0416042f916de8014c0ffc602027"
+      "git_tree_sha": "befae9c6d65c143f11342fc272b2b498223e8516",
+      "content_sha256": "d759d69d3e1aba5d82422e41acbcedd1f5c2a25ee66ea75120a5ade89cf274cb"
     },
     {
       "name": "apt-st",
       "path": "apt-st",
-      "version": "27.1.0",
+      "version": "28.0.0",
       "kg_ref": "ATOM_Skill_apt_st",
       "channel": "stable",
-      "git_tree_sha": "92cf25d26322598f2230104a3b6d6c376c374fe0",
-      "content_sha256": "041a4c23369787c95ef7f117161bc46a82678529ea12d0c39a0eef93980ddeb8"
+      "git_tree_sha": "6fc9fdcebc99b53c0dff17af1d5ae45e1919ee33",
+      "content_sha256": "eb801357d5cb015fafc8541a09832a63c80db94000612010160f9d02ef654dd1"
     },
     {
       "name": "backup",
@@ -266,8 +266,8 @@
       "version": "3.2.0",
       "kg_ref": "ATOM_Skill_harness",
       "channel": "stable",
-      "git_tree_sha": "824e7715b424fc952469b723cb70eb031a656369",
-      "content_sha256": "4816708da96733ea3ef2d64e313a59df4ec4b982901318061c38ae2dd45189d4"
+      "git_tree_sha": "fab6f548b011d9cd22a9690c0afa41f8455cd3c4",
+      "content_sha256": "a6c0dbb5c741ad6a5ae4718e75bfc2a603285bb911774d3734f1f727f3ea3a53"
     },
     {
       "name": "harness-diagnose",
@@ -281,11 +281,11 @@
     {
       "name": "jaebaeman",
       "path": "jaebaeman",
-      "version": "2.4.0",
+      "version": "3.0.0",
       "kg_ref": "ATOM_Skill_jaebaeman",
       "channel": "stable",
-      "git_tree_sha": "b84ced2bc749ae773efb60cfad74743cd450a627",
-      "content_sha256": "602f224625ac3cab6bbc5ecbf24a5a6efc7207fab1b35c551c17b85ba778fd3f"
+      "git_tree_sha": "56d6ce6c557f2e704534196ab2bb8d8cfa8ba94a",
+      "content_sha256": "b8f0e7dd7fac33bb56311ec1069858729cce8dcbe737516bcd815622b8856058"
     },
     {
       "name": "kafka-manage",
@@ -317,11 +317,11 @@
     {
       "name": "longinus",
       "path": "longinus",
-      "version": "3.3.0",
+      "version": "4.0.0",
       "kg_ref": "ATOM_Skill_longinus",
       "channel": "stable",
-      "git_tree_sha": "d19f9cd358f3540f10c7d37aa016acd6012d682c",
-      "content_sha256": "8188dcaa443d63b75112230b9dfa450246ebea836dd157b780baea87f9eb0a56"
+      "git_tree_sha": "4e5d0386e43a32d9a8947f719cf5280b48b5f487",
+      "content_sha256": "519619bcd17a22427bce75b7d05aae0bc55bfa64d7f4d1596d0ed86e3d13b374"
     },
     {
       "name": "loop-engineering",
@@ -371,20 +371,20 @@
     {
       "name": "prom",
       "path": "prom",
-      "version": "3.0.0",
+      "version": "3.1.0",
       "kg_ref": "ATOM_Skill_prom_alias",
       "channel": "stable",
-      "git_tree_sha": "2e54e8bc46e7969ec7821c778949afbc0f7022c5",
-      "content_sha256": "6a39de415e4a2c75f4ba738e7e50a6855a1ebd7cc0c5df46a89d588fa673dbb1"
+      "git_tree_sha": "ae81eae8c0e29632b5b00918ff700d6776969822",
+      "content_sha256": "b22b703873eaef30bdbf27ecce19a92c264fd51d86f2e1185f56747743a387f3"
     },
     {
       "name": "prometheus",
       "path": "prometheus",
-      "version": "6.4.1",
+      "version": "7.0.0",
       "kg_ref": "ATOM_Skill_prometheus",
       "channel": "stable",
-      "git_tree_sha": "20becceecb3007e0b734cef0cf8c6bbe5cc77619",
-      "content_sha256": "639562946c2a9fcb04967c31a521a81cd731acf8dfc4b713e0580277885d0204"
+      "git_tree_sha": "720638ab3de1df5a5cb66d6fb0bc123f100fe62a",
+      "content_sha256": "e556ffc260a511fa196a59cde86abce6f33810c3f464a25ef8cf268fffc39da4"
     },
     {
       "name": "server-status",
@@ -407,11 +407,11 @@
     {
       "name": "solve",
       "path": "solve",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "kg_ref": "ATOM_Skill_solve",
       "channel": "stable",
-      "git_tree_sha": "159f2beb6d184b604c96a3193602537c7ca3ec5e",
-      "content_sha256": "b618303df3ba75c83990c05d06027975da0afd406851a61ab6b0aa79b797ae19"
+      "git_tree_sha": "ef799a1fc51bb9224639e92a53e84cd48eabb4ba",
+      "content_sha256": "8826d1fcd1a2602ec0168019e144106e097e256d16db752d3075b2ae4be602c7"
     },
     {
       "name": "symposium-research",
@@ -425,65 +425,65 @@
     {
       "name": "taliban",
       "path": "taliban",
-      "version": "3.2.0",
+      "version": "4.0.0",
       "kg_ref": "ATOM_Skill_taliban",
       "channel": "stable",
-      "git_tree_sha": "ab105e7f38cb1284e2ae6a5a2f6cfe018bc4ff34",
-      "content_sha256": "b0a62ae4bfccacd10180f5d5168652cc00d2d4b01c8b93d6987b0b637c481a22"
+      "git_tree_sha": "7b8b326a8ae8d433b3735a26b7b163c36eee4b34",
+      "content_sha256": "743480ab670b24617729d7a5f5574bcf2a155ce4b11eaffcfcee5e13b16ab949"
     },
     {
       "name": "tlb",
       "path": "tlb",
-      "version": "2.0.0",
+      "version": "3.0.0",
       "kg_ref": "ATOM_Skill_tlb_alias",
       "channel": "stable",
-      "git_tree_sha": "476cfedf537d1b61cc81bdf38aac73382cc1d48a",
-      "content_sha256": "99bee8b26a960557ad12e293a7879aa94b808e0c4f0526865ef0ade105dc8fe7"
+      "git_tree_sha": "fb5d95cc918dc77cd402ad99c09847a1de0c4179",
+      "content_sha256": "4fa9dc50bcf7354e1286848f52d623e90afc2e055e95f8e1082fbe2a16ce8612"
     },
     {
       "name": "tpa",
       "path": "tpa",
-      "version": "1.2.0",
+      "version": "2.0.0",
       "kg_ref": "ATOM_Skill_tpa_orchestrator_v10",
       "channel": "stable",
-      "git_tree_sha": "02016922d0a48f1cdf86f7c96c3bf3517705e6fd",
-      "content_sha256": "ba292d037b6ce7cf34408e600f7c75c3fe5876e90b8c9e4ed2c8a5879655fc36"
+      "git_tree_sha": "296ec76ba5d9d38ef1407fce859c333f7d2f40f0",
+      "content_sha256": "4a73d8b625e1887c4ce732b4a7e7b86f36f1e7270ecf3aa640b36c681994cf1d"
     },
     {
       "name": "tpa-sp",
       "path": "tpa-sp",
-      "version": "1.2.0",
+      "version": "2.0.0",
       "kg_ref": "ATOM_Skill_tpa_sp",
       "channel": "stable",
-      "git_tree_sha": "31139457d3846363f7cd8d65a572930e72cf0e33",
-      "content_sha256": "5916ea18e3994a654ef49ece4d975c15eab69d2157d140b275ee240e510ade8b"
+      "git_tree_sha": "9498fa8338cb69bc5161838d1188fa7a6e430f7e",
+      "content_sha256": "5991f99f26bb0b10716b0b9af693d506ccc87f813a5c44950d5deaa733e7caf1"
     },
     {
       "name": "tpa-st",
       "path": "tpa-st",
-      "version": "1.2.0",
+      "version": "2.0.0",
       "kg_ref": "ATOM_Skill_tpa_st",
       "channel": "stable",
-      "git_tree_sha": "b866827290a9e347b92a6aa5bca1a92ef7849c79",
-      "content_sha256": "f130b0c706d868cc2a1d0724050080583597f52c31482df50e8d79215bfcfa10"
+      "git_tree_sha": "c092b45884eab2b0a391f11608438b670d00ab22",
+      "content_sha256": "769c7a13c06c1546966732404c197497675d54cf5836ccbce57ba88379f33e2e"
     },
     {
       "name": "tpa-ta",
       "path": "tpa-ta",
-      "version": "1.2.0",
+      "version": "2.0.0",
       "kg_ref": "ATOM_Skill_tpa_ta",
       "channel": "stable",
-      "git_tree_sha": "c1375b189dfb46f8bd2b1aa9880d128894a00806",
-      "content_sha256": "82071146974a1c349d652017ad4011aaec0106fc38bc977e2ca2e43583416c27"
+      "git_tree_sha": "f60cbefcc524161f360723e05e3837bb5329c634",
+      "content_sha256": "8485de1df7f4d3a4d959444e28d0cc1e3d5803339e9326b7664abfd389be4600"
     },
     {
       "name": "tpa-tcw",
       "path": "tpa-tcw",
-      "version": "1.2.0",
+      "version": "2.0.0",
       "kg_ref": "ATOM_Skill_tpa_tcw",
       "channel": "stable",
-      "git_tree_sha": "daaad7fee25b7430529514a84556ee4cc71da3ee",
-      "content_sha256": "5339f45cb8931904f3d4f7c19b7294b8d7e108bacbbb504bc9751dec4039863e"
+      "git_tree_sha": "cea42b7a1eeb2875f11fb2c58e96d74d04f6c688",
+      "content_sha256": "9830d3c7792b6c19365088ebe9c335373adec14732397f8fa9842f9ebff63cfc"
     }
   ]
 }
