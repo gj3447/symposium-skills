@@ -4,19 +4,19 @@
     {
       "name": "MANIFEST.json",
       "digest": {
-        "sha256": "3b3fc8ed40a445f42d263e19775b98d073a5d2b95842566effe9c27a3eca723f"
+        "sha256": "8e2adc255059892490423f4fcf885d42bd3f149f23d289a6563f94e2fcee4019"
       }
     },
     {
       "name": "SBOM.json",
       "digest": {
-        "sha256": "227fed4fb6095c0d295a556ed730a92a727b310f9b44e561ef4dbcd73fed249f"
+        "sha256": "4bcf15e2dc54b39af5c8c9d776a6601cfdcd0d7c434aa7f9a8a966e80d6fc574"
       }
     },
     {
       "name": ".well-known/skills/index.json",
       "digest": {
-        "sha256": "537744cab14be801ed3fda31a3377d4d917e6c3cae18503c4615b10ce31feda3"
+        "sha256": "a4a83534494d8fcf65fa08d77dde5cd7310e4dc1f2994d49fde7c22532a7adc1"
       }
     }
   ],
@@ -25,13 +25,13 @@
     "buildDefinition": {
       "buildType": "https://symposium.local/skill-build/v1",
       "externalParameters": {
-        "git_head_commit": "af01c0df3b5c54690db8ef049de7cd68581b2c64",
+        "git_head_commit": "28eb1aac77f8fb817627f860d3478def05f55b0f",
         "git_latest_tag": null,
         "canonical_path": "/home/lagyeongjun/CD/SYMPOSIUM/SKILLS"
       },
       "internalParameters": {
-        "merkle_root": "1792f6a2069d0dbba9a6d145a7555dfee67213f271fe14d46d308d03d90da929",
-        "skills_count": 53
+        "merkle_root": "ff1c1ea38acbb3b10aa494f9c3c13017aab20a9bf56667f1d089758b0440b7a3",
+        "skills_count": 51
       },
       "resolvedDependencies": [
         {
@@ -139,7 +139,7 @@
         {
           "uri": "pkg:claude-skill/call-grok@None",
           "digest": {
-            "sha1": "9bdf448f4cf96c7c560cb28a9b997507c27d89d7"
+            "sha1": "000d44ff0e615d9813abd00ad1beb852e695fd44"
           }
         },
         {
@@ -227,12 +227,6 @@
           }
         },
         {
-          "uri": "pkg:claude-skill/lakatotree-judge@None",
-          "digest": {
-            "sha1": "22627276c6688650e3aa54dd5865dd91a199aa6a"
-          }
-        },
-        {
           "uri": "pkg:claude-skill/legion-roster@1.0.0",
           "digest": {
             "sha1": "a549f5090f44012e75bd2d07f5fde0491552e665"
@@ -263,15 +257,9 @@
           }
         },
         {
-          "uri": "pkg:claude-skill/ooptdd-receipt@None",
-          "digest": {
-            "sha1": "031a76be8f6b1df5f81bf879c34a62ba16c1d8d2"
-          }
-        },
-        {
           "uri": "pkg:claude-skill/pi-workbench@None",
           "digest": {
-            "sha1": "9800dcb60f1822b97eee0d21d1125391140456da"
+            "sha1": "6c7a25a2421368129954a2eb8cddbb0bbf96fc90"
           }
         },
         {
@@ -307,7 +295,7 @@
         {
           "uri": "pkg:claude-skill/symposium-research@None",
           "digest": {
-            "sha1": "71022bc1b388a1edaddcb8bffa0e393cdefde5ff"
+            "sha1": "ce63ae389b938af8fe25c244675b11d204406bac"
           }
         },
         {
@@ -359,9 +347,9 @@
         "id": "https://symposium.local/builders/skill-build@v1"
       },
       "metadata": {
-        "invocationId": "1792f6a2069d0dbba9a6d145a7555dfee67213f271fe14d46d308d03d90da929",
-        "startedOn": "2026-08-14T08:43:10Z",
-        "finishedOn": "2026-08-14T08:43:10Z"
+        "invocationId": "ff1c1ea38acbb3b10aa494f9c3c13017aab20a9bf56667f1d089758b0440b7a3",
+        "startedOn": "2026-08-14T08:43:21Z",
+        "finishedOn": "2026-08-14T08:43:21Z"
       },
       "byproducts": [
         {

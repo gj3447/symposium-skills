@@ -1,6 +1,0 @@
-interface:
-  display_name: "LakatoTree Judge"
-  short_description: "Judge progress from preregistered evidence"
-  default_prompt: "Use $lakatotree-judge to preregister and judge this result without hand-entering a verdict."
-policy:
-  allow_implicit_invocation: false

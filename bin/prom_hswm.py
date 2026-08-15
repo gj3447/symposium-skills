@@ -17,7 +17,7 @@ taliban_mathematical_sampler.py).
 
 ── vendor-copy provenance ────────────────────────────────────────────────────
 SKILLS 는 별도 서브모듈 repo → HSWM/prom_search_hswm 에서 import 하지 않고 함수 본문을
-복사했다. 원본 파일은 LakatoTree 앵커라 이동 금지. 원본 경로(전부
+복사했다. 원본 파일은 provenance 앵커라 이동 금지. 원본 경로(전부
 /Users/lagyeongjun/CD/SYMPOSIUM/HSWM/prom_search_hswm/) + sha256 (2026-07-22 시점):
 
   [F1] hswm_fusion.py
@@ -741,7 +741,7 @@ def cmd_bind(args):
     """Step 3.5: RF 텍스트 ↔ 기존 KG 후보 노드 → cosine≥τ 쌍(weight-semantic 엣지 재료)
     + τ 미달 RF 는 float 플래그 목록. τ 기본 = BIND_TAU_DEFAULT (휴리스틱) —
     운영은 P1 캘리브레이션 τ(null_mean+3·null_std) 를 --tau 로 주입 권장.
-    LakatoTree hard core 구현 재료: '외부노드는 롱기누스 weight-semantic 엣지로
+    HSWM 바인딩 구현 재료: '외부노드는 롱기누스 weight-semantic 엣지로
     내부場 바인딩 or float 플래그'."""
     try:
         raw = _read_input(args)

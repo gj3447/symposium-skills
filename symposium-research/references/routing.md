@@ -5,9 +5,9 @@ This table is a runtime decision aid, not a fixed `USES` graph.
 | Signal in the task | Route | Required return |
 |---|---|---|
 | Unknown prior art, unstable fact, explicit research/PROM | `$prometheus` / `prometheus_expert` | sourced claims, conflicts, caveats, confidence |
-| PI path or PI experiment | `$pi-workbench` / `pi_research_engineer` | single-writer state, executable evidence, judge state |
-| Behavior changed | `$ooptdd-receipt` | locked spec, real run, positive receipt, injected negative |
-| Scientific progress claimed | `$lakatotree-judge` / `progress_judge` | preregistration, evidence record, deterministic judge receipt |
+| PI path or PI experiment | `$pi-workbench` / `pi_research_engineer` | single-writer state and direct execution evidence |
+| Behavior changed | target test or reproducible probe | locked observable, real run, output and artifact hashes |
+| Scientific progress claimed | frozen evidence plus explicitly requested review | preregistration, measurements, caveats, and separated interpretation |
 | Reusable mechanism boundary | `$engine-design` / `engine_systems_designer` | engine-or-module decision and falsifiers |
 | Multiple lifecycle states or forbidden transitions | `$fsm-design` | executable transition contract and traces |
 | Autonomous/bounded execution | `$loop-engineering` | budgets, checkpoint/effect protocol, terminal outcomes |

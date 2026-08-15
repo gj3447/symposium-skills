@@ -183,7 +183,7 @@ def cmd_contract_print(_args: argparse.Namespace) -> int:
             "L4_late_supersede_gate",
             "L1_static_residual_optin",
             "TRAVERSAL_OFF",
-            "lakatotree_prereg_measure_submit",
+            "direct_preregister_measure_record",
             "S3_dual_channel_write_identity",
         ],
         "never": [

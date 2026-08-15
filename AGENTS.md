@@ -24,7 +24,7 @@
 | Tier | Skills | Role |
 |---|---|---|
 | **research** | symposium-research | Thin PI/internal research router; selects specialists by measured need. |
-| **pi** | pi-workbench, ooptdd-receipt, lakatotree-judge, compute-offload | PI coordination, executable measurement, independent judgment, and managed compute. |
+| **pi** | pi-workbench, compute-offload | PI coordination, direct measurement, and managed compute. |
 | **essence** | apt, harness, longinus, taliban, jaebaeman, prometheus | 5대 무기 + APT orchestrator. Constitutional governance via CODEOWNERS. |
 | **alias** | 88-taliban, tlb, prom | Thin aliases of essence (drift-sensitive). |
 | **phase** | apt-sa, apt-sp, apt-st, apt-scw, apt-meta-review | APT 5-phase cycle. |

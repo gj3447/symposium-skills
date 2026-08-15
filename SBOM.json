@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:76f93dcd-513f-589f-ae65-3e6a45636ad7",
+  "serialNumber": "urn:uuid:e4783c19-22c4-502b-a0da-f13f735a9f24",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-14T08:43:10Z",
+    "timestamp": "2026-08-14T08:43:21Z",
     "tools": [
       {
         "vendor": "SYMPOSIUM",
@@ -15,19 +15,19 @@
     "component": {
       "type": "application",
       "name": "SYMPOSIUM/SKILLS",
-      "version": "af01c0d",
+      "version": "28eb1aa",
       "properties": [
         {
           "name": "git:head",
-          "value": "af01c0df3b5c54690db8ef049de7cd68581b2c64"
+          "value": "28eb1aac77f8fb817627f860d3478def05f55b0f"
         },
         {
           "name": "manifest:merkle_root",
-          "value": "1792f6a2069d0dbba9a6d145a7555dfee67213f271fe14d46d308d03d90da929"
+          "value": "ff1c1ea38acbb3b10aa494f9c3c13017aab20a9bf56667f1d089758b0440b7a3"
         },
         {
           "name": "manifest:skills_count",
-          "value": "53"
+          "value": "51"
         }
       ]
     }
@@ -421,7 +421,7 @@
         },
         {
           "name": "git:tree_sha",
-          "value": "9bdf448f4cf96c7c560cb28a9b997507c27d89d7"
+          "value": "000d44ff0e615d9813abd00ad1beb852e695fd44"
         },
         {
           "name": "claude-skill:channel",
@@ -739,28 +739,6 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:claude-skill/lakatotree-judge@None",
-      "name": "lakatotree-judge",
-      "version": "None",
-      "scope": "required",
-      "purl": "pkg:claude-skill/lakatotree-judge@None?channel=stable",
-      "properties": [
-        {
-          "name": "kg:ref",
-          "value": null
-        },
-        {
-          "name": "git:tree_sha",
-          "value": "22627276c6688650e3aa54dd5865dd91a199aa6a"
-        },
-        {
-          "name": "claude-skill:channel",
-          "value": "stable"
-        }
-      ]
-    },
-    {
-      "type": "library",
       "bom-ref": "pkg:claude-skill/legion-roster@1.0.0",
       "name": "legion-roster",
       "version": "1.0.0",
@@ -871,28 +849,6 @@
     },
     {
       "type": "library",
-      "bom-ref": "pkg:claude-skill/ooptdd-receipt@None",
-      "name": "ooptdd-receipt",
-      "version": "None",
-      "scope": "required",
-      "purl": "pkg:claude-skill/ooptdd-receipt@None?channel=stable",
-      "properties": [
-        {
-          "name": "kg:ref",
-          "value": null
-        },
-        {
-          "name": "git:tree_sha",
-          "value": "031a76be8f6b1df5f81bf879c34a62ba16c1d8d2"
-        },
-        {
-          "name": "claude-skill:channel",
-          "value": "stable"
-        }
-      ]
-    },
-    {
-      "type": "library",
       "bom-ref": "pkg:claude-skill/pi-workbench@None",
       "name": "pi-workbench",
       "version": "None",
@@ -905,7 +861,7 @@
         },
         {
           "name": "git:tree_sha",
-          "value": "9800dcb60f1822b97eee0d21d1125391140456da"
+          "value": "6c7a25a2421368129954a2eb8cddbb0bbf96fc90"
         },
         {
           "name": "claude-skill:channel",
@@ -1037,7 +993,7 @@
         },
         {
           "name": "git:tree_sha",
-          "value": "71022bc1b388a1edaddcb8bffa0e393cdefde5ff"
+          "value": "ce63ae389b938af8fe25c244675b11d204406bac"
         },
         {
           "name": "claude-skill:channel",

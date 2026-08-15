@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-08-14T08:43:10Z",
-  "git_head_commit": "af01c0df3b5c54690db8ef049de7cd68581b2c64",
-  "git_head_short": "af01c0d",
+  "generatedAt": "2026-08-14T08:43:21Z",
+  "git_head_commit": "28eb1aac77f8fb817627f860d3478def05f55b0f",
+  "git_head_short": "28eb1aa",
   "git_latest_tag": null,
   "canonical_path": "/home/lagyeongjun/CD/SYMPOSIUM/SKILLS",
-  "skills_count": 53,
-  "merkle_root": "1792f6a2069d0dbba9a6d145a7555dfee67213f271fe14d46d308d03d90da929",
+  "skills_count": 51,
+  "merkle_root": "ff1c1ea38acbb3b10aa494f9c3c13017aab20a9bf56667f1d089758b0440b7a3",
   "skills": [
     {
       "name": "88-taliban",
@@ -167,7 +167,7 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "9bdf448f4cf96c7c560cb28a9b997507c27d89d7",
+      "git_tree_sha": "000d44ff0e615d9813abd00ad1beb852e695fd44",
       "content_sha256": "284b1b48c986758d1fb9ec832ef39f47d25078bafd9d0ec7ffa743f1c76a8a56"
     },
     {
@@ -297,15 +297,6 @@
       "content_sha256": "efc9079100f82fcf94a8889de83a3e962eb0bf12e2fe650ddcf724c8f00af893"
     },
     {
-      "name": "lakatotree-judge",
-      "path": "lakatotree-judge",
-      "version": null,
-      "kg_ref": null,
-      "channel": "stable",
-      "git_tree_sha": "22627276c6688650e3aa54dd5865dd91a199aa6a",
-      "content_sha256": "baff23525fded39c85f118f6751eacb533343bdf588fd54af931769672161aec"
-    },
-    {
       "name": "legion-roster",
       "path": "legion-roster",
       "version": "1.0.0",
@@ -351,22 +342,13 @@
       "content_sha256": "ecf27bf5d0aeb02315b94535e4a3507cb808548540b835b8764ce1c17eda8081"
     },
     {
-      "name": "ooptdd-receipt",
-      "path": "ooptdd-receipt",
-      "version": null,
-      "kg_ref": null,
-      "channel": "stable",
-      "git_tree_sha": "031a76be8f6b1df5f81bf879c34a62ba16c1d8d2",
-      "content_sha256": "61e4cf26f7d0d6465b8f32e7e8257e6fda1dcbc00a3d8eff4b9ff868aa013f65"
-    },
-    {
       "name": "pi-workbench",
       "path": "pi-workbench",
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "9800dcb60f1822b97eee0d21d1125391140456da",
-      "content_sha256": "265c3c62716777f546bdb4371290328a9ab05531b258be8be226bac4a2d48b16"
+      "git_tree_sha": "6c7a25a2421368129954a2eb8cddbb0bbf96fc90",
+      "content_sha256": "5fdced14a5a4e4ac3a0aa60314878bc93ccdf6dd7abe70f62f1fb246eaf1dc83"
     },
     {
       "name": "prom",
@@ -419,8 +401,8 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "71022bc1b388a1edaddcb8bffa0e393cdefde5ff",
-      "content_sha256": "a8951f429aa2d61e531148a4e6a6d408c8c1d4a44dc2c61340aa34d5bc1a7121"
+      "git_tree_sha": "ce63ae389b938af8fe25c244675b11d204406bac",
+      "content_sha256": "fcc9c87c4557bc9ff198b6bc79dc827ff2b618c5ec0860cb76366991da9adb53"
     },
     {
       "name": "taliban",

@@ -5,26 +5,25 @@
   "mode": "write",
   "kind": "behavior",
   "repo": {
-    "name": "lakatotree",
-    "logical_path": "PI/lakatotree",
-    "resolved_root": "/absolute/path/to/lakatotree",
+    "name": "example-engine",
+    "logical_path": "PI/example-engine",
+    "resolved_root": "/absolute/path/to/example-engine",
     "git_head": "0123456789abcdef0123456789abcdef01234567",
     "instructions_read": [
       "PI/AGENTS.md",
-      "PI/lakatotree/CLAUDE.md"
+      "PI/example-engine/AGENTS.md"
     ]
   },
   "roles": {
     "coordinator": "root",
-    "implementer": "pi_research_engineer",
-    "judge": "progress_judge"
+    "implementer": "pi_research_engineer"
   },
   "coordination": {
     "policy": "canonical_main_single_writer",
     "owner_id": "pi_research_engineer.example",
     "writes": [
-      "lakatotree/lakatos/example.py",
-      "lakatotree/tests/test_example.py"
+      "example-engine/src/example.py",
+      "example-engine/tests/test_example.py"
     ],
     "token_state": "DONE",
     "base_head": "0123456789abcdef0123456789abcdef01234567",
@@ -34,18 +33,10 @@
     }
   },
   "measurement": {
-    "receipt_path": "evidence/example-ooptdd-receipt.json",
-    "receipt_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-    "test_command": ".venv/bin/python -m pytest -q",
-    "positive_verdict": "green",
-    "negative_verdict": "red"
-  },
-  "judgment": {
-    "packet_path": "evidence/example-judgment-packet.json",
-    "packet_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-    "judge_command": ".venv/bin/python examples/example_programme.py",
-    "source": "scripted",
-    "verified_from_receipt": true
+    "record_path": "evidence/example-test-run.json",
+    "record_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "command": ".venv/bin/python -m pytest -q",
+    "outcome": "passed"
   },
   "verification": [
     {

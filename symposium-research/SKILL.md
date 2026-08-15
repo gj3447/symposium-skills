@@ -41,8 +41,9 @@ Read [references/routing.md](references/routing.md), then select the smallest
 useful combination:
 
 - PI coordination or code work: `pi_research_engineer` plus `$pi-workbench`;
-- executable behavior evidence: `$ooptdd-receipt`;
-- independent progress judgment: `progress_judge` plus `$lakatotree-judge`;
+- executable behavior evidence: direct target tests and reproducible probes;
+- progress claims: freeze measurements separately from interpretation and seek
+  external review only when explicitly requested;
 - a new engine, FSM, or bounded agent loop: `engine_systems_designer` with
   `$engine-design`, `$fsm-design`, and `$loop-engineering` as applicable;
 - Harness classification or four-axis diagnosis: `$harness` or
@@ -71,7 +72,7 @@ output fields, evidence standard, and explicit non-goals. Prefer read-only axes
 in parallel. Parallel children remain read-only. When mutation is required, one
 root/parent session performs it sequentially on canonical `main` under the
 repository writer token. Do not create parallel writers, session branches,
-linked worktrees, or OMD leases.
+linked worktrees, or auxiliary coordinator leases.
 
 The parent collects all results, checks required fields, deduplicates repeated
 claims, preserves conflicts, and decides the next dispatch. A child never writes
@@ -85,8 +86,8 @@ Return:
 2. authority sources and unavailable sources;
 3. findings with evidence, caveats, alternatives, and confidence;
 4. artifacts and exact paths;
-5. commands, tests, receipts, or judge output actually run;
+5. commands, tests, measurements, or review output actually run;
 6. unresolved questions and the next falsifier.
 
-For PI completion or progress claims, activity and a passing local test are not
-enough: require the single-writer plus two-evidence-layer `$pi-workbench` contract.
+For PI completion or progress claims, activity alone is not enough: require the
+single-writer plus direct-measurement `$pi-workbench` contract.

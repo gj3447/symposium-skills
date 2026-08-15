@@ -91,10 +91,8 @@ def verify_linked_files(document: Any, root: Path) -> list[str]:
         return []
     errors: list[str] = []
     measurement = mapping(document.get("measurement"))
-    for path_key, sha_key in (("receipt_path", "receipt_sha256"), ("evidence_path", "evidence_sha256")):
+    for path_key, sha_key in (("record_path", "record_sha256"), ("evidence_path", "evidence_sha256")):
         errors.extend(verify_file(measurement.get(path_key), measurement.get(sha_key), root, f"measurement.{path_key}"))
-    judgment = mapping(document.get("judgment"))
-    errors.extend(verify_file(judgment.get("packet_path"), judgment.get("packet_sha256"), root, "judgment.packet_path"))
     for index, raw in enumerate(sequence(document.get("verification"))):
         item = mapping(raw)
         if "output_path" in item:
@@ -129,10 +127,8 @@ def validate(document: Any, stage: str, allow_template: bool = False) -> list[st
         errors.append("repo.git_head must be a lowercase 7-64 hex commit id when present")
 
     roles = mapping(document.get("roles"))
-    for key in ("coordinator", "implementer", "judge"):
+    for key in ("coordinator", "implementer"):
         require_actor(roles, key, errors, "roles")
-    if roles.get("implementer") == roles.get("judge"):
-        errors.append("roles.implementer and roles.judge must differ")
 
     coordination = mapping(document.get("coordination"))
     writes = sequence(coordination.get("writes"))
@@ -171,37 +167,26 @@ def validate(document: Any, stage: str, allow_template: bool = False) -> list[st
         elif coordination.get("token_state") != "HELD":
             errors.append("planned write cycles require coordination.token_state == 'HELD'")
 
-    requires_receipt = stage == "complete" and (
+    requires_measurement = stage == "complete" and (
         document.get("kind") == "behavior" or document.get("runtime_behavior") is True
     )
-    requires_judgment = stage == "complete" and (
+    requires_scientific_evidence = stage == "complete" and (
         document.get("kind") in {"experiment", "progress_claim"}
         or document.get("progress_claim") is True
     )
     measurement = mapping(document.get("measurement"))
-    judgment = mapping(document.get("judgment"))
-    if requires_receipt:
-        for key in ("receipt_path", "test_command"):
+    if requires_measurement:
+        for key in ("record_path", "command"):
             require_text(measurement, key, errors, "measurement")
-        require_sha(measurement, "receipt_sha256", errors, "measurement")
-        if measurement.get("positive_verdict") not in {"green", "present"}:
-            errors.append("measurement.positive_verdict must be green or present")
-        if measurement.get("negative_verdict") not in {"absent", "red", "failed", "rejected"}:
-            errors.append("measurement.negative_verdict must prove the same gate failed")
-    if requires_judgment:
-        if measurement.get("measurement_type") not in {"ooptdd_receipt", "numeric_probe", "dataset_manifest", "replay"}:
-            errors.append("judged experiments require a supported measurement.measurement_type")
+        require_sha(measurement, "record_sha256", errors, "measurement")
+        if measurement.get("outcome") not in {"passed", "present", "inconclusive", "failed"}:
+            errors.append("measurement.outcome must be passed, present, inconclusive, or failed")
+    if requires_scientific_evidence:
+        if measurement.get("measurement_type") not in {"direct_probe", "test_run", "numeric_probe", "dataset_manifest", "replay"}:
+            errors.append("scientific experiments require a supported measurement.measurement_type")
         for key in ("evidence_path",):
             require_text(measurement, key, errors, "measurement")
         require_sha(measurement, "evidence_sha256", errors, "measurement")
-    if requires_judgment or judgment:
-        for key in ("packet_path", "judge_command"):
-            require_text(judgment, key, errors, "judgment")
-        require_sha(judgment, "packet_sha256", errors, "judgment")
-        if judgment.get("source") != "scripted":
-            errors.append("judgment.source must be 'scripted'")
-        if judgment.get("verified_from_receipt") is not True:
-            errors.append("judgment.verified_from_receipt must be true")
 
     verification = sequence(document.get("verification"))
     if stage == "complete":
@@ -243,7 +228,7 @@ def main() -> int:
     elif args.verify_linked:
         print(f"valid pi-cycle/v1 ({args.stage}); linked artifact hashes verified")
     else:
-        print(f"structurally valid pi-cycle/v1 ({args.stage}); claimed tools and artifacts were not executed or hash-verified")
+        print(f"structurally valid pi-cycle/v1 ({args.stage}); claimed commands and artifacts were not executed or hash-verified")
     return 0
 
 
