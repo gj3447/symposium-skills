@@ -2,8 +2,8 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": null,
-  "git_head_short": "28eb1aa",
-  "merkle_root": "ff1c1ea38acbb3b10aa494f9c3c13017aab20a9bf56667f1d089758b0440b7a3",
+  "git_head_short": "4296a64",
+  "merkle_root": "6a7d5bbc4176b9c69f839234eacff5651e3f4f654a87d1d67a9665eaa4908c2f",
   "skills_count": 51,
   "skills": [
     {
@@ -130,7 +130,7 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "000d44ff0e615d9813abd00ad1beb852e695fd44"
+      "git_tree_sha": "cdb4b597748391b002c324cbb7975a54dfdcb604"
     },
     {
       "name": "compute-offload",
@@ -270,7 +270,7 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "6c7a25a2421368129954a2eb8cddbb0bbf96fc90"
+      "git_tree_sha": "152aabee88a9141d8826f7ea762cb83114cb3704"
     },
     {
       "name": "prom",

@@ -4,19 +4,19 @@
     {
       "name": "MANIFEST.json",
       "digest": {
-        "sha256": "8e2adc255059892490423f4fcf885d42bd3f149f23d289a6563f94e2fcee4019"
+        "sha256": "d3fb6d1775b2d0c7be8606d3eb881dbe1491d0de6d0bedb7f3dd16a0be3bf90b"
       }
     },
     {
       "name": "SBOM.json",
       "digest": {
-        "sha256": "4bcf15e2dc54b39af5c8c9d776a6601cfdcd0d7c434aa7f9a8a966e80d6fc574"
+        "sha256": "01d8c67bbc2f4c7063eb0c5fd2c9e076644cb594805038b6bfe5f7ee7ec6cb02"
       }
     },
     {
       "name": ".well-known/skills/index.json",
       "digest": {
-        "sha256": "a4a83534494d8fcf65fa08d77dde5cd7310e4dc1f2994d49fde7c22532a7adc1"
+        "sha256": "fd179aa94beb916eb72d17b89d04d0ea979a306bc0ccf304601f4deaf23dcaf8"
       }
     }
   ],
@@ -25,12 +25,12 @@
     "buildDefinition": {
       "buildType": "https://symposium.local/skill-build/v1",
       "externalParameters": {
-        "git_head_commit": "28eb1aac77f8fb817627f860d3478def05f55b0f",
+        "git_head_commit": "4296a6474cd6f94ed98216cd9045171dada41044",
         "git_latest_tag": null,
         "canonical_path": "/home/lagyeongjun/CD/SYMPOSIUM/SKILLS"
       },
       "internalParameters": {
-        "merkle_root": "ff1c1ea38acbb3b10aa494f9c3c13017aab20a9bf56667f1d089758b0440b7a3",
+        "merkle_root": "6a7d5bbc4176b9c69f839234eacff5651e3f4f654a87d1d67a9665eaa4908c2f",
         "skills_count": 51
       },
       "resolvedDependencies": [
@@ -139,7 +139,7 @@
         {
           "uri": "pkg:claude-skill/call-grok@None",
           "digest": {
-            "sha1": "000d44ff0e615d9813abd00ad1beb852e695fd44"
+            "sha1": "cdb4b597748391b002c324cbb7975a54dfdcb604"
           }
         },
         {
@@ -259,7 +259,7 @@
         {
           "uri": "pkg:claude-skill/pi-workbench@None",
           "digest": {
-            "sha1": "6c7a25a2421368129954a2eb8cddbb0bbf96fc90"
+            "sha1": "152aabee88a9141d8826f7ea762cb83114cb3704"
           }
         },
         {
@@ -347,9 +347,9 @@
         "id": "https://symposium.local/builders/skill-build@v1"
       },
       "metadata": {
-        "invocationId": "ff1c1ea38acbb3b10aa494f9c3c13017aab20a9bf56667f1d089758b0440b7a3",
-        "startedOn": "2026-08-14T08:43:21Z",
-        "finishedOn": "2026-08-14T08:43:21Z"
+        "invocationId": "6a7d5bbc4176b9c69f839234eacff5651e3f4f654a87d1d67a9665eaa4908c2f",
+        "startedOn": "2026-08-15T07:22:57Z",
+        "finishedOn": "2026-08-15T07:22:57Z"
       },
       "byproducts": [
         {

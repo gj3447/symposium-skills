@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-08-14T08:43:21Z",
-  "git_head_commit": "28eb1aac77f8fb817627f860d3478def05f55b0f",
-  "git_head_short": "28eb1aa",
+  "generatedAt": "2026-08-15T07:22:57Z",
+  "git_head_commit": "4296a6474cd6f94ed98216cd9045171dada41044",
+  "git_head_short": "4296a64",
   "git_latest_tag": null,
   "canonical_path": "/home/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 51,
-  "merkle_root": "ff1c1ea38acbb3b10aa494f9c3c13017aab20a9bf56667f1d089758b0440b7a3",
+  "merkle_root": "6a7d5bbc4176b9c69f839234eacff5651e3f4f654a87d1d67a9665eaa4908c2f",
   "skills": [
     {
       "name": "88-taliban",
@@ -167,7 +167,7 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "000d44ff0e615d9813abd00ad1beb852e695fd44",
+      "git_tree_sha": "cdb4b597748391b002c324cbb7975a54dfdcb604",
       "content_sha256": "284b1b48c986758d1fb9ec832ef39f47d25078bafd9d0ec7ffa743f1c76a8a56"
     },
     {
@@ -347,7 +347,7 @@
       "version": null,
       "kg_ref": null,
       "channel": "stable",
-      "git_tree_sha": "6c7a25a2421368129954a2eb8cddbb0bbf96fc90",
+      "git_tree_sha": "152aabee88a9141d8826f7ea762cb83114cb3704",
       "content_sha256": "5fdced14a5a4e4ac3a0aa60314878bc93ccdf6dd7abe70f62f1fb246eaf1dc83"
     },
     {
