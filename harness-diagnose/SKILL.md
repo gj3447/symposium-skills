@@ -8,6 +8,7 @@ description: >
   Harness 3-tier 진단 정적 KB — KNOWN_FRAMEWORKS 40개 이름→tier(L_IDE/L_RT/L_MC) + 4축(Inform/Constrain/Verify/Correct) 매핑 + 분류 규칙.
   구 MCP `harness_diagnose` 도구의 스킬 강등본 (C-class: 정적 KB 이름매칭, M9.2. M6 capability-probe 방향은 별도 축).
   사용: 이름 매치(HIGH) → 아래 표 조회. 미등록 대상은 분류 규칙 수동 적용 또는 UNKNOWN 선언 (추측 금지).
+  Use when: classifying a named framework with this frozen 3-tier/4-axis knowledge base. Do not use when: diagnosing a repository from live evidence or designing a harness; use `$harness` instead.
   재생성: bhgman `engine.harness.harness.diagnose()` 전수 — engine_sha256 불일치 시 stale.
 engine_sha256: 34d95fa1462d40cd1a73f68cb996360d2feca99c7c28288de4db7ec8ece94459
 ---

@@ -8,6 +8,7 @@ description: >
   비행기맨 #4 산하 7군단장 roster (정적) — 동사·Contract requires/provides·정전 순서.
   구 MCP `legion_roster` 도구의 스킬 강등본 (C-class: 정적 지식, M9.2).
   재생성: bhgman `engine.mcp_server.tools.legion.legion_roster_impl()` — engine_sha256 불일치 시 stale.
+  Use when: looking up the fixed seven-commander roster, order, or requires/provides contracts. Do not use when: planning or executing a state-dependent legion dispatch; use `$jaebaeman` instead.
   참고: legion_run(폐루프 실행)은 MCP 잔류(A-class, KG 상태 의존).
 engine_sha256: f2133a18b85e8ddd7333c2ebfa4445aaf9a65d97cdf45db6ef72a556254190bf
 ---

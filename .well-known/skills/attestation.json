@@ -4,19 +4,19 @@
     {
       "name": "MANIFEST.json",
       "digest": {
-        "sha256": "d3fb6d1775b2d0c7be8606d3eb881dbe1491d0de6d0bedb7f3dd16a0be3bf90b"
+        "sha256": "09525fef43d1090017ae00941ec56203aa19726aee21eed6f22fefaeaaf68f0a"
       }
     },
     {
       "name": "SBOM.json",
       "digest": {
-        "sha256": "01d8c67bbc2f4c7063eb0c5fd2c9e076644cb594805038b6bfe5f7ee7ec6cb02"
+        "sha256": "91b309b1494e112d6bcce15ccc74819ba3ae3b4c7b04a5926be239067e0b818f"
       }
     },
     {
       "name": ".well-known/skills/index.json",
       "digest": {
-        "sha256": "fd179aa94beb916eb72d17b89d04d0ea979a306bc0ccf304601f4deaf23dcaf8"
+        "sha256": "75c6b29100ee155b27606b0c25edc3d104b9db7e527d873f7874993a372ef06a"
       }
     }
   ],
@@ -25,12 +25,12 @@
     "buildDefinition": {
       "buildType": "https://symposium.local/skill-build/v1",
       "externalParameters": {
-        "git_head_commit": "4296a6474cd6f94ed98216cd9045171dada41044",
+        "git_head_commit": "8e1a3eb94353254367fcef5d6724168373aecace",
         "git_latest_tag": null,
         "canonical_path": "/home/lagyeongjun/CD/SYMPOSIUM/SKILLS"
       },
       "internalParameters": {
-        "merkle_root": "6a7d5bbc4176b9c69f839234eacff5651e3f4f654a87d1d67a9665eaa4908c2f",
+        "merkle_root": "29c396c407342b4ff1eab6cd76ac828700546f7b9eb177bfd1618b7a7136523c",
         "skills_count": 51
       },
       "resolvedDependencies": [
@@ -211,7 +211,7 @@
         {
           "uri": "pkg:claude-skill/harness-diagnose@1.0.0",
           "digest": {
-            "sha1": "3936c1c3f3e13097ee68c45069b746ecfc330cb5"
+            "sha1": "15fbcb5bb3501c9a7e86970c7ce5d2cf0df119b9"
           }
         },
         {
@@ -229,7 +229,7 @@
         {
           "uri": "pkg:claude-skill/legion-roster@1.0.0",
           "digest": {
-            "sha1": "a549f5090f44012e75bd2d07f5fde0491552e665"
+            "sha1": "b353fb6468dbb3393dfb5cef9a95eb549ce8ffce"
           }
         },
         {
@@ -247,7 +247,7 @@
         {
           "uri": "pkg:claude-skill/naesengmoon-lens-registry@1.0.0",
           "digest": {
-            "sha1": "2d00855cf79b69cc2d551f4488eacab23e7e5025"
+            "sha1": "7ef3c71b7e284776734913f1bf26f3b70dfc5f5c"
           }
         },
         {
@@ -347,9 +347,9 @@
         "id": "https://symposium.local/builders/skill-build@v1"
       },
       "metadata": {
-        "invocationId": "6a7d5bbc4176b9c69f839234eacff5651e3f4f654a87d1d67a9665eaa4908c2f",
-        "startedOn": "2026-08-15T07:22:57Z",
-        "finishedOn": "2026-08-15T07:22:57Z"
+        "invocationId": "29c396c407342b4ff1eab6cd76ac828700546f7b9eb177bfd1618b7a7136523c",
+        "startedOn": "2026-08-15T07:23:39Z",
+        "finishedOn": "2026-08-15T07:23:39Z"
       },
       "byproducts": [
         {

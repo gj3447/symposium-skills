@@ -8,6 +8,7 @@ description: >
   나생문 LensSet 레지스트리 (정적) — 4렌즈 멤버십·축 목록 + HR12 계층 분리 규칙 + 하네스 4축 매핑.
   구 MCP `naesengmoon_lens_check` 도구의 스킬 강등본 (C-class: 정적 지식, M9.2).
   재생성: bhgman `engine.mcp_server.tools.naesengmoon.naesengmoon_lens_check_impl("all")` — engine_sha256 불일치 시 stale.
+  Use when: looking up static LensSet membership, axes, critic minima, HR12 separation, or harness mapping. Do not use when: running a live multi-lens validation or xlock verdict; use `$taliban` instead.
 engine_sha256: 5244437b559eb189be30622616090e88883ce9bcd36fee03b097cc61a57038f4
 ---
 

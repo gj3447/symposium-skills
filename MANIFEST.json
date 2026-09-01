@@ -1,12 +1,12 @@
 {
   "schema": "v1",
-  "generatedAt": "2026-08-15T07:22:57Z",
-  "git_head_commit": "4296a6474cd6f94ed98216cd9045171dada41044",
-  "git_head_short": "4296a64",
+  "generatedAt": "2026-08-15T07:23:39Z",
+  "git_head_commit": "8e1a3eb94353254367fcef5d6724168373aecace",
+  "git_head_short": "8e1a3eb",
   "git_latest_tag": null,
   "canonical_path": "/home/lagyeongjun/CD/SYMPOSIUM/SKILLS",
   "skills_count": 51,
-  "merkle_root": "6a7d5bbc4176b9c69f839234eacff5651e3f4f654a87d1d67a9665eaa4908c2f",
+  "merkle_root": "29c396c407342b4ff1eab6cd76ac828700546f7b9eb177bfd1618b7a7136523c",
   "skills": [
     {
       "name": "88-taliban",
@@ -275,8 +275,8 @@
       "version": "1.0.0",
       "kg_ref": "hub-harness-3tier",
       "channel": "stable",
-      "git_tree_sha": "3936c1c3f3e13097ee68c45069b746ecfc330cb5",
-      "content_sha256": "46412f55173c57da7a4af649e25dd91f0b3de09e57e8133c438c0a95d31ba931"
+      "git_tree_sha": "15fbcb5bb3501c9a7e86970c7ce5d2cf0df119b9",
+      "content_sha256": "345a56ffa57d90baf41c65159ef48a350631e532d8ce89602ae8fdb2dacce946"
     },
     {
       "name": "jaebaeman",
@@ -302,8 +302,8 @@
       "version": "1.0.0",
       "kg_ref": "bihaenggiman-legioncommanders-2026-05-26",
       "channel": "stable",
-      "git_tree_sha": "a549f5090f44012e75bd2d07f5fde0491552e665",
-      "content_sha256": "a9f2bf12e4c4275c27f28fe4602960f0ee83845897a90ac28c2fc64abd5678ba"
+      "git_tree_sha": "b353fb6468dbb3393dfb5cef9a95eb549ce8ffce",
+      "content_sha256": "2a23fd808d0170c1e6f0104a4a5cc375b687b60cb7ddc6ff077ab7f8b44de886"
     },
     {
       "name": "longinus",
@@ -329,8 +329,8 @@
       "version": "1.0.0",
       "kg_ref": "naesengmoon-canonical-2026-05-19",
       "channel": "stable",
-      "git_tree_sha": "2d00855cf79b69cc2d551f4488eacab23e7e5025",
-      "content_sha256": "0da347d6b2ad7a88c28f8650ad9021af4e91ea5fd70db30bfdacf4426b98094d"
+      "git_tree_sha": "7ef3c71b7e284776734913f1bf26f3b70dfc5f5c",
+      "content_sha256": "d9aaa4a420499c9a06475a3034aebc0ab4f66635260731e6620d18786c414cc7"
     },
     {
       "name": "occam",

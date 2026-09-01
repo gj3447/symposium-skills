@@ -2,8 +2,8 @@
   "schema": "rfc8615-skills-v1",
   "publisher": "SYMPOSIUM",
   "release": null,
-  "git_head_short": "4296a64",
-  "merkle_root": "6a7d5bbc4176b9c69f839234eacff5651e3f4f654a87d1d67a9665eaa4908c2f",
+  "git_head_short": "8e1a3eb",
+  "merkle_root": "29c396c407342b4ff1eab6cd76ac828700546f7b9eb177bfd1618b7a7136523c",
   "skills_count": 51,
   "skills": [
     {
@@ -214,7 +214,7 @@
       "version": "1.0.0",
       "kg_ref": "hub-harness-3tier",
       "channel": "stable",
-      "git_tree_sha": "3936c1c3f3e13097ee68c45069b746ecfc330cb5"
+      "git_tree_sha": "15fbcb5bb3501c9a7e86970c7ce5d2cf0df119b9"
     },
     {
       "name": "jaebaeman",
@@ -235,7 +235,7 @@
       "version": "1.0.0",
       "kg_ref": "bihaenggiman-legioncommanders-2026-05-26",
       "channel": "stable",
-      "git_tree_sha": "a549f5090f44012e75bd2d07f5fde0491552e665"
+      "git_tree_sha": "b353fb6468dbb3393dfb5cef9a95eb549ce8ffce"
     },
     {
       "name": "longinus",
@@ -256,7 +256,7 @@
       "version": "1.0.0",
       "kg_ref": "naesengmoon-canonical-2026-05-19",
       "channel": "stable",
-      "git_tree_sha": "2d00855cf79b69cc2d551f4488eacab23e7e5025"
+      "git_tree_sha": "7ef3c71b7e284776734913f1bf26f3b70dfc5f5c"
     },
     {
       "name": "occam",

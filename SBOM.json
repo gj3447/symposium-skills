@@ -1,10 +1,10 @@
 {
   "bomFormat": "CycloneDX",
   "specVersion": "1.5",
-  "serialNumber": "urn:uuid:f34891b7-1f6e-58a3-883a-481d06501104",
+  "serialNumber": "urn:uuid:17aedb05-975b-5655-9d65-6356bbb59795",
   "version": 1,
   "metadata": {
-    "timestamp": "2026-08-15T07:22:57Z",
+    "timestamp": "2026-08-15T07:23:39Z",
     "tools": [
       {
         "vendor": "SYMPOSIUM",
@@ -15,15 +15,15 @@
     "component": {
       "type": "application",
       "name": "SYMPOSIUM/SKILLS",
-      "version": "4296a64",
+      "version": "8e1a3eb",
       "properties": [
         {
           "name": "git:head",
-          "value": "4296a6474cd6f94ed98216cd9045171dada41044"
+          "value": "8e1a3eb94353254367fcef5d6724168373aecace"
         },
         {
           "name": "manifest:merkle_root",
-          "value": "6a7d5bbc4176b9c69f839234eacff5651e3f4f654a87d1d67a9665eaa4908c2f"
+          "value": "29c396c407342b4ff1eab6cd76ac828700546f7b9eb177bfd1618b7a7136523c"
         },
         {
           "name": "manifest:skills_count",
@@ -685,7 +685,7 @@
         },
         {
           "name": "git:tree_sha",
-          "value": "3936c1c3f3e13097ee68c45069b746ecfc330cb5"
+          "value": "15fbcb5bb3501c9a7e86970c7ce5d2cf0df119b9"
         },
         {
           "name": "claude-skill:channel",
@@ -751,7 +751,7 @@
         },
         {
           "name": "git:tree_sha",
-          "value": "a549f5090f44012e75bd2d07f5fde0491552e665"
+          "value": "b353fb6468dbb3393dfb5cef9a95eb549ce8ffce"
         },
         {
           "name": "claude-skill:channel",
@@ -817,7 +817,7 @@
         },
         {
           "name": "git:tree_sha",
-          "value": "2d00855cf79b69cc2d551f4488eacab23e7e5025"
+          "value": "7ef3c71b7e284776734913f1bf26f3b70dfc5f5c"
         },
         {
           "name": "claude-skill:channel",
